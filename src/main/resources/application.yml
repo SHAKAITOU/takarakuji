@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: commercePFServer
+  cloud:
+    config:
+      profile: commerceFW
+      label: 1
+      uri: http://localhost:8888
+    
+  
+  profiles: 
+    active: dev
+  
+  messages:
+    basename: messages
+    cache-seconds: -1
+    encoding: UTF-8
+  db1:
+    datasource:
+      url: jdbc:postgresql://127.0.0.1:5432/sha_test
+      username: postgres
+      password: postgre
+      driverClassName: org.postgresql.Driver
+  db2:
+    datasource:
+      url: jdbc:postgresql://127.0.0.1:5432/sha_test2
+      username: postgres
+      password: postgre
+      driverClassName: org.postgresql.Driver
+      
+  session:
+    store-type: none
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+  file: logs/logback-demo.log
+  path: logs
+  
+server:
+  port: 8092
+
+
+cloud.aws:
+  credentials:
+    accessKey: aws_access_key
+    secretKey: aws_secret_access_key
+  region:
+    static: ap-northeast-1 

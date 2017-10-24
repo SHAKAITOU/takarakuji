@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+  th:with="lang=${#locale.language}" th:lang="${lang}">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Form</h1>
+    <form action="#" th:action="@{/S002R}" th:object="${s002InputData}" method="post">
+    	<p th:text="'title1: ' + ${output.msg1}" />
+    	<p th:text="'title2: ' + ${output.msg2}" />
+    	<p th:text="'title3: ' + ${output.msg3}" />
+    	<p th:text="'title1: ' + #{MSG001}" />
+    	<p th:text="'title2: ' + #{MSG002}" />
+    	<p th:text="'title3: ' + #{MSG003}" />
+    	<p>Id: <input type="text" th:field="*{id}" /></p>
+        <p>Message: <input type="text" th:field="*{content}" /></p>
+        <!-- common info -->
+        <input type="hidden" th:field="*{userId}" th:value="${s002InputData.userId}" />
+        <input type="hidden" th:field="*{userName}" th:value="${s002InputData.userName}" />
+        <!-- ================= -->
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</body>
+</html>

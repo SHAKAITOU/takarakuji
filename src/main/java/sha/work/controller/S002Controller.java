@@ -1,5 +1,6 @@
 package sha.work.controller;
 
+import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import sha.framework.controller.ScreenBaseController;
 import sha.framework.data.InputBaseData;
 import sha.framework.data.OutputBaseData;
+import sha.framework.util.DateCommonUtil;
 import sha.framework.util.ResourceUtil;
 import sha.framework.util.UserInfoUtil;
 import sha.work.data.S002InputData;
@@ -32,6 +34,9 @@ public class S002Controller extends ScreenBaseController{
 	
 	@Autowired
 	private ResourceUtil msg;
+	
+	@Autowired
+	private DateCommonUtil dateUtil;
 
 	@Override
 	public void validate(InputBaseData input, OutputBaseData output) {
@@ -41,7 +46,7 @@ public class S002Controller extends ScreenBaseController{
 
 
 	@RequestMapping(method=RequestMethod.GET)
-	public ModelAndView exapmle(@RequestParam Map<String,String> allRequestParams)  {
+	public ModelAndView exapmle(@RequestParam Map<String,String> allRequestParams, Locale loc)  {
 
 		S002InputData input = new S002InputData();
 		
@@ -57,9 +62,10 @@ public class S002Controller extends ScreenBaseController{
 		
 		super.execService(input, output, null);
 		//WebContext context2 = new WebContext(request, response, context, Locale.JAPAN);
-		output.setMsg1(msg.getContext(Locale.JAPAN, "MSG001"));
-		output.setMsg2(msg.getContext(Locale.JAPAN, "MSG002", "aaa"));
-		output.setMsg3(msg.getContext(Locale.JAPAN, "MSG003", "aaa", "bbb"));
+		output.setMsg1(msg.getContext(loc, "MSG001"));
+		output.setMsg2(msg.getContext(loc, "MSG002", "aaa"));
+		output.setMsg3(dateUtil.formatDate(new Date(), DateCommonUtil.DATE_FORMAT_YYYYSMMSDD_YOUBI, loc));
+		
 		//output.setMsg1(msg.getMessage("MSG001", null, Locale.JAPANESE));
 		
 		output.setInputBaseData(input);

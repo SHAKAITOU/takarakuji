@@ -14,6 +14,11 @@ public class ClassFinder {
 
     private static final String BAD_PACKAGE_ERROR = "Unable to get resources from path '%s'. Are you sure the package '%s' exists?";
 
+    /**
+     * 指定されたパッケージの直下にクラスリストを取得
+     * @param scannedPackage 指定されたパッケージ
+     * @return クラスリスト
+     */
     public static List<Class<?>> find(String scannedPackage) {
         String scannedPath = scannedPackage.replace(PKG_SEPARATOR, DIR_SEPARATOR);
         URL scannedUrl = Thread.currentThread().getContextClassLoader().getResource(scannedPath);
@@ -45,5 +50,4 @@ public class ClassFinder {
         }
         return classes;
     }
-
 }

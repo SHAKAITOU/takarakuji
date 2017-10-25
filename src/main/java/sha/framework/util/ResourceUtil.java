@@ -16,11 +16,15 @@ public class ResourceUtil {
 //    public void registerInstance() {
 //        instance = this;
 //    }
-
+	public String getContext(String key) {		
+		return msg.getMessage(key, null, Locale.getDefault());
+	}
+	
+	public String getContext(String key, String... args) {		
+		return msg.getMessage(key, args, Locale.getDefault());
+	}
 	
 	public String getContext(Locale location, String key, String... args) {		
 		return msg.getMessage(key, args, location);
 	}
-	
-	
 }

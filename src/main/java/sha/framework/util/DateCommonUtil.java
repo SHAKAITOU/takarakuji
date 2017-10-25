@@ -5,14 +5,39 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.locks.ReentrantLock;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import lombok.Getter;
 
 public class DateCommonUtil {
+	
+	@Autowired
+	private ResourceUtil msg;
 	
 	public static final String DATE_FORMAT_YYYYSMMSDD = "yyyy/MM/dd";
 	
 	public static final String DATE_FORMAT_YYYYMMDD = "yyyyMMdd";
 	
 	public static final String DATE_FORMAT_YYYYSMMSDDHHQMIQSS = "yyyy/MM/dd HH:mm:ss";
+	
+	public static final String DATE_FORMAT_YYYYHMMHDD = "yyyy-MM-dd";
+	
+	public static final String DATE_FORMAT_YYYYHMMHDDHHQMIQSS = "yyyy-MM-dd HH:mm:ss";
+	
+	public static final String DATE_FORMAT_YYYYSMMSDDHHQMIQSS_SSS = "yyyy/MM/dd HH:mm:ss.SSS";
+	
+	public static final String DATE_FORMAT_YYYYHMMHDDHHQMIQSS_SSS = "yyyy-MM-dd HH:mm:ss.SSS";
+	
+	public static final String TIME_FORMAT_HHQMI = "HH:mm";
+	
+	public static final String TIME_FORMAT_HHQMIQSS = "HH:mm:ss";
+	
+	public static final String TIME_FORMAT_HHQMIQSS_SSS = "HH:mm:ss.SSS";
+	
+	public static final String DATE_FORMAT_YYYYSMMSDD_YOUBI = "yyyy/MM/dd（曜日）";
 	
 	public static final long DATE_STEP = 1000*60*60*24;
 	
@@ -21,21 +46,74 @@ public class DateCommonUtil {
 	public static final long MIN_STEP = 1000*60;
 	
 	public static final long SEC_STEP = 1000;
+	
+	private final ReentrantLock lock = new ReentrantLock();
 
+	
+
+	
 	/**
 	 * 日付妥当性チェック<P>
 	 * 指定された日付が妥当であるかをチェックする。チェックする日付形式も指定する。
 	 * 
 	 * @param strDate チェック元日付文字列
-	 * @param format 日付フォーマット
 	 * @return 真偽結果値 true | false
 	 */
-	public boolean checkDate(String strDate, String format) {
-		if(parseDate(strDate, format) == null) {
+	public boolean checkDate(String strDate) {
+		if(strDate.length() == DATE_FORMAT_YYYYSMMSDD.length()) {
+			if(parseDate(strDate, DATE_FORMAT_YYYYSMMSDD) != null) {
+				return true;
+			}else if(parseDate(strDate, DATE_FORMAT_YYYYHMMHDD) != null) {
+				return true;
+			}
+		}else if(strDate.length() == DATE_FORMAT_YYYYMMDD.length()) {
+			if(parseDate(strDate, DATE_FORMAT_YYYYMMDD) != null) {
+				return true;
+			}
+		}else if(strDate.length() == DATE_FORMAT_YYYYSMMSDDHHQMIQSS.length()) {
+			if(parseDate(strDate, DATE_FORMAT_YYYYSMMSDDHHQMIQSS) != null) {
+				return true;
+			}else if(parseDate(strDate, DATE_FORMAT_YYYYHMMHDDHHQMIQSS) != null) {
+				return true;
+			}
+		}else if(strDate.length() == DATE_FORMAT_YYYYSMMSDDHHQMIQSS_SSS.length()) {
+			if(parseDate(strDate, DATE_FORMAT_YYYYSMMSDDHHQMIQSS_SSS) != null) {
+				return true;
+			}else if(parseDate(strDate, DATE_FORMAT_YYYYHMMHDDHHQMIQSS_SSS) != null) {
+				return true;
+			}
+		}else {
 			return false;
 		}
 		
-		return true;
+		return false;
+	}
+	
+	/**
+	 * 時刻妥当性チェック<P>
+	 * 指定された時刻が妥当であるかをチェックする。チェックする時刻形式も指定する。
+	 * 
+	 * @param strDate チェック元日付文字列
+	 * @return 真偽結果値 true | false
+	 */
+	public boolean checkTime(String strTime) {
+		if(strTime.length() == TIME_FORMAT_HHQMI.length()) {
+			if(parseDate(strTime, TIME_FORMAT_HHQMI) != null) {
+				return true;
+			}
+		}else if(strTime.length() == TIME_FORMAT_HHQMIQSS.length()) {
+			if(parseDate(strTime, TIME_FORMAT_HHQMIQSS) != null) {
+				return true;
+			}
+		}else if(strTime.length() == TIME_FORMAT_HHQMIQSS_SSS.length()) {
+			if(parseDate(strTime, TIME_FORMAT_HHQMIQSS_SSS) != null) {
+				return true;
+			}
+		}else {
+			return false;
+		}
+		
+		return false;
 	}
 	
 	/**
@@ -54,13 +132,37 @@ public class DateCommonUtil {
 		    DateFormat df = new SimpleDateFormat(format);
 		    df.setLenient(false); // ←これで厳密にチェックしてくれるようになる 2017/01/32のものはエラーがThrowされる
 		    Date dt = df.parse(strDate);
-		    if(strDate.equals(df.format(dt))){
+		    if(!strDate.equals(df.format(dt))){
 		    	return null;
 		    }
 		    return dt;
 		} catch (ParseException p) {
 		    return null;
 		}
+	}
+	
+	public String formatDate(Date date, String format) {
+		String str = "";
+		if(format.equals(DATE_FORMAT_YYYYSMMSDD_YOUBI)) {
+			str = format(date, DATE_FORMAT_YYYYSMMSDD);	
+			DayOfWeek day = getDayOfWeek(date);
+			str += "("+msg.getContext(day.getName())+")";
+		}else {
+			str = format(date, format);	
+		}
+		return str;
+	}
+	
+	public String formatDate(Date date, String format, Locale loc) {
+		String str = "";
+		if(format.equals(DATE_FORMAT_YYYYSMMSDD_YOUBI)) {
+			str = format(date, DATE_FORMAT_YYYYSMMSDD);	
+			DayOfWeek day = getDayOfWeek(date);
+			str += "("+msg.getContext(loc, day.getName())+")";
+		}else {
+			str = format(date, format);	
+		}
+		return str;
 	}
 	
 	/**
@@ -75,7 +177,7 @@ public class DateCommonUtil {
 	 * 		long[2] 分数差<BR>
 	 * 		long[3] 秒数差<BR>
 	 */
-	public long[] getDateDiff(Date orgDt, Date trgDt) {
+	public long[] getDateDifference(Date orgDt, Date trgDt) {
 		long orgDtTime = orgDt.getTime();
 		long trgDtTime = trgDt.getTime();
 		long[] result = new long[4];
@@ -166,10 +268,10 @@ public class DateCommonUtil {
 	 * Calendar.FRIDAY=6 <BR> 
 	 * Calendar.SATURDAY=7 
 	 */
-	public int getDayOfWeek(Date orgDt) {
+	public DayOfWeek getDayOfWeek(Date orgDt) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(orgDt);
-		return calendar.get(Calendar.DAY_OF_WEEK);
+		return DayOfWeek.getEnum(calendar.get(Calendar.DAY_OF_WEEK));
 	}
 	
 	/**
@@ -180,41 +282,84 @@ public class DateCommonUtil {
 	 * @param format 日付フォーマット
 	 * @return 日付文字列
 	 */
-	public String getFormatDateString(Date orgDt, String format) {
-		 DateFormat df = new SimpleDateFormat(format);
-		 String dtString = df.format(orgDt);		 
-		 return dtString;
+	private String format(Date orgDt, String format) {
+		lock.lock();
+		DateFormat df = new SimpleDateFormat(format);
+		String dtString = df.format(orgDt);
+		lock.unlock();
+		return dtString;
 		 
 	}
+	
+	public enum DayOfWeek {
+		
+		SUNDAY(Calendar.SUNDAY, "SUNDAY"), 
+		MONDAY(Calendar.MONDAY, "MONDAY"),
+		TUESDAY(Calendar.TUESDAY, "TUESDAY"),
+		WEDNESDAY(Calendar.WEDNESDAY, "WEDNESDAY"),
+		THURSDAY(Calendar.THURSDAY, "THURSDAY"),
+		FRIDAY(Calendar.FRIDAY, "FRIDAY"),
+		SATURDAY(Calendar.SATURDAY, "SATURDAY");
+		
+		@Getter
+		private int id;
+		
+		@Getter
+		private String name;
+		
+ 
+        // コンストラクタの実装
+        private DayOfWeek (int id, String name) {
+        	this.id = id;
+        	this.name = name;
+        }
+        
+        public static DayOfWeek getEnum(int id) {
+        	DayOfWeek[] enumArray = DayOfWeek.values();
+        	 
+            // 取得出来たenum型分ループします。
+            for(DayOfWeek enumStr : enumArray) {
+                // 引数とenum型の文字列部分を比較します。
+                if (id == enumStr.getId()){
+                    return enumStr;
+                }
+            }
+
+            return null;
+        }
+    }
 	
 	
 	public static void main(String[] arg) {
 		
 		DateCommonUtil util = new DateCommonUtil();
 		//------------------------
-		System.out.println("checkDate(2017/01/32):"+util.checkDate("2017/01/32", DATE_FORMAT_YYYYSMMSDD));
-		System.out.println("checkDate(2017/01/31):"+util.checkDate("2017/01/31", DATE_FORMAT_YYYYSMMSDD));
-		System.out.println("checkDate(2018/02/29):"+util.checkDate("2018/02/29", DATE_FORMAT_YYYYSMMSDD));
-		System.out.println("checkDate(20180229):"+util.checkDate("20180229", DATE_FORMAT_YYYYSMMSDD));
-		System.out.println("checkDate(2017/02/2A):"+util.checkDate("2017/02/2A", DATE_FORMAT_YYYYSMMSDD));
-		System.out.println("checkDate(2017/02/cA):"+util.checkDate("2017/02/cA", DATE_FORMAT_YYYYSMMSDD));
-		System.out.println("checkDate(2017/02/2Ac):"+util.checkDate("2017/02/2Ac", DATE_FORMAT_YYYYSMMSDD));
+		System.out.println("checkDate(2017/01/32):"+util.checkDate("2017/01/32"));
+		System.out.println("checkDate(2017/01/31):"+util.checkDate("2017/01/31"));
+		System.out.println("checkDate(2018/02/29):"+util.checkDate("2018/02/29"));
+		System.out.println("checkDate(20180229):"+util.checkDate("20180229"));
+		System.out.println("checkDate(2017/02/2A):"+util.checkDate("2017/02/2A"));
+		System.out.println("checkDate(2017/02/cA):"+util.checkDate("2017/02/cA"));
+		System.out.println("checkDate(2017/02/2Ac):"+util.checkDate("2017/02/2Ac"));
 		//------------------------
-		System.out.println("checkDate(20170132):"+util.checkDate("20170132", DATE_FORMAT_YYYYMMDD));
-		System.out.println("checkDate(20170131):"+util.checkDate("20170131", DATE_FORMAT_YYYYMMDD));
-		System.out.println("checkDate(20180229):"+util.checkDate("20180229", DATE_FORMAT_YYYYMMDD));
-		System.out.println("checkDate(2018/02/28):"+util.checkDate("2018/02/28", DATE_FORMAT_YYYYMMDD));
-		System.out.println("checkDate(2017022A):"+util.checkDate("2017022A", DATE_FORMAT_YYYYMMDD));
-		System.out.println("checkDate(201702cA):"+util.checkDate("201702cA", DATE_FORMAT_YYYYMMDD));
-		System.out.println("checkDate(2017022Ac):"+util.checkDate("2017022Ac", DATE_FORMAT_YYYYMMDD));
-		System.out.println("checkDate(2017A22A):"+util.checkDate("2017A222", DATE_FORMAT_YYYYMMDD));
+		System.out.println("checkDate(20170132):"+util.checkDate("20170132"));
+		System.out.println("checkDate(20170131):"+util.checkDate("20170131"));
+		System.out.println("checkDate(20180229):"+util.checkDate("20180229"));
+		System.out.println("checkDate(2018/02/28):"+util.checkDate("2018/02/28"));
+		System.out.println("checkDate(2017022A):"+util.checkDate("2017022A"));
+		System.out.println("checkDate(201702cA):"+util.checkDate("201702cA"));
+		System.out.println("checkDate(2017022Ac):"+util.checkDate("2017022Ac"));
+		System.out.println("checkDate(2017A22A):"+util.checkDate("2017A222"));
 		//------------------------
+		System.out.println("checkTime(34:56):"+util.checkTime("34:56"));
+		System.out.println("checkTime(12:56):"+util.checkTime("12:56"));
+		System.out.println("checkTime(12:70):"+util.checkTime("12:70"));
 		Calendar org = Calendar.getInstance();
 		org.set(2017, 10, 12, 22, 23, 20);
 		Calendar trg = Calendar.getInstance();
 		trg.set(2017, 10, 13, 22, 43, 20);
 		
-		System.out.println("getDateDiff(org, trg):"+util.getDateDiff(org.getTime(), trg.getTime()).toString());
+		System.out.println("getDateDiff(org, trg):"+util.getDateDifference(org.getTime(), trg.getTime()).toString());
 		//------------------------
 		org = Calendar.getInstance();
 		org.set(2017, 10, 12, 22, 23, 20);
@@ -225,7 +370,7 @@ public class DateCommonUtil {
 		System.out.println("getDayOfWeek(org):"+util.getDayOfWeek(org.getTime()));
 		
 		//------------------------
-		System.out.println("getFormatDateString(org, yyyy/MM/dd):"+util.getFormatDateString(org.getTime(), DATE_FORMAT_YYYYSMMSDDHHQMIQSS));
+		System.out.println("formatDate(org, yyyy/MM/dd):"+util.formatDate(org.getTime(), DATE_FORMAT_YYYYSMMSDD_YOUBI));
 		
 	}
 }

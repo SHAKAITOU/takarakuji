@@ -9,9 +9,14 @@ import java.util.Enumeration;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import sha.framework.exception.TKRKException;
 
 public class PropertiesUtil {
+	
+	@Autowired
+	private LogCommonUtil log;
 	
 	private ResourceBundle bundle;
 
@@ -20,7 +25,7 @@ public class PropertiesUtil {
 		try {
 			bundle = new PropertyResourceBundle(input);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			log.error("プロパティの取得クラス初期化", "InputStream I/O error.", e);
 			throw new TKRKException(e.getMessage());
 		}
 	}
@@ -29,7 +34,7 @@ public class PropertiesUtil {
 		try {
 			bundle = new PropertyResourceBundle(new FileInputStream(file));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			log.error("プロパティの取得クラス初期化", "InputStream I/O error.", e);
 			throw new TKRKException(e.getMessage());
 		}
 	}
@@ -40,7 +45,7 @@ public class PropertiesUtil {
 			test = new String( test.getBytes("8859_1"),"UTF-8");
 
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+			log.error("プロパティの取得", "The Character Encoding is not supported.", e);
 			throw new TKRKException(e.getMessage());
 		}
 

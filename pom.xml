@@ -132,6 +132,24 @@
 			<artifactId>aws-java-sdk</artifactId>
 			<version>1.11.228</version>
 		</dependency>
+		<!-- google findbugs -->
+			<dependency>
+			    <groupId>com.google.code.findbugs</groupId>
+			    <artifactId>jsr305</artifactId>
+			    <version>3.0.2</version>
+			</dependency>
+			<!-- mybatis -->
+			<dependency>
+	            <groupId>org.mybatis</groupId>
+	            <artifactId>mybatis</artifactId>
+	            <version>3.4.5</version>
+	        </dependency>
+	        <!-- commons-lang3 -->
+	        <dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.6</version>
+			</dependency>
 	</dependencies>
 
 	<build>

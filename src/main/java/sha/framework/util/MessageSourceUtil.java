@@ -5,7 +5,7 @@ import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 
-public class ResourceUtil {
+public class MessageSourceUtil {
 	
 
 	@Autowired 

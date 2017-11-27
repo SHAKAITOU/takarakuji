@@ -17,8 +17,9 @@ import sha.framework.db.DB1Properties;
 import sha.framework.db.DB2Properties;
 import sha.framework.handler.CustomerLocaleResolver;
 import sha.framework.util.DateCommonUtil;
+import sha.framework.util.JsonLogCommonUtil;
 import sha.framework.util.LogCommonUtil;
-import sha.framework.util.ResourceUtil;
+import sha.framework.util.MessageSourceUtil;
 import sha.framework.util.StringCommonUtil;
 import sha.framework.util.UserInfoUtil;
 /**
@@ -64,8 +65,8 @@ public class BaseApplication extends WebMvcConfigurerAdapter {
 	}
 	
 	@Bean
-	public ResourceUtil getResourceUtil() {
-		return new ResourceUtil();
+	public MessageSourceUtil getResourceUtil() {
+		return new MessageSourceUtil();
 	}
 	
 	@Bean
@@ -76,6 +77,11 @@ public class BaseApplication extends WebMvcConfigurerAdapter {
 	@Bean
 	public DateCommonUtil getDateCommonUtil() {
 		return new DateCommonUtil();
+	}
+	
+	@Bean
+	public JsonLogCommonUtil getJsonLogCommonUtil() {
+		return new JsonLogCommonUtil();
 	}
 
 	/**

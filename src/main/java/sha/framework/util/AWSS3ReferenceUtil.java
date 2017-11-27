@@ -1,13 +1,16 @@
 package sha.framework.util;
 
-import org.springframework.stereotype.Service;
+import com.amazonaws.auth.InstanceProfileCredentialsProvider;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 
-@Service
 public class AWSS3ReferenceUtil {
     
 	
 //	@Autowired
-//    private AmazonS3Client s3;
+    private AmazonS3 s3 = AmazonS3ClientBuilder.standard()
+            .withCredentials(new InstanceProfileCredentialsProvider())
+            .build();
 //	
 //	
 //	public FWCheckResult checkFile(String bucketName, String s3key) {

@@ -15,7 +15,7 @@ import lombok.Getter;
 public class DateCommonUtil {
 	
 	@Autowired
-	private ResourceUtil msg;
+	private MessageSourceUtil msg;
 	
 	public static final String DATE_FORMAT_YYYYSMMSDD = "yyyy/MM/dd";
 	
@@ -30,6 +30,8 @@ public class DateCommonUtil {
 	public static final String DATE_FORMAT_YYYYSMMSDDHHQMIQSS_SSS = "yyyy/MM/dd HH:mm:ss.SSS";
 	
 	public static final String DATE_FORMAT_YYYYHMMHDDHHQMIQSS_SSS = "yyyy-MM-dd HH:mm:ss.SSS";
+	
+	public static final String DATE_FORMAT_YYYYHMMHDDHHQMIQSS_SSSZ = "yyyy-MM-dd HH:mm:ss.SSSZ";
 	
 	public static final String TIME_FORMAT_HHQMI = "HH:mm";
 	
@@ -289,6 +291,10 @@ public class DateCommonUtil {
 		lock.unlock();
 		return dtString;
 		 
+	}
+	
+	public Date getSystemCurrentDate() {
+		return new Date(System.currentTimeMillis());
 	}
 	
 	public enum DayOfWeek {

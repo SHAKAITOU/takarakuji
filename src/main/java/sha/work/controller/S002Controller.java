@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +18,8 @@ import sha.framework.controller.ScreenBaseController;
 import sha.framework.data.InputBaseData;
 import sha.framework.data.OutputBaseData;
 import sha.framework.util.DateCommonUtil;
-import sha.framework.util.ResourceUtil;
+import sha.framework.util.JsonLogCommonUtil;
+import sha.framework.util.MessageSourceUtil;
 import sha.framework.util.UserInfoUtil;
 import sha.work.data.S002InputData;
 import sha.work.data.S002OutputData;
@@ -33,10 +37,13 @@ public class S002Controller extends ScreenBaseController{
 	private UserInfoUtil userInfoUtil;
 	
 	@Autowired
-	private ResourceUtil msg;
+	private MessageSourceUtil msg;
 	
 	@Autowired
 	private DateCommonUtil dateUtil;
+	
+	@Autowired
+	private JsonLogCommonUtil jsonLog;
 
 	@Override
 	public void validate(InputBaseData input, OutputBaseData output) {
@@ -46,7 +53,9 @@ public class S002Controller extends ScreenBaseController{
 
 
 	@RequestMapping(method=RequestMethod.GET)
-	public ModelAndView exapmle(@RequestParam Map<String,String> allRequestParams, Locale loc)  {
+	public ModelAndView exapmle(@RequestParam Map<String,String> allRequestParams, Locale loc, 
+			HttpServletRequest request,
+			HttpServletResponse response)  {
 
 		S002InputData input = new S002InputData();
 		
@@ -72,6 +81,8 @@ public class S002Controller extends ScreenBaseController{
 		
 		mav.addObject("output", output);
 		mav.setViewName("test/S002");
+		
+		jsonLog.info("REQ0001", "TRC0002", "Json log test msg.", request, response, null);
 		
 		return mav;
 	}

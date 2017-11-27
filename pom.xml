@@ -104,13 +104,11 @@
 			<artifactId>slf4j-json-logger</artifactId>
 			<version>1.0.2</version>
 		</dependency>
-		<!-- 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-aws-autoconfigure</artifactId>
 			<version>1.2.1.RELEASE</version>
 		</dependency>
-		 -->
 		<dependency>
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-config-client</artifactId>
@@ -127,6 +125,12 @@
         <dependency>
 		    <groupId>commons-digester</groupId>
 		    <artifactId>commons-digester</artifactId>
+		</dependency>
+		<!-- AWS S3 SDK -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.11.228</version>
 		</dependency>
 	</dependencies>
 

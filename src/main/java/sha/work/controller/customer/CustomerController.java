@@ -1,4 +1,4 @@
-package sha.work.controller;
+package sha.work.controller.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import sha.framework.controller.ScreenBaseController;
 import sha.framework.util.UserInfoUtil;
+import sha.work.controller.UrlPathDefine;
 import sha.work.data.S001InputData;
 import sha.work.data.S001OutputData;
 
 @Controller
-@RequestMapping("/example")
-public class S001Controller extends ScreenBaseController{
+@RequestMapping(path = UrlPathDefine.CUSTOMER_INIT, method=RequestMethod.GET)
+public class CustomerController extends ScreenBaseController{
 
 	@Autowired
 	private UserInfoUtil userInfoUtil;
 
 
-	@RequestMapping(method=RequestMethod.GET)
 	@ResponseBody
 	public S001OutputData exapmle(@RequestParam String name, @RequestParam String address)  {
 

@@ -3,11 +3,9 @@ package sha.work.service;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
-
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import sha.framework.data.InputBaseData;
 import sha.framework.data.OutputBaseData;
 import sha.framework.service.BaseService;
@@ -22,7 +20,7 @@ import sha.work.mapper.db2.User2Mapper;
 import sha.work.mapper.domain.User;
 
 @Service
-public class MBTestService<S extends InputBaseData, T extends OutputBaseData> extends BaseService<S, T> {
+public class MBTestService extends BaseService {
 
 
     @Autowired
@@ -39,51 +37,15 @@ public class MBTestService<S extends InputBaseData, T extends OutputBaseData> ex
     
     @Autowired
     private LogicTest logicTest;
-    
-    
-//    @Override
-//    public void preMainLogic(InputBaseData input, OutputBaseData output) throws CommercePFScreenException {
-//    	// TODO Auto-generated method stub
-//    	//userMapper.save(10, "test1");
-//    	
-//    }
-//    
-//    @Override
-//    public void execMainLogic(InputBaseData input, OutputBaseData output, String... param) {
-//    	// TODO Auto-generated method stub
-//    	//userMapper.save(11, "test2");
-//    }
-//    
-//    @Override
-//    public void postMainLogic(InputBaseData input, OutputBaseData output) {
-//    	// TODO Auto-generated method stub
-//    	//userMapper.save(12, "test3");
-//    	output = getByName("bob");
-//    }
-    
-    
 
 
 
 	public String findByName(String name) {
 		return userMapper.findByName(name).toString();
 	}
-	
-	@Override
-	public void preMainLogic(S input, T output) throws TKRKScreenException {
-		// TODO Auto-generated method stub
-	}
 
-	@Override
-	public void execMainLogic(S input, T output, String... param) throws TKRKScreenException {
-		// TODO Auto-generated method stub
-		//logicTest.save();
-		//userMapper.saveError(6, "xie2");
-		
-	}
 
-	@Override
-	public void postMainLogic(S input, T output) throws TKRKScreenException {
+	public void logic(InputBaseData input, OutputBaseData output) throws TKRKScreenException {
 		// TODO Auto-generated method stub
 		//User user = getByName("bob");
 		//User user = userMapper.findByName("bob");
@@ -91,7 +53,7 @@ public class MBTestService<S extends InputBaseData, T extends OutputBaseData> ex
 		UserMapper user = (UserMapper)dbAccess.getMapper(UserMapper.class);
 		User user2 = user.getByName("bob");
 		((S002OutputData)output).setUser(user2);
-		PropertiesUtil propertiesUtil = new PropertiesUtil(new File("D:\\sya-kt\\resource\\messages.properties"));
+		PropertiesUtil propertiesUtil = new PropertiesUtil(new File("D:\\sya-kt\\resource\\old\\messages.properties"));
 		((S002OutputData)output).setLocalProp(propertiesUtil.getProperty("MSG004"));
 		List<String> arr = Arrays.asList(
 	            StringEscapeUtils.escapeCsv("a\",b[\\b,'\""),

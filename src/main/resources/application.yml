@@ -34,7 +34,9 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
-
+    
+api-service:
+  name: takarakuji
 
 logging:
   level:
@@ -46,10 +48,11 @@ logging:
 server:
   port: 8092
 
-
-cloud.aws:
-  credentials:
-    accessKey: aws_access_key
-    secretKey: aws_secret_access_key
-  region:
-    static: ap-northeast-1 
+#### no env##### 
+#cloud.aws:
+#  credentials:
+#    accessKey: aws_access_key
+#    secretKey: aws_secret_access_key
+#  region:
+#    static: ap-northeast-1 
+################

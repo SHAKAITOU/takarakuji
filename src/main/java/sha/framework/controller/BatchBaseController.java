@@ -1,5 +1,5 @@
 package sha.framework.controller;
-public abstract class BatchBaseController extends BaseController {
+public class BatchBaseController extends BaseController {
 
 
 

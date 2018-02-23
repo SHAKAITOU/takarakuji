@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+  th:with="lang=${#locale.language}" th:lang="${lang}">
+<head>
+	<title>SHA LOTO</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<!-- CSS -->
+  <style type="text/css">
+	html {
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+	*, *:before, *:after {
+		-webkit-box-sizing: inherit;
+		-moz-box-sizing: inherit;
+		box-sizing: inherit;
+	}
+	
+	.axis text {
+		font: 10px sans-serif;
+	}
+	
+	.axis path,
+	.axis line {
+		fill: none;
+		stroke: #000;
+		shape-rendering: crispEdges;
+	}
+	
+	.bar {
+		fill: orange;
+	}
+
+	.bar:hover {
+		fill: orangered ;
+	}
+	
+	.bar1 {
+		fill: blue;
+	}
+
+	.bar1:hover {
+		fill: black;
+	}
+
+	.x.axis path {
+		display: none;
+	}
+	
+	.d3-tip {
+		line-height: 1;
+		font-weight: bold;
+		padding: 12px;
+		background: rgba(0, 0, 0, 0.8);
+		color: #fff;
+		border-radius: 2px;
+	}
+
+	/* Creates a small triangle extender for the tooltip */
+	.d3-tip:after {
+		box-sizing: border-box;
+		display: inline;
+		font-size: 10px;
+		width: 100%;
+		line-height: 1;
+		color: rgba(0, 0, 0, 0.8);
+		content: "\25BC";
+		position: absolute;
+		text-align: center;
+	}
+
+	/* Style northward tooltips differently */
+	.d3-tip.n:after {
+		margin: -1px 0 0 0;
+		top: 100%;
+		left: 0;
+	}
+	
+	</style>
+
+<svg class="chart" width="420" height="120"></svg>
+
+<script type="text/javascript" th:inline="javascript">
+
+/*<![CDATA[*/
+
+    
+    var margin = {top: 20, right: 30, bottom: 30, left: 40};
+    var width = $('#okPanel').width() - margin.left - margin.right;
+    var height = 500 - margin.top - margin.bottom;
+    
+	var data = /*[[${resultList}]]*/ null;
+
+	var x = d3.scaleBand().rangeRound([0, width]).padding(0.1);
+
+	var y = d3.scaleLinear().range([height, 0]);
+
+	var chart = d3.select(".chart")
+				    .attr("width", width + margin.left + margin.right)
+				    .attr("height", height + margin.top + margin.bottom)
+				  	.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	x.domain(data.map(function(d) { return d.numberName; }));
+	y.domain([0, d3.max(data, function(d) { return d.numberValue; })]);
+	
+	var numberTip = d3.tip()
+				.attr("class", "d3-tip")
+				.offset([-10, 0])
+				.html(function(d) {
+					return "<strong>出た回数:</strong> <span style='color:red'>" + d.numberValue + "</span>";
+				});
+	
+	d3.select("body").append("svg").call(numberTip);
+	
+	var bar = chart.selectAll("g")
+					.data(data)
+					.enter().append("g")
+					.attr("transform", function(d) { return "translate(" + x(d.numberName) + ",0)"; });
+
+	bar.append("rect")
+		.attr("y", function(d) { return y(d.numberValue); })
+		.attr("height", function(d) { return height - y(d.numberValue); })
+		.attr("width",x.bandwidth())
+		.attr("class", "bar")
+		.on('mouseover', numberTip.show)
+		.on('mouseout', numberTip.hide);
+
+	bar.append("text")
+		.attr("x", x.bandwidth() / 2)
+		.attr("y", function(d) { return y(d.numberValue) + 3; })
+		.attr("dy", ".71em")
+		.text(function(d) { return ""; });
+
+	var xAxis = d3.axisBottom().scale(x);
+	var yAxis = d3.axisLeft().scale(y);
+	  
+	chart.append("g")
+	    .attr("class", "x axis")
+	    .attr("transform", "translate(0," + height + ")")
+	    .call(xAxis);
+	  
+	chart.append("g")
+		.attr("class", "y axis")
+		.call(yAxis)
+		.append("text")
+    	.attr("transform", "rotate(-90)")
+	    .attr("y", 6)
+	    .attr("dy", ".71em")
+	    .style("color", "blue")
+	    .style("text-anchor", "end")
+	    .text("各数字過去出た回数");
+	
+
+
+function type(d) {
+  d.value = +d.numberValue; // coerce to number
+  return d;
+}	
+
+/*]]>*/
+</script>	
+	
+</body>
+
+</html>

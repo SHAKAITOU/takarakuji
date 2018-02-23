@@ -23,16 +23,16 @@ public class MultipleDBAccessUtil {
 	private List<Class<? extends Object>> alldb2Classes;
 
 	@Autowired
-	private void getDB1SqlSession(@Qualifier(DBConfig.DB1_SQLSESSION_BEAN_NAME) SqlSessionTemplate sqlSession) {
+	private void getDB1SqlSession(@Qualifier(DBConfig.DOMAIN_SQLSESSION_BEAN_NAME) SqlSessionTemplate sqlSession) {
 		this.db1SQlSesstion = sqlSession;
-		alldb1Classes = ClassFinder.find(DBConfig.DB1_MAPPER_PACKAGE);
+		alldb1Classes = ClassFinder.find(DBConfig.DOMAIN_MAPPER_PACKAGE);
 	}
 	
 	
 	@Autowired
-	private void getDB2SqlSession(@Qualifier(DBConfig.DB2_SQLSESSION_BEAN_NAME) SqlSessionTemplate sqlSession) {
+	private void getDB2SqlSession(@Qualifier(DBConfig.LOTO_SQLSESSION_BEAN_NAME) SqlSessionTemplate sqlSession) {
 		this.db2SQlSesstion = sqlSession;
-		alldb2Classes = ClassFinder.find(DBConfig.DB2_MAPPER_PACKAGE);
+		alldb2Classes = ClassFinder.find(DBConfig.LOTO_MAPPER_PACKAGE);
 	}
 	
 	
@@ -48,7 +48,7 @@ public class MultipleDBAccessUtil {
 	}
 	
 	public SqlSessionTemplate getSqlSession(String sqlSessionNm) {
-		if(sqlSessionNm.equals(DBConfig.DB1_SQLSESSION_BEAN_NAME)) {
+		if(sqlSessionNm.equals(DBConfig.DOMAIN_SQLSESSION_BEAN_NAME)) {
 			return db1SQlSesstion;
 		}else {
 			return db2SQlSesstion;

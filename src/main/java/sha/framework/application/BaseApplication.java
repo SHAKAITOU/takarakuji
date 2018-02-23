@@ -13,8 +13,8 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
-import sha.framework.db.DB1Properties;
-import sha.framework.db.DB2Properties;
+import sha.framework.db.DomainProperties;
+import sha.framework.db.LotoProperties;
 import sha.framework.handler.CustomerLocaleResolver;
 import sha.framework.util.DateCommonUtil;
 import sha.framework.util.JsonLogCommonUtil;
@@ -31,7 +31,7 @@ import sha.framework.util.UserInfoUtil;
 @ComponentScan(basePackages="sha.*")
 //@MapperScan(basePackages="com.nec.jp.commercepf.example.*")
 @EnableAsync(proxyTargetClass=true)
-@EnableConfigurationProperties({DataSourceProperties.class, DB1Properties.class, DB2Properties.class})
+@EnableConfigurationProperties({DataSourceProperties.class, DomainProperties.class, LotoProperties.class})
 public class BaseApplication extends WebMvcConfigurerAdapter {
 	
 	@Bean

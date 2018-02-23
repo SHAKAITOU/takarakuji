@@ -6,11 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import sha.framework.controller.ScreenBaseController;
 import sha.framework.util.UserInfoUtil;
-import sha.work.controller.UrlPathDefine;
-import sha.work.data.S001InputData;
-import sha.work.data.S001OutputData;
+import sha.work.controller.test.UrlPathDefine;
 
 @Controller
 @RequestMapping(path = UrlPathDefine.CUSTOMER_INIT, method=RequestMethod.GET)
@@ -21,19 +20,19 @@ public class CustomerController extends ScreenBaseController{
 
 
 	@ResponseBody
-	public S001OutputData exapmle(@RequestParam String name, @RequestParam String address)  {
+	public String exapmle(@RequestParam String name, @RequestParam String address)  {
 
-		S001InputData input = new S001InputData();
-		input.setName(name);
-		input.setAddress(address);
+//		S001InputData input = new S001InputData();
+//		input.setName(name);
+//		input.setAddress(address);
+//		
+//		input = (S001InputData)userInfoUtil.initInfo(1, input);
+//
+//		S001OutputData output = new S001OutputData();
+//		output.setComment(name + ":" + address);
+//		output.setS001InputData(input);
 		
-		input = (S001InputData)userInfoUtil.initInfo(1, input);
-
-		S001OutputData output = new S001OutputData();
-		output.setComment(name + ":" + address);
-		output.setS001InputData(input);
-		
-		return output;
+		return "";
 	}
 
 

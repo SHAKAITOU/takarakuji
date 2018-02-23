@@ -1,9 +1,9 @@
 spring:
   application:
-    name: commercePFServer
+    name: shaLotoPro
   cloud:
     config:
-      profile: commerceFW
+      profile: shaLoto
       label: 1
       uri: http://localhost:8888
     
@@ -15,13 +15,13 @@ spring:
     basename: messages
     cache-seconds: -1
     encoding: UTF-8
-  db1:
+  domain:
     datasource:
       url: jdbc:postgresql://127.0.0.1:5432/sha_test
       username: postgres
       password: postgre
       driverClassName: org.postgresql.Driver
-  db2:
+  loto:
     datasource:
       url: jdbc:postgresql://127.0.0.1:5432/sha_test2
       username: postgres
@@ -36,7 +36,7 @@ spring:
     port: 6379
     
 api-service:
-  name: takarakuji
+  name: shaLoto
 
 logging:
   level:
@@ -47,6 +47,10 @@ logging:
   
 server:
   port: 8092
+  
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true  
 
 #### no env##### 
 #cloud.aws:

@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
+<head>
+	<title>SHA LOTO</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no"/>
+    
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+	
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
+		integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+	
+	
+</head>
+<body>
+<div class="container" role="main">
+
+	<div class="page-header">
+		<h1>TEST DATA</h1>
+	</div>
+	<div class="row">
+		<div class="col-sm-3">
+			<div class="panel panel-warning">
+				<div class="panel-heading">
+					<h3 class="panel-title">INIT</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-10 col-sm-offset-1">
+							<!-- ========INIT BTN========= -->
+							<button id="importHanyoDataBtn" type="button" class="btn btn-sm btn-block btn-warning">importHanyoData</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">LOGIC</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-10 col-sm-offset-1">
+							<!-- ========ANALYSIS BTN========= -->
+							<button id="loto7AnalysisP1" type="button" class="btn btn-sm btn-block btn-primary">loto7AnalysisP1</button>
+							<button id="loto7AnalysisP1Group" type="button" class="btn btn-sm btn-block btn-primary">loto7AnalysisP1Group</button> 
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!-- end col-sm-3 -->
+		<div class="col-sm-9">
+			<div id="okPanel" class="panel panel-success">
+				<div class="panel-heading">
+					<h3 class="panel-title">WHEN SUCCESSFUL</h3>
+				</div>
+				<div class="panel-body">
+					<div id="okResultBody"></div>
+				</div>
+			</div>
+			<div id="ngPanel" class="panel panel-danger">
+				<div class="panel-heading">
+					<h3 class="panel-title">WHEN FAIL</h3>
+				</div>
+				<div class="panel-body">
+					<div id="ngResultBody"></div>
+				</div>
+			</div>
+		</div><!-- end col-sm-9 -->
+	</div><!-- end row -->
+
+	
+</div>	
+<!-- /container -->
+
+<!-- include bootstrapLib  -->
+<div th:replace="fragment/footer :: bootstrapLib"></div>
+<script type="text/javascript">
+/*<![CDATA[*/
+
+var commonBtn;
+$btn_obj = $('#importHanyoDataBtn'); 
+$btn_obj.unbind(); 
+$btn_obj.on('click', function(event) {
+	commonBtn = $(this);
+	event.preventDefault();
+	executeAjax("GET", null, '/domain/init/importHanyoData'); 
+}); 
+
+$btn_obj = $('#loto7AnalysisP1'); 
+$btn_obj.unbind(); 
+$btn_obj.on('click', function(event) {
+	commonBtn = $(this);
+	event.preventDefault();
+	executeAjax("GET", null, '/loto/loto7AnalysisP1'); 
+});
+
+$btn_obj = $('#loto7AnalysisP1Group'); 
+$btn_obj.unbind(); 
+$btn_obj.on('click', function(event) {
+	commonBtn = $(this);
+	event.preventDefault();
+	executeAjax("GET", null, '/loto/loto7AnalysisP1Group'); 
+});
+
+
+$(window).resize(function() {
+	if(commonBtn != null){		
+		commonBtn.click();
+	}
+}).trigger("resize");
+
+function executeAjax(type, data, url) { 
+	$.ajax({
+		   type: type,
+		   url: url,
+		   data: data,
+		   statusCode: {
+			    200: function(data){
+			    	$("#okPanel").show();
+			    	$("#ngPanel").hide();
+			    	$("#okResultBody").html(data);
+					$("#ngResultBody").html("");
+			    },
+			    404: function() {
+			      alert( "page not found" );
+			    },
+			    500: function(data){
+			    	$("#okPanel").hide();
+			    	$("#ngPanel").show();
+			    	$("#okResultBody").html("");
+					$("#ngResultBody").html(data.responseText);
+			    }
+		   },
+		   timeout: 10000
+
+	});
+}
+
+/*]]>*/
+</script>
+</body>
+</html>

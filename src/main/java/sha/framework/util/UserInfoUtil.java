@@ -5,8 +5,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import sha.framework.data.InputBaseData;
-import sha.work.mapper.db1.UserMapper;
-import sha.work.mapper.domain.User;
+import sha.work.dto.domain.User;
+import sha.work.mapper.domain.UserMapper;
 
 public class UserInfoUtil {
 

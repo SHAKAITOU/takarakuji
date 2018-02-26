@@ -34,6 +34,19 @@
 		WHERE (B2 = ${prefix})
 	</sql>
 	
+	<!-- SELECT -->
+	<select id="getAll" resultType="sha.work.dto.loto.Loto7">
+		SELECT * FROM M_LOTO7
+	</select>
+	
+	<select id="findByTurn" resultType="sha.work.dto.loto.Loto7">
+		SELECT * FROM M_LOTO7 WHERE TURN = #{turn}
+	</select>
+	
+	<select id="getNomalNumbers" resultType="sha.work.dto.loto.Loto7">
+		SELECT * FROM M_LOTO7 WHERE TURN = #{turn}
+	</select>
+	
 	<select id="getNomalNumberSum" resultType="sha.work.entity.loto.NumberAndTurns">
 		<foreach item="num" index="index" collection="loto7Hanyo">
 			<if test="index > 0">UNION </if>
@@ -57,5 +70,36 @@
 		</foreach>
 		ORDER BY numberName	
 	</select>
+	
+	
+	<!-- INSERT -->
+	<insert id="save">
+		INSERT INTO M_LOTO7
+		( 
+			TURN
+			,OPEN_DT
+			,L1
+			,L2
+			,L3
+			,L4
+			,L5
+			,L6
+			,L7
+			,B1
+			,B2
+		 ) VALUES (
+			#{turn}
+			, #{openDt}
+			, #{l1}
+			, #{l2}
+			, #{l3}
+			, #{l4}
+			, #{l5}
+			, #{l6}
+			, #{l7}
+			, #{b1}
+			, #{b2}
+		)
+	</insert>
 	
 </mapper>

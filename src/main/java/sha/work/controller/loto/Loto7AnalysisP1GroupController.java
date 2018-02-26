@@ -18,6 +18,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import sha.framework.controller.ScreenBaseController;
 import sha.framework.util.JsonLogCommonUtil;
 import sha.framework.util.MessageSourceUtil;
+import sha.work.common.Loto7Type;
 import sha.work.exception.TKRKScreenException;
 import sha.work.service.loto.Loto7AnalysisP1Service;
 
@@ -49,7 +50,9 @@ public class Loto7AnalysisP1GroupController extends ScreenBaseController{
 
 
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("resultList", service.logic());
+		mav.addObject("resultList", service.analysis());
+		mav.addObject("loto7TypeEnums", Loto7Type.values());
+		
 		mav.setViewName("loto/loto7AnalysisP1ResultGroup");
 		
 		return mav;

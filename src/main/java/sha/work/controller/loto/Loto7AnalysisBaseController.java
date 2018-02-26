@@ -19,7 +19,7 @@ import sha.framework.controller.ScreenBaseController;
 import sha.framework.util.JsonLogCommonUtil;
 import sha.framework.util.MessageSourceUtil;
 import sha.work.exception.TKRKScreenException;
-import sha.work.service.loto.Loto7AnalysisP1Service;
+import sha.work.service.loto.Loto7AnalysisBaseService;
 
 /**
  * S002 Thymeleaf 
@@ -27,8 +27,8 @@ import sha.work.service.loto.Loto7AnalysisP1Service;
  *
  */
 @Controller
-@RequestMapping("/loto/loto7AnalysisP1")
-public class Loto7AnalysisP1Controller extends ScreenBaseController{
+@RequestMapping("/loto/getLoto7AnalysisBase")
+public class Loto7AnalysisBaseController extends ScreenBaseController{
 	
 	
 	@Autowired
@@ -39,7 +39,7 @@ public class Loto7AnalysisP1Controller extends ScreenBaseController{
 	private JsonLogCommonUtil jsonLog;
 	
 	@Autowired
-	private Loto7AnalysisP1Service service;
+	private Loto7AnalysisBaseService service;
 
 
 	@RequestMapping(method=RequestMethod.GET)
@@ -49,8 +49,8 @@ public class Loto7AnalysisP1Controller extends ScreenBaseController{
 
 
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("resultList", service.analysis());
-		mav.setViewName("loto/loto7AnalysisP1Result");
+		service.analysisAll();
+		mav.setViewName("/domain/init/hanyoDataImportSuccess");
 		
 		return mav;
 	}

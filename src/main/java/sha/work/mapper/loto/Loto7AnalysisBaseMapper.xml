@@ -1,0 +1,68 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sha.work.mapper.loto.Loto7AnalysisBaseMapper">
+	<!-- RESULT MAP -->
+
+	
+	<!-- SQL CHIP -->
+	
+	
+	<select id="isExist" resultType="int">
+		SELECT COUNT(*) FROM M_LOTO7_ANALYSIS_BASE WHERE TURN = #{turn}
+	</select>
+	
+	<insert id="save">
+		INSERT INTO M_LOTO7_ANALYSIS_BASE
+		( 
+			TURN 
+			,MAX_NUM
+			,MIN_NUM
+			,MAX_MIN_DIFF
+			,TOTAL_AVG
+			,MAX_NUM_DIFF
+			,MIN_NUM_DIFF
+			,NUM_DIFF_AVG
+			,EVEN_NUM_CNT
+			,ODD_NUM_CNT
+			,SERIAL_NUM_CNT
+			,LEFT_AREA_NUM_CNT
+			,CENTER_AREA_NUM_CNT
+			,RIGHT_AREA_NUM_CNT
+		 ) VALUES (
+			#{turn}
+			,#{maxNum}
+			,#{minNum}
+			,#{maxMinDiff}
+			,#{totalAvg}
+			,#{maxNumDiff}
+			,#{minNumDiff}
+			,#{numDiffAvg}
+			,#{evenNumCnt}
+			,#{oddNumCnt}
+			,#{serialNumCnt}
+			,#{leftAreaNumCnt}
+			,#{centerAreaNumCnt}
+			,#{rightAreaNumCnt}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE M_LOTO7_ANALYSIS_BASE
+		SET
+			MAX_NUM = #{maxNum}
+			,MIN_NUM = #{minNum}
+			,MAX_MIN_DIFF = #{maxMinDiff}
+			,TOTAL_AVG = #{totalAvg}
+			,MAX_NUM_DIFF = #{maxNumDiff}
+			,MIN_NUM_DIFF = #{minNumDiff}
+			,NUM_DIFF_AVG = #{numDiffAvg}
+			,EVEN_NUM_CNT = #{evenNumCnt}
+			,ODD_NUM_CNT = #{oddNumCnt}
+			,SERIAL_NUM_CNT = #{serialNumCnt}
+			,LEFT_AREA_NUM_CNT = #{leftAreaNumCnt}
+			,CENTER_AREA_NUM_CNT = #{centerAreaNumCnt}
+			,RIGHT_AREA_NUM_CNT = #{rightAreaNumCnt}
+		WHERE
+			TURN = #{turn}
+	</update>
+	
+</mapper>

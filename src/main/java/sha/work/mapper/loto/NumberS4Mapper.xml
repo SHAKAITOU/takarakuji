@@ -1,0 +1,32 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sha.work.mapper.loto.NumberS4Mapper">
+	<!-- RESULT MAP -->
+
+	
+	<!-- SQL CHIP -->
+	
+	
+	<select id="findByTurn" resultType="sha.work.dto.loto.NumberS4">
+		SELECT * FROM M_NUMBER_S4 WHERE TURN = #{turn}
+	</select>
+	
+	<insert id="save">
+		INSERT INTO M_NUMBER_S4
+		( 
+			TURN
+			,OPEN_DT
+			,L1
+			,L2
+			,L3
+			,L4
+		 ) VALUES (
+			#{turn}
+			, #{openDt}
+			, #{l1}
+			, #{l2}
+			, #{l3}
+			, #{l4}
+		)
+	</insert>
+	
+</mapper>

@@ -1,0 +1,497 @@
+/*!--------------------------
+ * DIV CSS
+ * --------------------------
+ */
+.div-top{
+	position: relative;
+    padding: 2px;
+  	border-style: solid;
+    border-color:white;
+  	border-width: 0px;
+  	border-radius: 0px;
+  	width: 100%;
+  	vertical-align:middle;
+  	height: 40px;
+}
+
+.div-body{
+	position: relative;
+	padding: 2px;
+  	border-style: solid;
+    border-color:white;
+  	border-width: 0px;
+  	border-radius: 0px;
+  	width: 100%;
+  	background-image: url('../image/maxresdefault.jpg');
+  	background-repeat: no-repeat;
+	background-attachment: fixed;
+	-moz-background-size:100% 100%;
+	background-size:100% 100%;
+}
+
+.div-body-m{
+	position: relative;
+	top: 70px;
+	padding: 2px;
+  	border-style: solid;
+    border-color:white;
+  	border-width: 0px;
+  	border-radius: 0px;
+  	width: 100%;
+}
+
+.div-db{
+	position: fixed;
+	bottom: 0;
+	position: relative;
+	margin-top:5px;
+	padding: 1px;
+  	border-style: solid;
+    border-color:white;
+  	border-width: 0px;
+  	border-radius: 0px;
+  	width: 100%;
+  	height: 22px;
+  	text-align: center;
+}
+
+.div-d2{
+  	border-style: solid;
+    border-color:white;
+  	border-width: 1px;
+  	border-radius: 0px;
+  	color: white;
+}
+
+.div-dt1{
+	color: white;
+	font-size: 15px;
+  	border-style: solid;
+    border-color:white;
+  	border-width: 1px;
+  	border-radius: 0px;
+  	overflow-y:scroll;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+/*!--------------------------
+ * DIALOG CSS
+ * --------------------------
+ */
+
+.vertical-alignment-helper {
+    display:table;
+    height: 100%;
+    width: 100%;
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+}
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width:inherit;
+    height:inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+}
+
+.w800-dialog .modal-dialog {
+    /* new custom width */
+    width: 850px;
+}
+
+.w850-dialog .modal-dialog {
+    /* new custom width */
+    width: 850px;
+}
+
+.w900-dialog .modal-dialog {
+    /* new custom width */
+    width: 900px;
+}
+
+.w950-dialog .modal-dialog {
+    /* new custom width */
+    width: 950px;
+}
+
+/*!--------------------------
+ * LABEL CSS
+ * --------------------------
+ */
+.label-12{
+	font-size: 12px;
+	vertical-align: middle;
+}
+
+.label-12b{
+	font-size: 12px;
+	font-weight: bold;
+	vertical-align: middle;
+}
+ 
+.label-14{
+	font-size: 14px;
+	vertical-align: middle;
+}
+
+.label-14b{
+	font-size: 14px;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+.label-16{
+	font-size: 16px;
+	vertical-align: middle;
+}
+
+.label-16b{
+	font-size: 16px;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+.label-lh2{
+	color: white;
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #485563;
+}
+
+.label-l2{
+	color: #333;
+	font-size: 12px;
+	background-color: #e2f3f5;
+	text-align: left;
+	padding-left: 2px;	
+}
+
+.label-lh3{
+	color: white;
+	font-size: 12px;
+	height:25px;
+	font-weight: bold;
+	background-color: #8B3F09;
+}
+
+.label-l3{
+	color: #333;
+	font-size: 14px;
+	background-color: white;
+	text-align: left;
+	padding-left: 2px;	
+}
+.label-l3:focus{
+	background-color: #EBEEB3;
+	box-shadow: 0px 0px 10px 0 #FB1DBC;
+}
+/*!--------------------------
+ * TD CSS
+ * --------------------------
+ */
+.td-lb{
+	font-size: 14px;
+	font-weight: bold;
+	vertical-align: middle;
+	background-color: #EDEDED;
+} 
+ 
+.td-t1{
+	color: white;
+	padding-left: 1px;
+	padding-top: 1px;
+}
+
+.td-th2{
+	padding-left: 2px;
+	color: white;
+	font-size: 15px;
+	background-color: #d9534f;
+}
+.td-t2s{
+	color: white;
+	padding-left: 2px;
+	background-color: #34495e;
+}
+
+.td-t2d{
+	color: white;
+	background-color: #4C345F;
+}
+
+.td-t2a{
+	color: #F9F944;
+	background-color: #B17DBF;
+	font-weight: bold;
+}
+
+/*!--------------------------
+ * dropdown-submenu
+ * --------------------------
+ */
+.marginBottom-0 {margin-bottom:0;}
+
+.dropdown-submenu{position:relative;}
+.dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
+.dropdown-submenu>a:after{display:block;content:" ";float:right;width:0;height:0;border-color:transparent;border-style:solid;border-width:5px 0 5px 5px;border-left-color:#cccccc;margin-top:5px;margin-right:-10px;}
+.dropdown-submenu:hover>a:after{border-left-color:#555;}
+.dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
+
+
+/*!--------------------------
+ * BUTTON CSS
+ * --------------------------
+ */
+.btn_com{
+	box-shadow: 2px 2px 2px #888888;
+}
+.btn_com:hover {
+    text-decoration: underline;
+}
+
+.btn_com:active {
+    box-shadow: none;
+}
+/* ボタン紫色 */
+.btn-purple {
+    background: #AC53D8;
+    color: #ffffff;
+}
+ 
+.btn-purple:hover, .btn-purple:focus, .btn-purple:active, .btn-purple.active, .open > .dropdown-toggle.btn-purple {
+    background: #9E2ED6;
+    color: #ffffff;
+}
+ 
+.btn-purple:active, .btn-purple.active {
+    background: #68208C;
+    color: #ffffff;
+    box-shadow: none;
+}
+
+/* 咖啡色 */
+.btn-coffee {
+    background: #B86352;
+    color: #ffffff;
+}
+ 
+.btn-coffee:hover, .btn-coffee:focus, .btn-coffee:active, .btn-coffee.active, .open > .dropdown-toggle.btn-coffee {
+    background: #82473B;
+    color: #ffffff;
+}
+ 
+.btn-coffee:active, .btn-coffee.active {
+    background: #5C342C;
+    color: #ffffff;
+    box-shadow: none;
+}
+
+/* 灰色 */
+.btn-gray {
+    background: #A4A4A4;
+    color: #ffffff;
+}
+ 
+.btn-gray:hover, .btn-gray:focus, .btn-gray:active, .btn-gray.active, .open > .dropdown-toggle.btn-gray {
+    background: #6E6E6E;
+    color: #ffffff;
+}
+ 
+.btn-gray:active, .btn-gray.active {
+    background: #585858;
+    color: #ffffff;
+    box-shadow: none;
+}
+
+/* 黄色 */
+.btn-yellow {
+    background: #787A5B;
+    color: #ffffff;
+}
+ 
+.btn-yellow:hover, .btn-yellow:focus, .btn-yellow:active, .btn-yellow.active, .open > .dropdown-toggle.btn-yellow {
+    background: #7F8331;
+    color: #ffffff;
+}
+ 
+.btn-yellow:active, .btn-yellow.active {
+    background: #55571E;
+    color: #ffffff;
+    box-shadow: none;
+}
+/*!--------------------------
+ * img CSS
+ * --------------------------
+ */
+.img-i1{
+	border:solid 1px #c0c0c0;
+}
+.img-i1:hover{
+	border:solid 1px #800000;
+	cursor:hand;
+}
+.img-i2{
+	border:solid 1px #c0c0c0;
+}
+
+.img-highlight{
+	border:solid 1px #0000ff;
+	cursor:hand;
+}
+
+.img_lang_ja{
+	background-image		   : url("../images/btn_japan_out.gif");
+}
+
+.img_lang_ja:hover{
+	background-image		   : url("../images/btn_japan_over.gif");
+}
+
+/*!--------------------------
+ * a CSS
+ * --------------------------
+ */
+a {
+	text-decoration: underline;
+}
+
+a:hover {
+	color: #F9F15F;
+	text-decoration: underline;
+}
+
+.a-a1{
+	color: white;
+	height: 40px;
+	cursor:hand;
+}
+
+.a-a2{
+	color: #00ff00;
+	cursor:hand;
+	text-decoration: underline;
+}
+.a-a2:hover{
+	color: #4C345F;
+	cursor:hand;
+	text-decoration: underline;
+}
+.a-a2:active {
+	color: #F4803D;
+	cursor:hand;
+	text-decoration: underline;
+}
+/*!--------------------------
+ * isotope CSS
+ * --------------------------
+ */
+.grid {
+  border: 0px solid white;
+}
+
+/* clear fix */
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* ---- .element-item ---- */
+
+.element-item {
+	position: relative;
+	float: left;
+	margin: 1px;
+	padding: 0px;
+	height: auto;
+	cursor:hand;
+}
+
+.element-item:hover {
+
+}
+
+.element-item-a {
+	position: relative;
+	float: left;
+	height: auto;
+	margin: 1px;
+	padding: 2px;
+	color: #F9F944;
+	background-color: #3957E0;
+	font-weight: bold;
+	border-width: 1px; 
+	border-style: solid;
+	border-radius: 3px;
+	cursor:hand;
+}
+
+/*!--------------------------
+ * TABLE CSS
+ * --------------------------
+ */
+
+.table tbody tr.highlight td { 
+	background-color: #A9D0F5;
+	font-weight: bold;
+	color: #FFFF00;
+}
+
+/*!--------------------------
+ * TOOLTIP CSS
+ * --------------------------
+ */
+ .divTooltip
+{
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  z-index: 2999;
+  width: "auto";
+  margin-left: -30px;
+  padding: 3px;
+  border: 1px solid white;
+  opacity: .9;
+  background-color: #343D66;
+  border-radius: 3px;
+  font-size: 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;
+}
+.divTooltip:hover
+{
+  visibility: visible;
+}
+ 
+.divTooltip:before
+{
+  content: "";
+  position: absolute;
+  z-index: 3000;
+  top: -9px;
+  left: 30px;
+  margin-left: -8px;
+  border-top: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
+  border-top-color: white;
+}
+.divTooltip:after
+{
+  content: "";
+  position: absolute;
+  z-index: 3000;
+  top: -7px;
+  left: 30px;
+  margin-left: -8px;
+  border-top: 0; 
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #343D66;
+}

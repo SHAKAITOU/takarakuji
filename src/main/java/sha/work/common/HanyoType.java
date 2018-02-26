@@ -16,13 +16,13 @@ public enum HanyoType {
         this.id = id;
     }
     
-    public int value() {
+    public int getId() {
         return id;
     }
     
     public HanyoType valueOf(int id) {
     	for(HanyoType type : HanyoType.values()) {
-    		if(id == type.value()) {
+    		if(id == type.getId()) {
     			return type;
     		}
     	}

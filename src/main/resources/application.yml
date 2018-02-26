@@ -42,6 +42,7 @@ logging:
   level:
     root: INFO
     org.springframework.web: INFO
+    sha.work.mapper.loto: DEBUG
   file: logs/logback-demo.log
   path: logs
   

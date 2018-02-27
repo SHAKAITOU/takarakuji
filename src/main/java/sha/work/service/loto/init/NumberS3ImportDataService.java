@@ -1,4 +1,4 @@
-package sha.work.service.loto;
+package sha.work.service.loto.init;
 
 import java.io.IOException;
 import java.util.List;

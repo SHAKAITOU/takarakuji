@@ -1,5 +1,7 @@
-package sha.work.controller.loto;
+package sha.work.controller.batch;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 
@@ -7,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,12 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import sha.framework.controller.ScreenBaseController;
 import sha.framework.util.JsonLogCommonUtil;
 import sha.framework.util.MessageSourceUtil;
-import sha.work.common.Loto7NumberType;
 import sha.work.exception.TKRKScreenException;
+import sha.work.loto.LotoConstant;
 import sha.work.service.loto.Loto7AnalysisP1Service;
 
 /**
@@ -28,8 +33,8 @@ import sha.work.service.loto.Loto7AnalysisP1Service;
  *
  */
 @Controller
-@RequestMapping("/loto/loto7AnalysisP1Group")
-public class Loto7AnalysisP1GroupController extends ScreenBaseController{
+@RequestMapping("/batch/loto7AnalysisP1CreateFile")
+public class Loto7AnalysisP1CreateFileController extends ScreenBaseController{
 	
 	
 	@Autowired
@@ -40,7 +45,10 @@ public class Loto7AnalysisP1GroupController extends ScreenBaseController{
 	private JsonLogCommonUtil jsonLog;
 	
 	@Autowired
-	private Loto7AnalysisP1Service service;
+	private Loto7AnalysisP1Service service;	
+	
+	@Autowired
+    ResourceLoader resourceLoader;
 
 
 	@RequestMapping(method=RequestMethod.GET)
@@ -51,10 +59,19 @@ public class Loto7AnalysisP1GroupController extends ScreenBaseController{
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("resultList", service.analysis());
-		mav.addObject("loto7TypeEnums", Loto7NumberType.values());
+		ObjectMapper objectMapper = new ObjectMapper();
 		
-		mav.setViewName("loto/loto7AnalysisP1ResultGroup");
-		
+		try {
+			File file = new ClassPathResource(LotoConstant.LOTO7_P1_FILE+LotoConstant.JSON).getFile();;
+			if(!file.exists()) {
+				file.delete();
+			}
+			file.createNewFile();
+			objectMapper.writeValue(file, service.analysis());
+		} catch (IOException e) {
+			throw new TKRKScreenException(e);
+		}
+		mav.setViewName("/common/success");
 		return mav;
 	}
 

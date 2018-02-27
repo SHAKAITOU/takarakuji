@@ -41,7 +41,7 @@ public class HanyoDataImportController extends ScreenBaseController{
 		ModelAndView mav = new ModelAndView();
 		service.importHanyoData();
 
-		mav.setViewName("/domain/init/hanyoDataImportSuccess");
+		mav.setViewName("/common/success");
 		return mav;
 	}
 

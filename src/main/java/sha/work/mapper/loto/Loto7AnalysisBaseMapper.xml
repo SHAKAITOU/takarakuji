@@ -10,6 +10,10 @@
 		SELECT COUNT(*) FROM M_LOTO7_ANALYSIS_BASE WHERE TURN = #{turn}
 	</select>
 	
+	<select id="analysisP2" resultType="int">
+		SELECT COUNT(*) FROM M_LOTO7_ANALYSIS_BASE WHERE TURN = #{turn}
+	</select>
+	
 	<insert id="save">
 		INSERT INTO M_LOTO7_ANALYSIS_BASE
 		( 

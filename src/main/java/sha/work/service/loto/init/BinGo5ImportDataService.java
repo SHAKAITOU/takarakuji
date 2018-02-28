@@ -1,20 +1,17 @@
 package sha.work.service.loto.init;
 
-import java.io.IOException;
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import sha.framework.service.BaseService;
-import sha.framework.util.CsvFileReader;
+import sha.framework.util.FileReaderUtil;
 import sha.work.dto.loto.BinGo5;
 import sha.work.dto.loto.def.BinGo5Table;
-import sha.work.exception.TKRKScreenException;
-import sha.work.loto.LotoConstant;
 import sha.work.mapper.loto.BinGo5Mapper;
+import sha.work.util.FileUtil;
 
 @Service
 public class BinGo5ImportDataService extends BaseService {
@@ -22,19 +19,10 @@ public class BinGo5ImportDataService extends BaseService {
 	/** DB access class. */
 	@Autowired
 	private BinGo5Mapper binGo5Mapper;
-	
-	@Autowired
-    ResourceLoader resourceLoader;
 
 	public void importData() {
-		Resource resource = resourceLoader.getResource("classpath:" + LotoConstant.BINGO5+LotoConstant.CSV);
 
-		List<List<String>> csvData;
-		try {
-			csvData = CsvFileReader.read(resource.getFile());
-		} catch (IOException e) {
-			throw new TKRKScreenException(e);
-		}
+		List<List<String>> csvData = FileReaderUtil.readCsv(new File(FileUtil.getBinGo5ImportDataFileCsv()));
 
 		for(List<String> data : csvData) {
 			BinGo5 binGo5 = new BinGo5();

@@ -29,7 +29,7 @@ public class HtmlResourceReader {
 		//convertNumberS4(LotoConstant.NUMBERS4+LotoConstant.TXT, LotoConstant.NUMBERS4+LotoConstant.CSV);
 		//convertNumberS3(LotoConstant.NUMBERS3+LotoConstant.TXT, LotoConstant.NUMBERS3+LotoConstant.CSV);
 		//convertBinGo5(LotoConstant.BINGO5+LotoConstant.TXT, LotoConstant.BINGO5+LotoConstant.CSV);
-		convertMiniLoto(LotoConstant.MINILOTO+LotoConstant.TXT, LotoConstant.MINILOTO+LotoConstant.CSV);
+		//convertMiniLoto(LotoConstant.MINILOTO+LotoConstant.TXT, LotoConstant.MINILOTO+LotoConstant.CSV);
 	}
 
 

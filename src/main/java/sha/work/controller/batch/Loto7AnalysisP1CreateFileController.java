@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,8 +22,8 @@ import sha.framework.controller.ScreenBaseController;
 import sha.framework.util.JsonLogCommonUtil;
 import sha.framework.util.MessageSourceUtil;
 import sha.work.exception.TKRKScreenException;
-import sha.work.loto.LotoConstant;
 import sha.work.service.loto.Loto7AnalysisP1Service;
+import sha.work.util.FileUtil;
 
 /**
  * S002 Thymeleaf 
@@ -46,9 +44,6 @@ public class Loto7AnalysisP1CreateFileController extends ScreenBaseController{
 	
 	@Autowired
 	private Loto7AnalysisP1Service service;	
-	
-	@Autowired
-    ResourceLoader resourceLoader;
 
 
 	@RequestMapping(method=RequestMethod.GET)
@@ -62,8 +57,12 @@ public class Loto7AnalysisP1CreateFileController extends ScreenBaseController{
 		ObjectMapper objectMapper = new ObjectMapper();
 		
 		try {
-			File file = new ClassPathResource(LotoConstant.LOTO7_P1_FILE+LotoConstant.JSON).getFile();;
-			if(!file.exists()) {
+		    File dir = new File(FileUtil.getJsonDataFilePath());
+		    if (!dir.exists()) {
+		        dir.mkdirs();
+		    }
+		    File file = new File(FileUtil.getLoto7P1DataFileJson());
+			if(file.exists()) {
 				file.delete();
 			}
 			file.createNewFile();
@@ -75,6 +74,5 @@ public class Loto7AnalysisP1CreateFileController extends ScreenBaseController{
 		return mav;
 	}
 
-	
 
 }

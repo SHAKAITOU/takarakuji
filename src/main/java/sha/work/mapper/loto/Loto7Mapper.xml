@@ -2,7 +2,7 @@
 <mapper namespace="sha.work.mapper.loto.Loto7Mapper">
 	<!-- RESULT MAP -->
 	<resultMap id="NumberAndTurns" 
-				type="sha.work.entity.loto.NumberAndTurns">
+				type="sha.work.entity.query.NumberAndTurnsQuery">
         
     </resultMap>
 	
@@ -47,7 +47,7 @@
 		SELECT * FROM M_LOTO7 WHERE TURN = #{turn}
 	</select>
 	
-	<select id="getNomalNumberSum" resultType="sha.work.entity.loto.NumberAndTurns">
+	<select id="getNomalNumberSum" resultType="sha.work.entity.query.NumberAndTurnsQuery">
 		<foreach item="num" index="index" collection="loto7Hanyo">
 			<if test="index > 0">UNION </if>
 			<include refid="selectNumber"><property name="prefix" value="${num.value}"/></include>
@@ -55,7 +55,7 @@
 		ORDER BY numberName	
 	</select>
 	
-	<select id="getBonusNumber1Sum" resultType="sha.work.entity.loto.NumberAndTurns">
+	<select id="getBonusNumber1Sum" resultType="sha.work.entity.query.NumberAndTurnsQuery">
 		<foreach item="num" index="index" collection="loto7Hanyo">
 			<if test="index > 0">UNION </if>
 			<include refid="selectBonusNumber1"><property name="prefix" value="${index}"/></include>
@@ -63,7 +63,7 @@
 		ORDER BY numberName	
 	</select>
 	
-	<select id="getBonusNumber2Sum" resultType="sha.work.entity.loto.NumberAndTurns">
+	<select id="getBonusNumber2Sum" resultType="sha.work.entity.query.NumberAndTurnsQuery">
 		<foreach item="num" index="index" collection="loto7Hanyo">
 			<if test="index > 0">UNION </if>
 			<include refid="selectBonusNumber2"><property name="prefix" value="${index}"/></include>

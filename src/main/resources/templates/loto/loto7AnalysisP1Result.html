@@ -84,15 +84,15 @@
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
 					<a id="nomalNumberChartClk" class="nav-link" data-toggle="tab" href="#nomalNumberChartDiv" 
-						th:text="${T(sha.work.common.Loto7NumberType).NOMAL_NUMBER.getName()}"></a>
+						th:text="${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}"></a>
 				</li>
 				<li class="nav-item">
 					<a id="bonusNumber1ChartClk" class="nav-link" data-toggle="tab" href="#bonusNumber1ChartDiv" 
-						th:text="${T(sha.work.common.Loto7NumberType).BONUS_NUMBER1.getName()}"></a>
+						th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getName()}"></a>
 				</li>
 				<li class="nav-item">
 					<a id="bonusNumber2ChartClk" class="nav-link" data-toggle="tab" href="#bonusNumber2ChartDiv"
-						th:text="${T(sha.work.common.Loto7NumberType).BONUS_NUMBER2.getName()}"></a>
+						th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getName()}"></a>
 				</li>
 			</ul>
 			<div id="chartTabContent" class="tab-content">
@@ -106,11 +106,11 @@
 							<thead>
 								<tr>
 									<td class="td-t2s label-14b text-center">数字</td>
-									<td class="info label-14b text-center" th:text="${T(sha.work.common.Loto7NumberType).NOMAL_NUMBER.getName()}"></td>
+									<td class="info label-14b text-center" th:text="${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}"></td>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="member : ${resultList}">
+								<tr th:each="member : ${resultList.p1List}">
 									<td class="text-center label-14b" th:text="${member.numberName}"></td>
 									<td class="text-right">
 										<span class="badge badge-primary label-14b">
@@ -132,11 +132,11 @@
 							<thead>
 								<tr>
 									<td class="td-t2s label-14b text-center">数字</td>
-									<td class="danger label-14b text-center" th:text="${T(sha.work.common.Loto7NumberType).BONUS_NUMBER1.getName()}"></td>
+									<td class="danger label-14b text-center" th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getName()}"></td>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="member : ${resultList}">
+								<tr th:each="member : ${resultList.p1List}">
 									<td class="text-center label-14b" th:text="${member.numberName}"></td>
 									<td class="text-right">
 										<span class="badge badge-info label-14b">
@@ -158,11 +158,11 @@
 							<thead>
 								<tr>
 									<td class="td-t2s label-14b text-center">数字</td>
-									<td class="warning label-14b text-center" th:text="${T(sha.work.common.Loto7NumberType).BONUS_NUMBER2.getName()}"></td>
+									<td class="warning label-14b text-center" th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getName()}"></td>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="member : ${resultList}">
+								<tr th:each="member : ${resultList.p1List}">
 									<td class="text-center label-14b" th:text="${member.numberName}"></td>
 									<td class="text-right">
 										<span class="badge badge-warning label-14b">
@@ -177,7 +177,7 @@
 			</div>
 		</div>
 	</div>
-	
+	<div id="testJson"></div>
 </div>
 <script type="text/javascript" th:inline="javascript">
 
@@ -187,7 +187,7 @@
 	
 	var svgWidth = $('#okPanel').width()-40;
     var svgHeight = 300;
-	var data = /*[[${resultList}]]*/ null;
+	var data = /*[[${resultList.p1List}]]*/ null;
 	
 	creataNomalNumberChart(svgWidth, svgHeight, data);
 	creataBonusNumber1Chart(svgWidth, svgHeight, data);
@@ -215,7 +215,7 @@
 		
 		//add title
 				
-		var title = /*[[${T(sha.work.common.Loto7NumberType).NOMAL_NUMBER.getName()}]]*/ 
+		var title = /*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}]]*/ 
 		title += "各数字過去出た回数";
 		chart.append("text")
 			.attr("x", (width / 2))
@@ -256,7 +256,7 @@
 			.attr("height", function(d) { return height - y(d.numberValue); })
 			.attr("width",x.bandwidth())
 			.attr("class", "bar")
-			.attr("fill", /*[[${T(sha.work.common.Loto7NumberType).NOMAL_NUMBER.getBarColor()}]]*/)
+			.attr("fill", /*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getBarColor()}]]*/)
 			.on('mouseover', numberTip.show)
 			.on('mouseout', numberTip.hide);
 	
@@ -309,7 +309,7 @@
 	
 		//add title
 		
-		var title = /*[[${T(sha.work.common.Loto7NumberType).BONUS_NUMBER1.getName()}]]*/ 
+		var title = /*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getName()}]]*/ 
 		title += "各数字過去出た回数";
 		chart.append("text")
 			.attr("x", (width / 2))
@@ -350,7 +350,7 @@
 			.attr("height", function(d) { return height - y(d.bonusNumber1Value); })
 			.attr("width",x.bandwidth())
 			.attr("class", "bar")
-			.attr("fill", /*[[${T(sha.work.common.Loto7NumberType).BONUS_NUMBER1.getBarColor()}]]*/)
+			.attr("fill", /*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getBarColor()}]]*/)
 			.on('mouseover', numberTip.show)
 			.on('mouseout', numberTip.hide);
 	
@@ -368,7 +368,7 @@
 		    .attr("transform", "translate(0," + height + ")")
 		    .call(xAxis);
 		
-		var title = /*[[${T(sha.work.common.Loto7NumberType).BONUS_NUMBER1.getName()}]]*/ 
+		var title = /*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getName()}]]*/ 
 			title += "各数字過去出た回数";
 		chart.append("g")
 			.attr("class", "axis")
@@ -404,7 +404,7 @@
 					  	.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 	
 		//add title
-		var title = /*[[${T(sha.work.common.Loto7NumberType).BONUS_NUMBER2.getName()}]]*/ 
+		var title = /*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getName()}]]*/ 
 		title += "各数字過去出た回数";
 		chart.append("text")
 			.attr("x", (width / 2))
@@ -445,7 +445,7 @@
 			.attr("height", function(d) { return height - y(d.bonusNumber2Value); })
 			.attr("width",x.bandwidth())
 			.attr("class", "bar")
-			.attr("fill", /*[[${T(sha.work.common.Loto7NumberType).BONUS_NUMBER2.getBarColor()}]]*/)
+			.attr("fill", /*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getBarColor()}]]*/)
 			.on('mouseover', numberTip.show)
 			.on('mouseout', numberTip.hide);
 	
@@ -463,7 +463,7 @@
 		    .attr("transform", "translate(0," + height + ")")
 		    .call(xAxis);
 		
-		var title = /*[[${T(sha.work.common.Loto7NumberType).BONUS_NUMBER2.getName()}]]*/ 
+		var title = /*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getName()}]]*/ 
 			title += "各数字過去出た回数";
 		chart.append("g")
 			.attr("class", "axis")

@@ -1,9 +1,9 @@
-package sha.work.entity.loto;
+package sha.work.entity.query;
 
 import lombok.Data;
 
 @Data
-public class NumberAndTurns {
+public class NumberAndTurnsQuery {
 
 	private String numberName;
 	private int numberValue;

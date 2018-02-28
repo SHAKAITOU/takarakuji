@@ -82,13 +82,13 @@
 			<thead>
 				<tr>
 					<td class="td-t2s label-14b text-center">数字</td>
-					<td class="info label-14b text-center" th:text="${T(sha.work.common.Loto7NumberType).NOMAL_NUMBER.getName()}"></td>
-					<td class="danger label-14b text-center" th:text="${T(sha.work.common.Loto7NumberType).BONUS_NUMBER1.getName()}"></td>
-					<td class="warning label-14b text-center" th:text="${T(sha.work.common.Loto7NumberType).BONUS_NUMBER2.getName()}"></td>		
+					<td class="info label-14b text-center" th:text="${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}"></td>
+					<td class="danger label-14b text-center" th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getName()}"></td>
+					<td class="warning label-14b text-center" th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getName()}"></td>		
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="member : ${resultList}">
+				<tr th:each="member : ${resultList.p1List}">
 					<td class="text-center label-14b" th:text="${member.numberName}"></td>
 					<td class="text-right">
 						<span class="badge badge-primary label-14b">
@@ -135,24 +135,24 @@
 		var y = d3.scaleLinear().range([height, 0]);
 		
 		var z = d3.scaleOrdinal().range([ 
-			/*[[${T(sha.work.common.Loto7NumberType).NOMAL_NUMBER.getBarColor()}]]*/, 
-			/*[[${T(sha.work.common.Loto7NumberType).BONUS_NUMBER1.getBarColor()}]]*/, 
-			/*[[${T(sha.work.common.Loto7NumberType).BONUS_NUMBER2.getBarColor()}]]*/ 
+			/*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getBarColor()}]]*/, 
+			/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getBarColor()}]]*/, 
+			/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getBarColor()}]]*/ 
 		]);
 		var numberKeys = [
-			/*[[${T(sha.work.common.Loto7NumberType).NOMAL_NUMBER.getKey()}]]*/, 
-			/*[[${T(sha.work.common.Loto7NumberType).BONUS_NUMBER1.getKey()}]]*/, 
-			/*[[${T(sha.work.common.Loto7NumberType).BONUS_NUMBER2.getKey()}]]*/
+			/*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getKey()}]]*/, 
+			/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getKey()}]]*/, 
+			/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getKey()}]]*/
 		];
 
 		var numberNames = [ 
-			/*[[${T(sha.work.common.Loto7NumberType).NOMAL_NUMBER.getName()}]]*/,
-			/*[[${T(sha.work.common.Loto7NumberType).BONUS_NUMBER1.getName()}]]*/,
-			/*[[${T(sha.work.common.Loto7NumberType).BONUS_NUMBER2.getName()}]]*/
+			/*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}]]*/,
+			/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getName()}]]*/,
+			/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getName()}]]*/
 		];
 	    
 		//data
-		var data = /*[[${resultList}]]*/ null;
+		var data = /*[[${resultList.p1List}]]*/ null;
 		
 	
 		data.forEach(function(d) {

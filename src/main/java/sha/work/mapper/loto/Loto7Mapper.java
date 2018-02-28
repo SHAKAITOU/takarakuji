@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import sha.work.dto.loto.Loto7;
-import sha.work.entity.loto.Loto7AnalysisP1;
-import sha.work.entity.loto.NumberAndTurns;
+import sha.work.entity.in.Loto7AnalysisP1In;
+import sha.work.entity.query.NumberAndTurnsQuery;
 
 @Mapper
 public interface Loto7Mapper {
@@ -18,11 +18,11 @@ public interface Loto7Mapper {
     
     List<Loto7> getAll();
 
-	List<NumberAndTurns> getNomalNumberSum(Loto7AnalysisP1 loto7AnalysisP1);
+	List<NumberAndTurnsQuery> getNomalNumberSum(Loto7AnalysisP1In loto7AnalysisP1);
 	
-	List<NumberAndTurns> getBonusNumber1Sum(Loto7AnalysisP1 loto7AnalysisP1);
+	List<NumberAndTurnsQuery> getBonusNumber1Sum(Loto7AnalysisP1In loto7AnalysisP1);
 	
-	List<NumberAndTurns> getBonusNumber2Sum(Loto7AnalysisP1 loto7AnalysisP1);	
+	List<NumberAndTurnsQuery> getBonusNumber2Sum(Loto7AnalysisP1In loto7AnalysisP1);	
 	
 	void save(Loto7 loto7);
 

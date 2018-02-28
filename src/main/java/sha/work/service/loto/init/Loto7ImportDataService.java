@@ -1,20 +1,18 @@
 package sha.work.service.loto.init;
 
-import java.io.IOException;
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import sha.framework.service.BaseService;
-import sha.framework.util.CsvFileReader;
+import sha.framework.util.FileReaderUtil;
 import sha.work.dto.loto.Loto7;
 import sha.work.dto.loto.def.Loto7Table;
-import sha.work.exception.TKRKScreenException;
-import sha.work.loto.LotoConstant;
 import sha.work.mapper.loto.Loto7Mapper;
+import sha.work.util.FileUtil;
 
 @Service
 public class Loto7ImportDataService extends BaseService {
@@ -27,14 +25,8 @@ public class Loto7ImportDataService extends BaseService {
     ResourceLoader resourceLoader;
 
 	public void importData() {
-		Resource resource = resourceLoader.getResource("classpath:" + LotoConstant.LOTO7+LotoConstant.CSV);
 
-		List<List<String>> csvData;
-		try {
-			csvData = CsvFileReader.read(resource.getFile());
-		} catch (IOException e) {
-			throw new TKRKScreenException(e);
-		}
+		List<List<String>> csvData = FileReaderUtil.readCsv(new File(FileUtil.getLoto7ImportDataFileCsv()));
 
 		for(List<String> data : csvData) {
 			Loto7 loto7 = new Loto7();

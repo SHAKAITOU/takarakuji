@@ -1,4 +1,4 @@
-package sha.work.common;
+package sha.work.enums;
 
 public enum Loto7NumberType {
 

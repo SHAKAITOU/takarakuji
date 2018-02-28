@@ -1,4 +1,4 @@
-package sha.work.entity.loto;
+package sha.work.entity.in;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import lombok.Data;
 import sha.work.dto.domain.Hanyo;
 
 @Data
-public class Loto7AnalysisP1 {
+public class Loto7AnalysisP1In {
 
 	private List<Hanyo> loto7Hanyo;
 }

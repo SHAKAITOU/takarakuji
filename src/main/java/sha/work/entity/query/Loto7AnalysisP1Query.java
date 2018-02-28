@@ -1,9 +1,9 @@
-package sha.work.entity.loto;
+package sha.work.entity.query;
 
 import lombok.Data;
 
 @Data
-public class Loto7AnalysisP1Result {
+public class Loto7AnalysisP1Query {
 
 	private String numberName;
 	private int numberValue;

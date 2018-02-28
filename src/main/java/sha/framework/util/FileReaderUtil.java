@@ -8,9 +8,9 @@ import java.util.List;
 
 import org.springframework.util.CollectionUtils;
 
-public class CsvFileReader {
+public class FileReaderUtil {
 
-	public static List<List<String>> read(File src) {
+	public static List<List<String>> readCsv(File src) {
 		List<List<String>> csvData = new ArrayList<>(new ArrayList<>());
 
 		try {
@@ -18,7 +18,6 @@ public class CsvFileReader {
 			BufferedReader br = new BufferedReader(new FileReader(src));
 
 			String str;
-			StringBuffer sb = new StringBuffer();
 			while((str = br.readLine()) != null){
 				csvData.add(CollectionUtils.arrayToList(str.split(",")));
 
@@ -34,7 +33,36 @@ public class CsvFileReader {
 		return csvData;
 	}
 
-	public static List<List<String>> read(String srcStr) {
+	public static List<List<String>> readCsv(String srcStr) {
+
+		File src = new File(srcStr);
+		
+		return readCsv(src);
+	}
+	
+	public static String read(File src) {
+		StringBuffer sb = new StringBuffer();
+		
+		try {
+
+			BufferedReader br = new BufferedReader(new FileReader(src));
+
+			String str;
+			while((str = br.readLine()) != null){
+				sb.append(str);
+			}
+
+			br.close();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return sb.toString();
+	}
+	
+	public static String read(String srcStr) {
 
 		File src = new File(srcStr);
 		

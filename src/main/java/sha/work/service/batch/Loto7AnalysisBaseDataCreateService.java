@@ -27,7 +27,7 @@ public class Loto7AnalysisBaseDataCreateService extends BaseService {
 	@Transactional
 	public void analysis(int turn) throws TKRKScreenException {
 
-		Loto7 loto7 = loto7Mapper.getNomalNumbers(turn);
+		Loto7 loto7 = loto7Mapper.findByTurn(turn);
 		analysis(loto7);
 	}
 	

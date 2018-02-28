@@ -13,10 +13,12 @@ import sha.work.entity.query.NumberAndTurnsQuery;
 public interface Loto7Mapper {
 
     Loto7 findByTurn(@Param("turn") int turn);
-    
-    Loto7 getNomalNumbers(@Param("turn") int turn);
-    
+
     List<Loto7> getAll();
+    
+    int getTotalCnt();
+    
+    List<Loto7> getPageList(@Param("pageCnt") int pageCnt, @Param("pageIdx") int pageIdx);
 
 	List<NumberAndTurnsQuery> getNomalNumberSum(Loto7AnalysisP1In loto7AnalysisP1);
 	

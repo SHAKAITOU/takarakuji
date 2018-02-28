@@ -27,20 +27,6 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-3">
-			<div class="panel panel-warning">
-				<div class="panel-heading">
-					<h3 class="panel-title">INIT</h3>
-				</div>
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-sm-10 col-sm-offset-1">
-							<!-- ========INIT BTN========= -->
-							<button id="importHanyoDataBtn" type="button" class="btn btn-sm btn-block btn-outline-warning">importHanyoData</button>
-							<button id="getLoto7AnalysisBase" type="button" class="btn btn-sm btn-block btn-outline-warning">getLoto7AnalysisBase</button>
-						</div>
-					</div>
-				</div>
-			</div>
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">LOGIC</h3>
@@ -87,22 +73,6 @@
 /*<![CDATA[*/
 
 var commonBtn;
-$btn_obj = $('#importHanyoDataBtn'); 
-$btn_obj.unbind(); 
-$btn_obj.on('click', function(event) {
-	commonBtn = $(this);
-	event.preventDefault();
-	executeAjax("GET", null, '/domain/init/importHanyoData'); 
-});
-
-$btn_obj = $('#getLoto7AnalysisBase'); 
-$btn_obj.unbind(); 
-$btn_obj.on('click', function(event) {
-	commonBtn = $(this);
-	event.preventDefault();
-	executeAjax("GET", null, '/loto/getLoto7AnalysisBase'); 
-});
-
 $btn_obj = $('#loto7AnalysisP1'); 
 $btn_obj.unbind(); 
 $btn_obj.on('click', function(event) {

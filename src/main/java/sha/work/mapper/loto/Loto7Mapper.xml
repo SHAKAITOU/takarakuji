@@ -43,8 +43,12 @@
 		SELECT * FROM M_LOTO7 WHERE TURN = #{turn}
 	</select>
 	
-	<select id="getNomalNumbers" resultType="sha.work.dto.loto.Loto7">
-		SELECT * FROM M_LOTO7 WHERE TURN = #{turn}
+	<select id="getTotalCnt" resultType="int">
+		SELECT COUNT(*) FROM M_LOTO7
+	</select>
+	
+	<select id="getPageList" resultType="sha.work.dto.loto.Loto7">
+		SELECT * FROM M_LOTO7 ORDER BY TURN DESC LIMIT #{pageCnt} OFFSET #{pageInx}
 	</select>
 	
 	<select id="getNomalNumberSum" resultType="sha.work.entity.query.NumberAndTurnsQuery">

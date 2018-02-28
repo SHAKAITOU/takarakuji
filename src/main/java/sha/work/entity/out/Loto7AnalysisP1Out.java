@@ -7,5 +7,5 @@ import sha.work.entity.query.Loto7AnalysisP1Query;
 
 @Data
 public class Loto7AnalysisP1Out {
-	List<Loto7AnalysisP1Query> p1List;
+	private List<Loto7AnalysisP1Query> p1List;
 }

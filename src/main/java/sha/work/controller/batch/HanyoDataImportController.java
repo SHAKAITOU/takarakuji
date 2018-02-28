@@ -1,4 +1,4 @@
-package sha.work.controller.domain;
+package sha.work.controller.batch;
 
 import javax.validation.Validator;
 
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import sha.framework.controller.ScreenBaseController;
 import sha.framework.util.LogCommonUtil;
-import sha.work.service.domain.init.HanyoDataImportService;
+import sha.work.service.batch.HanyoDataImportService;
 
 /**
  * S002 Thymeleaf 
@@ -19,7 +19,7 @@ import sha.work.service.domain.init.HanyoDataImportService;
  *
  */
 @Controller
-@RequestMapping("/domain/init/importHanyoData")
+@RequestMapping("/batch/importHanyoData")
 public class HanyoDataImportController extends ScreenBaseController{
 
 	

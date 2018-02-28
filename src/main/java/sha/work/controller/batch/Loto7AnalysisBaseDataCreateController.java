@@ -1,4 +1,4 @@
-package sha.work.controller.loto;
+package sha.work.controller.batch;
 
 import java.util.Locale;
 import java.util.Map;
@@ -19,7 +19,7 @@ import sha.framework.controller.ScreenBaseController;
 import sha.framework.util.JsonLogCommonUtil;
 import sha.framework.util.MessageSourceUtil;
 import sha.work.exception.TKRKScreenException;
-import sha.work.service.loto.Loto7AnalysisBaseService;
+import sha.work.service.batch.Loto7AnalysisBaseDataCreateService;
 
 /**
  * S002 Thymeleaf 
@@ -27,8 +27,8 @@ import sha.work.service.loto.Loto7AnalysisBaseService;
  *
  */
 @Controller
-@RequestMapping("/loto/getLoto7AnalysisBase")
-public class Loto7AnalysisBaseController extends ScreenBaseController{
+@RequestMapping("/batch/createLoto7AnalysisBaseData")
+public class Loto7AnalysisBaseDataCreateController extends ScreenBaseController{
 	
 	
 	@Autowired
@@ -39,7 +39,7 @@ public class Loto7AnalysisBaseController extends ScreenBaseController{
 	private JsonLogCommonUtil jsonLog;
 	
 	@Autowired
-	private Loto7AnalysisBaseService service;
+	private Loto7AnalysisBaseDataCreateService service;
 
 
 	@RequestMapping(method=RequestMethod.GET)
@@ -50,7 +50,7 @@ public class Loto7AnalysisBaseController extends ScreenBaseController{
 
 		ModelAndView mav = new ModelAndView();
 		service.analysisAll();
-		mav.setViewName("/domain/init/hanyoDataImportSuccess");
+		mav.setViewName("/common/success");
 		
 		return mav;
 	}

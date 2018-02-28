@@ -16,7 +16,7 @@ import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 import com.github.springtestdbunit.dataset.ReplacementDataSetLoader;
 
-import sha.work.service.domain.init.HanyoDataImportService;
+import sha.work.service.batch.HanyoDataImportService;
 
 @RunWith(SpringRunner.class)
 @ComponentScan(basePackages="sha.*")

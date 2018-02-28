@@ -1,4 +1,4 @@
-package sha.work.service.loto;
+package sha.work.service.batch;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +15,7 @@ import sha.work.mapper.loto.Loto7AnalysisBaseMapper;
 import sha.work.mapper.loto.Loto7Mapper;
 
 @Service
-public class Loto7AnalysisBaseService extends BaseService {
+public class Loto7AnalysisBaseDataCreateService extends BaseService {
 
 	/** DB access class. */
 	@Autowired

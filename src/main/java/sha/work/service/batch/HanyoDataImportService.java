@@ -1,4 +1,4 @@
-package sha.work.service.domain.init;
+package sha.work.service.batch;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

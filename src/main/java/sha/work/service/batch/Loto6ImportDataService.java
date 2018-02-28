@@ -1,4 +1,4 @@
-package sha.work.service.loto.init;
+package sha.work.service.batch;
 
 import java.io.File;
 import java.util.List;

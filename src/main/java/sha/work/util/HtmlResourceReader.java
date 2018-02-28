@@ -1,4 +1,4 @@
-package sha.work.loto;
+package sha.work.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

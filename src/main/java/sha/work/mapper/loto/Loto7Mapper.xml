@@ -5,6 +5,21 @@
 				type="sha.work.entity.query.NumberAndTurnsQuery">
         
     </resultMap>
+    
+    <resultMap id="Loto7" 
+				type="sha.work.dto.loto.Loto7">
+		<id property="turn" column="turn" />
+		<result property="openDt" column="open_dt"/>
+		<result property="l1" column="l1"/>
+		<result property="l2" column="l2"/>
+		<result property="l3" column="l3"/>
+		<result property="l4" column="l4"/>
+		<result property="l5" column="l5"/>
+		<result property="l6" column="l6"/>
+		<result property="l7" column="l7"/>
+		<result property="b1" column="b1"/>
+		<result property="b2" column="b2"/>
+    </resultMap>
 	
 	<!-- SQL CHIP -->
 	<sql id="selectNumber">
@@ -35,11 +50,11 @@
 	</sql>
 	
 	<!-- SELECT -->
-	<select id="getAll" resultType="sha.work.dto.loto.Loto7">
+	<select id="getAll" resultMap="Loto7">
 		SELECT * FROM M_LOTO7
 	</select>
 	
-	<select id="findByTurn" resultType="sha.work.dto.loto.Loto7">
+	<select id="findByTurn" resultMap="Loto7">
 		SELECT * FROM M_LOTO7 WHERE TURN = #{turn}
 	</select>
 	
@@ -47,11 +62,11 @@
 		SELECT COUNT(*) FROM M_LOTO7
 	</select>
 	
-	<select id="getPageList" resultType="sha.work.dto.loto.Loto7">
-		SELECT * FROM M_LOTO7 ORDER BY TURN DESC LIMIT #{pageCnt} OFFSET #{pageInx}
+	<select id="getPageList" resultMap="Loto7">
+		SELECT * FROM M_LOTO7 ORDER BY TURN DESC LIMIT #{pageCnt} OFFSET #{pageIdx}
 	</select>
 	
-	<select id="getNomalNumberSum" resultType="sha.work.entity.query.NumberAndTurnsQuery">
+	<select id="getNomalNumberSum" resultMap="NumberAndTurns">
 		<foreach item="num" index="index" collection="loto7Hanyo">
 			<if test="index > 0">UNION </if>
 			<include refid="selectNumber"><property name="prefix" value="${num.value}"/></include>
@@ -59,7 +74,7 @@
 		ORDER BY numberName	
 	</select>
 	
-	<select id="getBonusNumber1Sum" resultType="sha.work.entity.query.NumberAndTurnsQuery">
+	<select id="getBonusNumber1Sum" resultMap="NumberAndTurns">
 		<foreach item="num" index="index" collection="loto7Hanyo">
 			<if test="index > 0">UNION </if>
 			<include refid="selectBonusNumber1"><property name="prefix" value="${index}"/></include>
@@ -67,7 +82,7 @@
 		ORDER BY numberName	
 	</select>
 	
-	<select id="getBonusNumber2Sum" resultType="sha.work.entity.query.NumberAndTurnsQuery">
+	<select id="getBonusNumber2Sum" resultMap="NumberAndTurns">
 		<foreach item="num" index="index" collection="loto7Hanyo">
 			<if test="index > 0">UNION </if>
 			<include refid="selectBonusNumber2"><property name="prefix" value="${index}"/></include>

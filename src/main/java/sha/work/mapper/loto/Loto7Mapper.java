@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import sha.work.dto.loto.Loto7;
 import sha.work.entity.in.Loto7AnalysisP1In;
+import sha.work.entity.in.Loto7ShowDataIn;
 import sha.work.entity.query.NumberAndTurnsQuery;
 
 @Mapper
@@ -18,7 +19,7 @@ public interface Loto7Mapper {
     
     int getTotalCnt();
     
-    List<Loto7> getPageList(@Param("pageCnt") int pageCnt, @Param("pageIdx") int pageIdx);
+    List<Loto7> getPageList(Loto7ShowDataIn dataIn);
 
 	List<NumberAndTurnsQuery> getNomalNumberSum(Loto7AnalysisP1In loto7AnalysisP1);
 	

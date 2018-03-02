@@ -63,7 +63,17 @@
 	</select>
 	
 	<select id="getPageList" resultMap="Loto7">
-		SELECT * FROM M_LOTO7 ORDER BY TURN DESC LIMIT #{pageCnt} OFFSET #{pageIdx}
+		SELECT * FROM M_LOTO7
+		WHERE
+		<choose>
+            <when test="searchTypeRadio == 0">
+            	 TO_DATE(open_dt, 'YYYY/MM/DD') &gt;= TO_DATE(#{searchDt}, 'YYYY/MM/DD')
+            </when>
+            <when test="searchTypeRadio == 1">
+            	TURN &gt;= #{searchTurnFrom}
+            </when>
+		</choose>
+		ORDER BY TURN DESC LIMIT #{pageCntRadio}
 	</select>
 	
 	<select id="getNomalNumberSum" resultMap="NumberAndTurns">

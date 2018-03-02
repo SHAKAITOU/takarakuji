@@ -24,52 +24,58 @@
 <div class="row">
 	<div class="col-sm-4">
 		<legend>表示件数</legend>
+		<div class="row" style="height: 30px;">
 		<div class="col-md-12">
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label class="btn btn-outline-info active">
 					<input type="radio" name="pageCntRadio" 
-						id="pageCntRadio10" autocomplete="off" checked=""/>10件
+						id="pageCntRadio10" autocomplete="off" value="10" checked=""/>10件
 				</label>
 				<label class="btn btn-outline-info">
-					<input type="radio" name="pageCntRadio" 
+					<input type="radio" name="pageCntRadio" value="25"
 						id="pageCntRadio25" autocomplete="off"/>25件
 				</label>
 				<label class="btn btn-outline-info">
-					<input type="radio" name="pageCntRadio" 
+					<input type="radio" name="pageCntRadio" value="50"
 						id="pageCntRadio50" autocomplete="off"/>50件
 				</label>
 				<label class="btn btn-outline-info">
-					<input type="radio" name="pageCntRadio" 
+					<input type="radio" name="pageCntRadio" value="75"
 						id="pageCntRadio75" autocomplete="off"/>75件
 				</label>
 				<label class="btn btn-outline-info">
-					<input type="radio" name="pageCntRadio" 
+					<input type="radio" name="pageCntRadio" value="100"
 						id="pageCntRadio100" autocomplete="off"/>100件
 				</label>
 			</div>
 		</div>
+		</div>
 	</div>
 	<div class="col-sm-4">
 		<legend>検索方式</legend>
-		<div class="col-sm-12" style="height: 30px;">
+		<div class="row">
+		<div class="col-sm-12">
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label id="searchByDt" class="btn btn-outline-info active">
-					<input type="radio" name="searchTypeRadio" 
+					<input type="radio" name="searchTypeRadio" value="0"
 						 autocomplete="off" checked=""/>抽せん日から指定
 				</label>
 				<label id="searchByTurn" class="btn btn-outline-info">
-					<input type="radio" name="searchTypeRadio" 
+					<input type="radio" name="searchTypeRadio" value="1"
 						autocomplete="off"/>回号から指定
 				</label>
 			</div>
 		</div>
+		</div>
 	</div>
 	<div class="col-sm-4">
 		<legend id="searchShowTitle">検索条件</legend>
+		<div class="row">
 		<div class="col-sm-12" style="height: 30px;">
 			<div id="searchByDtShowDiv" class="form-group" style="display: block;">
 				<div class="input-group">
-					<input type="text" class="form-control-sm"/>
+					<input id="searchDt" name="searchDt" type="text" class="form-control-sm form_datetime text-center" 
+							placeholder="yyyy/mm/dd" value="" readonly="true"/>
 					<div class="input-group-append">
 						<span class="input-group-text">日</span>
 					</div>
@@ -77,12 +83,13 @@
 			</div>
 			<div id="searchByTurnShowDiv" class="form-group" style="display: none;">
 				<div class="input-group">
-					<input type="text" class="form-control-sm"/>
+					<input type="number" name="searchTurnFrom" class="form-control-sm text-right" step="10" min="1" max="1000"/>
 					<div class="input-group-append">
 						<span class="input-group-text">回</span>
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 	</div>
 	<div class="col-sm-12 text-right" style="height: 40px;">
@@ -101,7 +108,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="member : ${resultList.loto7List}">
+				<tr th:each="member : ${result.loto7List}">
 					<td class="label-14b text-center" th:text="'第' + ${member.turn} + '回'"></td>
 					<td class="label-14b text-center" th:text="${member.openDt}"></td>
 					<td class="label-14b text-center" th:text="${member.l1}"></td>
@@ -122,7 +129,16 @@
 
 /*<![CDATA[*/
 	$(document).ready(function(){
+		
 		$('#okPanelTitle').text("ロト7(LOTO7)過去の抽せん結果");
+		
+		
+		//date picker init
+		//===========================================================↓
+		$('#searchDt').datepicker({
+	        format: "yyyy/mm/dd",
+	        language: "ja",
+	    });
 		
 		$btn_obj = $('#searchByDt'); 
 		$btn_obj.unbind(); 

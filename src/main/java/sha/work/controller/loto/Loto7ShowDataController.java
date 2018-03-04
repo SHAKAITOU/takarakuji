@@ -2,14 +2,23 @@ package sha.work.controller.loto;
 
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
+import java.util.Locale;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import sha.framework.controller.ScreenBaseController;
 import sha.framework.exception.TKRKScreenException;
@@ -40,7 +49,7 @@ public class Loto7ShowDataController extends ScreenBaseController{
 
 
 	@RequestMapping(path="/loto/showLoto7Data", method=RequestMethod.GET)
-	public ModelAndView exapmle(@ModelAttribute Object greeting)  {
+	public ModelAndView showLoto7DataGet(@ModelAttribute Object greeting)  {
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -60,6 +69,29 @@ public class Loto7ShowDataController extends ScreenBaseController{
 		return mav;
 	}
 	
+	@RequestMapping(path="/loto/showLoto7Data", method=RequestMethod.POST)
+	public ModelAndView showLoto7DataPost(@RequestParam Map<String,String> allRequestParams, Locale loc, 
+			HttpServletRequest request,
+			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
+		
+		ModelAndView mav = new ModelAndView();
+		Loto7ShowDataIn dataIn = searchLoto7ShowDataIn(allRequestParams);
+
+		Loto7ShowDataOut dataOut = new Loto7ShowDataOut();
+		
+		try {
+			BeanUtils.copyProperties(dataOut, dataIn);
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			throw new TKRKScreenException(e);
+		}
+
+		dataOut.setLoto7List(service.getData(dataIn));
+		
+		mav.addObject("result", dataOut);
+		mav.setViewName("loto/loto7DataShow");
+		return mav;
+	}
+	
 	private Loto7ShowDataIn initLoto7ShowDataIn() {
 		Loto7ShowDataIn dataIn = new Loto7ShowDataIn();
 		dataIn.setPageCntRadio(PageCntType.MAX_10.getId());
@@ -67,6 +99,20 @@ public class Loto7ShowDataController extends ScreenBaseController{
 		dataIn.setSearchDt(DateUtility.formatDate(LocalDate.now(), DateFormat.UUUUSMMSDD.getFormat()));
 		int maxTurn = service.getMaxTurn();
 		dataIn.setSearchTurnFrom(maxTurn-dataIn.getPageCntRadio());
+		dataIn.setMaxTurn(maxTurn);
+		
+		return dataIn;
+	}
+	
+	private Loto7ShowDataIn searchLoto7ShowDataIn(Map<String,String> allRequestParams) {
+		Loto7ShowDataIn dataIn = new Loto7ShowDataIn();
+		dataIn.setPageCntRadio(Integer.valueOf(allRequestParams.get("pageCntRadio")));
+		dataIn.setSearchTypeRadio(allRequestParams.get("searchTypeRadio"));
+		dataIn.setSearchDt(allRequestParams.get("searchDt"));
+		if(!StringUtils.isEmpty(allRequestParams.get("searchTurnFrom"))) {
+			dataIn.setSearchTurnFrom(Integer.valueOf(allRequestParams.get("searchTurnFrom")));
+		}
+		int maxTurn = service.getMaxTurn();
 		dataIn.setMaxTurn(maxTurn);
 		
 		return dataIn;

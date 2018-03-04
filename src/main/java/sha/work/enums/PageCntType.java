@@ -2,23 +2,21 @@ package sha.work.enums;
 
 public enum PageCntType {
 
-	MAX_10(10, "max10", "10件", "#2780E3"),
-	MAX_25(25, "max25", "25件", "#2780E3"),
-	MAX_50(50, "max50", "50件", "#2780E3"),
-	MAX_75(75, "max75", "75件", "#2780E3"),
-	MAX_100(100, "max100", "100件", "#2780E3");
+	MAX_10(10, "max10", "10件"),
+	MAX_25(25, "max25", "25件"),
+	MAX_50(50, "max50", "50件"),
+	MAX_75(75, "max75", "75件"),
+	MAX_100(100, "max100", "100件");
 	
     /** type. */
     private int id;
     private String key;
     private String name;
-    private String barColor;
 
-    private PageCntType(int id, String key, String name, String barColor) {
+    private PageCntType(int id, String key, String name) {
         this.id = id;
         this.key = key;
         this.name = name;
-        this.barColor = barColor;
     }
     
     public int getId() {
@@ -33,9 +31,7 @@ public enum PageCntType {
         return name;
     }
     
-    public String getBarColor() {
-        return barColor;
-    }
+
     
     public PageCntType valueOf(int id) {
     	for(PageCntType type : PageCntType.values()) {

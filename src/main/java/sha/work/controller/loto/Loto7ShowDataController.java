@@ -28,6 +28,7 @@ import sha.framework.util.LogCommonUtil;
 import sha.work.entity.in.Loto7ShowDataIn;
 import sha.work.entity.out.Loto7ShowDataOut;
 import sha.work.enums.PageCntType;
+import sha.work.enums.PageOrderType;
 import sha.work.service.loto.Loto7ShowService;
 
 /**
@@ -100,6 +101,7 @@ public class Loto7ShowDataController extends ScreenBaseController{
 		int maxTurn = service.getMaxTurn();
 		dataIn.setSearchTurnFrom(maxTurn-dataIn.getPageCntRadio());
 		dataIn.setMaxTurn(maxTurn);
+		dataIn.setOrderType(PageOrderType.DESC.getKey());
 		
 		return dataIn;
 	}
@@ -114,6 +116,7 @@ public class Loto7ShowDataController extends ScreenBaseController{
 		}
 		int maxTurn = service.getMaxTurn();
 		dataIn.setMaxTurn(maxTurn);
+		dataIn.setOrderType(allRequestParams.get("orderType"));
 		
 		return dataIn;
 	}

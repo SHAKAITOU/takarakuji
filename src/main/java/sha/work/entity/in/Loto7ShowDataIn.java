@@ -9,5 +9,6 @@ public class Loto7ShowDataIn {
 	private String searchDt;
 	private int searchTurnFrom;
 	private int maxTurn;
+	private String orderType;
 
 }

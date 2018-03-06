@@ -73,7 +73,15 @@
             	TURN &gt;= #{searchTurnFrom}
             </when>
 		</choose>
-		ORDER BY TURN DESC LIMIT #{pageCntRadio}
+		<choose>
+            <when test="orderType == 'asc'">
+			ORDER BY TURN ASC
+			</when>
+			<when test="orderType == 'desc'">
+			ORDER BY TURN DESC
+			</when>
+		</choose>
+		LIMIT #{pageCntRadio}
 	</select>
 	
 	<select id="getNomalNumberSum" resultMap="NumberAndTurns">

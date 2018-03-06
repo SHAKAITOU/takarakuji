@@ -1,7 +1,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sha.work.mapper.loto.Loto7AnalysisBaseMapper">
 	<!-- RESULT MAP -->
-
+	<resultMap id="NumberAndTurns" 
+				type="sha.work.entity.query.NumberAndTurnsQuery">
+		<result property="numberName" column="NUMBER_NAME"/>
+		<result property="numberValue" column="CNT"/>
+    </resultMap>
 	
 	<!-- SQL CHIP -->
 	
@@ -10,8 +14,13 @@
 		SELECT COUNT(*) FROM M_LOTO7_ANALYSIS_BASE WHERE TURN = #{turn}
 	</select>
 	
-	<select id="analysisP2" resultType="int">
-		SELECT COUNT(*) FROM M_LOTO7_ANALYSIS_BASE WHERE TURN = #{turn}
+	<select id="summaryTotalAvg" resultMap="NumberAndTurns">
+		SELECT 
+		TOTAL_AVG NUMBER_NAME, 
+		COUNT(TOTAL_AVG) CNT
+		FROM M_LOTO7_ANALYSIS_BASE
+		GROUP BY TOTAL_AVG
+		ORDER BY TOTAL_AVG
 	</select>
 	
 	<insert id="save">

@@ -9,76 +9,13 @@
 
 <!-- CSS -->
 <style type="text/css">
-	html {
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		box-sizing: border-box;
-	}
-	*, *:before, *:after {
-		-webkit-box-sizing: inherit;
-		-moz-box-sizing: inherit;
-		box-sizing: inherit;
-	}
-	
-	.axis text {
-		font: 10px sans-serif;
-	}
-	
-	.axis path,
-	.axis line {
-		fill: none;
-		stroke: #000;
-		shape-rendering: crispEdges;
-	}
-	
-	.bar {
-
-	}
-
-	.bar:hover {
-		fill: orangered ;
-	}
-
-	.x.axis path {
-		display: none;
-	}
-	
-	.d3-tip {
-		line-height: 1;
-		font-weight: bold;
-		padding: 12px;
-		background: rgba(0, 0, 0, 0.6);
-		color: #fff;
-		border-radius: 2px;
-	}
-
-	/* Creates a small triangle extender for the tooltip */
-	.d3-tip:after {
-		box-sizing: border-box;
-		display: inline;
-		font-size: 10px;
-		width: 100%;
-		line-height: 1;
-		color: rgba(0, 0, 0, 0.8);
-		content: "\25BC";
-		position: absolute;
-		text-align: center;
-	}
-
-	/* Style northward tooltips differently */
-	.d3-tip.n:after {
-		margin: -1px 0 0 0;
-		top: 100%;
-		left: 0;
-	}
 	
 </style>
 <div class="row">
 	<div class="col-sm-12">
 		<legend>グラフ</legend>
 	</div>
-	<div class="col-sm-12">
-		<svg class="chart"></svg>
+	<div id="chartDiv" class="col-sm-12">
 	</div>
 	<div class="col-sm-12">
 		<legend>データ</legend>
@@ -122,38 +59,19 @@
 	
 	$(document).ready(function(){
 	    var svgWidth = $('#okPanel').width();
-	    var svgHeight = 500;
-		creatChart(svgWidth, svgHeight);
-		$('#okPanelTitle').text("ロト7(LOTO7)各数字過去出た回数");
-	});
-
-	/**
-	 * draw group bar chart
-	 */
-	function creatChart(svgWidth, svgHeight) {
-	
-	    var margin = {top: 30, right: 30, bottom: 30, left: 40};
-	    var width = svgWidth - margin.left - margin.right;
-	    var height = svgHeight - margin.top - margin.bottom;
-		
-		var x0 = d3.scaleBand().rangeRound([0, width]).paddingInner(0.1);
-	
-		var x1 = d3.scaleBand().padding(0.05);
-	
-		var y = d3.scaleLinear().range([height, 0]);
-		
-		var z = d3.scaleOrdinal().range([ 
+	    var svgHeight = 300;
+	    var rangeColor = [ 
 			/*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getBarColor()}]]*/, 
 			/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getBarColor()}]]*/, 
 			/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getBarColor()}]]*/ 
-		]);
-		var numberKeys = [
+		]
+		var keys = [
 			/*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getKey()}]]*/, 
 			/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getKey()}]]*/, 
 			/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getKey()}]]*/
 		];
 
-		var numberNames = [ 
+		var names = [ 
 			/*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}]]*/,
 			/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getName()}]]*/,
 			/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getName()}]]*/
@@ -162,100 +80,21 @@
 		//data
 		var data = /*[[${resultList.p1List}]]*/ null;
 		
-	
-		data.forEach(function(d) {
-			d.numbers = numberKeys.map(function(name) { return {name: name, value: +d[name]}; });
-		});
+		var titleHeader = "ロト7(LOTO7)";
+		var titleFooter = "各数字過去出た回数グループ表示";
+		var xTitle = "（X軸：数字；　Y軸：回数）";
+		var title = titleHeader + titleFooter;
 		
-		var chartTopMargin = 10;
-		x0.domain(data.map(function(d) { return d.numberName; }));
-		x1.domain(numberKeys).rangeRound([0, x0.bandwidth()]);
-		y.domain([0, d3.max(data, function(d) { return d3.max(d.numbers, function(d) { return d.value; }); })+chartTopMargin]);
-	
-		//get a chart
-		var chart = 
-			d3.select(".chart")
-				.attr("width", width + margin.left + margin.right)
-				.attr("height", height + margin.top + margin.bottom)
-			  	.append("g")
-			  		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+		d3.select("#chartDiv").select("svg").remove();
+		var svg = d3.select("#chartDiv").append("svg");
 		
-		//append bar in chart
-		var bar =
-			chart.append("g")
-				.selectAll("g")
-					//bond data
-					.data(data)
-					.enter().append("g")
-						.attr("transform", function(d) { return "translate(" + x0(d.numberName) + ",0)"; });
+		ShaChart.barChart.groupBarChart(svg, svgWidth, svgHeight, data, 
+				rangeColor, keys, names,
+				title, xTitle);
 		
-		//active tooptip
-		var numberTip = d3.tip()
-					.attr("class", "d3-tip")
-					.offset([-10, 0])
-					.html(function(d) {
-						return "<strong>出た回数:</strong> <span style='color:#F3F781'>" + d.value + "回</span>";
-					});
+		$('#okPanelTitle').text(title);
+	});
 		
-		d3.select("body").append("svg").call(numberTip);
-		
-		bar.selectAll("rect")
-			.data(function(d) { return d.numbers; })
-			.enter().append("rect")
-				.attr("class", "bar")
-				.attr("x", function(d) { return x1(d.name); })
-				.attr("y", function(d) { return y(d.value); })
-				.attr("width", x1.bandwidth())
-				.attr("height", function(d) { return height - y(d.value); })
-				.attr("fill", function(d) { return z(d.name); })
-				.on('mouseover', numberTip.show)
-				.on('mouseout', numberTip.hide);
-		
-		//append x axis
-		chart.append("g")
-			.attr("class", "axis")
-			.attr("transform", "translate(0," + height + ")")
-			.call(d3.axisBottom(x0));
-	
-		//append y axis
-		chart.append("g")
-			.attr("class", "axis")
-			.call(d3.axisLeft(y).ticks(null, "s"))
-			.append("text")
-			    .attr("x", 2)
-			    .attr("y", y(y.ticks().pop()) + 0.5)
-			    .attr("dy", "0.32em")
-			    .attr("fill", "#000")
-			    .attr("font-weight", "bold")
-			    .attr("text-anchor", "start")
-			    .text("各数字過去出た回数");
-		
-		//append legend
-		var legend = 
-			chart.append("g")
-				.attr("font-family", "sans-serif")
-				.attr("font-size", 10)
-				.attr("text-anchor", "end")
-				.selectAll("g")
-					.data(numberNames.slice())
-					.enter().append("g")
-						.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-	
-		var yLegend = 0;
-	
-		legend.append("rect")
-				.attr("x", width - 19)
-				.attr("y", yLegend)
-				.attr("width", 19)
-				.attr("height", 19)
-				.attr("fill", z);
-	
-		legend.append("text")
-				.attr("x", width - 24)
-				.attr("y", yLegend+9.5)
-				.attr("dy", "0.32em")
-				.text(function(d) { return d; });	
-	}	
 
 /*]]>*/
 </script>

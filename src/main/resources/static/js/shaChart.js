@@ -93,7 +93,8 @@ try{
 			.attr("y", function(d) { return y(getValue(d)); })
 			.attr("width",x.bandwidth())
 			.attr("class", "bar")
-			.attr("fill", barColor)
+			.attr("fill", 
+					(barColor instanceof Array) ? function(d, i) { return barColor[i]; } : barColor)
 			.on('mouseover', numberTip.show)
 			.on('mouseout', numberTip.hide)
 			.attr("height", 0)
@@ -287,7 +288,7 @@ try{
 
 		    var pie = d3.pie() //this will create arc data for us given a list of values
 						      .value(function(d, i) { return getValue(data[i]); }) // Binding each value to the pie
-						      .sort( function(a, b) { return null; });
+						      .sort( function(a, b) { if(a.index > b.index) {return true;} else {return false;} });
 
 			
 			var chart = svg.attr("width", svgWidth)
@@ -309,24 +310,30 @@ try{
 		      		.on('mouseover', numberTip.show)
 					.on('mouseout', numberTip.hide);
 
-//			arcs.filter(function(d) { return d.endAngle - d.startAngle > .2; })
-//				.append("text")
-//				.attr("dy", ".35em")
-//				//.attr("text-anchor", "middle")
-//				.attr("transform", function(d) { //set the label's origin to the center of the arc
-//					d.outerRadius = outerRadius + 50; // Set Outer Coordinate
-//			        return "translate(" + arc.centroid(d) + ")";
-//				})
-//				.style("fill", "White")
-//				.style("font", "bold 12px Arial")
-//				.text(function(d, i) { return getName(data[i]); });
-			
-			// Computes the angle of an arc, converting from radians to degrees.
-			function angle(d) {
-				var a = (d.startAngle + d.endAngle) * 90 / Math.PI - 90;
-				//return a > 90 ? a - 180 : a;
-				return 0;
-			}
+			//append legend
+			var legend = 
+				svg.selectAll(".legend")
+			      .data(pie(data))
+			      .enter().append("g")
+			      .attr("transform", function(d,i){
+			        return "translate(" + (width - 110) + "," + (i * 15 + 20) + ")";
+			      })
+			      .attr("class", "legend"); 
+		
+			var yLegend = 0;
+		
+			legend.append("rect")
+					.attr("x", 10)
+					.attr("y", 10)
+					.attr("width", 19)
+					.attr("height", 19)
+					.attr("fill", rangeColor);
+		
+			legend.append("text")
+					.attr("x", 10)
+					.attr("y", 10)
+					.attr("dy", "0.32em")
+					.text(function(d) { return getName(d); });
 		}
 	}
 	

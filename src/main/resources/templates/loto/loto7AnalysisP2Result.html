@@ -15,15 +15,17 @@
 
 <div class="row">	
 	<div class="col-sm-12">
-		<div class="col-sm-12">
-			<legend>グラフ</legend>
-		</div>
-		<div id="barChartDiv" class="col-sm-6 div-center">
-			
-		</div>
-		<div id="pieChartDiv" class="col-sm-6 div-center">
-			
-		</div>
+		<legend>グラフ</legend>
+	</div>
+</div>
+<div class="row">
+	<div id="barChartDiv" class="col-sm-12 div-center">
+		
+	</div>
+</div>	
+<div class="row">
+	<div id="pieChartDiv" class="col-sm-12 div-center">
+		
 	</div>
 </div>
 <div class="row">
@@ -164,6 +166,7 @@
 		
 		var svgWidth = $('#okPanel').width()-40;
 	    var svgHeight = 400;
+		var rangeColor = ShaColor.htmlColor.randomColor(data.length, ShaColor.htmlColor.jpColor);
 	    
 	    ShaChart.common.initD3Tip();
 		var numberTip = ShaChart.common.createD3Tip(
@@ -175,11 +178,10 @@
 					return html;
 				},
 				[-10, 0]);
-		ShaChart.barChart.simpleBarChart("#barChartDiv", svgWidth/2, svgHeight, data,
-				getName, getValue, numberTip, /*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getBarColor()}]]*/,
+		ShaChart.barChart.simpleBarChart("#barChartDiv", svgWidth, svgHeight, data,
+				getName, getValue, numberTip, rangeColor,
 				"", xTitle);
 		
-		var rangeColor = ShaColor.htmlColor.randomColor(40, ShaColor.htmlColor.jpColor);
 		
 		numberTip = ShaChart.common.createD3Tip(
 				function(d, i) {
@@ -190,7 +192,7 @@
 					return html;
 				},
 				[0, 0]);
-		ShaChart.barChart.pieChart("#pieChartDiv", svgWidth/2, svgHeight, data, 
+		ShaChart.barChart.pieChart("#pieChartDiv", svgWidth, svgHeight, data, 
 				getName, getValue, numberTip, rangeColor, "");
 	}
 

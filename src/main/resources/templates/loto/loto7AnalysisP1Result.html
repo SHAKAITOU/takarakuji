@@ -50,7 +50,7 @@
 							<thead>
 								<tr>
 									<td class="td-t2s label-14b text-center">数字</td>
-									<td class="info label-14b text-center" th:text="${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}"></td>
+									<td class="td-t2s label-14b text-center">当選回数</td>
 								</tr>
 							</thead>
 							<tbody>
@@ -76,7 +76,7 @@
 							<thead>
 								<tr>
 									<td class="td-t2s label-14b text-center">数字</td>
-									<td class="danger label-14b text-center" th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getName()}"></td>
+									<td class="td-t2s label-14b text-center">当選回数</td>
 								</tr>
 							</thead>
 							<tbody>
@@ -102,7 +102,7 @@
 							<thead>
 								<tr>
 									<td class="td-t2s label-14b text-center">数字</td>
-									<td class="warning label-14b text-center" th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getName()}"></td>
+									<td class="td-t2s label-14b text-center">当選回数</td>
 								</tr>
 							</thead>
 							<tbody>
@@ -133,8 +133,8 @@
 		var data = /*[[${resultList.p1List}]]*/ null;
 		
 		var titleHeader = "ロト7(LOTO7)";
-		var titleFooter = "各数字過去出た回数";
-		var xTitle = "（X軸：数字；　Y軸：回数）";
+		var titleFooter = "各数字過去当選回数";
+		var xTitle = "（X軸：数字；　Y軸：当選回数）";
 		
 		$btn_obj = $('#nomalNumberChartClk'); 
 		$btn_obj.unbind();
@@ -144,14 +144,18 @@
 			var getValue = function (d) {return d.numberValue;};
 			var title = /*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}]]*/;
 			title = titleHeader + "【" + title + "】" + titleFooter;
+			
 			ShaChart.common.initD3Tip();			
-
-			var numberTip = d3.tip().attr("class", "d3-tip")
-									.offset([-10, 0])
-									.html(function(d) {
-										return "<strong>当選数平均値:</strong> <span style='color:#e6b422'>" + getName(d) + "</span><br/>"+
-										"<strong>出た回数:</strong> <span style='color:red'>" + getValue(d) + "</span>";
-									});
+			var numberTip = ShaChart.common.createD3Tip(
+					function(d) {
+						var name = /*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}]]*/;
+						var html = "<strong>" + name + ":</strong>"
+									+" <span style='color:#e6b422'>" + getName(d) + "</span><br/>"
+									+"<strong>当選回数:</strong>" 
+									+ " <span style='color:red'>" + getValue(d) + "回</span>";
+						return html;
+					},
+					[-10, 0]);
 			
 			ShaChart.barChart.simpleBarChart("#chartDiv", svgWidth, svgHeight, data, 
 					getName, getValue, numberTip, /*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getBarColor()}]]*/,
@@ -166,14 +170,18 @@
 			var getValue = function (d) {return d.bonusNumber1Value;}
 			var title = /*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getName()}]]*/;
 			title = titleHeader + "【" + title + "】" + titleFooter;
+			
 			ShaChart.common.initD3Tip();
-
-			var numberTip = d3.tip().attr("class", "d3-tip")
-							.offset([-10, 0])
-							.html(function(d) {
-								return "<strong>当選数平均値:</strong> <span style='color:#e6b422'>" + getName(d) + "</span><br/>"+
-								"<strong>出た回数:</strong> <span style='color:red'>" + getValue(d) + "</span>";
-							});
+			var numberTip = ShaChart.common.createD3Tip(
+					function(d) {
+						var name = /*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getName()}]]*/;
+						var html = "<strong>" + name + ":</strong>"
+									+" <span style='color:#e6b422'>" + getName(d) + "</span><br/>"
+									+"<strong>当選回数:</strong>" 
+									+ " <span style='color:red'>" + getValue(d) + "回</span>";
+						return html;
+					},
+					[-10, 0]);
 			
 			ShaChart.barChart.simpleBarChart("#chartDiv", svgWidth, svgHeight, data, 
 					getName, getValue, numberTip, /*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getBarColor()}]]*/,
@@ -187,14 +195,18 @@
 			var getValue = function (d) {return d.bonusNumber2Value;}
 			var title = /*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getName()}]]*/;
 			title = titleHeader + "【" + title + "】" + titleFooter;
+			
 			ShaChart.common.initD3Tip();
-
-			var numberTip = d3.tip().attr("class", "d3-tip")
-							.offset([-10, 0])
-							.html(function(d) {
-								return "<strong>当選数平均値:</strong> <span style='color:#e6b422'>" + getName(d) + "</span><br/>"+
-								"<strong>出た回数:</strong> <span style='color:red'>" + getValue(d) + "</span>";
-							});
+			var numberTip = ShaChart.common.createD3Tip(
+					function(d) {
+						var name = /*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getName()}]]*/;
+						var html = "<strong>" + name + ":</strong>"
+									+" <span style='color:#e6b422'>" + getName(d) + "</span><br/>"
+									+"<strong>当選回数:</strong>" 
+									+ " <span style='color:red'>" + getValue(d) + "回</span>";
+						return html;
+					},
+					[-10, 0]);
 			
 			ShaChart.barChart.simpleBarChart("#chartDiv", svgWidth, svgHeight, data,
 					getName, getValue, numberTip, /*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getBarColor()}]]*/,

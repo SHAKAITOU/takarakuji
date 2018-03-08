@@ -18,6 +18,13 @@ try{
 	$chart.common = {
 		initD3Tip : function() {
 			d3.select(".d3-tip").remove();
+		},
+		createD3Tip : function(getHtml, offSet) {
+			return d3.tip().attr("class", "d3-tip")
+						.offset(offSet)
+						.html(function(d) {
+							return getHtml(d);
+						});
 		}
 	}
 	
@@ -271,7 +278,7 @@ try{
 			var svg = canvas.append("svg");
 			
 			//draw pie
-			var outerRadius = (svgHeight - margin.top - margin.bottom)/2-40;
+			var outerRadius = (svgHeight - margin.top - margin.bottom)/2;
 
 			// This will create <path> elements for us using arc data...
 		    var arc = d3.arc()

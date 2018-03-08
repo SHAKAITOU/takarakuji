@@ -166,18 +166,30 @@
 	    var svgHeight = 400;
 	    
 	    ShaChart.common.initD3Tip();
-		var numberTip = d3.tip().attr("class", "d3-tip")
-		.offset([0, 0])
-		.html(function(d, i) {
-			return "<strong>当選数平均値:</strong> <span style='color:#e6b422'>" + getName(data[i]) + "</span><br/>"+
-					"<strong>出た回数:</strong> <span style='color:red'>" + getValue(data[i]) + "回</span>";
-		});
+		var numberTip = ShaChart.common.createD3Tip(
+				function(d) {
+					var html = "<strong>当選数平均値:</strong>"
+								+" <span style='color:#e6b422'>" + getName(d) + "</span><br/>"
+								+"<strong>当選回数:</strong>" 
+								+ " <span style='color:red'>" + getValue(d) + "回</span>";
+					return html;
+				},
+				[-10, 0]);
 		ShaChart.barChart.simpleBarChart("#barChartDiv", svgWidth/2, svgHeight, data,
 				getName, getValue, numberTip, /*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getBarColor()}]]*/,
 				"", xTitle);
 		
 		var rangeColor = ShaColor.htmlColor.randomColor(40, ShaColor.htmlColor.jpColor);
-			
+		
+		numberTip = ShaChart.common.createD3Tip(
+				function(d, i) {
+					var html = "<strong>当選数平均値:</strong>"
+								+" <span style='color:#e6b422'>" + d.data.numberName + "</span><br/>"
+								+"<strong>当選回数:</strong>" 
+								+ " <span style='color:red'>" + d.data.numberValue + "回</span>";
+					return html;
+				},
+				[0, 0]);
 		ShaChart.barChart.pieChart("#pieChartDiv", svgWidth/2, svgHeight, data, 
 				getName, getValue, numberTip, rangeColor, "");
 	}

@@ -81,16 +81,24 @@
 		var data = /*[[${resultList.p1List}]]*/ null;
 		
 		var titleHeader = "ロト7(LOTO7)";
-		var titleFooter = "各数字過去出た回数グループ表示";
-		var xTitle = "（X軸：数字；　Y軸：回数）";
+		var titleFooter = "各数字過去当選回数グループ表示";
+		var xTitle = "（X軸：数字；　Y軸：当選回数）";
 		var title = titleHeader + titleFooter;
 		
 		ShaChart.common.initD3Tip();
 		var numberTip = d3.tip().attr("class", "d3-tip")
 						.offset([-10, 0])
 						.html(function(d) {
-							return "<strong>出た回数:</strong> <span style='color:red'>" + d.value + "</span>";
+							return "<strong>当選回数:</strong> <span style='color:red'>" + d.value + "</span>";
 						});
+		var numberTip = ShaChart.common.createD3Tip(
+				function(d) {
+					var html = "<strong>当選回数:</strong>" 
+								+ " <span style='color:red'>" + d.value + "回</span>";
+					return html;
+				},
+				[-10, 0]);
+		
 		ShaChart.barChart.groupBarChart("#chartDiv", svgWidth, svgHeight, data, 
 				rangeColor, keys, names, numberTip,
 				title, xTitle);

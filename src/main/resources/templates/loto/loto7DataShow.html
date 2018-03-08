@@ -198,7 +198,7 @@
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
 			var postData = $('#search_form').serializeArray();
-			executeAjax("POST", postData, '/loto/showLoto7Data'); 
+			ShaCommon.ajax.execute('/loto/showLoto7Data', "POST", postData, callBackOk, callBackNg); 
 		});
 	});
 	

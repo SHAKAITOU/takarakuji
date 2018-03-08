@@ -136,36 +136,68 @@
 		var titleFooter = "各数字過去出た回数";
 		var xTitle = "（X軸：数字；　Y軸：回数）";
 		
-		$('#nomalNumberChartClk').on('click', function(event) {
-			d3.select("#chartDiv").select("svg").remove();
-			var svg = d3.select("#chartDiv").append("svg");
-			var getValue = function getNumberValue(d) {return d.numberValue;}
+		$btn_obj = $('#nomalNumberChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			var getName = function (d) {return d.numberName;};
+			var getValue = function (d) {return d.numberValue;};
 			var title = /*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}]]*/;
 			title = titleHeader + "【" + title + "】" + titleFooter;
-			ShaChart.barChart.simpleBarChart(svg, svgWidth, svgHeight, data, 
-					getValue, /*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getBarColor()}]]*/,
+			ShaChart.common.initD3Tip();			
+
+			var numberTip = d3.tip().attr("class", "d3-tip")
+									.offset([-10, 0])
+									.html(function(d) {
+										return "<strong>当選数平均値:</strong> <span style='color:#e6b422'>" + getName(d) + "</span><br/>"+
+										"<strong>出た回数:</strong> <span style='color:red'>" + getValue(d) + "</span>";
+									});
+			
+			ShaChart.barChart.simpleBarChart("#chartDiv", svgWidth, svgHeight, data, 
+					getName, getValue, numberTip, /*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getBarColor()}]]*/,
 					title, xTitle);
 		});
 		
-		$('#bonusNumber1ChartClk').on('click', function(event) {
-			d3.select("#chartDiv").select("svg").remove();
-			var svg = d3.select("#chartDiv").append("svg");
-			var getValue = function getNumberValue(d) {return d.bonusNumber1Value;}
+		$btn_obj = $('#bonusNumber1ChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			var getName = function (d) {return d.numberName;};
+			var getValue = function (d) {return d.bonusNumber1Value;}
 			var title = /*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getName()}]]*/;
 			title = titleHeader + "【" + title + "】" + titleFooter;
-			ShaChart.barChart.simpleBarChart(svg, svgWidth, svgHeight, data, 
-					getValue, /*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getBarColor()}]]*/,
+			ShaChart.common.initD3Tip();
+
+			var numberTip = d3.tip().attr("class", "d3-tip")
+							.offset([-10, 0])
+							.html(function(d) {
+								return "<strong>当選数平均値:</strong> <span style='color:#e6b422'>" + getName(d) + "</span><br/>"+
+								"<strong>出た回数:</strong> <span style='color:red'>" + getValue(d) + "</span>";
+							});
+			
+			ShaChart.barChart.simpleBarChart("#chartDiv", svgWidth, svgHeight, data, 
+					getName, getValue, numberTip, /*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getBarColor()}]]*/,
 					title, xTitle);
 		});
-		
-		$('#bonusNumber2ChartClk').on('click', function(event) {
-			d3.select("#chartDiv").select("svg").remove();
-			var svg = d3.select("#chartDiv").append("svg");
-			var getValue = function getNumberValue(d) {return d.bonusNumber2Value;}
+		$btn_obj = $('#bonusNumber2ChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			var getName = function (d) {return d.numberName;};
+			var getValue = function (d) {return d.bonusNumber2Value;}
 			var title = /*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getName()}]]*/;
 			title = titleHeader + "【" + title + "】" + titleFooter;
-			ShaChart.barChart.simpleBarChart(svg, svgWidth, svgHeight, data,
-					getValue, /*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getBarColor()}]]*/,
+			ShaChart.common.initD3Tip();
+
+			var numberTip = d3.tip().attr("class", "d3-tip")
+							.offset([-10, 0])
+							.html(function(d) {
+								return "<strong>当選数平均値:</strong> <span style='color:#e6b422'>" + getName(d) + "</span><br/>"+
+								"<strong>出た回数:</strong> <span style='color:red'>" + getValue(d) + "</span>";
+							});
+			
+			ShaChart.barChart.simpleBarChart("#chartDiv", svgWidth, svgHeight, data,
+					getName, getValue, numberTip, /*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getBarColor()}]]*/,
 					title, xTitle);
 		});
 	    

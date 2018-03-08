@@ -77,73 +77,61 @@
 <div th:replace="fragment/footer :: bootstrapLib"></div>
 <script type="text/javascript">
 /*<![CDATA[*/
-
-var commonBtn;
-
-$btn_obj = $('#showLoto7Data'); 
-$btn_obj.unbind(); 
-$btn_obj.on('click', function(event) {
-	commonBtn = $(this);
-	event.preventDefault();
-	executeAjax("GET", null, '/loto/showLoto7Data'); 
-});
-
-$btn_obj = $('#loto7AnalysisP1'); 
-$btn_obj.unbind(); 
-$btn_obj.on('click', function(event) {
-	commonBtn = $(this);
-	event.preventDefault();
-	executeAjax("GET", null, '/loto/loto7AnalysisP1'); 
-});
-
-$btn_obj = $('#loto7AnalysisP1Group'); 
-$btn_obj.unbind(); 
-$btn_obj.on('click', function(event) {
-	commonBtn = $(this);
-	event.preventDefault();
-	executeAjax("GET", null, '/loto/loto7AnalysisP1Group'); 
-});
-
-$btn_obj = $('#loto7AnalysisP2'); 
-$btn_obj.unbind(); 
-$btn_obj.on('click', function(event) {
-	commonBtn = $(this);
-	event.preventDefault();
-	executeAjax("GET", null, '/loto/loto7AnalysisP2'); 
-});
-
-$(window).resize(function() {
-	if(commonBtn != null){		
-		commonBtn.click();
-	}
-}).trigger("resize");
-
-function executeAjax(type, data, url) { 
-	$.ajax({
-		   type: type,
-		   url: url,
-		   data: data,
-		   statusCode: {
-			    200: function(data){
-			    	$("#okPanel").show();
-			    	$("#ngPanel").hide();
-			    	$("#okResultBody").html(data);
-					$("#ngResultBody").html("");
-			    },
-			    404: function() {
-			      alert( "page not found" );
-			    },
-			    500: function(data){
-			    	$("#okPanel").hide();
-			    	$("#ngPanel").show();
-			    	$("#okResultBody").html("");
-					$("#ngResultBody").html(data.responseText);
-			    }
-		   },
-		   timeout: 10000
-
+$(document).ready(function(){
+	var commonBtn;
+	
+	$btn_obj = $('#showLoto7Data'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.execute('/loto/showLoto7Data', "GET", null, callBackOk, callBackNg); 
 	});
-}
+	
+	$btn_obj = $('#loto7AnalysisP1'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.execute('/loto/loto7AnalysisP1', "GET", null, callBackOk, callBackNg); 
+	});
+	
+	$btn_obj = $('#loto7AnalysisP1Group'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.execute('/loto/loto7AnalysisP1Group', "GET", null, callBackOk, callBackNg); 
+	});
+	
+	$btn_obj = $('#loto7AnalysisP2'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.execute('/loto/loto7AnalysisP2', "GET", null, callBackOk, callBackNg); 
+	});
+	
+	$(window).resize(function() {
+		if(commonBtn != null){		
+			commonBtn.click();
+		}
+	}).trigger("resize");
+	
+	function callBackOk(data) {
+		$("#okPanel").show();
+		$("#ngPanel").hide();
+		$("#okResultBody").html(data);
+		$("#ngResultBody").html("");
+	}
+	
+	function callBackNg(data) {
+		$("#okPanel").hide();
+		$("#ngPanel").show();
+		$("#okResultBody").html("");
+		$("#ngResultBody").html(data.responseText);
+	}
+});
 
 /*]]>*/
 </script>

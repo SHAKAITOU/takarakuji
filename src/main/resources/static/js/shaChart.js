@@ -1,23 +1,45 @@
-
 try{
 	ShaChart;
 }catch(e){
-	ShaChart = {};;
+	ShaChart = {};
 }
 
 (function($chart) {
 	
+	//*****************************************************************************
+	// common define
+	//*****************************************************************************
 	
-	if($chart.barChart) return $chart.barChart;
+	if($chart.common) { 
+		return $chart.common; 
+	}	
+	
+	
+	$chart.common = {
+		initD3Tip : function() {
+			d3.select(".d3-tip").remove();
+		}
+	}
+	
+	//*****************************************************************************
+	// barChart define
+	//*****************************************************************************
+	
+	if($chart.barChart) {
+		return $chart.barChart;
+	}
 	
 	$chart.barChart = {
 
 		//------------------------------------------------------------------------------
 		// draw a simple bar chart
 		//------------------------------------------------------------------------------
-		simpleBarChart : function (svg, svgWidth, svgHeight, data, 
-									getValue, barColor,
+		simpleBarChart : function (divCanvasId, svgWidth, svgHeight, data, 
+									getName, getValue, numberTip, barColor,
 									title, xTitle) {
+			
+			d3.select(divCanvasId).select("svg").remove();
+			var svg = d3.select(divCanvasId).append("svg");
 
 			var margin = {top: 20, right: 30, bottom: 40, left: 30};
 			var width = svgWidth - margin.left - margin.right;
@@ -27,8 +49,8 @@ try{
 			
 			var y = d3.scaleLinear().range([height, 0]);
 			
-			var chart = svg.attr("width", width + margin.left + margin.right)
-			    .attr("height", height + margin.top + margin.bottom)
+			var chart = svg.attr("width", svgWidth)
+			    .attr("height", svgHeight)
 			  	.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 			
 			//add title
@@ -50,23 +72,15 @@ try{
 			.text(xTitle);
 			
 			var chartTopMargin = 5;
-			x.domain(data.map(function(d) { return d.numberName; }));
+			x.domain(data.map(function(d) { return getName(d); }));
 			y.domain([0, d3.max(data, function(d) { return getValue(d); })+chartTopMargin]);
-			
-
-			d3.select(".d3-tip").remove();
-			var numberTip = d3.tip().attr("class", "d3-tip")
-							.offset([-10, 0])
-							.html(function(d) {
-								return "<strong>出た回数:</strong> <span style='color:red'>" + getValue(d) + "</span>";
-							});
 			
 			chart.call(numberTip);
 			
 			var bar = chart.selectAll("g")
 				.data(data)
 				.enter().append("g")
-				.attr("transform", function(d) { return "translate(" + x(d.numberName) + ",0)"; });
+				.attr("transform", function(d) { return "translate(" + x(getName(d)) + ",0)"; });
 			
 			bar.append("rect")
 			.attr("y", function(d) { return y(getValue(d)); })
@@ -113,9 +127,12 @@ try{
 		//------------------------------------------------------------------------------
 		// draw a group bar chart
 		//------------------------------------------------------------------------------
-		groupBarChart : function(svg, svgWidth, svgHeight, data, 
-								rangeColor, keys, names,
+		groupBarChart : function(divCanvasId, svgWidth, svgHeight, data, 
+								rangeColor, keys, names, numberTip,
 								title, xTitle) {
+			
+			d3.select(divCanvasId).select("svg").remove();
+			var svg = d3.select(divCanvasId).append("svg");
 			
 		    var margin = {top: 30, right: 30, bottom: 40, left: 40};
 		    var width = svgWidth - margin.left - margin.right;
@@ -140,8 +157,8 @@ try{
 			y.domain([0, d3.max(data, function(d) { return d3.max(d.numbers, function(d) { return d.value; }); })+legendTopMargin]);
 		
 			//get a chart
-			var chart =svg.attr("width", width + margin.left + margin.right)
-							.attr("height", height + margin.top + margin.bottom)
+			var chart =svg.attr("width", svgWidth)
+							.attr("height", svgHeight)
 							.append("g")
 					  			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 			
@@ -173,13 +190,8 @@ try{
 							.attr("transform", function(d) { return "translate(" + x0(d.numberName) + ",0)"; });
 			
 			//active tooptip
-			d3.select(".d3-tip").remove();
-			var numberTip = d3.tip().attr("class", "d3-tip")
-								.offset([-10, 0])
-								.html(function(d) {
-									return "<strong>出た回数:</strong> <span style='color:red'>" + d.value + "</span>";
-								});
-			d3.select("body").append("svg").call(numberTip);
+
+			chart.call(numberTip);
 			
 			bar.selectAll("rect")
 				.data(function(d) { return d.numbers; })
@@ -246,12 +258,68 @@ try{
 		},
 		
 		//------------------------------------------------------------------------------
-		// draw a bar and pie chart
+		// draw a pie chart
 		//------------------------------------------------------------------------------
-		barAndPieChart : function(svg, svgWidth, svgHeight, data, numberTip, 
-								rangeColor, keys, names,
-								title, xTitle) {
+		pieChart : function(divCanvasId, svgWidth, svgHeight, data,
+								getName, getValue, numberTip, rangeColor, 
+								title) {
 			
+			var margin = {top: 20, right: 30, bottom: 40, left: 30};
+			
+			var canvas = d3.select(divCanvasId);
+			canvas.select("svg").remove();
+			var svg = canvas.append("svg");
+			
+			//draw pie
+			var outerRadius = (svgHeight - margin.top - margin.bottom)/2-40;
+
+			// This will create <path> elements for us using arc data...
+		    var arc = d3.arc()
+		    			.innerRadius(0)
+		    			.outerRadius(outerRadius);
+
+		    var pie = d3.pie() //this will create arc data for us given a list of values
+						      .value(function(d, i) { return getValue(data[i]); }) // Binding each value to the pie
+						      .sort( function(a, b) { return null; });
+
+			
+			var chart = svg.attr("width", svgWidth)
+						    .attr("height", svgHeight)
+						  	.append("g").attr("transform", "translate(" + outerRadius*1.1 + "," + outerRadius*1.1 + ")");
+			
+			//active tooptip
+			chart.call(numberTip);
+			
+			var arcs = chart.selectAll("g")
+		      				.data(pie(data))
+		      				.enter()
+		      				.append("g");
+			
+			arcs.append("path")
+					.attr("class", "bar")
+		      		.attr("fill", function(d, i) { return rangeColor[i]; } )
+		      		.attr("d", arc)
+		      		.on('mouseover', numberTip.show)
+					.on('mouseout', numberTip.hide);
+
+//			arcs.filter(function(d) { return d.endAngle - d.startAngle > .2; })
+//				.append("text")
+//				.attr("dy", ".35em")
+//				//.attr("text-anchor", "middle")
+//				.attr("transform", function(d) { //set the label's origin to the center of the arc
+//					d.outerRadius = outerRadius + 50; // Set Outer Coordinate
+//			        return "translate(" + arc.centroid(d) + ")";
+//				})
+//				.style("fill", "White")
+//				.style("font", "bold 12px Arial")
+//				.text(function(d, i) { return getName(data[i]); });
+			
+			// Computes the angle of an arc, converting from radians to degrees.
+			function angle(d) {
+				var a = (d.startAngle + d.endAngle) * 90 / Math.PI - 90;
+				//return a > 90 ? a - 180 : a;
+				return 0;
+			}
 		}
 	}
 	

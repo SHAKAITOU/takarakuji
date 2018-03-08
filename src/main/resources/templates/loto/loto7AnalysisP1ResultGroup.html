@@ -85,11 +85,14 @@
 		var xTitle = "（X軸：数字；　Y軸：回数）";
 		var title = titleHeader + titleFooter;
 		
-		d3.select("#chartDiv").select("svg").remove();
-		var svg = d3.select("#chartDiv").append("svg");
-		
-		ShaChart.barChart.groupBarChart(svg, svgWidth, svgHeight, data, 
-				rangeColor, keys, names,
+		ShaChart.common.initD3Tip();
+		var numberTip = d3.tip().attr("class", "d3-tip")
+						.offset([-10, 0])
+						.html(function(d) {
+							return "<strong>出た回数:</strong> <span style='color:red'>" + d.value + "</span>";
+						});
+		ShaChart.barChart.groupBarChart("#chartDiv", svgWidth, svgHeight, data, 
+				rangeColor, keys, names, numberTip,
 				title, xTitle);
 		
 		$('#okPanelTitle').text(title);

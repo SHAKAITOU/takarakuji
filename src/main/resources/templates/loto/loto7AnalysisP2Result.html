@@ -18,7 +18,10 @@
 		<div class="col-sm-12">
 			<legend>グラフ</legend>
 		</div>
-		<div id="chartDiv" class="col-sm-12 div-center">
+		<div id="barChartDiv" class="col-sm-6 div-center">
+			
+		</div>
+		<div id="pieChartDiv" class="col-sm-6 div-center">
 			
 		</div>
 	</div>
@@ -129,14 +132,55 @@
 
 	$(document).ready(function(){
 		
-		var svgWidth = $('#okPanel').width()-40;
-	    var svgHeight = 300;
+
 		var data = /*[[${resultList.summaryTotalAvgList}]]*/ null;
 		
+
+		var titleHeader = "ロト7(LOTO7)";
+		var titleFooter = "関連分析";
+
+		var title = titleHeader+titleFooter;
+		$('#okPanelTitle').text(title);
+		
+		$btn_obj = $('#totalAvgChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			createTotalAvgChart(data, titleFooter);
+		});
+		
 	    
-		$('#okPanelTitle').text("ロト7(LOTO7)数字関連分析");
 		$("#totalAvgChartClk").click();
+		
 	});	
+	
+	function createTotalAvgChart(data, titleFooter) {
+		var itemTitle = /*[[${T(sha.work.enums.AnalysisType).TOTAL_AVG.getName()}]]*/;
+		var title = itemTitle + titleFooter;		
+		var xTitle = "（X軸：" + itemTitle + "；　Y軸：回数）";
+		
+		var getName = function (d) {return d.numberName;};
+		var getValue = function (d) {return d.numberValue;};
+		
+		var svgWidth = $('#okPanel').width()-40;
+	    var svgHeight = 400;
+	    
+	    ShaChart.common.initD3Tip();
+		var numberTip = d3.tip().attr("class", "d3-tip")
+		.offset([0, 0])
+		.html(function(d, i) {
+			return "<strong>当選数平均値:</strong> <span style='color:#e6b422'>" + getName(data[i]) + "</span><br/>"+
+					"<strong>出た回数:</strong> <span style='color:red'>" + getValue(data[i]) + "回</span>";
+		});
+		ShaChart.barChart.simpleBarChart("#barChartDiv", svgWidth/2, svgHeight, data,
+				getName, getValue, numberTip, /*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getBarColor()}]]*/,
+				"", xTitle);
+		
+		var rangeColor = ShaColor.htmlColor.randomColor(40, ShaColor.htmlColor.jpColor);
+			
+		ShaChart.barChart.pieChart("#pieChartDiv", svgWidth/2, svgHeight, data, 
+				getName, getValue, numberTip, rangeColor, "");
+	}
 
 /*]]>*/
 </script>	

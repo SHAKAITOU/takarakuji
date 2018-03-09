@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+  th:with="lang=${#locale.language}" th:lang="${lang}">
+<head>
+	<title>SHA LOTO</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<!-- CSS -->
+<style type="text/css">
+	
+</style>
+<div class="row">
+	<div class="col-md-12 col-sx-12">
+		<legend id="chartTitle">グラフ</legend>
+	</div>
+	<div id="chartDiv" class="col-md-12 col-sx-12">
+	</div>
+	<div class="col-md-12 col-sx-12">
+		<legend>データ</legend>
+	</div>
+	<div class="col-md-12 col-sx-12 table-responsive">
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<td class="td-t2s label-14b text-center">数字</td>
+					<td class="info label-14b text-center" th:text="${T(sha.work.enums.Loto6NumberType).NOMAL_NUMBER.getName()}"></td>
+					<td class="danger label-14b text-center" th:text="${T(sha.work.enums.Loto6NumberType).BONUS_NUMBER1.getName()}"></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="member : ${resultList.p1List}">
+					<td class="text-center label-14b" th:text="${member.numberName}"></td>
+					<td class="text-right">
+						<span class="badge badge-primary label-14b">
+							<span style="color: #E7CF59" th:text="${member.numberValue}"></span>回
+						</span>
+					</td>
+					<td class="text-right">
+						<span class="badge badge-info label-14b">
+							<span style="color: #E7CF59" th:text="${member.bonusNumber1Value}"></span>回
+						</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<script type="text/javascript" th:inline="javascript">
+
+/*<![CDATA[*/
+	
+	$(document).ready(function(){
+
+	    var rangeColor = [ 
+			/*[[${T(sha.work.enums.Loto6NumberType).NOMAL_NUMBER.getBarColor()}]]*/, 
+			/*[[${T(sha.work.enums.Loto6NumberType).BONUS_NUMBER1.getBarColor()}]]*/ 
+		]
+		var keys = [
+			/*[[${T(sha.work.enums.Loto6NumberType).NOMAL_NUMBER.getKey()}]]*/, 
+			/*[[${T(sha.work.enums.Loto6NumberType).BONUS_NUMBER1.getKey()}]]*/ 
+		];
+
+		var names = [ 
+			/*[[${T(sha.work.enums.Loto6NumberType).NOMAL_NUMBER.getName()}]]*/,
+			/*[[${T(sha.work.enums.Loto6NumberType).BONUS_NUMBER1.getName()}]]*/
+		];
+	    
+		//data
+		var data = /*[[${resultList.p1List}]]*/ null;
+		
+		drawGraph(rangeColor, keys, names, data);
+	    
+		var titleHeader = "ロト6(LOTO6)";
+		var titleFooter = "各数字過去当選回数グループ表示";
+		var title = titleHeader + titleFooter;
+		$('#chartTitle').html(titleFooter);
+		$('#okPanelTitle').text(title);
+		
+		//trigger when windows resize
+		ShaCommon.util.triggerWinResize(
+			function() {
+				drawGraph(rangeColor, keys, names, data);
+			}
+		);
+		
+		function drawGraph(rangeColor, keys, names, data) {
+
+		    var svgWidth = $('#okPanel').width();
+		    var svgHeight = 300;
+
+			var xTitle = "（X軸：数字；　Y軸：当選回数）";
+			
+			ShaChart.common.initD3Tip();
+			var numberTip = d3.tip().attr("class", "d3-tip")
+							.offset([-10, 0])
+							.html(function(d) {
+								return "<strong>当選回数:</strong> <span style='color:red'>" + d.value + "</span>";
+							});
+			var numberTip = ShaChart.common.createD3Tip(
+					function(d) {
+						var html = "<strong>当選回数:</strong>" 
+									+ " <span style='color:red'>" + d.value + "回</span>";
+						return html;
+					},
+					[-10, 0]);
+			
+			ShaChart.chart.groupBarChart("#chartDiv", svgWidth, svgHeight, data, 
+					rangeColor, keys, names, numberTip,
+					"", xTitle);
+		}
+	});
+		
+
+/*]]>*/
+</script>
+
+	
+	
+</body>
+
+</html>

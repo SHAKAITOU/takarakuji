@@ -1,6 +1,5 @@
-package sha.work.controller.batch;
+package sha.work.controller.loto;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
@@ -19,10 +18,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import sha.framework.controller.ScreenBaseController;
+import sha.framework.util.FileReaderUtil;
 import sha.framework.util.JsonLogCommonUtil;
 import sha.framework.util.MessageSourceUtil;
+import sha.work.entity.out.Loto6AnalysisP1Out;
 import sha.work.exception.TKRKScreenException;
-import sha.work.service.loto.Loto7AnalysisP1Service;
 import sha.work.util.FileUtil;
 
 /**
@@ -31,8 +31,7 @@ import sha.work.util.FileUtil;
  *
  */
 @Controller
-@RequestMapping("/batch/loto7AnalysisP1CreateFile")
-public class Loto7AnalysisP1CreateFileController extends ScreenBaseController{
+public class Loto6AnalysisP1Controller extends ScreenBaseController{
 	
 	
 	@Autowired
@@ -43,35 +42,45 @@ public class Loto7AnalysisP1CreateFileController extends ScreenBaseController{
 	private JsonLogCommonUtil jsonLog;
 	
 	@Autowired
-	private Loto7AnalysisP1Service service;	
+	private ObjectMapper objMapper; 
 
 
-	@RequestMapping(method=RequestMethod.GET)
-	public ModelAndView exapmle(@RequestParam Map<String,String> allRequestParams, Locale loc, 
+	@RequestMapping(path="/loto/loto6AnalysisP1", method=RequestMethod.GET)
+	public ModelAndView getLoto6AnalysisP1(@RequestParam Map<String,String> allRequestParams, Locale loc, 
 			HttpServletRequest request,
 			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
 
 
 		ModelAndView mav = new ModelAndView();
-		ObjectMapper objectMapper = new ObjectMapper();
+		mav.addObject("resultList", getAnaLysisData());
+		mav.setViewName("loto/loto6AnalysisP1Result");
 		
-		try {
-		    File dir = new File(FileUtil.getJsonDataFilePath());
-		    if (!dir.exists()) {
-		        dir.mkdirs();
-		    }
-		    File file = new File(FileUtil.getLoto7P1DataFileJson());
-			if(file.exists()) {
-				file.delete();
-			}
-			file.createNewFile();
-			objectMapper.writeValue(file, service.analysis());
-		} catch (IOException e) {
-			throw new TKRKScreenException(e);
-		}
-		mav.setViewName("/common/success");
+		return mav;
+	}
+	
+	@RequestMapping(path="/loto/loto6AnalysisP1Group", method=RequestMethod.GET)
+	public ModelAndView getLoto6AnalysisP1Group(@RequestParam Map<String,String> allRequestParams, Locale loc, 
+			HttpServletRequest request,
+			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
+
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("resultList", getAnaLysisData());
+		mav.setViewName("loto/loto6AnalysisP1ResultGroup");
+		
 		return mav;
 	}
 
+	private Loto6AnalysisP1Out getAnaLysisData() {
+		try {
+			String data = FileReaderUtil.read(FileUtil.getLoto6P1DataFileJson());
+			return objMapper.readValue(data, Loto6AnalysisP1Out.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new TKRKScreenException(e);
+		}
+	}
+	
+	
 
 }

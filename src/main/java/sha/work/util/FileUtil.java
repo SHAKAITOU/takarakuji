@@ -34,6 +34,12 @@ public class FileUtil {
 	
 	private static final String LOTO7_P1 = "loto7P1Data";
 	
+	private static final String LOTO7_P2 = "loto7P2Data";
+	
+	private static final String LOTO6_P1 = "loto6P1Data";
+	
+	private static final String LOTO6_P2 = "loto6P2Data";
+	
 	//PATH
 	public static String getRootPath() {
 		return	ROOT_PATH;
@@ -104,5 +110,20 @@ public class FileUtil {
 	//JSON FILE
 	public static String getLoto7P1DataFileJson() {
 		return getJsonDataFilePath() + File.separator + LOTO7_P1 + JSON;
+	}
+	
+	//JSON FILE
+	public static String getLoto7P2DataFileJson() {
+		return getJsonDataFilePath() + File.separator + LOTO7_P2 + JSON;
+	}
+	
+	//JSON FILE
+	public static String getLoto6P1DataFileJson() {
+		return getJsonDataFilePath() + File.separator + LOTO6_P1 + JSON;
+	}
+	
+	//JSON FILE
+	public static String getLoto6P2DataFileJson() {
+		return getJsonDataFilePath() + File.separator + LOTO6_P2 + JSON;
 	}
 }

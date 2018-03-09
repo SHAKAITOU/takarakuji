@@ -22,7 +22,7 @@ import sha.framework.controller.ScreenBaseController;
 import sha.framework.util.JsonLogCommonUtil;
 import sha.framework.util.MessageSourceUtil;
 import sha.work.exception.TKRKScreenException;
-import sha.work.service.loto.Loto7AnalysisP1Service;
+import sha.work.service.loto.Loto7AnalysisP2Service;
 import sha.work.util.FileUtil;
 
 /**
@@ -31,8 +31,8 @@ import sha.work.util.FileUtil;
  *
  */
 @Controller
-@RequestMapping("/batch/loto7AnalysisP1CreateFile")
-public class Loto7AnalysisP1CreateFileController extends ScreenBaseController{
+@RequestMapping("/batch/loto7AnalysisP2CreateFile")
+public class Loto7AnalysisP2CreateFileController extends ScreenBaseController{
 	
 	
 	@Autowired
@@ -43,7 +43,7 @@ public class Loto7AnalysisP1CreateFileController extends ScreenBaseController{
 	private JsonLogCommonUtil jsonLog;
 	
 	@Autowired
-	private Loto7AnalysisP1Service service;	
+	private Loto7AnalysisP2Service service;	
 
 
 	@RequestMapping(method=RequestMethod.GET)
@@ -60,12 +60,12 @@ public class Loto7AnalysisP1CreateFileController extends ScreenBaseController{
 		    if (!dir.exists()) {
 		        dir.mkdirs();
 		    }
-		    File file = new File(FileUtil.getLoto7P1DataFileJson());
+		    File file = new File(FileUtil.getLoto7P2DataFileJson());
 			if(file.exists()) {
 				file.delete();
 			}
 			file.createNewFile();
-			objectMapper.writeValue(file, service.analysis());
+			objectMapper.writeValue(file, service.summary());
 		} catch (IOException e) {
 			throw new TKRKScreenException(e);
 		}

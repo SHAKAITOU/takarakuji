@@ -1,6 +1,6 @@
 package sha.work.enums;
 
-public enum AnalysisType {
+public enum Loto7AnalysisType {
 
 	TOTAL_AVG			(1, "totalAvg", 	"当選数平均値"),
 	MAX_MIN_DIFF		(2, "maxMinDiff", 	"最大と最小数差値"),
@@ -20,7 +20,7 @@ public enum AnalysisType {
     private String key;
     private String name;
 
-    private AnalysisType(int id, String key, String name) {
+    private Loto7AnalysisType(int id, String key, String name) {
         this.id = id;
         this.key = key;
         this.name = name;
@@ -38,8 +38,8 @@ public enum AnalysisType {
         return name;
     }
     
-    public AnalysisType valueOf(int id) {
-    	for(AnalysisType type : AnalysisType.values()) {
+    public Loto7AnalysisType valueOf(int id) {
+    	for(Loto7AnalysisType type : Loto7AnalysisType.values()) {
     		if(id == type.getId()) {
     			return type;
     		}
@@ -48,8 +48,8 @@ public enum AnalysisType {
     	return null;
     }
     
-    public AnalysisType keyOf(String key) {
-    	for(AnalysisType type : AnalysisType.values()) {
+    public Loto7AnalysisType keyOf(String key) {
+    	for(Loto7AnalysisType type : Loto7AnalysisType.values()) {
     		if(key.equals(type.getKey())) {
     			return type;
     		}
@@ -58,8 +58,8 @@ public enum AnalysisType {
     	return null;
     }
     
-    public AnalysisType nameOf(String name) {
-    	for(AnalysisType type : AnalysisType.values()) {
+    public Loto7AnalysisType nameOf(String name) {
+    	for(Loto7AnalysisType type : Loto7AnalysisType.values()) {
     		if(name.equals(type.getName())) {
     			return type;
     		}

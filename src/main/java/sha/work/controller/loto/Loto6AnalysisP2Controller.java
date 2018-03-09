@@ -21,7 +21,7 @@ import sha.framework.controller.ScreenBaseController;
 import sha.framework.util.FileReaderUtil;
 import sha.framework.util.JsonLogCommonUtil;
 import sha.framework.util.MessageSourceUtil;
-import sha.work.entity.out.Loto7AnalysisP2Out;
+import sha.work.entity.out.Loto6AnalysisP2Out;
 import sha.work.exception.TKRKScreenException;
 import sha.work.util.FileUtil;
 
@@ -31,7 +31,7 @@ import sha.work.util.FileUtil;
  *
  */
 @Controller
-public class Loto7AnalysisP2Controller extends ScreenBaseController{
+public class Loto6AnalysisP2Controller extends ScreenBaseController{
 	
 	
 	@Autowired
@@ -45,8 +45,8 @@ public class Loto7AnalysisP2Controller extends ScreenBaseController{
 	private ObjectMapper objMapper;  
 
 
-	@RequestMapping(path="/loto/loto7AnalysisP2", method=RequestMethod.GET)
-	public ModelAndView getLoto7AnalysisP2(@RequestParam Map<String,String> allRequestParams, Locale loc, 
+	@RequestMapping(path="/loto/loto6AnalysisP2", method=RequestMethod.GET)
+	public ModelAndView getLoto6AnalysisP2(@RequestParam Map<String,String> allRequestParams, Locale loc, 
 			HttpServletRequest request,
 			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
 
@@ -54,15 +54,15 @@ public class Loto7AnalysisP2Controller extends ScreenBaseController{
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("resultList", getAnaLysisData());
-		mav.setViewName("loto/loto7AnalysisP2Result");
+		mav.setViewName("loto/loto6AnalysisP2Result");
 		
 		return mav;
 	}
 	
-	private Loto7AnalysisP2Out getAnaLysisData() {
+	private Loto6AnalysisP2Out getAnaLysisData() {
 		try {
-			String data = FileReaderUtil.read(FileUtil.getLoto7P2DataFileJson());
-			return objMapper.readValue(data, Loto7AnalysisP2Out.class);
+			String data = FileReaderUtil.read(FileUtil.getLoto6P2DataFileJson());
+			return objMapper.readValue(data, Loto6AnalysisP2Out.class);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			throw new TKRKScreenException(e);

@@ -1,7 +1,5 @@
 package sha.work.controller.batch;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 
@@ -16,14 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import sha.framework.controller.ScreenBaseController;
 import sha.framework.util.JsonLogCommonUtil;
 import sha.framework.util.MessageSourceUtil;
 import sha.work.exception.TKRKScreenException;
-import sha.work.service.loto.Loto7AnalysisP1Service;
-import sha.work.util.FileUtil;
+import sha.work.service.batch.Loto6AnalysisBaseDataCreateService;
 
 /**
  * S002 Thymeleaf 
@@ -31,8 +27,8 @@ import sha.work.util.FileUtil;
  *
  */
 @Controller
-@RequestMapping("/batch/loto7AnalysisP1CreateFile")
-public class Loto7AnalysisP1CreateFileController extends ScreenBaseController{
+@RequestMapping("/batch/createLoto6AnalysisBaseData")
+public class Loto6AnalysisBaseDataCreateController extends ScreenBaseController{
 	
 	
 	@Autowired
@@ -43,7 +39,7 @@ public class Loto7AnalysisP1CreateFileController extends ScreenBaseController{
 	private JsonLogCommonUtil jsonLog;
 	
 	@Autowired
-	private Loto7AnalysisP1Service service;	
+	private Loto6AnalysisBaseDataCreateService service;
 
 
 	@RequestMapping(method=RequestMethod.GET)
@@ -53,25 +49,12 @@ public class Loto7AnalysisP1CreateFileController extends ScreenBaseController{
 
 
 		ModelAndView mav = new ModelAndView();
-		ObjectMapper objectMapper = new ObjectMapper();
-		
-		try {
-		    File dir = new File(FileUtil.getJsonDataFilePath());
-		    if (!dir.exists()) {
-		        dir.mkdirs();
-		    }
-		    File file = new File(FileUtil.getLoto7P1DataFileJson());
-			if(file.exists()) {
-				file.delete();
-			}
-			file.createNewFile();
-			objectMapper.writeValue(file, service.analysis());
-		} catch (IOException e) {
-			throw new TKRKScreenException(e);
-		}
+		service.analysisAll();
 		mav.setViewName("/common/success");
+		
 		return mav;
 	}
 
+	
 
 }

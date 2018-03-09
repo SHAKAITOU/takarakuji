@@ -35,6 +35,16 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-10 col-md-offset-1">
+							<legend>ロト6(LOTO6)</legend>
+						</div>
+						<div class="col-md-10 col-md-offset-1">
+							<!-- ========ANALYSIS BTN========= -->
+							<button id="showLoto6Data" type="button" class="btn btn btn-block btn-outline-primary">過去の抽せん結果</button> 
+							<button id="loto6AnalysisP1" type="button" class="btn btn btn-block btn-outline-primary">過去出た回数シングル図</button>
+							<button id="loto6AnalysisP1Group" type="button" class="btn btn btn-block btn-outline-primary">過去出た回数グループ図</button>
+							<button id="loto6AnalysisP2" type="button" class="btn btn btn-block btn-outline-primary">数字関連分析図</button> 
+						</div>
+						<div class="col-md-10 col-md-offset-1">
 							<legend>ロト7(LOTO7)</legend>
 						</div>
 						<div class="col-md-10 col-md-offset-1">
@@ -79,6 +89,46 @@
 /*<![CDATA[*/
 $(document).ready(function(){
 	var commonBtn;
+	
+	$btn_obj = $('#showLoto6Data'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.execute('/loto/showLoto6Data', "GET", null, 
+				ShaCommon.ajax.callBackOk, 
+				ShaCommon.ajax.callBackNg); 
+	});
+	
+	$btn_obj = $('#loto6AnalysisP1'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.execute('/loto/loto6AnalysisP1', "GET", null, 
+				ShaCommon.ajax.callBackOk, 
+				ShaCommon.ajax.callBackNg); 
+	});
+	
+	$btn_obj = $('#loto6AnalysisP1Group'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.execute('/loto/loto6AnalysisP1Group', "GET", null, 
+				ShaCommon.ajax.callBackOk, 
+				ShaCommon.ajax.callBackNg); 
+	});
+	
+	$btn_obj = $('#loto6AnalysisP2'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.execute('/loto/loto6AnalysisP2', "GET", null, 
+				ShaCommon.ajax.callBackOk, 
+				ShaCommon.ajax.callBackNg); 
+	});
 	
 	$btn_obj = $('#showLoto7Data'); 
 	$btn_obj.unbind(); 

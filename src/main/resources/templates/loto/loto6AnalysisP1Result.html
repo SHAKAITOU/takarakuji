@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+  th:with="lang=${#locale.language}" th:lang="${lang}">
+<head>
+	<title>SHA LOTO</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<!-- CSS -->
+<style type="text/css">
+
+
+</style>
+<div class="row">	
+	<div class="col-md-12 col-sx-12">
+		<div class="col-md-12 col-sx-12">
+			<legend id="chartTitle">グラフ</legend>
+		</div>
+		<div id="chartDiv" class="col-md-12 col-sx-12 div-center">
+			
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12 col-sx-12">
+		<div class="bs-component">
+			<ul class="nav nav-tabs">
+				<li class="nav-item">
+					<a id="nomalNumberChartClk" class="nav-link" data-toggle="tab" href="#nomalNumberChartDiv" 
+						th:text="${T(sha.work.enums.Loto6NumberType).NOMAL_NUMBER.getName()}"></a>
+				</li>
+				<li class="nav-item">
+					<a id="bonusNumber1ChartClk" class="nav-link" data-toggle="tab" href="#bonusNumber1ChartDiv" 
+						th:text="${T(sha.work.enums.Loto6NumberType).BONUS_NUMBER1.getName()}"></a>
+				</li>
+			</ul>
+			<div id="chartTabContent" class="tab-content">
+				<!-- nomalNumberChart -->
+				<div class="tab-pane fade" id="nomalNumberChartDiv">
+					<div class="col-md-12  col-sx-12">
+						<legend>データ</legend>
+					</div>
+					<div class="col-md-12 col-sx-12 table-responsive">
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<td class="td-t2s label-14b text-center">数字</td>
+									<td class="td-t2s label-14b text-center">当選回数</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="member : ${resultList.p1List}">
+									<td class="text-center label-14b" th:text="${member.numberName}"></td>
+									<td class="text-right">
+										<span class="badge badge-primary label-14b">
+											<span style="color: #E7CF59" th:text="${member.numberValue}"></span>回
+										</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- bonusNumber1Chart -->
+				<div class="tab-pane fade" id="bonusNumber1ChartDiv">
+					<div class="col-md-12 col-sx-12">
+						<legend>データ</legend>
+					</div>
+					<div class="col-md-12 col-sx-12 table-responsive">
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<td class="td-t2s label-14b text-center">数字</td>
+									<td class="td-t2s label-14b text-center">当選回数</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="member : ${resultList.p1List}">
+									<td class="text-center label-14b" th:text="${member.numberName}"></td>
+									<td class="text-right">
+										<span class="badge badge-info label-14b">
+											<span style="color: #E7CF59" th:text="${member.bonusNumber1Value}"></span>回
+										</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" th:inline="javascript">
+
+/*<![CDATA[*/
+
+	$(document).ready(function(){
+		
+		var loto6AnalysisP1ResultBtn = null;
+
+		var data = /*[[${resultList.p1List}]]*/ null;
+		
+		var titleHeader = "ロト6(LOTO6)";
+		var titleFooter = "各数字過去当選回数";
+		var xTitle = "（X軸：数字；　Y軸：当選回数）";
+		
+		$btn_obj = $('#nomalNumberChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			loto7AnalysisP1ResultBtn = $(this);
+			
+			var getName = function (d) {return d.numberName;};
+			var getValue = function (d) {return d.numberValue;};
+			
+			var svgWidth = $('#okPanel').width()-40;
+		    var svgHeight = 300;
+			ShaChart.common.initD3Tip();			
+			var numberTip = ShaChart.common.createD3Tip(
+					function(d) {
+						var name = /*[[${T(sha.work.enums.Loto6NumberType).NOMAL_NUMBER.getName()}]]*/;
+						var html = "<strong>" + name + ":</strong>"
+									+" <span style='color:#e6b422'>" + getName(d) + "</span><br/>"
+									+"<strong>当選回数:</strong>" 
+									+ " <span style='color:red'>" + getValue(d) + "回</span>";
+						return html;
+					},
+					[-10, 0]);
+			
+			ShaChart.chart.simpleBarChart("#chartDiv", svgWidth, svgHeight, data, 
+					getName, getValue, numberTip, /*[[${T(sha.work.enums.Loto6NumberType).NOMAL_NUMBER.getBarColor()}]]*/,
+					"", xTitle);
+			
+			var title = /*[[${T(sha.work.enums.Loto6NumberType).NOMAL_NUMBER.getName()}]]*/;
+			title += titleFooter;
+			
+			$('#chartTitle').html(title);
+		});
+		
+		$btn_obj = $('#bonusNumber1ChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			loto7AnalysisP1ResultBtn = $(this);
+			
+			var getName = function (d) {return d.numberName;};
+			var getValue = function (d) {return d.bonusNumber1Value;}
+			
+			var svgWidth = $('#okPanel').width()-40;
+		    var svgHeight = 300;
+			ShaChart.common.initD3Tip();
+			var numberTip = ShaChart.common.createD3Tip(
+					function(d) {
+						var name = /*[[${T(sha.work.enums.Loto6NumberType).BONUS_NUMBER1.getName()}]]*/;
+						var html = "<strong>" + name + ":</strong>"
+									+" <span style='color:#e6b422'>" + getName(d) + "</span><br/>"
+									+"<strong>当選回数:</strong>" 
+									+ " <span style='color:red'>" + getValue(d) + "回</span>";
+						return html;
+					},
+					[-10, 0]);
+			
+			ShaChart.chart.simpleBarChart("#chartDiv", svgWidth, svgHeight, data, 
+					getName, getValue, numberTip, /*[[${T(sha.work.enums.Loto6NumberType).BONUS_NUMBER1.getBarColor()}]]*/,
+					"", xTitle);
+			
+			var title = /*[[${T(sha.work.enums.Loto6NumberType).BONUS_NUMBER1.getName()}]]*/;
+			title += titleFooter;
+			
+			$('#chartTitle').html(title);
+		});
+		
+	    
+		$('#okPanelTitle').text(titleHeader + titleFooter);
+		$("#nomalNumberChartClk").click();
+		
+		//trigger when windows resize
+		ShaCommon.util.triggerWinResize(
+			function() {
+				if(loto6AnalysisP1ResultBtn != null) {
+					loto6AnalysisP1ResultBtn.click();
+				}
+			}
+		);
+	});		
+
+/*]]>*/
+</script>	
+	
+</body>
+
+</html>

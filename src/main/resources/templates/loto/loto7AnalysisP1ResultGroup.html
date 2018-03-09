@@ -12,15 +12,15 @@
 	
 </style>
 <div class="row">
-	<div class="col-sm-12">
-		<legend>グラフ</legend>
+	<div class="col-md-12 col-sx-12">
+		<legend id="chartTitle">グラフ</legend>
 	</div>
-	<div id="chartDiv" class="col-sm-12">
+	<div id="chartDiv" class="col-md-12 col-sx-12">
 	</div>
-	<div class="col-sm-12">
+	<div class="col-md-12 col-sx-12">
 		<legend>データ</legend>
 	</div>
-	<div class="col-sm-12 table-responsive">
+	<div class="col-md-12 col-sx-12 table-responsive">
 		<table class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
@@ -58,8 +58,7 @@
 /*<![CDATA[*/
 	
 	$(document).ready(function(){
-	    var svgWidth = $('#okPanel').width();
-	    var svgHeight = 300;
+
 	    var rangeColor = [ 
 			/*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getBarColor()}]]*/, 
 			/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getBarColor()}]]*/, 
@@ -80,30 +79,46 @@
 		//data
 		var data = /*[[${resultList.p1List}]]*/ null;
 		
+		drawGraph(rangeColor, keys, names, data);
+	    
 		var titleHeader = "ロト7(LOTO7)";
 		var titleFooter = "各数字過去当選回数グループ表示";
-		var xTitle = "（X軸：数字；　Y軸：当選回数）";
 		var title = titleHeader + titleFooter;
-		
-		ShaChart.common.initD3Tip();
-		var numberTip = d3.tip().attr("class", "d3-tip")
-						.offset([-10, 0])
-						.html(function(d) {
-							return "<strong>当選回数:</strong> <span style='color:red'>" + d.value + "</span>";
-						});
-		var numberTip = ShaChart.common.createD3Tip(
-				function(d) {
-					var html = "<strong>当選回数:</strong>" 
-								+ " <span style='color:red'>" + d.value + "回</span>";
-					return html;
-				},
-				[-10, 0]);
-		
-		ShaChart.barChart.groupBarChart("#chartDiv", svgWidth, svgHeight, data, 
-				rangeColor, keys, names, numberTip,
-				title, xTitle);
-		
+		$('#chartTitle').html(titleFooter);
 		$('#okPanelTitle').text(title);
+		
+		//trigger when windows resize
+		ShaCommon.util.triggerWinResize(
+			function() {
+				drawGraph(rangeColor, keys, names, data);
+			}
+		);
+		
+		function drawGraph(rangeColor, keys, names, data) {
+
+		    var svgWidth = $('#okPanel').width();
+		    var svgHeight = 300;
+
+			var xTitle = "（X軸：数字；　Y軸：当選回数）";
+			
+			ShaChart.common.initD3Tip();
+			var numberTip = d3.tip().attr("class", "d3-tip")
+							.offset([-10, 0])
+							.html(function(d) {
+								return "<strong>当選回数:</strong> <span style='color:red'>" + d.value + "</span>";
+							});
+			var numberTip = ShaChart.common.createD3Tip(
+					function(d) {
+						var html = "<strong>当選回数:</strong>" 
+									+ " <span style='color:red'>" + d.value + "回</span>";
+						return html;
+					},
+					[-10, 0]);
+			
+			ShaChart.chart.groupBarChart("#chartDiv", svgWidth, svgHeight, data, 
+					rangeColor, keys, names, numberTip,
+					"", xTitle);
+		}
 	});
 		
 

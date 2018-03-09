@@ -22,7 +22,96 @@
 		GROUP BY TOTAL_AVG
 		ORDER BY CNT DESC
 	</select>
+		
+	<select id="summaryMaxNumDiff" resultMap="NumberAndTurns">
+		SELECT 
+		MAX_NUM_DIFF NUMBER_NAME, 
+		COUNT(MAX_NUM_DIFF) CNT
+		FROM M_LOTO7_ANALYSIS_BASE
+		GROUP BY MAX_NUM_DIFF
+		ORDER BY CNT DESC
+	</select>
 	
+	<select id="summaryMinNumDiff" resultMap="NumberAndTurns">
+		SELECT 
+		MIN_NUM_DIFF NUMBER_NAME, 
+		COUNT(MIN_NUM_DIFF) CNT
+		FROM M_LOTO7_ANALYSIS_BASE
+		GROUP BY MIN_NUM_DIFF
+		ORDER BY CNT DESC
+	</select>
+	
+	<select id="summaryMaxMinDiff" resultMap="NumberAndTurns">
+		SELECT 
+		MAX_MIN_DIFF NUMBER_NAME, 
+		COUNT(MAX_MIN_DIFF) CNT
+		FROM M_LOTO7_ANALYSIS_BASE
+		GROUP BY MAX_MIN_DIFF
+		ORDER BY CNT DESC
+	</select>
+	
+	<select id="summaryNumDiffAvg" resultMap="NumberAndTurns">
+		SELECT 
+		NUM_DIFF_AVG NUMBER_NAME, 
+		COUNT(NUM_DIFF_AVG) CNT
+		FROM M_LOTO7_ANALYSIS_BASE
+		GROUP BY NUM_DIFF_AVG
+		ORDER BY CNT DESC
+	</select>
+	
+	<select id="summaryEvenNumCnt" resultMap="NumberAndTurns">
+		SELECT 
+		EVEN_NUM_CNT NUMBER_NAME, 
+		COUNT(EVEN_NUM_CNT) CNT
+		FROM M_LOTO7_ANALYSIS_BASE
+		GROUP BY EVEN_NUM_CNT
+		ORDER BY CNT DESC
+	</select>
+	
+	<select id="summaryOddNumCnt" resultMap="NumberAndTurns">
+		SELECT 
+		ODD_NUM_CNT NUMBER_NAME, 
+		COUNT(ODD_NUM_CNT) CNT
+		FROM M_LOTO7_ANALYSIS_BASE
+		GROUP BY ODD_NUM_CNT
+		ORDER BY CNT DESC
+	</select>
+	
+	<select id="summarySerialNumCnt" resultMap="NumberAndTurns">
+		SELECT 
+		SERIAL_NUM_CNT NUMBER_NAME, 
+		COUNT(SERIAL_NUM_CNT) CNT
+		FROM M_LOTO7_ANALYSIS_BASE
+		GROUP BY SERIAL_NUM_CNT
+		ORDER BY CNT DESC
+	</select>
+	
+	<select id="summaryLeftAreaNumCnt" resultMap="NumberAndTurns">
+		SELECT 
+		LEFT_AREA_NUM_CNT NUMBER_NAME, 
+		COUNT(LEFT_AREA_NUM_CNT) CNT
+		FROM M_LOTO7_ANALYSIS_BASE
+		GROUP BY LEFT_AREA_NUM_CNT
+		ORDER BY CNT DESC
+	</select>
+	
+	<select id="summaryCenterAreaNumCnt" resultMap="NumberAndTurns">
+		SELECT 
+		CENTER_AREA_NUM_CNT NUMBER_NAME, 
+		COUNT(CENTER_AREA_NUM_CNT) CNT
+		FROM M_LOTO7_ANALYSIS_BASE
+		GROUP BY CENTER_AREA_NUM_CNT
+		ORDER BY CNT DESC
+	</select>
+	
+	<select id="summaryRightAreaNumCnt" resultMap="NumberAndTurns">
+		SELECT 
+		RIGHT_AREA_NUM_CNT NUMBER_NAME, 
+		COUNT(RIGHT_AREA_NUM_CNT) CNT
+		FROM M_LOTO7_ANALYSIS_BASE
+		GROUP BY RIGHT_AREA_NUM_CNT
+		ORDER BY CNT DESC
+	</select>	
 	<insert id="save">
 		INSERT INTO M_LOTO7_ANALYSIS_BASE
 		( 

@@ -14,27 +14,31 @@
 </style>
 
 <div class="row">	
-	<div class="col-sm-12">
-		<legend>グラフ</legend>
+	<div class="col-md-12 col-sx-12">
+		<legend id="chartTitle">グラフ</legend>
 	</div>
 </div>
 <div class="row">
-	<div id="barChartDiv" class="col-sm-12 div-center">
+	<div id="barChartDiv" class="col-md-12 col-sx-12 div-center">
 		
 	</div>
 </div>	
 <div class="row">
-	<div id="pieChartDiv" class="col-sm-12 div-center">
+	<div id="pieChartDiv" class="col-md-12 col-sx-12 div-center">
 		
 	</div>
 </div>
 <div class="row">
-	<div class="col-sm-12">
+	<div class="col-md-12 col-sx-12">
 		<div class="bs-component">
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
 					<a id="totalAvgChartClk" class="nav-link" data-toggle="tab" href="#totalAvgChartDiv" 
 						th:text="${T(sha.work.enums.AnalysisType).TOTAL_AVG.getName()}"></a>
+				</li>
+				<li class="nav-item">
+					<a id="maxMinDiffChartClk" class="nav-link" data-toggle="tab" href="#maxMinDiffChartDiv" 
+						th:text="${T(sha.work.enums.AnalysisType).MAX_MIN_DIFF.getName()}"></a>
 				</li>
 				<li class="nav-item">
 					<a id="maxNumDiffChartClk" class="nav-link" data-toggle="tab" href="#maxNumDiffChartDiv" 
@@ -44,89 +48,46 @@
 					<a id="minNumDiffChartClk" class="nav-link" data-toggle="tab" href="#minNumDiffChartDiv"
 						th:text="${T(sha.work.enums.AnalysisType).MIN_NUM_DIFF.getName()}"></a>
 				</li>
+				<li class="nav-item">
+					<a id="numDiffAvgChartClk" class="nav-link" data-toggle="tab" href="#numDiffAvgChartDiv" 
+						th:text="${T(sha.work.enums.AnalysisType).NUM_DIFF_AVG.getName()}"></a>
+				</li>
+				<li class="nav-item">
+					<a id="evenNumCntChartClk" class="nav-link" data-toggle="tab" href="#evenNumCntChartDiv" 
+						th:text="${T(sha.work.enums.AnalysisType).EVEN_NUM_CNT.getName()}"></a>
+				</li>
+				<li class="nav-item">
+					<a id="oddNumCntChartClk" class="nav-link" data-toggle="tab" href="#oddNumCntChartDiv" 
+						th:text="${T(sha.work.enums.AnalysisType).ODD_NUM_CNT.getName()}"></a>
+				</li>
+				<li class="nav-item">
+					<a id="serialNumCntChartClk" class="nav-link" data-toggle="tab" href="#serialNumCntChartDiv" 
+						th:text="${T(sha.work.enums.AnalysisType).SERIAL_NUM_CNT.getName()}"></a>
+				</li>
+				<li class="nav-item">
+					<a id="leftAreaNumCntChartClk" class="nav-link" data-toggle="tab" href="#leftAreaNumCntChartDiv" 
+						th:text="${T(sha.work.enums.AnalysisType).LEFT_AREA_NUM_CNT.getName()}"></a>
+				</li>
+				<li class="nav-item">
+					<a id="centerAreaNumCntChartClk" class="nav-link" data-toggle="tab" href="#centerAreaNumCntChartDiv" 
+						th:text="${T(sha.work.enums.AnalysisType).CENTER_AREA_NUM_CNT.getName()}"></a>
+				</li>
+				<li class="nav-item">
+					<a id="rightAreaNumCntChartClk" class="nav-link" data-toggle="tab" href="#rightAreaNumCntChartDiv" 
+						th:text="${T(sha.work.enums.AnalysisType).RIGHT_AREA_NUM_CNT.getName()}"></a>
+				</li>
 			</ul>
-			<div id="chartTabContent" class="tab-content">
-				<!-- nomalNumberChart -->
-				<div class="tab-pane fade" id="totalAvgChartDiv">
-					<div class="col-sm-12">
-						<legend>データ</legend>
-					</div>
-					<div class="col-sm-12 table-responsive">
-						<table class="table table-striped table-bordered table-hover">
-							<thead>
-								<tr>
-									<td class="td-t2s label-14b text-center" th:text="${T(sha.work.enums.AnalysisType).TOTAL_AVG.getName()}"></td>
-									<td class="info label-14b text-center">出た回数</td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="member : ${resultList.summaryTotalAvgList}">
-									<td class="text-center label-14b" th:text="${member.numberName}"></td>
-									<td class="text-right">
-										<span class="badge badge-primary label-14b">
-											<span style="color: #E7CF59" th:text="${member.numberValue}"></span>回
-										</span>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<!-- bonusNumber1Chart -->
-				<div class="tab-pane fade" id="maxNumDiffChartDiv">
-					<div class="col-sm-12">
-						<legend>データ</legend>
-					</div>
-					<div class="col-sm-12 table-responsive">
-						<table class="table table-striped table-bordered table-hover">
-							<thead>
-								<tr>
-									<td class="td-t2s label-14b text-center" th:text="${T(sha.work.enums.AnalysisType).TOTAL_AVG.getName()}"></td>
-									<td class="info label-14b text-center">出た回数</td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="member : ${resultList.summaryTotalAvgList}">
-									<td class="text-center label-14b" th:text="${member.numberName}"></td>
-									<td class="text-right">
-										<span class="badge badge-primary label-14b">
-											<span style="color: #E7CF59" th:text="${member.numberValue}"></span>回
-										</span>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<!-- bonusNumber2Chart -->
-				<div class="tab-pane fade" id="minNumDiffChartDiv">
-					<div class="col-sm-12">
-						<legend>データ</legend>
-					</div>
-					<div class="col-sm-12 table-responsive">
-						<table class="table table-striped table-bordered table-hover">
-							<thead>
-								<tr>
-									<td class="td-t2s label-14b text-center" th:text="${T(sha.work.enums.AnalysisType).TOTAL_AVG.getName()}"></td>
-									<td class="info label-14b text-center">出た回数</td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="member : ${resultList.summaryTotalAvgList}">
-									<td class="text-center label-14b" th:text="${member.numberName}"></td>
-									<td class="text-right">
-										<span class="badge badge-primary label-14b">
-											<span style="color: #E7CF59" th:text="${member.numberValue}"></span>回
-										</span>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
+</div>
+<div class="row">
+	<div class="col-md-12 col-sx-12">
+		<legend>データ</legend>
+	</div>
+	<div class="col-md-12 col-sx-12 table-responsive">
+		<div id="legendChartDiv" class="col-md-12 col-sx-12 div-left">
+		</div>
+	</div>	
 </div>
 <script type="text/javascript" th:inline="javascript">
 
@@ -134,9 +95,9 @@
 
 	$(document).ready(function(){
 		
-
-		var data = /*[[${resultList.summaryTotalAvgList}]]*/ null;
+		var loto7AnalysisP2ResultBtn = null;
 		
+		var rangeColor = ShaColor.htmlColor.randomColor(40, ShaColor.htmlColor.jpColor);
 
 		var titleHeader = "ロト7(LOTO7)";
 		var titleFooter = "関連分析";
@@ -148,52 +109,217 @@
 		$btn_obj.unbind();
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
-			createTotalAvgChart(data, titleFooter);
+			loto7AnalysisP2ResultBtn = $(this);
+			
+			var data = /*[[${resultList.summaryTotalAvgList}]]*/ null;			
+			var itemTitle = /*[[${T(sha.work.enums.AnalysisType).TOTAL_AVG.getName()}]]*/;
+			
+			createTotalAvgChart(data, rangeColor, itemTitle);
+			
+			$('#chartTitle').html(itemTitle + "比率分析");
 		});
 		
+		$btn_obj = $('#maxMinDiffChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			loto7AnalysisP2ResultBtn = $(this);
+			
+			var data = /*[[${resultList.summaryMaxMinDiffList}]]*/ null;			
+			var itemTitle = /*[[${T(sha.work.enums.AnalysisType).MAX_MIN_DIFF.getName()}]]*/;
+			
+			createTotalAvgChart(data, rangeColor, itemTitle);
+			
+			$('#chartTitle').html(itemTitle + "比率分析");
+		});
+		
+		$btn_obj = $('#maxNumDiffChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			loto7AnalysisP2ResultBtn = $(this);
+			
+			var data = /*[[${resultList.summaryMaxNumDiffList}]]*/ null;			
+			var itemTitle = /*[[${T(sha.work.enums.AnalysisType).MAX_NUM_DIFF.getName()}]]*/;
+			
+			createTotalAvgChart(data, rangeColor, itemTitle);
+			
+			$('#chartTitle').html(itemTitle + "比率分析");
+		});
+		
+		$btn_obj = $('#minNumDiffChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			loto7AnalysisP2ResultBtn = $(this);
+			
+			var data = /*[[${resultList.summaryMinNumDiffList}]]*/ null;			
+			var itemTitle = /*[[${T(sha.work.enums.AnalysisType).MIN_NUM_DIFF.getName()}]]*/;
+			
+			createTotalAvgChart(data, rangeColor, itemTitle);
+			
+			$('#chartTitle').html(itemTitle + "比率分析");
+		});
+	
+		$btn_obj = $('#numDiffAvgChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			loto7AnalysisP2ResultBtn = $(this);
+			
+			var data = /*[[${resultList.summaryNumDiffAvgList}]]*/ null;			
+			var itemTitle = /*[[${T(sha.work.enums.AnalysisType).NUM_DIFF_AVG.getName()}]]*/;
+			
+			createTotalAvgChart(data, rangeColor, itemTitle);
+			
+			$('#chartTitle').html(itemTitle + "比率分析");
+		});
+		
+		$btn_obj = $('#evenNumCntChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			loto7AnalysisP2ResultBtn = $(this);
+			
+			var data = /*[[${resultList.summaryEvenNumCntList}]]*/ null;			
+			var itemTitle = /*[[${T(sha.work.enums.AnalysisType).EVEN_NUM_CNT.getName()}]]*/;
+			
+			createTotalAvgChart(data, rangeColor, itemTitle);
+			
+			$('#chartTitle').html(itemTitle + "比率分析");
+		});
+		
+		$btn_obj = $('#oddNumCntChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			loto7AnalysisP2ResultBtn = $(this);
+			
+			var data = /*[[${resultList.summaryOddNumCntList}]]*/ null;			
+			var itemTitle = /*[[${T(sha.work.enums.AnalysisType).ODD_NUM_CNT.getName()}]]*/;
+			
+			createTotalAvgChart(data, rangeColor, itemTitle);
+			
+			$('#chartTitle').html(itemTitle + "比率分析");
+		});
+
+		$btn_obj = $('#serialNumCntChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			loto7AnalysisP2ResultBtn = $(this);
+			
+			var data = /*[[${resultList.summarySerialNumCntList}]]*/ null;			
+			var itemTitle = /*[[${T(sha.work.enums.AnalysisType).SERIAL_NUM_CNT.getName()}]]*/;
+			
+			createTotalAvgChart(data, rangeColor, itemTitle);
+			
+			$('#chartTitle').html(itemTitle + "比率分析");
+		});
+		
+		$btn_obj = $('#leftAreaNumCntChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			loto7AnalysisP2ResultBtn = $(this);
+			
+			var data = /*[[${resultList.summaryLeftAreaNumCntList}]]*/ null;			
+			var itemTitle = /*[[${T(sha.work.enums.AnalysisType).LEFT_AREA_NUM_CNT.getName()}]]*/;
+			
+			createTotalAvgChart(data, rangeColor, itemTitle);
+			
+			$('#chartTitle').html(itemTitle + "比率分析");
+		});
+		
+		$btn_obj = $('#centerAreaNumCntChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			loto7AnalysisP2ResultBtn = $(this);
+			
+			var data = /*[[${resultList.summaryCenterAreaNumCntList}]]*/ null;			
+			var itemTitle = /*[[${T(sha.work.enums.AnalysisType).CENTER_AREA_NUM_CNT.getName()}]]*/;
+			
+			createTotalAvgChart(data, rangeColor, itemTitle);
+			
+			$('#chartTitle').html(itemTitle + "比率分析");
+		});
+		
+		$btn_obj = $('#rightAreaNumCntChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			loto7AnalysisP2ResultBtn = $(this);
+			
+			var data = /*[[${resultList.summaryRightAreaNumCntList}]]*/ null;			
+			var itemTitle = /*[[${T(sha.work.enums.AnalysisType).RIGHT_AREA_NUM_CNT.getName()}]]*/;
+			
+			createTotalAvgChart(data, rangeColor, itemTitle);
+			
+			$('#chartTitle').html(itemTitle + "比率分析");
+		});
 	    
 		$("#totalAvgChartClk").click();
 		
+		//trigger when windows resize
+		ShaCommon.util.triggerWinResize(
+			function() {
+				if(loto7AnalysisP2ResultBtn != null) {
+					loto7AnalysisP2ResultBtn.click();
+				}
+			}
+		);
+		
 	});	
 	
-	function createTotalAvgChart(data, titleFooter) {
-		var itemTitle = /*[[${T(sha.work.enums.AnalysisType).TOTAL_AVG.getName()}]]*/;
-		var title = itemTitle + titleFooter;		
+	function createTotalAvgChart(data, rangeColor, itemTitle) {
 		var xTitle = "（X軸：" + itemTitle + "；　Y軸：回数）";
 		
 		var getName = function (d) {return d.numberName;};
 		var getValue = function (d) {return d.numberValue;};
+		var getPercent = function (d) {return d.percent;};
 		
 		var svgWidth = $('#okPanel').width()-40;
-	    var svgHeight = 400;
-		var rangeColor = ShaColor.htmlColor.randomColor(data.length, ShaColor.htmlColor.jpColor);
-	    
+	    var svgHeight = 300;
+
 	    ShaChart.common.initD3Tip();
+	    
+	    //draw bar chart
 		var numberTip = ShaChart.common.createD3Tip(
 				function(d) {
-					var html = "<strong>当選数平均値:</strong>"
+					var html = "<strong>" + itemTitle + ":</strong>"
 								+" <span style='color:#e6b422'>" + getName(d) + "</span><br/>"
 								+"<strong>当選回数:</strong>" 
 								+ " <span style='color:red'>" + getValue(d) + "回</span>";
 					return html;
 				},
 				[-10, 0]);
-		ShaChart.barChart.simpleBarChart("#barChartDiv", svgWidth, svgHeight, data,
+		ShaChart.chart.simpleBarChart("#barChartDiv", svgWidth, svgHeight, data,
 				getName, getValue, numberTip, rangeColor,
 				"", xTitle);
 		
-		
+		//draw pie chart
 		numberTip = ShaChart.common.createD3Tip(
 				function(d, i) {
-					var html = "<strong>当選数平均値:</strong>"
+					var html = "<strong>" + itemTitle + ":</strong>"
 								+" <span style='color:#e6b422'>" + d.data.numberName + "</span><br/>"
 								+"<strong>当選回数:</strong>" 
 								+ " <span style='color:red'>" + d.data.numberValue + "回</span>";
 					return html;
 				},
 				[0, 0]);
-		ShaChart.barChart.pieChart("#pieChartDiv", svgWidth, svgHeight, data, 
+		ShaChart.chart.pieChart("#pieChartDiv", svgWidth, svgHeight, data, 
 				getName, getValue, numberTip, rangeColor, "");
+
+		//draw legend table chart
+		var colSetting = [];
+		var getLegendValue = function (d) {return d.numberValue+"回";};
+		colSetting.push([getName, itemTitle, 130, "text-center"]);
+		colSetting.push([getLegendValue, "回数", 50, "text-right"]);
+		colSetting.push([getPercent, "比率", 50, "text-right"]);
+		
+		ShaChart.chart.legendTableChart("#legendChartDiv", svgWidth, data, 
+				colSetting, numberTip, rangeColor);
 	}
 
 /*]]>*/

@@ -14,6 +14,26 @@ public interface Loto7AnalysisBaseMapper {
 	int isExist(@Param("turn") int turn);
 	
 	List<NumberAndTurnsQuery> summaryTotalAvg();
+	
+	List<NumberAndTurnsQuery> summaryMaxNumDiff();
+	
+	List<NumberAndTurnsQuery> summaryMinNumDiff();
+	
+	List<NumberAndTurnsQuery> summaryMaxMinDiff();
+	
+	List<NumberAndTurnsQuery> summaryNumDiffAvg();
+	
+	List<NumberAndTurnsQuery> summaryEvenNumCnt();
+	
+	List<NumberAndTurnsQuery> summaryOddNumCnt();
+	
+	List<NumberAndTurnsQuery> summarySerialNumCnt();
+	
+	List<NumberAndTurnsQuery> summaryLeftAreaNumCnt();
+	
+	List<NumberAndTurnsQuery> summaryCenterAreaNumCnt();
+	
+	List<NumberAndTurnsQuery> summaryRightAreaNumCnt();
 
 	void save(Loto7AnalysisBase analysisBase);
 	

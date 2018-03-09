@@ -23,7 +23,7 @@
 </style>
 <form id="search_form" name="search_form" role="form" method="POST">
 <div class="row">
-	<div class="col-sm-4">
+	<div class="col-md-4 col-xs-12">
 		<legend>表示件数</legend>
 		<div class="row" style="height: 30px;">
 		<div class="col-md-12">
@@ -57,10 +57,10 @@
 		</div>
 		</div>
 	</div>
-	<div class="col-sm-4">
+	<div class="col-md-4 col-xs-12">
 		<legend>検索順序</legend>
 		<div class="row">
-		<div class="col-sm-12">
+		<div class="col-md-12">
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label id="orderTypeAsc" 
 					th:class="'btn btn-outline-secondary' + (${result.orderType == 'asc'} ? ' active' : '')">
@@ -80,10 +80,10 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-sm-4">
+	<div class="col-md-4 col-xs-12">
 		<legend>検索方式</legend>
 		<div class="row">
-		<div class="col-sm-12">
+		<div class="col-md-12">
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label id="searchByDt" 
 					th:class="'btn btn-outline-secondary' + (${result.searchTypeRadio == '0'} ? ' active' : '')">
@@ -101,10 +101,10 @@
 		</div>
 		</div>
 	</div>
-	<div class="col-sm-4">
+	<div class="col-md-4 col-xs-12">
 		<legend id="searchShowTitle">検索条件</legend>
 		<div class="row">
-		<div class="col-sm-12" style="height: 30px;">
+		<div class="col-md-12" style="height: 30px;">
 			<div id="searchByDtShowDiv" class="form-group" 
 				th:style="'display: ' + (${result.searchTypeRadio == '0'} ? 'block;' : 'none;')">
 				<div class="input-group">
@@ -128,10 +128,10 @@
 		</div>
 		</div>
 	</div>
-	<div class="col-sm-12 text-right" style="height: 40px;">
+	<div class="col-md-12 col-xs-12 text-right" style="height: 40px;">
 		<button id="searchBtn" type="button" class="btn-lg btn-outline-primary" style="width: 120px;">検索</button>
 	</div>
-	<div class="col-sm-12 table-responsive">
+	<div class="col-md-12 col-xs-12 table-responsive">
 		<table id="resultTable" class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
@@ -198,7 +198,9 @@
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
 			var postData = $('#search_form').serializeArray();
-			ShaCommon.ajax.execute('/loto/showLoto7Data', "POST", postData, callBackOk, callBackNg); 
+			ShaCommon.ajax.execute('/loto/showLoto7Data', "POST", postData, 
+					ShaCommon.ajax.callBackOk, 
+					ShaCommon.ajax.callBackNg); 
 		});
 	});
 	

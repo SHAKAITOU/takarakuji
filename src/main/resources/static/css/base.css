@@ -542,6 +542,10 @@ a:hover {
 	fill: orangered ;
 }
 
+.barActive {
+	fill: orangered ;
+}
+
 
 .x.axis path {
 	display: none;
@@ -575,3 +579,17 @@ a:hover {
 	top: 100%;
 	left: 0;
 }
+
+.legend{
+    margin-bottom:76px;
+    display:inline-block;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+.legend td{
+    padding:4px 5px;
+    vertical-align:bottom;
+}
+
+.legend tr{    border-bottom:1px solid grey; }
+.legend tr:first-child{    border-top:1px solid grey; }

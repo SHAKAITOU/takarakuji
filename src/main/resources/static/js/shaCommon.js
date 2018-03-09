@@ -21,7 +21,14 @@ try{
 		//------------------------------------------------------------------------------
 		getRandomInt : function (min, max) {
 			return Math.floor( Math.random() * (max - min + 1) ) + min;
+		},
+		
+		triggerWinResize : function(callFun) {
+			$(window).resize(function() {
+				callFun();
+			}).trigger("resize");
 		}
+	
 	}
 	
 	
@@ -56,6 +63,26 @@ try{
 				   },
 				   timeout: 10000
 			});
+		},
+	
+		//------------------------------------------------------------------------------
+		// execute ajax callBackOk
+		//------------------------------------------------------------------------------
+		callBackOk : function (data) {
+			$("#okPanel").show();
+			$("#ngPanel").hide();
+			$("#okResultBody").html(data);
+			$("#ngResultBody").html("");
+		},
+		
+		//------------------------------------------------------------------------------
+		// execute ajax callBackNg
+		//------------------------------------------------------------------------------
+		callBackNg : function (data) {
+			$("#okPanel").hide();
+			$("#ngPanel").show();
+			$("#okResultBody").html("");
+			$("#ngResultBody").html(data.responseText);
 		}
 	}
 	

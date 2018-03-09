@@ -32,11 +32,11 @@ try{
 	// barChart define
 	//*****************************************************************************
 	
-	if($chart.barChart) {
-		return $chart.barChart;
+	if($chart.chart) {
+		return $chart.chart;
 	}
 	
-	$chart.barChart = {
+	$chart.chart = {
 
 		//------------------------------------------------------------------------------
 		// draw a simple bar chart
@@ -310,30 +310,47 @@ try{
 		      		.on('mouseover', numberTip.show)
 					.on('mouseout', numberTip.hide);
 
-			//append legend
-			var legend = 
-				svg.selectAll(".legend")
-			      .data(pie(data))
-			      .enter().append("g")
-			      .attr("transform", function(d,i){
-			        return "translate(" + (width - 110) + "," + (i * 15 + 20) + ")";
-			      })
-			      .attr("class", "legend"); 
+		},
 		
-			var yLegend = 0;
-		
-			legend.append("rect")
-					.attr("x", 10)
-					.attr("y", 10)
-					.attr("width", 19)
-					.attr("height", 19)
-					.attr("fill", rangeColor);
-		
-			legend.append("text")
-					.attr("x", 10)
-					.attr("y", 10)
-					.attr("dy", "0.32em")
-					.text(function(d) { return getName(d); });
+		//------------------------------------------------------------------------------
+		// draw a legend table chart
+		//------------------------------------------------------------------------------
+		legendTableChart : function(divCanvasId, svgWidth, data,
+									colSetting, numberTip, rangeColor) {
+			// create table for legend.
+			d3.select(divCanvasId).select("table").remove();
+			var legend = d3.select(divCanvasId).append("table").attr('class','legend');
+	       
+			var trh = legend.append("tHeader").append("tr");
+			trh.append("td")
+					.attr("class", "td-t2s text-center")
+					.attr("width", 40)
+					.text("色");
+			for(i=0; i<colSetting.length; i++) {
+				trh.append("td")
+					.attr("class", "td-t2s "+colSetting[i][3])
+					.attr("width", colSetting[i][2])
+					.text(colSetting[i][1]);
+			}
+			// create one row per segment.
+			var tr = legend.append("tbody").selectAll("tr").data(data).enter().append("tr");
+	            
+			// create the first column for each segment.
+			tr.append("td")
+				.attr("width", 40)
+				.attr("class", "text-center")
+				.append("svg").attr("width", '16').attr("height", '16').append("rect")
+				.attr("class", "bar")
+				.attr("width", '16').attr("height", '16')
+				.attr("fill",function(d, i){ return rangeColor[i]; });
+	            
+	        // create the second column for each segment.
+			for(i=0; i<colSetting.length; i++) {
+				tr.append("td")
+					.attr("width", colSetting[i][2])
+					.attr("class", colSetting[i][3])
+					.text(function(d){ return colSetting[i][0](d);});
+			}
 		}
 	}
 	

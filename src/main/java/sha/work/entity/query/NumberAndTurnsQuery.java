@@ -7,4 +7,5 @@ public class NumberAndTurnsQuery {
 
 	private String numberName;
 	private int numberValue;
+	private String percent;
 }

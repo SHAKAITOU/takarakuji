@@ -40,6 +40,10 @@ public class FileUtil {
 	
 	private static final String LOTO6_P2 = "loto6P2Data";
 	
+	private static final String MINI_LOTO_P1 = "miniLotoP1Data";
+	
+	private static final String MINI_LOTO_P2 = "miniLotoP2Data";
+	
 	//PATH
 	public static String getRootPath() {
 		return	ROOT_PATH;
@@ -125,5 +129,15 @@ public class FileUtil {
 	//JSON FILE
 	public static String getLoto6P2DataFileJson() {
 		return getJsonDataFilePath() + File.separator + LOTO6_P2 + JSON;
+	}
+	
+	//JSON FILE
+	public static String getMiniLotoP1DataFileJson() {
+		return getJsonDataFilePath() + File.separator + MINI_LOTO_P1 + JSON;
+	}
+	
+	//JSON FILE
+	public static String getMiniLotoP2DataFileJson() {
+		return getJsonDataFilePath() + File.separator + MINI_LOTO_P2 + JSON;
 	}
 }

@@ -1,0 +1,170 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sha.work.mapper.loto.MiniLotoAnalysisBaseMapper">
+	<!-- RESULT MAP -->
+	<resultMap id="NumberAndTurns" 
+				type="sha.work.entity.query.NumberAndTurnsQuery">
+		<result property="numberName" column="NUMBER_NAME"/>
+		<result property="numberValue" column="CNT"/>
+    </resultMap>
+	
+	<!-- SQL CHIP -->
+	
+	
+	<select id="isExist" resultType="int">
+		SELECT COUNT(*) FROM M_MINI_LOTO_ANALYSIS_BASE WHERE TURN = #{turn}
+	</select>
+	
+	<select id="summaryTotalAvg" resultMap="NumberAndTurns">
+		SELECT 
+		TOTAL_AVG NUMBER_NAME, 
+		COUNT(TOTAL_AVG) CNT
+		FROM M_MINI_LOTO_ANALYSIS_BASE
+		GROUP BY TOTAL_AVG
+		ORDER BY CNT DESC
+	</select>
+		
+	<select id="summaryMaxNumDiff" resultMap="NumberAndTurns">
+		SELECT 
+		MAX_NUM_DIFF NUMBER_NAME, 
+		COUNT(MAX_NUM_DIFF) CNT
+		FROM M_MINI_LOTO_ANALYSIS_BASE
+		GROUP BY MAX_NUM_DIFF
+		ORDER BY CNT DESC
+	</select>
+	
+	<select id="summaryMinNumDiff" resultMap="NumberAndTurns">
+		SELECT 
+		MIN_NUM_DIFF NUMBER_NAME, 
+		COUNT(MIN_NUM_DIFF) CNT
+		FROM M_MINI_LOTO_ANALYSIS_BASE
+		GROUP BY MIN_NUM_DIFF
+		ORDER BY CNT DESC
+	</select>
+	
+	<select id="summaryMaxMinDiff" resultMap="NumberAndTurns">
+		SELECT 
+		MAX_MIN_DIFF NUMBER_NAME, 
+		COUNT(MAX_MIN_DIFF) CNT
+		FROM M_MINI_LOTO_ANALYSIS_BASE
+		GROUP BY MAX_MIN_DIFF
+		ORDER BY CNT DESC
+	</select>
+	
+	<select id="summaryNumDiffAvg" resultMap="NumberAndTurns">
+		SELECT 
+		NUM_DIFF_AVG NUMBER_NAME, 
+		COUNT(NUM_DIFF_AVG) CNT
+		FROM M_MINI_LOTO_ANALYSIS_BASE
+		GROUP BY NUM_DIFF_AVG
+		ORDER BY CNT DESC
+	</select>
+	
+	<select id="summaryEvenNumCnt" resultMap="NumberAndTurns">
+		SELECT 
+		EVEN_NUM_CNT NUMBER_NAME, 
+		COUNT(EVEN_NUM_CNT) CNT
+		FROM M_MINI_LOTO_ANALYSIS_BASE
+		GROUP BY EVEN_NUM_CNT
+		ORDER BY CNT DESC
+	</select>
+	
+	<select id="summaryOddNumCnt" resultMap="NumberAndTurns">
+		SELECT 
+		ODD_NUM_CNT NUMBER_NAME, 
+		COUNT(ODD_NUM_CNT) CNT
+		FROM M_MINI_LOTO_ANALYSIS_BASE
+		GROUP BY ODD_NUM_CNT
+		ORDER BY CNT DESC
+	</select>
+	
+	<select id="summarySerialNumCnt" resultMap="NumberAndTurns">
+		SELECT 
+		SERIAL_NUM_CNT NUMBER_NAME, 
+		COUNT(SERIAL_NUM_CNT) CNT
+		FROM M_MINI_LOTO_ANALYSIS_BASE
+		GROUP BY SERIAL_NUM_CNT
+		ORDER BY CNT DESC
+	</select>
+	
+	<select id="summaryLeftAreaNumCnt" resultMap="NumberAndTurns">
+		SELECT 
+		LEFT_AREA_NUM_CNT NUMBER_NAME, 
+		COUNT(LEFT_AREA_NUM_CNT) CNT
+		FROM M_MINI_LOTO_ANALYSIS_BASE
+		GROUP BY LEFT_AREA_NUM_CNT
+		ORDER BY CNT DESC
+	</select>
+	
+	<select id="summaryCenterAreaNumCnt" resultMap="NumberAndTurns">
+		SELECT 
+		CENTER_AREA_NUM_CNT NUMBER_NAME, 
+		COUNT(CENTER_AREA_NUM_CNT) CNT
+		FROM M_MINI_LOTO_ANALYSIS_BASE
+		GROUP BY CENTER_AREA_NUM_CNT
+		ORDER BY CNT DESC
+	</select>
+	
+	<select id="summaryRightAreaNumCnt" resultMap="NumberAndTurns">
+		SELECT 
+		RIGHT_AREA_NUM_CNT NUMBER_NAME, 
+		COUNT(RIGHT_AREA_NUM_CNT) CNT
+		FROM M_MINI_LOTO_ANALYSIS_BASE
+		GROUP BY RIGHT_AREA_NUM_CNT
+		ORDER BY CNT DESC
+	</select>	
+	<insert id="save">
+		INSERT INTO M_MINI_LOTO_ANALYSIS_BASE
+		( 
+			TURN 
+			,MAX_NUM
+			,MIN_NUM
+			,MAX_MIN_DIFF
+			,TOTAL_AVG
+			,MAX_NUM_DIFF
+			,MIN_NUM_DIFF
+			,NUM_DIFF_AVG
+			,EVEN_NUM_CNT
+			,ODD_NUM_CNT
+			,SERIAL_NUM_CNT
+			,LEFT_AREA_NUM_CNT
+			,CENTER_AREA_NUM_CNT
+			,RIGHT_AREA_NUM_CNT
+		 ) VALUES (
+			#{turn}
+			,#{maxNum}
+			,#{minNum}
+			,#{maxMinDiff}
+			,#{totalAvg}
+			,#{maxNumDiff}
+			,#{minNumDiff}
+			,#{numDiffAvg}
+			,#{evenNumCnt}
+			,#{oddNumCnt}
+			,#{serialNumCnt}
+			,#{leftAreaNumCnt}
+			,#{centerAreaNumCnt}
+			,#{rightAreaNumCnt}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE M_MINI_LOTO_ANALYSIS_BASE
+		SET
+			MAX_NUM = #{maxNum}
+			,MIN_NUM = #{minNum}
+			,MAX_MIN_DIFF = #{maxMinDiff}
+			,TOTAL_AVG = #{totalAvg}
+			,MAX_NUM_DIFF = #{maxNumDiff}
+			,MIN_NUM_DIFF = #{minNumDiff}
+			,NUM_DIFF_AVG = #{numDiffAvg}
+			,EVEN_NUM_CNT = #{evenNumCnt}
+			,ODD_NUM_CNT = #{oddNumCnt}
+			,SERIAL_NUM_CNT = #{serialNumCnt}
+			,LEFT_AREA_NUM_CNT = #{leftAreaNumCnt}
+			,CENTER_AREA_NUM_CNT = #{centerAreaNumCnt}
+			,RIGHT_AREA_NUM_CNT = #{rightAreaNumCnt}
+		WHERE
+			TURN = #{turn}
+	</update>
+	
+</mapper>

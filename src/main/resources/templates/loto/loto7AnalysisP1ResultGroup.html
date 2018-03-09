@@ -17,40 +17,57 @@
 	</div>
 	<div id="chartDiv" class="col-md-12 col-sx-12">
 	</div>
-	<div class="col-md-12 col-sx-12">
-		<legend>データ</legend>
-	</div>
-	<div class="col-md-12 col-sx-12 table-responsive">
-		<table class="table table-striped table-bordered table-hover">
-			<thead>
-				<tr>
-					<td class="td-t2s label-14b text-center">数字</td>
-					<td class="info label-14b text-center" th:text="${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}"></td>
-					<td class="danger label-14b text-center" th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getName()}"></td>
-					<td class="warning label-14b text-center" th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getName()}"></td>		
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="member : ${resultList.p1List}">
-					<td class="text-center label-14b" th:text="${member.numberName}"></td>
-					<td class="text-right">
-						<span class="badge badge-primary label-14b">
-							<span style="color: #E7CF59" th:text="${member.numberValue}"></span>回
-						</span>
-					</td>
-					<td class="text-right">
-						<span class="badge badge-info label-14b">
-							<span style="color: #E7CF59" th:text="${member.bonusNumber1Value}"></span>回
-						</span>
-					</td>
-					<td class="text-right">
-						<span class="badge badge-warning label-14b">
-							<span style="color: #E7CF59" th:text="${member.bonusNumber2Value}"></span>回
-						</span>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+</div>
+<div class="row">
+	<div class="col-md-12 col-sx-12">	
+		<div class="bs-component">
+			<ul class="nav nav-tabs">
+				<li class="nav-item">
+					<a id="nomalNumberChartClk" class="nav-link" data-toggle="tab" href="#nomalNumberChartDiv" 
+						th:text="当選数字グループ"></a>
+				</li>
+			</ul>
+			<div id="chartTabContent" class="tab-content">
+				<div class="col-md-12  col-sx-12">
+					<legend>データ</legend>
+				</div>
+				<!-- nomalNumberChart -->
+				<div class="tab-pane fade" id="nomalNumberChartDiv">
+					<div class="col-md-12 col-sx-12 table-responsive">
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<td class="td-t2s label-14b text-center">数字</td>
+									<td class="info label-14b text-center" th:text="${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}"></td>
+									<td class="danger label-14b text-center" th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getName()}"></td>
+									<td class="warning label-14b text-center" th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getName()}"></td>		
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="member : ${resultList.p1List}">
+									<td class="text-center label-14b" th:text="${member.numberName}"></td>
+									<td class="text-right">
+										<span class="badge badge-primary label-14b">
+											<span style="color: #E7CF59" th:text="${member.numberValue}"></span>回
+										</span>
+									</td>
+									<td class="text-right">
+										<span class="badge badge-info label-14b">
+											<span style="color: #E7CF59" th:text="${member.bonusNumber1Value}"></span>回
+										</span>
+									</td>
+									<td class="text-right">
+										<span class="badge badge-warning label-14b">
+											<span style="color: #E7CF59" th:text="${member.bonusNumber2Value}"></span>回
+										</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 <script type="text/javascript" th:inline="javascript">
@@ -58,39 +75,52 @@
 /*<![CDATA[*/
 	
 	$(document).ready(function(){
-
-	    var rangeColor = [ 
-			/*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getBarColor()}]]*/, 
-			/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getBarColor()}]]*/, 
-			/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getBarColor()}]]*/ 
-		]
-		var keys = [
-			/*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getKey()}]]*/, 
-			/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getKey()}]]*/, 
-			/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getKey()}]]*/
-		];
-
-		var names = [ 
-			/*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}]]*/,
-			/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getName()}]]*/,
-			/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getName()}]]*/
-		];
-	    
-		//data
-		var data = /*[[${resultList.p1List}]]*/ null;
 		
-		drawGraph(rangeColor, keys, names, data);
-	    
+		var loto7AnalysisP1ResultGroupBtn = null;
+		
 		var titleHeader = "ロト7(LOTO7)";
 		var titleFooter = "各数字過去当選回数グループ表示";
 		var title = titleHeader + titleFooter;
 		$('#chartTitle').html(titleFooter);
 		$('#okPanelTitle').text(title);
 		
+		$btn_obj = $('#nomalNumberChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			loto7AnalysisP1ResultGroupBtn = $(this);
+			
+			var rangeColor = [ 
+				/*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getBarColor()}]]*/, 
+				/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getBarColor()}]]*/, 
+				/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getBarColor()}]]*/ 
+			]
+			var keys = [
+				/*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getKey()}]]*/, 
+				/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getKey()}]]*/, 
+				/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getKey()}]]*/
+			];
+
+			var names = [ 
+				/*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}]]*/,
+				/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getName()}]]*/,
+				/*[[${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getName()}]]*/
+			];
+		    
+			//data
+			var data = /*[[${resultList.p1List}]]*/ null;
+			
+			drawGraph(rangeColor, keys, names, data);
+		});
+		
+		$("#nomalNumberChartClk").click();
+
 		//trigger when windows resize
 		ShaCommon.util.triggerWinResize(
 			function() {
-				drawGraph(rangeColor, keys, names, data);
+				if(loto7AnalysisP1ResultGroupBtn != null) {
+					loto7AnalysisP1ResultGroupBtn.click();
+				}
 			}
 		);
 		

@@ -12,6 +12,16 @@
 
 
 </style>
+<div class="row">	
+	<div class="col-md-12 col-sx-12">
+		<div class="col-md-12 col-sx-12">
+			<legend id="chartTitle">グラフ</legend>
+		</div>
+		<div id="chartDiv" class="col-md-12 col-sx-12 div-center">
+			
+		</div>
+	</div>
+</div>
 <div class="row">
 	<div class="col-md-12 col-sx-12">
 		<div class="bs-component">
@@ -28,11 +38,6 @@
 			<div id="chartTabContent" class="tab-content">
 				<!-- nomalNumberChart -->
 				<div class="tab-pane fade" id="nomalNumberChartDiv">
-					<div class="col-md-12 col-sx-12">
-						<div class="col-md-12 col-sx-12 div-center">
-							<canvas id="nomalNumberChart"></canvas>
-						</div>
-					</div>
 					<div class="col-md-12  col-sx-12">
 						<legend>データ</legend>
 					</div>
@@ -59,11 +64,6 @@
 				</div>
 				<!-- bonusNumber1Chart -->
 				<div class="tab-pane fade" id="bonusNumber1ChartDiv">
-					<div class="col-md-12 col-sx-12">
-						<div class="col-md-12 col-sx-12 div-center">
-							<canvas id="bonusNumber1Chart"></canvas>
-						</div>
-					</div>
 					<div class="col-md-12 col-sx-12">
 						<legend>データ</legend>
 					</div>
@@ -106,65 +106,35 @@
 		var titleFooter = "各数字過去当選回数";
 		var xTitle = "（X軸：数字；　Y軸：当選回数）";
 		
-
-		
 		$btn_obj = $('#nomalNumberChartClk'); 
 		$btn_obj.unbind();
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
 			loto7AnalysisP1ResultBtn = $(this);
 			
+			var getName = function (d) {return d.numberName;};
+			var getValue = function (d) {return d.numberValue;};
+			
+			var svgWidth = $('#okPanel').width()-40;
+		    var svgHeight = 300;
+			ShaChart.common.initD3Tip();			
+			var numberTip = ShaChart.common.createD3Tip(
+					function(d) {
+						var name = /*[[${T(sha.work.enums.Loto6NumberType).NOMAL_NUMBER.getName()}]]*/;
+						var html = "<strong>" + name + ":</strong>"
+									+" <span style='color:#e6b422'>" + getName(d) + "</span><br/>"
+									+"<strong>当選回数:</strong>" 
+									+ " <span style='color:red'>" + getValue(d) + "回</span>";
+						return html;
+					},
+					[-10, 0]);
+			
+			ShaChart.chart.simpleBarChart("#chartDiv", svgWidth, svgHeight, data, 
+					getName, getValue, numberTip, /*[[${T(sha.work.enums.Loto6NumberType).NOMAL_NUMBER.getBarColor()}]]*/,
+					"", xTitle);
+			
 			var title = /*[[${T(sha.work.enums.Loto6NumberType).NOMAL_NUMBER.getName()}]]*/;
 			title += titleFooter;
-			
-			var ctx = document.getElementById("nomalNumberChart").getContext('2d');
-			var bgColors = [];
-			var bColors = [];
-			var lbs = [];
-			var datas =[];
-			var avgs =[];
-			for(n=0; n<data.length; n++) {
-				bgColors.push(ShaColor.htmlColor.categorys[n].rgbA);
-				bColors.push(ShaColor.htmlColor.categorys[n].rgbB);
-				lbs.push(data[n].numberName);
-				datas.push(data[n].numberValue);
-				avgs.push(ShaCommon.util.getRandomInt(0, 200));
-			}
-			var myChart = new Chart(ctx, {
-			    type: 'bar',
-			    data: {
-			        labels: lbs,
-			        datasets: [{
-			            label: 'の当選回数',
-			            data: datas,
-			            backgroundColor: bgColors,
-			            borderColor: bColors,
-			            borderWidth: 1
-			        },
-			        {
-			            label: 'Line Dataset',
-			            data: avgs,
-
-			            // Changes this dataset to become a line
-			            type: 'line'
-			          }
-			        ]
-			    },
-			    options: {
-			    	title: {
-						display: true,
-						text: [title, xTitle]
-					},
-			        scales: {
-			            yAxes: [{
-			                ticks: {
-			                    beginAtZero:true
-			                }
-			            }]
-			        }
-			    }
-			});
-			myChart.update();
 			
 			$('#chartTitle').html(title);
 		});
@@ -175,48 +145,26 @@
 			event.preventDefault();
 			loto7AnalysisP1ResultBtn = $(this);
 			
-			var title = /*[[${T(sha.work.enums.Loto6NumberType).BONUS_NUMBER1.getName()}]]*/;
-			title += titleFooter;
+			var getName = function (d) {return d.numberName;};
+			var getValue = function (d) {return d.bonusNumber1Value;}
 			
-			var ctx = document.getElementById("bonusNumber1Chart").getContext('2d');
-			var bgColors = [];
-			var bColors = [];
-			var lbs = [];
-			var datas =[];
-			for(n=0; n<data.length; n++) {
-				bgColors.push(ShaColor.htmlColor.categorys[n].rgbA);
-				bColors.push(ShaColor.htmlColor.categorys[n].rgbB);
-				lbs.push(data[n].numberName);
-				datas.push(data[n].bonusNumber1Value);
-			}
-			var myChart = new Chart(ctx, {
-			    type: 'bar',
-			    data: {
-			        labels: lbs,
-			        datasets: [{
-			            label: 'の当選回数',
-			            data: datas,
-			            backgroundColor: bgColors,
-			            borderColor: bColors,
-			            borderWidth: 1
-			        }]
-			    },
-			    options: {
-			    	title: {
-						display: true,
-						text: [title, xTitle]
+			var svgWidth = $('#okPanel').width()-40;
+		    var svgHeight = 300;
+			ShaChart.common.initD3Tip();
+			var numberTip = ShaChart.common.createD3Tip(
+					function(d) {
+						var name = /*[[${T(sha.work.enums.Loto6NumberType).BONUS_NUMBER1.getName()}]]*/;
+						var html = "<strong>" + name + ":</strong>"
+									+" <span style='color:#e6b422'>" + getName(d) + "</span><br/>"
+									+"<strong>当選回数:</strong>" 
+									+ " <span style='color:red'>" + getValue(d) + "回</span>";
+						return html;
 					},
-			        scales: {
-			            yAxes: [{
-			                ticks: {
-			                    beginAtZero:true
-			                }
-			            }]
-			        }
-			    }
-			});
+					[-10, 0]);
 			
-			myChart.update();
+			ShaChart.chart.simpleBarChart("#chartDiv", svgWidth, svgHeight, data, 
+					getName, getValue, numberTip, /*[[${T(sha.work.enums.Loto6NumberType).BONUS_NUMBER1.getBarColor()}]]*/,
+					"", xTitle);
 			
 			var title = /*[[${T(sha.work.enums.Loto6NumberType).BONUS_NUMBER1.getName()}]]*/;
 			title += titleFooter;

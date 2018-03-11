@@ -73,7 +73,10 @@
 					<h3 class="panel-title">WHEN FAIL</h3>
 				</div>
 				<div class="panel-body">
-					<div id="ngResultBody"></div>
+					<div id="ngResultBody">
+					<canvas id="myChart" width="400" height="400"></canvas>
+					
+					</div>
 				</div>
 			</div>
 		</div><!-- end col-sm-9 -->
@@ -172,7 +175,42 @@ $(document).ready(function(){
 
 });
 
+var ctx = document.getElementById("myChart").getContext('2d');
+var bgColors = [];
+var bColors = [];
+var lbs = [];
+var datas =[];
+for(n=0; n<ShaColor.htmlColor.categorys.length; n++) {
+	bgColors.push(ShaColor.htmlColor.categorys[n].rgbA);
+	bColors.push(ShaColor.htmlColor.categorys[n].rgbB);
+	lbs.push(n);
+	datas.push(ShaCommon.util.getRandomInt(3, 20));
+}
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: lbs,
+        datasets: [{
+            label: '# of Votes',
+            data: datas,
+            backgroundColor: bgColors,
+            borderColor: bColors,
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+
 /*]]>*/
 </script>
+
 </body>
 </html>

@@ -1,0 +1,401 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+  th:with="lang=${#locale.language}" th:lang="${lang}">
+<head>
+	<title>SHA LOTO</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<!-- CSS -->
+<style type="text/css">
+	
+	
+</style>
+<div class="row">
+	<div class="col-md-12 col-sx-12">
+		<div class="bs-component">
+			<ul class="nav nav-tabs">
+				<li class="nav-item">
+					<a id="totalAvgChartClk" class="nav-link" data-toggle="tab" href="#totalAvgChartDiv" 
+						th:text="${T(sha.work.enums.MiniLotoAnalysisType).TOTAL_AVG.getName()}"></a>
+				</li>
+				<li class="nav-item">
+					<a id="maxMinDiffChartClk" class="nav-link" data-toggle="tab" href="#maxMinDiffChartDiv" 
+						th:text="${T(sha.work.enums.MiniLotoAnalysisType).MAX_MIN_DIFF.getName()}"></a>
+				</li>
+				<li class="nav-item">
+					<a id="maxNumDiffChartClk" class="nav-link" data-toggle="tab" href="#maxNumDiffChartDiv" 
+						th:text="${T(sha.work.enums.MiniLotoAnalysisType).MAX_NUM_DIFF.getName()}"></a>
+				</li>
+				<li class="nav-item">
+					<a id="minNumDiffChartClk" class="nav-link" data-toggle="tab" href="#minNumDiffChartDiv"
+						th:text="${T(sha.work.enums.MiniLotoAnalysisType).MIN_NUM_DIFF.getName()}"></a>
+				</li>
+				<li class="nav-item">
+					<a id="numDiffAvgChartClk" class="nav-link" data-toggle="tab" href="#numDiffAvgChartDiv" 
+						th:text="${T(sha.work.enums.MiniLotoAnalysisType).NUM_DIFF_AVG.getName()}"></a>
+				</li>
+				<li class="nav-item">
+					<a id="evenNumCntChartClk" class="nav-link" data-toggle="tab" href="#evenNumCntChartDiv" 
+						th:text="${T(sha.work.enums.MiniLotoAnalysisType).EVEN_NUM_CNT.getName()}"></a>
+				</li>
+				<li class="nav-item">
+					<a id="oddNumCntChartClk" class="nav-link" data-toggle="tab" href="#oddNumCntChartDiv" 
+						th:text="${T(sha.work.enums.MiniLotoAnalysisType).ODD_NUM_CNT.getName()}"></a>
+				</li>
+				<li class="nav-item">
+					<a id="serialNumCntChartClk" class="nav-link" data-toggle="tab" href="#serialNumCntChartDiv" 
+						th:text="${T(sha.work.enums.MiniLotoAnalysisType).SERIAL_NUM_CNT.getName()}"></a>
+				</li>
+				<li class="nav-item">
+					<a id="leftAreaNumCntChartClk" class="nav-link" data-toggle="tab" href="#leftAreaNumCntChartDiv" 
+						th:text="${T(sha.work.enums.MiniLotoAnalysisType).LEFT_AREA_NUM_CNT.getName()}"></a>
+				</li>
+				<li class="nav-item">
+					<a id="centerAreaNumCntChartClk" class="nav-link" data-toggle="tab" href="#centerAreaNumCntChartDiv" 
+						th:text="${T(sha.work.enums.MiniLotoAnalysisType).CENTER_AREA_NUM_CNT.getName()}"></a>
+				</li>
+				<li class="nav-item">
+					<a id="rightAreaNumCntChartClk" class="nav-link" data-toggle="tab" href="#rightAreaNumCntChartDiv" 
+						th:text="${T(sha.work.enums.MiniLotoAnalysisType).RIGHT_AREA_NUM_CNT.getName()}"></a>
+				</li>
+			</ul>
+			<div id="chartTabContent" class="tab-content">
+				<!-- totalAvgChart -->
+				<div class="tab-pane fade" id="totalAvgChartDiv">
+					<div th:replace="fragment/table :: numberAndTurnTable('totalAvg', ${resultList.summaryTotalAvgList})"></div>
+				</div>
+				<!-- maxMinDiffChart -->
+				<div class="tab-pane fade" id="maxMinDiffChartDiv">
+					<div th:replace="fragment/table :: numberAndTurnTable('maxMinDiff', ${resultList.summaryMaxMinDiffList})"></div>
+				</div>
+				<!-- maxNumDiffChart -->
+				<div class="tab-pane fade" id="maxNumDiffChartDiv">
+					<div th:replace="fragment/table :: numberAndTurnTable('maxNumDiff', ${resultList.summaryMaxNumDiffList})"></div>
+				</div>
+				<!-- minNumDiffChart -->
+				<div class="tab-pane fade" id="minNumDiffChartDiv">
+					<div th:replace="fragment/table :: numberAndTurnTable('minNumDiff', ${resultList.summaryMinNumDiffList})"></div>
+				</div>
+				<!-- numDiffAvgChart -->
+				<div class="tab-pane fade" id="numDiffAvgChartDiv">
+					<div th:replace="fragment/table :: numberAndTurnTable('numDiffAvg', ${resultList.summaryNumDiffAvgList})"></div>
+				</div>
+				<!-- evenNumCntChart -->
+				<div class="tab-pane fade" id="evenNumCntChartDiv">
+					<div th:replace="fragment/table :: numberAndTurnTable('evenNumCnt', ${resultList.summaryEvenNumCntList})"></div>
+				</div>
+				<!-- oddNumCntChart -->
+				<div class="tab-pane fade" id="oddNumCntChartDiv">
+					<div th:replace="fragment/table :: numberAndTurnTable('oddNumCnt', ${resultList.summaryOddNumCntList})"></div>
+				</div>
+				<!-- serialNumCntChart -->
+				<div class="tab-pane fade" id="serialNumCntChartDiv">
+					<div th:replace="fragment/table :: numberAndTurnTable('serialNumCnt', ${resultList.summarySerialNumCntList})"></div>
+				</div>
+				<!-- leftAreaNumCntChart -->
+				<div class="tab-pane fade" id="leftAreaNumCntChartDiv">
+					<div th:replace="fragment/table :: numberAndTurnTable('leftAreaNumCnt', ${resultList.summaryLeftAreaNumCntList})"></div>
+				</div>
+				<!-- centerAreaNumCntChart -->
+				<div class="tab-pane fade" id="centerAreaNumCntChartDiv">
+					<div th:replace="fragment/table :: numberAndTurnTable('centerAreaNumCnt', ${resultList.summaryCenterAreaNumCntList})"></div>
+				</div>
+				<!-- rightAreaNumCntChart -->
+				<div class="tab-pane fade" id="rightAreaNumCntChartDiv">
+					<div th:replace="fragment/table :: numberAndTurnTable('rightAreaNumCnt', ${resultList.summaryRightAreaNumCntList})"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" th:inline="javascript">
+
+/*<![CDATA[*/
+
+	$(document).ready(function(){
+		
+		//active btn bond
+		var miniLotoAnalysisP2ResultBtn = null;
+		
+		//--------------------------------------------------------[
+		//title init		
+		var titleHeader = "ミニロト(MINILOTO)関連分析";
+		//--------------------------------------------------------]
+		
+		
+		//--------------------------------------------------------[
+		//data init
+		
+		//--------------------------------------------------------]
+		
+		
+		//--------------------------------------------------------[
+	    //page component init
+		$('#okPanelTitle').text(titleHeader);
+	    
+	    //totalAvg component
+		var data = /*[[${resultList.summaryTotalAvgList}]]*/ null;
+	    var itemTitle = /*[[${T(sha.work.enums.MiniLotoAnalysisType).TOTAL_AVG.getName()}]]*/;
+	    drawChart("totalAvg", data, itemTitle);
+	    
+	    //maxMinDiff component
+	    data = /*[[${resultList.summaryMaxMinDiffList}]]*/ null;
+	    itemTitle = /*[[${T(sha.work.enums.MiniLotoAnalysisType).MAX_MIN_DIFF.getName()}]]*/;
+	    drawChart("maxMinDiff", data, itemTitle);
+	    
+		//maxNumDiff component
+		data = /*[[${resultList.summaryMaxNumDiffList}]]*/ null;
+	    itemTitle = /*[[${T(sha.work.enums.MiniLotoAnalysisType).MAX_NUM_DIFF.getName()}]]*/;
+	    drawChart("maxNumDiff", data, itemTitle);
+	    
+		//minNumDiff component
+		data = /*[[${resultList.summaryMinNumDiffList}]]*/ null;
+	    itemTitle = /*[[${T(sha.work.enums.MiniLotoAnalysisType).MIN_NUM_DIFF.getName()}]]*/;
+	    drawChart("minNumDiff", data, itemTitle);
+		
+	    //numDiffAvg component
+		data = /*[[${resultList.summaryNumDiffAvgList}]]*/ null;
+	    itemTitle = /*[[${T(sha.work.enums.MiniLotoAnalysisType).NUM_DIFF_AVG.getName()}]]*/;
+	    drawChart("numDiffAvg", data, itemTitle);
+	   
+		//evenNumCnt component
+		data = /*[[${resultList.summaryEvenNumCntList}]]*/ null;
+	    itemTitle = /*[[${T(sha.work.enums.MiniLotoAnalysisType).EVEN_NUM_CNT.getName()}]]*/;
+	    drawChart("evenNumCnt", data, itemTitle);  
+	    
+	    //oddNumCnt component
+		data = /*[[${resultList.summaryOddNumCntList}]]*/ null;
+	    itemTitle = /*[[${T(sha.work.enums.MiniLotoAnalysisType).ODD_NUM_CNT.getName()}]]*/;
+	    drawChart("oddNumCnt", data, itemTitle);
+	    
+	    //serialNumCnt component
+		data = /*[[${resultList.summarySerialNumCntList}]]*/ null;
+	    itemTitle = /*[[${T(sha.work.enums.MiniLotoAnalysisType).SERIAL_NUM_CNT.getName()}]]*/;
+	    drawChart("serialNumCnt", data, itemTitle); 
+	    
+	    //leftAreaNumCnt component
+		data = /*[[${resultList.summaryLeftAreaNumCntList}]]*/ null;
+	    itemTitle = /*[[${T(sha.work.enums.MiniLotoAnalysisType).LEFT_AREA_NUM_CNT.getName()}]]*/;
+	    drawChart("leftAreaNumCnt", data, itemTitle); 
+	    
+	    //centerAreaNumCnt component
+		data = /*[[${resultList.summaryCenterAreaNumCntList}]]*/ null;
+	    itemTitle = /*[[${T(sha.work.enums.MiniLotoAnalysisType).CENTER_AREA_NUM_CNT.getName()}]]*/;
+	    drawChart("centerAreaNumCnt", data, itemTitle); 
+	    
+	    //rightAreaNumCnt component
+		data = /*[[${resultList.summaryRightAreaNumCntList}]]*/ null;
+	    itemTitle = /*[[${T(sha.work.enums.MiniLotoAnalysisType).RIGHT_AREA_NUM_CNT.getName()}]]*/;
+	    drawChart("rightAreaNumCnt", data, itemTitle); 
+	    //--------------------------------------------------------]
+		
+		
+		//--------------------------------------------------------[
+		//init bond event to btn
+		
+		//--------------------------------------------------------]
+	    $btn_obj = $('#totalAvgChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			miniLotoAnalysisP2ResultBtn = $(this);
+		});
+		
+		$btn_obj = $('#maxMinDiffChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			miniLotoAnalysisP2ResultBtn = $(this);
+		});
+		
+		$btn_obj = $('#maxNumDiffChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			miniLotoAnalysisP2ResultBtn = $(this);
+		});
+		
+		$btn_obj = $('#minNumDiffChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			miniLotoAnalysisP2ResultBtn = $(this);
+		});
+	
+		$btn_obj = $('#numDiffAvgChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			miniLotoAnalysisP2ResultBtn = $(this);
+		});
+		
+		$btn_obj = $('#evenNumCntChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			miniLotoAnalysisP2ResultBtn = $(this);
+		});
+		
+		$btn_obj = $('#oddNumCntChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			miniLotoAnalysisP2ResultBtn = $(this);
+		});
+
+		$btn_obj = $('#serialNumCntChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			miniLotoAnalysisP2ResultBtn = $(this);
+		});
+		
+		$btn_obj = $('#leftAreaNumCntChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			miniLotoAnalysisP2ResultBtn = $(this);
+		});
+		
+		$btn_obj = $('#centerAreaNumCntChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			miniLotoAnalysisP2ResultBtn = $(this);
+		});
+		
+		$btn_obj = $('#rightAreaNumCntChartClk'); 
+		$btn_obj.unbind();
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			miniLotoAnalysisP2ResultBtn = $(this);
+		});
+		
+		//--------------------------------------------------------[
+		//init event
+			    
+		$("#totalAvgChartClk").click();
+		//trigger when windows resize
+		ShaCommon.util.triggerWinResize(
+			function() {
+				
+			}
+		);
+		//--------------------------------------------------------]
+		
+	});	
+	
+	function drawChart(key, data, itemTitle) {
+		
+		var xTitle = "（X軸：" + itemTitle + "；　Y軸：当選回数）";
+		var barTitleFooter = "(当選回数降順)";
+		
+		var bgColors = [];
+		var bColors = [];
+		var lbs = [];
+		var barDatas =[];
+		var pieDatas =[];
+
+		for(n=0; n<data.length; n++) {
+			bgColors.push(ShaColor.htmlColor.categorys[n].rgbA);
+			bColors.push(ShaColor.htmlColor.categorys[n].rgbB);
+			lbs.push(data[n].numberName);
+			barDatas.push(data[n].numberValue);
+			pieDatas.push(data[n].percent);
+		}
+		var avg = ShaCommon.util.getAverageInt(barDatas);
+		
+	    drawBarChart($("#"+key+"BarChart").get(0).getContext('2d'), barDatas, lbs, bgColors, bColors, itemTitle+barTitleFooter, xTitle, avg);
+	    drawPieChart($("#"+key+"PieChart").get(0).getContext('2d'), pieDatas, lbs, bgColors, bColors, itemTitle+barTitleFooter, itemTitle);
+	}
+	
+	//draw bar chart
+	function drawBarChart(ctx, datas, lbs, bgColors, bColors, 
+							title, xTitle, avg) {
+		var myChart = new Chart(ctx, {
+		    type: 'bar',
+		    data: {
+		        labels: lbs,
+		        datasets: [{
+		            label: 'の当選回数',
+		            data: datas,
+		            backgroundColor: bgColors,
+		            borderColor: bColors,
+		            borderWidth: 1
+		        }]
+		    },
+		    options: {
+		    	legend: {
+		    		display: false
+		    	},
+		    	title: {
+					display: true,
+					text: [title, xTitle]
+				},
+		        scales: {
+		            yAxes: [{
+		                ticks: {
+		                    beginAtZero:true
+		                }
+		            }]
+		        },
+				annotation: {
+		            annotations: [{
+		                type: 'line',
+		                mode: 'horizontal',
+		                scaleID: 'y-axis-0',
+		                value: avg,
+		                borderColor: ShaColor.htmlColor.annotations[0].rgbB,
+		                borderWidth: 1,
+		                label: {
+                            backgroundColor: ShaColor.htmlColor.annotations[0].rgbA,
+                            borderColor: ShaColor.htmlColor.annotations[0].rgbB,
+                            borderWidth: 1,
+                            content: "平均回数:" + avg + "回",
+                            enabled: true,
+                            position: "left"
+                        }
+		            }]
+		    	}
+		    }
+		});
+		
+		return myChart;
+	}
+	
+	//draw pie chart
+	function drawPieChart(ctx, datas, lbs, bgColors, bColors, title, xtitle, avg) {
+		var myChart = new Chart(ctx, {
+		    type: 'doughnut',
+		    data: {
+		        labels: lbs,
+		        datasets: [{
+		            label: 'の当選回数',
+		            data: datas,
+		            backgroundColor: bgColors,
+		            borderColor: bColors,
+		            borderWidth: 1
+		        }]
+		    },
+		    options: {
+		    	legend: {
+		    		display: false
+		    	},
+		    	title: {
+					display: true,
+					text: [title, "（" + xtitle + "：比率%）"]
+				}
+		    }
+		});
+		
+		return myChart;
+	}
+
+/*]]>*/
+</script>	
+	
+</body>
+
+</html>

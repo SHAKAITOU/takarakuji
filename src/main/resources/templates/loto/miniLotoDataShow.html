@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+  th:with="lang=${#locale.language}" th:lang="${lang}">
+<head>
+	<title>SHA LOTO</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<!-- CSS -->
+<style type="text/css">
+	html {
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+	*, *:before, *:after {
+		-webkit-box-sizing: inherit;
+		-moz-box-sizing: inherit;
+		box-sizing: inherit;
+	}
+	
+</style>
+<form id="search_form" name="search_form" role="form" method="POST">
+<div class="row">
+	<div class="col-md-4 col-xs-12">
+		<legend>表示件数</legend>
+		<div class="row" style="height: 30px;">
+		<div class="col-md-12">
+			<div class="btn-group btn-group-toggle" data-toggle="buttons">
+				<label th:class="'btn btn-outline-secondary' + (${result.pageCntRadio == 10} ? ' active' : '')">
+					<input type="radio" name="pageCntRadio" value="10" 
+						id="pageCntRadio10" autocomplete="off" th:checked="${result.pageCntRadio == 10}" 
+						th:text="${T(sha.work.enums.PageCntType).MAX_10.getName()}"/>
+				</label>
+				<label th:class="'btn btn-outline-secondary' + (${result.pageCntRadio == 25} ? ' active' : '')">
+					<input type="radio" name="pageCntRadio" value="25"
+						id="pageCntRadio25" autocomplete="off" th:checked="${result.pageCntRadio == 25}"
+						th:text="${T(sha.work.enums.PageCntType).MAX_25.getName()}"/>
+				</label>
+				<label th:class="'btn btn-outline-secondary' + (${result.pageCntRadio == 50} ? ' active' : '')">
+					<input type="radio" name="pageCntRadio" value="50"
+						id="pageCntRadio50" autocomplete="off" th:checked="${result.pageCntRadio == 50}"
+						th:text="${T(sha.work.enums.PageCntType).MAX_50.getName()}"/>
+				</label>
+				<label th:class="'btn btn-outline-secondary' + (${result.pageCntRadio == 75} ? ' active' : '')">
+					<input type="radio" name="pageCntRadio" value="75"
+						id="pageCntRadio75" autocomplete="off" th:checked="${result.pageCntRadio == 75}"
+						th:text="${T(sha.work.enums.PageCntType).MAX_75.getName()}"/>
+				</label>
+				<label th:class="'btn btn-outline-secondary' + (${result.pageCntRadio == 100} ? ' active' : '')">
+					<input type="radio" name="pageCntRadio" value="100"
+						id="pageCntRadio100" autocomplete="off" th:checked="${result.pageCntRadio == 100}"
+						th:text="${T(sha.work.enums.PageCntType).MAX_100.getName()}"/>
+				</label>
+			</div>
+		</div>
+		</div>
+	</div>
+	<div class="col-md-4 col-xs-12">
+		<legend>検索順序</legend>
+		<div class="row">
+		<div class="col-md-12">
+			<div class="btn-group btn-group-toggle" data-toggle="buttons">
+				<label id="orderTypeAsc" 
+					th:class="'btn btn-outline-secondary' + (${result.orderType == 'asc'} ? ' active' : '')">
+					<input id="orderTypeAscRadio" type="radio" name="orderType" 
+						value="asc" th:checked="${result.orderType == 'asc'}"
+						 autocomplete="off" th:text="${T(sha.work.enums.PageOrderType).ASC.getName()}"/>
+				</label>
+				<label id="orderTypeDesc" 
+					th:class="'btn btn-outline-secondary' + (${result.orderType == 'desc'} ? ' active' : '')">
+					<input id="orderTypeDescRadio" type="radio" name="orderType" 
+					value="desc" th:checked="${result.orderType == 'desc'}"
+						autocomplete="off" th:text="${T(sha.work.enums.PageOrderType).DESC.getName()}"/>
+				</label>
+			</div>
+		</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-4 col-xs-12">
+		<legend>検索方式</legend>
+		<div class="row">
+		<div class="col-md-12">
+			<div class="btn-group btn-group-toggle" data-toggle="buttons">
+				<label id="searchByDt" 
+					th:class="'btn btn-outline-secondary' + (${result.searchTypeRadio == '0'} ? ' active' : '')">
+					<input id="searchByDtRadio" type="radio" name="searchTypeRadio" 
+						value="0" th:checked="${result.searchTypeRadio == '0'}"
+						 autocomplete="off"/>抽せん日から指定
+				</label>
+				<label id="searchByTurn" 
+					th:class="'btn btn-outline-secondary' + (${result.searchTypeRadio == '1'} ? ' active' : '')">
+					<input id="searchByTurnRadio" type="radio" name="searchTypeRadio" 
+					value="1" th:checked="${result.searchTypeRadio == '1'}"
+						autocomplete="off"/>回号から指定
+				</label>
+			</div>
+		</div>
+		</div>
+	</div>
+	<div class="col-md-4 col-xs-12">
+		<legend id="searchShowTitle">検索条件</legend>
+		<div class="row">
+		<div class="col-md-12" style="height: 30px;">
+			<div id="searchByDtShowDiv" class="form-group" 
+				th:style="'display: ' + (${result.searchTypeRadio == '0'} ? 'block;' : 'none;')">
+				<div class="input-group">
+					<input id="searchDt" name="searchDt" type="text" class="form-control-sm form_datetime text-center" 
+							placeholder="yyyy/mm/dd" th:value="${result.searchDt}" readonly="true"/>
+					<div class="input-group-append">
+						<span class="input-group-text">日以前の</span>
+					</div>
+				</div>
+			</div>
+			<div id="searchByTurnShowDiv" class="form-group" 
+				th:style="'display: ' + (${result.searchTypeRadio == '1'} ? 'block;' : 'none;')">
+				<div class="input-group">
+					<input type="number" name="searchTurnFrom" class="form-control-sm text-right" 
+						step="10" min="1" max="1000" th:value="${result.searchTurnFrom}"/>
+					<div class="input-group-append">
+						<span class="input-group-text">回以前の</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	<div class="col-md-12 col-xs-12 text-right" style="height: 40px;">
+		<button id="searchBtn" type="button" class="btn-lg btn-outline-primary" style="width: 120px;">検索</button>
+	</div>
+	<div class="col-md-12 col-xs-12 table-responsive">
+		<table id="resultTable" class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<td class="info label-14b text-center">回数</td>
+					<td class="info label-14b text-center">年月日</td>
+					<td class="info label-14b text-center" colspan="5"
+						th:text="${T(sha.work.enums.MiniLotoNumberType).NOMAL_NUMBER.getName()}"></td>
+					<td class="danger label-14b text-center">ボ１</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="member : ${result.miniLotoList}">
+					<td class="label-14b text-center" th:text="'第' + ${member.turn} + '回'"></td>
+					<td class="label-14b text-center" th:text="${member.openDt}"></td>
+					<td class="label-14b text-center" th:text="${member.l1}"></td>
+					<td class="label-14b text-center" th:text="${member.l2}"></td>
+					<td class="label-14b text-center" th:text="${member.l3}"></td>
+					<td class="label-14b text-center" th:text="${member.l4}"></td>
+					<td class="label-14b text-center" th:text="${member.l5}"></td>
+					<td class="label-14b text-center" th:text="${member.b1}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</form>
+<script type="text/javascript" th:inline="javascript">
+
+/*<![CDATA[*/
+	$(document).ready(function(){
+		
+		$('#okPanelTitle').text("ミニロト(MINILOTO)過去の抽せん結果");
+		
+		
+		//date picker init
+		//===========================================================↓
+		$('#searchDt').datepicker({
+	        format: "yyyy/mm/dd",
+	        language: "ja",
+	    });
+		
+		$btn_obj = $('#searchByDt'); 
+		$btn_obj.unbind(); 
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			$('#searchByDtShowDiv').show(); 
+			$('#searchByTurnShowDiv').hide(); 
+		});
+		
+		$btn_obj = $('#searchByTurn'); 
+		$btn_obj.unbind(); 
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			$('#searchByDtShowDiv').hide(); 
+			$('#searchByTurnShowDiv').show(); 
+		});
+		
+		$btn_obj = $('#searchBtn'); 
+		$btn_obj.unbind(); 
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			var postData = $('#search_form').serializeArray();
+			ShaCommon.ajax.execute('/loto/showMiniLotoData', "POST", postData, 
+					ShaCommon.ajax.callBackOk, 
+					ShaCommon.ajax.callBackNg); 
+		});
+	});
+	
+	
+
+	
+/*]]>*/
+</script>
+
+	
+	
+</body>
+
+</html>

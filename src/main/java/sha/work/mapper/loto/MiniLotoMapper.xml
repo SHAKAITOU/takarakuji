@@ -81,7 +81,7 @@
 	</select>
 	
 	<select id="getBonusNumber1Sum" resultMap="NumberAndTurns">
-		<foreach item="num" index="index" collection="MiniLotoHanyo">
+		<foreach item="num" index="index" collection="miniLotoHanyo">
 			<if test="index > 0">UNION </if>
 			<include refid="selectBonusNumber1"><property name="prefix" value="${index}"/></include>
 		</foreach>

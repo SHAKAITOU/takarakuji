@@ -66,7 +66,7 @@ public class MiniLotoShowDataController extends ScreenBaseController{
 		dataOut.setMiniLotoList(service.getData(dataIn));
 		
 		mav.addObject("result", dataOut);
-		mav.setViewName("loto/loto6DataShow");
+		mav.setViewName("loto/miniLotoDataShow");
 		return mav;
 	}
 	

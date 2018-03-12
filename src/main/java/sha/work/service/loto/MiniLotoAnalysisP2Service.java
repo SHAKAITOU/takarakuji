@@ -69,7 +69,7 @@ public class MiniLotoAnalysisP2Service extends BaseService {
 		
 		for(NumberAndTurnsQuery el : summaryList) {
 			double up = el.getNumberValue()+0d;
-			el.setPercent(Double.toString(Math.floor(up/total*10000) / 100)+"%");
+			el.setPercent(Double.toString(Math.floor(up/total*10000) / 100));
 		}
 	}
 }

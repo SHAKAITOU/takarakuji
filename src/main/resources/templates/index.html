@@ -35,6 +35,16 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-10 col-md-offset-1">
+							<legend>ミニロト(MINILOTO)</legend>
+						</div>
+						<div class="col-md-10 col-md-offset-1">
+							<!-- ========ANALYSIS BTN========= -->
+							<button id="showMiniLotoData" type="button" class="btn btn btn-block btn-outline-primary">過去の抽せん結果</button> 
+							<button id="miniLotoAnalysisP1" type="button" class="btn btn btn-block btn-outline-primary">過去出た回数シングル図</button>
+							<!-- <button id="loto7AnalysisP1Group" type="button" class="btn btn btn-block btn-outline-primary">過去出た回数グループ図</button> -->
+							<button id="miniLotoAnalysisP2" type="button" class="btn btn btn-block btn-outline-primary">数字関連分析図</button> 
+						</div>
+						<div class="col-md-10 col-md-offset-1">
 							<legend>ロト6(LOTO6)</legend>
 						</div>
 						<div class="col-md-10 col-md-offset-1">
@@ -74,8 +84,6 @@
 				</div>
 				<div class="panel-body">
 					<div id="ngResultBody">
-					<canvas id="myChart" width="400" height="400"></canvas>
-					
 					</div>
 				</div>
 			</div>
@@ -172,41 +180,36 @@ $(document).ready(function(){
 				ShaCommon.ajax.callBackOk, 
 				ShaCommon.ajax.callBackNg); 
 	});
+	
+	$btn_obj = $('#showMiniLotoData'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.execute('/loto/showMiniLotoData', "GET", null, 
+				ShaCommon.ajax.callBackOk, 
+				ShaCommon.ajax.callBackNg); 
+	});
+	
+	$btn_obj = $('#miniLotoAnalysisP1'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.execute('/loto/miniLotoAnalysisP1', "GET", null, 
+				ShaCommon.ajax.callBackOk, 
+				ShaCommon.ajax.callBackNg); 
+	});
 
-});
-
-var ctx = document.getElementById("myChart").getContext('2d');
-var bgColors = [];
-var bColors = [];
-var lbs = [];
-var datas =[];
-for(n=0; n<ShaColor.htmlColor.categorys.length; n++) {
-	bgColors.push(ShaColor.htmlColor.categorys[n].rgbA);
-	bColors.push(ShaColor.htmlColor.categorys[n].rgbB);
-	lbs.push(n);
-	datas.push(ShaCommon.util.getRandomInt(3, 20));
-}
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: lbs,
-        datasets: [{
-            label: '# of Votes',
-            data: datas,
-            backgroundColor: bgColors,
-            borderColor: bColors,
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
+	$btn_obj = $('#miniLotoAnalysisP2'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.execute('/loto/miniLotoAnalysisP2', "GET", null, 
+				ShaCommon.ajax.callBackOk, 
+				ShaCommon.ajax.callBackNg); 
+	});
 });
 
 /*]]>*/

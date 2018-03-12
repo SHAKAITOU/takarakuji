@@ -18,47 +18,47 @@
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
 					<a id="totalAvgChartClk" class="nav-link" data-toggle="tab" href="#totalAvgChartDiv" 
-						th:text="${T(sha.work.enums.Loto6AnalysisType).TOTAL_AVG.getName()}"></a>
+						th:text="${T(sha.work.enums.Loto7AnalysisType).TOTAL_AVG.getName()}"></a>
 				</li>
 				<li class="nav-item">
 					<a id="maxMinDiffChartClk" class="nav-link" data-toggle="tab" href="#maxMinDiffChartDiv" 
-						th:text="${T(sha.work.enums.Loto6AnalysisType).MAX_MIN_DIFF.getName()}"></a>
+						th:text="${T(sha.work.enums.Loto7AnalysisType).MAX_MIN_DIFF.getName()}"></a>
 				</li>
 				<li class="nav-item">
 					<a id="maxNumDiffChartClk" class="nav-link" data-toggle="tab" href="#maxNumDiffChartDiv" 
-						th:text="${T(sha.work.enums.Loto6AnalysisType).MAX_NUM_DIFF.getName()}"></a>
+						th:text="${T(sha.work.enums.Loto7AnalysisType).MAX_NUM_DIFF.getName()}"></a>
 				</li>
 				<li class="nav-item">
 					<a id="minNumDiffChartClk" class="nav-link" data-toggle="tab" href="#minNumDiffChartDiv"
-						th:text="${T(sha.work.enums.Loto6AnalysisType).MIN_NUM_DIFF.getName()}"></a>
+						th:text="${T(sha.work.enums.Loto7AnalysisType).MIN_NUM_DIFF.getName()}"></a>
 				</li>
 				<li class="nav-item">
 					<a id="numDiffAvgChartClk" class="nav-link" data-toggle="tab" href="#numDiffAvgChartDiv" 
-						th:text="${T(sha.work.enums.Loto6AnalysisType).NUM_DIFF_AVG.getName()}"></a>
+						th:text="${T(sha.work.enums.Loto7AnalysisType).NUM_DIFF_AVG.getName()}"></a>
 				</li>
 				<li class="nav-item">
 					<a id="evenNumCntChartClk" class="nav-link" data-toggle="tab" href="#evenNumCntChartDiv" 
-						th:text="${T(sha.work.enums.Loto6AnalysisType).EVEN_NUM_CNT.getName()}"></a>
+						th:text="${T(sha.work.enums.Loto7AnalysisType).EVEN_NUM_CNT.getName()}"></a>
 				</li>
 				<li class="nav-item">
 					<a id="oddNumCntChartClk" class="nav-link" data-toggle="tab" href="#oddNumCntChartDiv" 
-						th:text="${T(sha.work.enums.Loto6AnalysisType).ODD_NUM_CNT.getName()}"></a>
+						th:text="${T(sha.work.enums.Loto7AnalysisType).ODD_NUM_CNT.getName()}"></a>
 				</li>
 				<li class="nav-item">
 					<a id="serialNumCntChartClk" class="nav-link" data-toggle="tab" href="#serialNumCntChartDiv" 
-						th:text="${T(sha.work.enums.Loto6AnalysisType).SERIAL_NUM_CNT.getName()}"></a>
+						th:text="${T(sha.work.enums.Loto7AnalysisType).SERIAL_NUM_CNT.getName()}"></a>
 				</li>
 				<li class="nav-item">
 					<a id="leftAreaNumCntChartClk" class="nav-link" data-toggle="tab" href="#leftAreaNumCntChartDiv" 
-						th:text="${T(sha.work.enums.Loto6AnalysisType).LEFT_AREA_NUM_CNT.getName()}"></a>
+						th:text="${T(sha.work.enums.Loto7AnalysisType).LEFT_AREA_NUM_CNT.getName()}"></a>
 				</li>
 				<li class="nav-item">
 					<a id="centerAreaNumCntChartClk" class="nav-link" data-toggle="tab" href="#centerAreaNumCntChartDiv" 
-						th:text="${T(sha.work.enums.Loto6AnalysisType).CENTER_AREA_NUM_CNT.getName()}"></a>
+						th:text="${T(sha.work.enums.Loto7AnalysisType).CENTER_AREA_NUM_CNT.getName()}"></a>
 				</li>
 				<li class="nav-item">
 					<a id="rightAreaNumCntChartClk" class="nav-link" data-toggle="tab" href="#rightAreaNumCntChartDiv" 
-						th:text="${T(sha.work.enums.Loto6AnalysisType).RIGHT_AREA_NUM_CNT.getName()}"></a>
+						th:text="${T(sha.work.enums.Loto7AnalysisType).RIGHT_AREA_NUM_CNT.getName()}"></a>
 				</li>
 			</ul>
 			<div id="chartTabContent" class="tab-content">
@@ -117,11 +117,11 @@
 	$(document).ready(function(){
 		
 		//active btn bond
-		var loto6AnalysisP2ResultBtn = null;
+		var loto7AnalysisP2ResultBtn = null;
 		
 		//--------------------------------------------------------[
 		//title init		
-		var titleHeader = "ロト6(LOTO6)関連分析";
+		var titleHeader = "ロト7(LOTO7)関連分析";
 		//--------------------------------------------------------]
 		
 		
@@ -137,57 +137,57 @@
 	    
 	    //totalAvg component
 		var data = /*[[${resultList.summaryTotalAvgList}]]*/ null;
-	    var itemTitle = /*[[${T(sha.work.enums.Loto6AnalysisType).TOTAL_AVG.getName()}]]*/;
+	    var itemTitle = /*[[${T(sha.work.enums.Loto7AnalysisType).TOTAL_AVG.getName()}]]*/;
 	    drawChart("totalAvg", data, itemTitle);
 	    
 	    //maxMinDiff component
 	    data = /*[[${resultList.summaryMaxMinDiffList}]]*/ null;
-	    itemTitle = /*[[${T(sha.work.enums.Loto6AnalysisType).MAX_MIN_DIFF.getName()}]]*/;
+	    itemTitle = /*[[${T(sha.work.enums.Loto7AnalysisType).MAX_MIN_DIFF.getName()}]]*/;
 	    drawChart("maxMinDiff", data, itemTitle);
 	    
 		//maxNumDiff component
 		data = /*[[${resultList.summaryMaxNumDiffList}]]*/ null;
-	    itemTitle = /*[[${T(sha.work.enums.Loto6AnalysisType).MAX_NUM_DIFF.getName()}]]*/;
+	    itemTitle = /*[[${T(sha.work.enums.Loto7AnalysisType).MAX_NUM_DIFF.getName()}]]*/;
 	    drawChart("maxNumDiff", data, itemTitle);
 	    
 		//minNumDiff component
 		data = /*[[${resultList.summaryMinNumDiffList}]]*/ null;
-	    itemTitle = /*[[${T(sha.work.enums.Loto6AnalysisType).MIN_NUM_DIFF.getName()}]]*/;
+	    itemTitle = /*[[${T(sha.work.enums.Loto7AnalysisType).MIN_NUM_DIFF.getName()}]]*/;
 	    drawChart("minNumDiff", data, itemTitle);
 		
 	    //numDiffAvg component
 		data = /*[[${resultList.summaryNumDiffAvgList}]]*/ null;
-	    itemTitle = /*[[${T(sha.work.enums.Loto6AnalysisType).NUM_DIFF_AVG.getName()}]]*/;
+	    itemTitle = /*[[${T(sha.work.enums.Loto7AnalysisType).NUM_DIFF_AVG.getName()}]]*/;
 	    drawChart("numDiffAvg", data, itemTitle);
 	   
 		//evenNumCnt component
 		data = /*[[${resultList.summaryEvenNumCntList}]]*/ null;
-	    itemTitle = /*[[${T(sha.work.enums.Loto6AnalysisType).EVEN_NUM_CNT.getName()}]]*/;
+	    itemTitle = /*[[${T(sha.work.enums.Loto7AnalysisType).EVEN_NUM_CNT.getName()}]]*/;
 	    drawChart("evenNumCnt", data, itemTitle);  
 	    
 	    //oddNumCnt component
 		data = /*[[${resultList.summaryOddNumCntList}]]*/ null;
-	    itemTitle = /*[[${T(sha.work.enums.Loto6AnalysisType).ODD_NUM_CNT.getName()}]]*/;
+	    itemTitle = /*[[${T(sha.work.enums.Loto7AnalysisType).ODD_NUM_CNT.getName()}]]*/;
 	    drawChart("oddNumCnt", data, itemTitle);
 	    
 	    //serialNumCnt component
 		data = /*[[${resultList.summarySerialNumCntList}]]*/ null;
-	    itemTitle = /*[[${T(sha.work.enums.Loto6AnalysisType).SERIAL_NUM_CNT.getName()}]]*/;
+	    itemTitle = /*[[${T(sha.work.enums.Loto7AnalysisType).SERIAL_NUM_CNT.getName()}]]*/;
 	    drawChart("serialNumCnt", data, itemTitle); 
 	    
 	    //leftAreaNumCnt component
 		data = /*[[${resultList.summaryLeftAreaNumCntList}]]*/ null;
-	    itemTitle = /*[[${T(sha.work.enums.Loto6AnalysisType).LEFT_AREA_NUM_CNT.getName()}]]*/;
+	    itemTitle = /*[[${T(sha.work.enums.Loto7AnalysisType).LEFT_AREA_NUM_CNT.getName()}]]*/;
 	    drawChart("leftAreaNumCnt", data, itemTitle); 
 	    
 	    //centerAreaNumCnt component
 		data = /*[[${resultList.summaryCenterAreaNumCntList}]]*/ null;
-	    itemTitle = /*[[${T(sha.work.enums.Loto6AnalysisType).CENTER_AREA_NUM_CNT.getName()}]]*/;
+	    itemTitle = /*[[${T(sha.work.enums.Loto7AnalysisType).CENTER_AREA_NUM_CNT.getName()}]]*/;
 	    drawChart("centerAreaNumCnt", data, itemTitle); 
 	    
 	    //rightAreaNumCnt component
 		data = /*[[${resultList.summaryRightAreaNumCntList}]]*/ null;
-	    itemTitle = /*[[${T(sha.work.enums.Loto6AnalysisType).RIGHT_AREA_NUM_CNT.getName()}]]*/;
+	    itemTitle = /*[[${T(sha.work.enums.Loto7AnalysisType).RIGHT_AREA_NUM_CNT.getName()}]]*/;
 	    drawChart("rightAreaNumCnt", data, itemTitle); 
 	    //--------------------------------------------------------]
 		
@@ -200,77 +200,77 @@
 		$btn_obj.unbind();
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
-			loto6AnalysisP2ResultBtn = $(this);
+			loto7AnalysisP2ResultBtn = $(this);
 		});
 		
 		$btn_obj = $('#maxMinDiffChartClk'); 
 		$btn_obj.unbind();
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
-			loto6AnalysisP2ResultBtn = $(this);
+			loto7AnalysisP2ResultBtn = $(this);
 		});
 		
 		$btn_obj = $('#maxNumDiffChartClk'); 
 		$btn_obj.unbind();
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
-			loto6AnalysisP2ResultBtn = $(this);
+			loto7AnalysisP2ResultBtn = $(this);
 		});
 		
 		$btn_obj = $('#minNumDiffChartClk'); 
 		$btn_obj.unbind();
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
-			loto6AnalysisP2ResultBtn = $(this);
+			loto7AnalysisP2ResultBtn = $(this);
 		});
 	
 		$btn_obj = $('#numDiffAvgChartClk'); 
 		$btn_obj.unbind();
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
-			loto6AnalysisP2ResultBtn = $(this);
+			loto7AnalysisP2ResultBtn = $(this);
 		});
 		
 		$btn_obj = $('#evenNumCntChartClk'); 
 		$btn_obj.unbind();
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
-			loto6AnalysisP2ResultBtn = $(this);
+			loto7AnalysisP2ResultBtn = $(this);
 		});
 		
 		$btn_obj = $('#oddNumCntChartClk'); 
 		$btn_obj.unbind();
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
-			loto6AnalysisP2ResultBtn = $(this);
+			loto7AnalysisP2ResultBtn = $(this);
 		});
 
 		$btn_obj = $('#serialNumCntChartClk'); 
 		$btn_obj.unbind();
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
-			loto6AnalysisP2ResultBtn = $(this);
+			loto7AnalysisP2ResultBtn = $(this);
 		});
 		
 		$btn_obj = $('#leftAreaNumCntChartClk'); 
 		$btn_obj.unbind();
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
-			loto6AnalysisP2ResultBtn = $(this);
+			loto7AnalysisP2ResultBtn = $(this);
 		});
 		
 		$btn_obj = $('#centerAreaNumCntChartClk'); 
 		$btn_obj.unbind();
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
-			loto6AnalysisP2ResultBtn = $(this);
+			loto7AnalysisP2ResultBtn = $(this);
 		});
 		
 		$btn_obj = $('#rightAreaNumCntChartClk'); 
 		$btn_obj.unbind();
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
-			loto6AnalysisP2ResultBtn = $(this);
+			loto7AnalysisP2ResultBtn = $(this);
 		});
 		
 		//--------------------------------------------------------[

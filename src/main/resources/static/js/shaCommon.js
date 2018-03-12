@@ -23,6 +23,16 @@ try{
 			return Math.floor( Math.random() * (max - min + 1) ) + min;
 		},
 		
+		getAverageInt : function (numbers) {
+			var sum = 0;
+			for( var i = 0; i < numbers.length; i++ ){
+				//don't forget to add the base
+			    sum += parseInt( numbers[i], 10 ); //10進
+			}
+			var avg = Math.floor(sum/numbers.length);
+			return avg;
+		},
+		
 		triggerWinResize : function(callFun) {
 			$(window).resize(function() {
 				callFun();

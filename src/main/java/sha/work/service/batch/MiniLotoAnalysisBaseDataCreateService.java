@@ -211,7 +211,7 @@ public class MiniLotoAnalysisBaseDataCreateService extends BaseService {
 	private int getRightAreaNumCnt(int[] numbers) {
 		int rightNumCnt = 0;
 		for(int number : numbers) {
-			if(number > 20 && number <= 21) {
+			if(number > 20 && number <= 31) {
 				rightNumCnt += 1;
 			}
 		}

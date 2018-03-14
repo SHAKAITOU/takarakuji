@@ -2,8 +2,8 @@ package sha.work.enums;
 
 public enum Loto6NumberType {
 
-	NOMAL_NUMBER(1, "numberValue", "抽選数字", "#2780E3"),
-	BONUS_NUMBER1(2, "bonusNumber1Value", "ボーナス数字１番", "#9954BB");
+	NOMAL_NUMBER(1, "numberValue", "本数字", "#2780E3"),
+	BONUS_NUMBER1(2, "bonusNumber1Value", "ボーナス数字", "#9954BB");
 
     /** type. */
     private int id;

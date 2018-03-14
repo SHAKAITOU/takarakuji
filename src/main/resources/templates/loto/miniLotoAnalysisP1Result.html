@@ -61,7 +61,6 @@
 		//title init
 		var titleHeader = /*[[#{index.loto7.title}]]*/;
 		var titleFooter = /*[[#{analysisP1Result.titleFooter}]]*/;
-		var xTitle = /*[[#{analysisP1Result.xTitle}]]*/;
 		//--------------------------------------------------------]
 		
 		
@@ -92,13 +91,13 @@
 		title += titleFooter;		
 		var ctx = $("#nomalNumberChart").get(0).getContext('2d');
 		var avg = ShaCommon.util.getAverageInt(nomalNumberDatas);
-	    var nomalNumberChart = drawBarChart(ctx, nomalNumberDatas, lbs, bgColors, bColors, title, xTitle, avg);
+	    var nomalNumberChart = drawBarChart(ctx, nomalNumberDatas, lbs, bgColors, bColors, title, avg);
 		
 		var title = /*[[${T(sha.work.enums.MiniLotoNumberType).BONUS_NUMBER1.getName()}]]*/;
 		title += titleFooter;			
 		var ctx = $("#bonusNumber1Chart").get(0).getContext('2d');
 		var avg = ShaCommon.util.getAverageInt(bonusNumber1Datas);
-		var bonusNumber1Chart = drawBarChart(ctx, bonusNumber1Datas, lbs, bgColors, bColors, title, xTitle, avg);
+		var bonusNumber1Chart = drawBarChart(ctx, bonusNumber1Datas, lbs, bgColors, bColors, title, avg);
 		//--------------------------------------------------------]
 		
 		//--------------------------------------------------------[
@@ -146,8 +145,7 @@
 	}
 
 	//draw bar chart
-	function drawBarChart(ctx, datas, lbs, bgColors, bColors, 
-							title, xTitle, avg) {
+	function drawBarChart(ctx, datas, lbs, bgColors, bColors, title, avg) {
 		
 		var annotationTitle = /*[[#{analysisP1Result.barChart.annotation.title}]]*/;
 		var unit = /*[[#{table.turnTable.data.td2Span}]]*/;
@@ -170,13 +168,35 @@
 		    	},
 		    	title: {
 					display: true,
-					text: [title, xTitle]
+					text: [title]
 				},
-		        scales: {
+				scales: {
+		        	xAxes: [{
+		        		gridLines: {
+		        			display: false,
+		        			color: ShaColor.htmlColor.grids[0].rgbB,
+		                    borderDash: [1, 5],
+		        		},
+		        		scaleLabel: {
+		        			display: true,
+		        			labelString: /*[[#{analysisP1Result.xTitle}]]*/,
+		        			//fontColor: "red"
+		        		}
+		        	}],
 		            yAxes: [{
+		            	gridLines: {
+		            		display: true,
+		                    color: ShaColor.htmlColor.grids[0].rgbB,
+		                    borderDash: [1, 5],
+		            	},
 		                ticks: {
 		                    beginAtZero:true
-		                }
+		                },
+		            	scaleLabel: {
+		                	display: true,
+		                	labelString: /*[[#{analysisP1Result.yTitle}]]*/,
+		                	//fontColor: "red"
+		              	}
 		            }]
 		        },
 				annotation: {

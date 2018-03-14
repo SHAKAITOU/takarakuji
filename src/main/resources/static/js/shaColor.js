@@ -190,6 +190,10 @@ try{
 		
 		annotations : [
 			{hex:"#c9171e", rgbB:"rgba(201, 23, 30, 1)", rgbA:"rgba(201, 23, 30, 0.6)"},
+		],
+		
+		grids : [
+			{hex:"#808080", rgbB:"rgba(128, 128, 128, 1)", rgbA:"rgba(128, 128, 128, 0.6)"},
 		]
 	}
 	

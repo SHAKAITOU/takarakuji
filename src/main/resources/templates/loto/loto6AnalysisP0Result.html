@@ -12,9 +12,7 @@
 
 </style>
 <form id="search_form" name="search_form" role="form" method="POST">
-<div class="row">
-	<div th:replace="fragment/searchBlock :: searchLoto(${result})"></div>
-</div>
+<div th:replace="fragment/searchBlock :: searchLoto(${result})"></div>
 <div class="row">
 	<div class="col-md-12 col-xs-12 text-right" style="height: 40px;">
 		<button id="searchBtn" type="button" class="btn-lg btn-outline-primary" style="width: 120px;"
@@ -59,14 +57,12 @@
 /*<![CDATA[*/
 	$(document).ready(function(){
 		
-		var titleLeft = /*[[#{index.loto6.title}]]*/;
-		var titleRight = /*[[#{index.btn.analysisP0}]]*/;
 
 
 		//--------------------------------------------------------[
 		//title init
-		var titleHeader = /*[[#{index.loto6.title}]]*/;
-		var titleFooter = "分布";
+		var titleLeft = /*[[#{index.loto6.title}]]*/;
+		var titleRight = /*[[#{index.btn.analysisP0}]]*/;
 		//--------------------------------------------------------]
 
 		//--------------------------------------------------------[
@@ -138,6 +134,7 @@
 		} else if (datas.length > 50 && datas.length <= 100) {
 			xStepSize = 5;
 		} 
+
 		for(n=0; n<datas.length; n++) {
 			lbs.push(datas[n].openDt);
 			dataSetL1[n] = {x : datas[n].turn, y : datas[n].l1, r : radius};
@@ -240,7 +237,7 @@
 		                    beginAtZero:false,
 		                    //min: 0,
 		                    //max: 43,
-		                    stepSize: xStepSize
+		                    stepSize: xStepSize,
 		                },
 		        		scaleLabel: {
 		        			display: true,

@@ -52,25 +52,27 @@
 	</select>
 	
 	<select id="getPageList" resultMap="Loto6">
-		SELECT * FROM M_LOTO6
-		WHERE
-		<choose>
-            <when test="searchTypeRadio == 0">
-            	 TO_DATE(open_dt, 'YYYY/MM/DD') &gt;= TO_DATE(#{searchDt}, 'YYYY/MM/DD')
-            </when>
-            <when test="searchTypeRadio == 1">
-            	TURN &gt;= #{searchTurnFrom}
-            </when>
-		</choose>
+		SELECT * FROM (
+			SELECT * FROM M_LOTO6
+			WHERE
+			<choose>
+	            <when test="searchTypeRadio == 0">
+	            	 TO_DATE(open_dt, 'YYYY/MM/DD') &gt;= TO_DATE(#{searchDt}, 'YYYY/MM/DD')
+	            </when>
+	            <when test="searchTypeRadio == 1">
+	            	TURN &gt;= #{searchTurnFrom}
+	            </when>
+			</choose>
+			LIMIT #{pageCntRadio}
+		) D1
 		<choose>
             <when test="orderType == 'asc'">
-			ORDER BY TURN ASC
+			ORDER BY D1.TURN ASC
 			</when>
 			<when test="orderType == 'desc'">
-			ORDER BY TURN DESC
+			ORDER BY D1.TURN DESC
 			</when>
 		</choose>
-		LIMIT #{pageCntRadio}
 	</select>
 	
 	<select id="getNomalNumberSum" resultMap="NumberAndTurns">

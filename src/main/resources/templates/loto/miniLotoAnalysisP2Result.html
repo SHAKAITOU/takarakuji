@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
   th:with="lang=${#locale.language}" th:lang="${lang}">
 <head>
-	<title>SHA LOTO</title>
+	<title th:text="#{common.title}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
@@ -64,47 +64,47 @@
 			<div id="chartTabContent" class="tab-content">
 				<!-- totalAvgChart -->
 				<div class="tab-pane fade" id="totalAvgChartDiv">
-					<div th:replace="fragment/table :: numberAndTurnTable('totalAvg', ${resultList.summaryTotalAvgList})"></div>
+					<div th:replace="fragment/table :: turnTableWithBarPie('totalAvg', ${resultList.summaryTotalAvgList})"></div>
 				</div>
 				<!-- maxMinDiffChart -->
 				<div class="tab-pane fade" id="maxMinDiffChartDiv">
-					<div th:replace="fragment/table :: numberAndTurnTable('maxMinDiff', ${resultList.summaryMaxMinDiffList})"></div>
+					<div th:replace="fragment/table :: turnTableWithBarPie('maxMinDiff', ${resultList.summaryMaxMinDiffList})"></div>
 				</div>
 				<!-- maxNumDiffChart -->
 				<div class="tab-pane fade" id="maxNumDiffChartDiv">
-					<div th:replace="fragment/table :: numberAndTurnTable('maxNumDiff', ${resultList.summaryMaxNumDiffList})"></div>
+					<div th:replace="fragment/table :: turnTableWithBarPie('maxNumDiff', ${resultList.summaryMaxNumDiffList})"></div>
 				</div>
 				<!-- minNumDiffChart -->
 				<div class="tab-pane fade" id="minNumDiffChartDiv">
-					<div th:replace="fragment/table :: numberAndTurnTable('minNumDiff', ${resultList.summaryMinNumDiffList})"></div>
+					<div th:replace="fragment/table :: turnTableWithBarPie('minNumDiff', ${resultList.summaryMinNumDiffList})"></div>
 				</div>
 				<!-- numDiffAvgChart -->
 				<div class="tab-pane fade" id="numDiffAvgChartDiv">
-					<div th:replace="fragment/table :: numberAndTurnTable('numDiffAvg', ${resultList.summaryNumDiffAvgList})"></div>
+					<div th:replace="fragment/table :: turnTableWithBarPie('numDiffAvg', ${resultList.summaryNumDiffAvgList})"></div>
 				</div>
 				<!-- evenNumCntChart -->
 				<div class="tab-pane fade" id="evenNumCntChartDiv">
-					<div th:replace="fragment/table :: numberAndTurnTable('evenNumCnt', ${resultList.summaryEvenNumCntList})"></div>
+					<div th:replace="fragment/table :: turnTableWithBarPie('evenNumCnt', ${resultList.summaryEvenNumCntList})"></div>
 				</div>
 				<!-- oddNumCntChart -->
 				<div class="tab-pane fade" id="oddNumCntChartDiv">
-					<div th:replace="fragment/table :: numberAndTurnTable('oddNumCnt', ${resultList.summaryOddNumCntList})"></div>
+					<div th:replace="fragment/table :: turnTableWithBarPie('oddNumCnt', ${resultList.summaryOddNumCntList})"></div>
 				</div>
 				<!-- serialNumCntChart -->
 				<div class="tab-pane fade" id="serialNumCntChartDiv">
-					<div th:replace="fragment/table :: numberAndTurnTable('serialNumCnt', ${resultList.summarySerialNumCntList})"></div>
+					<div th:replace="fragment/table :: turnTableWithBarPie('serialNumCnt', ${resultList.summarySerialNumCntList})"></div>
 				</div>
 				<!-- leftAreaNumCntChart -->
 				<div class="tab-pane fade" id="leftAreaNumCntChartDiv">
-					<div th:replace="fragment/table :: numberAndTurnTable('leftAreaNumCnt', ${resultList.summaryLeftAreaNumCntList})"></div>
+					<div th:replace="fragment/table :: turnTableWithBarPie('leftAreaNumCnt', ${resultList.summaryLeftAreaNumCntList})"></div>
 				</div>
 				<!-- centerAreaNumCntChart -->
 				<div class="tab-pane fade" id="centerAreaNumCntChartDiv">
-					<div th:replace="fragment/table :: numberAndTurnTable('centerAreaNumCnt', ${resultList.summaryCenterAreaNumCntList})"></div>
+					<div th:replace="fragment/table :: turnTableWithBarPie('centerAreaNumCnt', ${resultList.summaryCenterAreaNumCntList})"></div>
 				</div>
 				<!-- rightAreaNumCntChart -->
 				<div class="tab-pane fade" id="rightAreaNumCntChartDiv">
-					<div th:replace="fragment/table :: numberAndTurnTable('rightAreaNumCnt', ${resultList.summaryRightAreaNumCntList})"></div>
+					<div th:replace="fragment/table :: turnTableWithBarPie('rightAreaNumCnt', ${resultList.summaryRightAreaNumCntList})"></div>
 				</div>
 			</div>
 		</div>
@@ -121,7 +121,8 @@
 		
 		//--------------------------------------------------------[
 		//title init		
-		var titleHeader = "ミニロト(MINILOTO)関連分析";
+		var titleHeader = /*[[#{index.miniloto.title}]]*/;
+		var titleFooter = /*[[#{analysisP2Result.titleFooter}]]*/;
 		//--------------------------------------------------------]
 		
 		
@@ -289,8 +290,10 @@
 	
 	function drawChart(key, data, itemTitle) {
 		
-		var xTitle = "（X軸：" + itemTitle + "；　Y軸：当選回数）";
-		var barTitleFooter = "(当選回数降順)";
+		var xTitleLeft = /*[[#{analysisP2Result.xTitleLeft}]]*/;
+		var xTitleRight = /*[[#{analysisP2Result.xTitleRight}]]*/;
+		var xTitle = xTitleLeft + itemTitle + xTitleRight;
+		var barTitleFooter =  /*[[#{analysisP2Result.barTitleFooter}]]*/;
 		
 		var bgColors = [];
 		var bColors = [];
@@ -314,12 +317,16 @@
 	//draw bar chart
 	function drawBarChart(ctx, datas, lbs, bgColors, bColors, 
 							title, xTitle, avg) {
+		
+		var annotationTitle = /*[[#{analysisP2Result.barChart.annotation.title}]]*/;
+		var unit = /*[[#{table.turnTable.data.td2Span}]]*/;
+		
 		var myChart = new Chart(ctx, {
 		    type: 'bar',
 		    data: {
 		        labels: lbs,
 		        datasets: [{
-		            label: 'の当選回数',
+		            label: /*[[#{analysisP2Result.barChart.label}]]*/,
 		            data: datas,
 		            backgroundColor: bgColors,
 		            borderColor: bColors,
@@ -353,7 +360,7 @@
                             backgroundColor: ShaColor.htmlColor.annotations[0].rgbA,
                             borderColor: ShaColor.htmlColor.annotations[0].rgbB,
                             borderWidth: 1,
-                            content: "平均回数:" + avg + "回",
+                            content: annotationTitle + avg + unit,
                             enabled: true,
                             position: "left"
                         }
@@ -367,12 +374,16 @@
 	
 	//draw pie chart
 	function drawPieChart(ctx, datas, lbs, bgColors, bColors, title, xtitle, avg) {
+		
+		var titleLeft = /*[[#{analysisP2Result.pieChart.titleLeft}]]*/;
+		var titleRight = /*[[#{analysisP2Result.pieChart.titleRight}]]*/;
+		
 		var myChart = new Chart(ctx, {
 		    type: 'doughnut',
 		    data: {
 		        labels: lbs,
 		        datasets: [{
-		            label: 'の当選回数',
+		            label: /*[[#{analysisP2Result.barChart.label}]]*/,
 		            data: datas,
 		            backgroundColor: bgColors,
 		            borderColor: bColors,
@@ -385,7 +396,7 @@
 		    	},
 		    	title: {
 					display: true,
-					text: [title, "（" + xtitle + "：比率%）"]
+					text: [title,  titleLeft + xtitle + titleRight]
 				}
 		    }
 		});

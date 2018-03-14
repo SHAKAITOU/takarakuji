@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
 <head>
-	<title>SHA LOTO</title>
+	<title th:text="#{common.title}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -24,45 +24,57 @@
 <div class="container" role="main">
 
 	<div class="page-header">
-		<h1>TEST DATA</h1>
+		<h1 th:text="#{index.title}"></h1>
 	</div>
 	<div class="row">
 		<div class="col-md-3 col-xs-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h3 class="panel-title">LOGIC</h3>
+					<h3 class="panel-title" th:text="#{index.panel.title}"></h3>
 				</div>
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-10 col-md-offset-1">
-							<legend>ミニロト(MINILOTO)</legend>
+							<legend th:text="#{index.miniloto.title}"></legend>
 						</div>
 						<div class="col-md-10 col-md-offset-1">
 							<!-- ========ANALYSIS BTN========= -->
-							<button id="showMiniLotoData" type="button" class="btn btn btn-block btn-outline-primary">過去の抽せん結果</button> 
-							<button id="miniLotoAnalysisP1" type="button" class="btn btn btn-block btn-outline-primary">過去出た回数シングル図</button>
-							<!-- <button id="loto7AnalysisP1Group" type="button" class="btn btn btn-block btn-outline-primary">過去出た回数グループ図</button> -->
-							<button id="miniLotoAnalysisP2" type="button" class="btn btn btn-block btn-outline-primary">数字関連分析図</button> 
+							<button id="showMiniLotoData" type="button" class="btn btn btn-block btn-outline-primary" 
+								th:text="#{index.btn.showData}"></button> 
+							<button id="miniLotoAnalysisP1" type="button" class="btn btn btn-block btn-outline-primary"
+								th:text="#{index.btn.analysisP1}"></button>
+							<!-- <button id="loto7AnalysisP1Group" type="button" class="btn btn btn-block btn-outline-primary"
+								th:text="#{index.btn.analysisP1Group}"></button> -->
+							<button id="miniLotoAnalysisP2" type="button" class="btn btn btn-block btn-outline-primary"
+								th:text="#{index.btn.analysisP2}"></button> 
 						</div>
 						<div class="col-md-10 col-md-offset-1">
-							<legend>ロト6(LOTO6)</legend>
-						</div>
-						<div class="col-md-10 col-md-offset-1">
-							<!-- ========ANALYSIS BTN========= -->
-							<button id="showLoto6Data" type="button" class="btn btn btn-block btn-outline-primary">過去の抽せん結果</button> 
-							<button id="loto6AnalysisP1" type="button" class="btn btn btn-block btn-outline-primary">過去出た回数シングル図</button>
-							<!-- <button id="loto6AnalysisP1Group" type="button" class="btn btn btn-block btn-outline-primary">過去出た回数グループ図</button> -->
-							<button id="loto6AnalysisP2" type="button" class="btn btn btn-block btn-outline-primary">数字関連分析図</button> 
-						</div>
-						<div class="col-md-10 col-md-offset-1">
-							<legend>ロト7(LOTO7)</legend>
+							<legend th:text="#{index.loto6.title}"></legend>
 						</div>
 						<div class="col-md-10 col-md-offset-1">
 							<!-- ========ANALYSIS BTN========= -->
-							<button id="showLoto7Data" type="button" class="btn btn btn-block btn-outline-primary">過去の抽せん結果</button> 
-							<button id="loto7AnalysisP1" type="button" class="btn btn btn-block btn-outline-primary">過去出た回数シングル図</button>
-							<!-- <button id="loto7AnalysisP1Group" type="button" class="btn btn btn-block btn-outline-primary">過去出た回数グループ図</button> -->
-							<button id="loto7AnalysisP2" type="button" class="btn btn btn-block btn-outline-primary">数字関連分析図</button> 
+							<button id="showLoto6Data" type="button" class="btn btn btn-block btn-outline-primary"
+								th:text="#{index.btn.showData}"></button> 
+							<button id="loto6AnalysisP1" type="button" class="btn btn btn-block btn-outline-primary"
+								th:text="#{index.btn.analysisP1}"></button>
+							<!-- <button id="loto6AnalysisP1Group" type="button" class="btn btn btn-block btn-outline-primary"
+								th:text="#{index.btn.analysisP1Group}"></button> -->
+							<button id="loto6AnalysisP2" type="button" class="btn btn btn-block btn-outline-primary"
+								th:text="#{index.btn.analysisP2}"></button> 
+						</div>
+						<div class="col-md-10 col-md-offset-1">
+							<legend th:text="#{index.loto7.title}"></legend>
+						</div>
+						<div class="col-md-10 col-md-offset-1">
+							<!-- ========ANALYSIS BTN========= -->
+							<button id="showLoto7Data" type="button" class="btn btn btn-block btn-outline-primary"
+								th:text="#{index.btn.showData}"></button> 
+							<button id="loto7AnalysisP1" type="button" class="btn btn btn-block btn-outline-primary"
+								th:text="#{index.btn.analysisP1}"></button>
+							<!-- <button id="loto7AnalysisP1Group" type="button" class="btn btn btn-block btn-outline-primary"
+								th:text="#{index.btn.analysisP1Group}"></button> -->
+							<button id="loto7AnalysisP2" type="button" class="btn btn btn-block btn-outline-primary"
+								th:text="#{index.btn.analysisP2}"></button> 
 						</div>
 					</div>
 				</div>
@@ -71,7 +83,7 @@
 		<div class="col-md-9 col-xs-12">
 			<div id="okPanel" class="panel panel-success">
 				<div class="panel-heading">
-					<h3 id="okPanelTitle" class="panel-title">WHEN SUCCESSFUL</h3>
+					<h3 id="okPanelTitle" class="panel-title" th:text="#{index.okPanel.title}"></h3>
 				</div>
 				<div class="panel-body">
 					<!-- ========RESULT BODY========= -->
@@ -80,7 +92,7 @@
 			</div>
 			<div id="ngPanel" class="panel panel-danger">
 				<div class="panel-heading">
-					<h3 class="panel-title">WHEN FAIL</h3>
+					<h3 class="panel-title" th:text="#{index.ngPanel.title}"></h3>
 				</div>
 				<div class="panel-body">
 					<div id="ngResultBody">
@@ -106,7 +118,7 @@ $(document).ready(function(){
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
 		event.preventDefault();
-		ShaCommon.ajax.execute('/loto/showLoto6Data', "GET", null, 
+		ShaCommon.ajax.get('/loto/showLoto6Data', null, 
 				ShaCommon.ajax.callBackOk, 
 				ShaCommon.ajax.callBackNg); 
 	});
@@ -116,7 +128,7 @@ $(document).ready(function(){
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
 		event.preventDefault();
-		ShaCommon.ajax.execute('/loto/loto6AnalysisP1', "GET", null, 
+		ShaCommon.ajax.get('/loto/loto6AnalysisP1', null, 
 				ShaCommon.ajax.callBackOk, 
 				ShaCommon.ajax.callBackNg); 
 	});
@@ -126,7 +138,7 @@ $(document).ready(function(){
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
 		event.preventDefault();
-		ShaCommon.ajax.execute('/loto/loto6AnalysisP1Group', "GET", null, 
+		ShaCommon.ajax.get('/loto/loto6AnalysisP1Group', null, 
 				ShaCommon.ajax.callBackOk, 
 				ShaCommon.ajax.callBackNg); 
 	});
@@ -136,7 +148,7 @@ $(document).ready(function(){
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
 		event.preventDefault();
-		ShaCommon.ajax.execute('/loto/loto6AnalysisP2', "GET", null, 
+		ShaCommon.ajax.get('/loto/loto6AnalysisP2', null, 
 				ShaCommon.ajax.callBackOk, 
 				ShaCommon.ajax.callBackNg); 
 	});
@@ -146,7 +158,7 @@ $(document).ready(function(){
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
 		event.preventDefault();
-		ShaCommon.ajax.execute('/loto/showLoto7Data', "GET", null, 
+		ShaCommon.ajax.get('/loto/showLoto7Data', null, 
 				ShaCommon.ajax.callBackOk, 
 				ShaCommon.ajax.callBackNg); 
 	});
@@ -156,7 +168,7 @@ $(document).ready(function(){
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
 		event.preventDefault();
-		ShaCommon.ajax.execute('/loto/loto7AnalysisP1', "GET", null, 
+		ShaCommon.ajax.get('/loto/loto7AnalysisP1', null, 
 				ShaCommon.ajax.callBackOk, 
 				ShaCommon.ajax.callBackNg); 
 	});
@@ -166,7 +178,7 @@ $(document).ready(function(){
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
 		event.preventDefault();
-		ShaCommon.ajax.execute('/loto/loto7AnalysisP1Group', "GET", null, 
+		ShaCommon.ajax.get('/loto/loto7AnalysisP1Group', null, 
 				ShaCommon.ajax.callBackOk, 
 				ShaCommon.ajax.callBackNg); 
 	});
@@ -176,7 +188,7 @@ $(document).ready(function(){
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
 		event.preventDefault();
-		ShaCommon.ajax.execute('/loto/loto7AnalysisP2', "GET", null, 
+		ShaCommon.ajax.get('/loto/loto7AnalysisP2', null, 
 				ShaCommon.ajax.callBackOk, 
 				ShaCommon.ajax.callBackNg); 
 	});
@@ -186,7 +198,7 @@ $(document).ready(function(){
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
 		event.preventDefault();
-		ShaCommon.ajax.execute('/loto/showMiniLotoData', "GET", null, 
+		ShaCommon.ajax.get('/loto/showMiniLotoData', null, 
 				ShaCommon.ajax.callBackOk, 
 				ShaCommon.ajax.callBackNg); 
 	});
@@ -196,7 +208,7 @@ $(document).ready(function(){
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
 		event.preventDefault();
-		ShaCommon.ajax.execute('/loto/miniLotoAnalysisP1', "GET", null, 
+		ShaCommon.ajax.get('/loto/miniLotoAnalysisP1', null, 
 				ShaCommon.ajax.callBackOk, 
 				ShaCommon.ajax.callBackNg); 
 	});
@@ -206,7 +218,7 @@ $(document).ready(function(){
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
 		event.preventDefault();
-		ShaCommon.ajax.execute('/loto/miniLotoAnalysisP2', "GET", null, 
+		ShaCommon.ajax.get('/loto/miniLotoAnalysisP2', null, 
 				ShaCommon.ajax.callBackOk, 
 				ShaCommon.ajax.callBackNg); 
 	});

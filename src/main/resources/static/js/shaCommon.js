@@ -53,11 +53,34 @@ try{
 	$common.ajax = {
 			
 		//------------------------------------------------------------------------------
-		// execute ajax
+		// execute get ajax
 		//------------------------------------------------------------------------------
-		execute : function (url, type, formData, callBackOk, callBackNg) { 
+		get : function (url, formData, callBackOk, callBackNg) { 
 			$.ajax({
-				   type: type,
+				   type: "GET",
+				   url: url,
+				   data: formData,
+				   statusCode: {
+					    200: function(data){
+					    	callBackOk(data);
+					    },
+					    404: function() {
+					      alert( "page not found" );
+					    },
+					    500: function(data){
+					    	callBackNg(data);
+					    }
+				   },
+				   timeout: 10000
+			});
+		},
+		
+		//------------------------------------------------------------------------------
+		// execute post ajax
+		//------------------------------------------------------------------------------
+		post : function (url, formData, callBackOk, callBackNg) { 
+			$.ajax({
+				   type: "POST",
 				   url: url,
 				   data: formData,
 				   statusCode: {

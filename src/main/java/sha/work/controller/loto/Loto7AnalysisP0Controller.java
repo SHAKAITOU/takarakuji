@@ -37,7 +37,7 @@ import sha.work.service.loto.Loto7ShowService;
  *
  */
 @Controller
-public class Loto7ShowDataController extends ScreenBaseController{
+public class Loto7AnalysisP0Controller extends ScreenBaseController{
 
 	
 
@@ -49,7 +49,7 @@ public class Loto7ShowDataController extends ScreenBaseController{
 	private Loto7ShowService service;
 
 
-	@RequestMapping(path="/loto/showLoto7Data", method=RequestMethod.GET)
+	@RequestMapping(path="/loto/loto7AnalysisP0", method=RequestMethod.GET)
 	public ModelAndView showLoto7DataGet(@ModelAttribute Object greeting)  {
 		
 		ModelAndView mav = new ModelAndView();
@@ -66,11 +66,11 @@ public class Loto7ShowDataController extends ScreenBaseController{
 		dataOut.setLoto7List(service.getData(dataIn));
 		
 		mav.addObject("result", dataOut);
-		mav.setViewName("loto/loto7DataShow");
+		mav.setViewName("loto/loto7AnalysisP0Result");
 		return mav;
 	}
 	
-	@RequestMapping(path="/loto/showLoto7Data", method=RequestMethod.POST)
+	@RequestMapping(path="/loto/loto7AnalysisP0", method=RequestMethod.POST)
 	public ModelAndView showLoto7DataPost(@RequestParam Map<String,String> allRequestParams, Locale loc, 
 			HttpServletRequest request,
 			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
@@ -89,7 +89,7 @@ public class Loto7ShowDataController extends ScreenBaseController{
 		dataOut.setLoto7List(service.getData(dataIn));
 		
 		mav.addObject("result", dataOut);
-		mav.setViewName("loto/loto7DataShow");
+		mav.setViewName("loto/loto7AnalysisP0Result");
 		return mav;
 	}
 	

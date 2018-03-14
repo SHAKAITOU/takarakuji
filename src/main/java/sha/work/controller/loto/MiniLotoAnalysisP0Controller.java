@@ -37,7 +37,7 @@ import sha.work.service.loto.MiniLotoShowService;
  *
  */
 @Controller
-public class MiniLotoShowDataController extends ScreenBaseController{
+public class MiniLotoAnalysisP0Controller extends ScreenBaseController{
 
 	
 
@@ -49,7 +49,7 @@ public class MiniLotoShowDataController extends ScreenBaseController{
 	private MiniLotoShowService service;
 
 
-	@RequestMapping(path="/loto/showMiniLotoData", method=RequestMethod.GET)
+	@RequestMapping(path="/loto/miniLotoAnalysisP0", method=RequestMethod.GET)
 	public ModelAndView showMiniLotoDataGet(@ModelAttribute Object greeting)  {
 		
 		ModelAndView mav = new ModelAndView();
@@ -66,11 +66,11 @@ public class MiniLotoShowDataController extends ScreenBaseController{
 		dataOut.setMiniLotoList(service.getData(dataIn));
 		
 		mav.addObject("result", dataOut);
-		mav.setViewName("loto/miniLotoDataShow");
+		mav.setViewName("loto/miniLotoAnalysisP0Result");
 		return mav;
 	}
 	
-	@RequestMapping(path="/loto/showMiniLotoData", method=RequestMethod.POST)
+	@RequestMapping(path="/loto/miniLotoAnalysisP0", method=RequestMethod.POST)
 	public ModelAndView showMiniLotoDataPost(@RequestParam Map<String,String> allRequestParams, Locale loc, 
 			HttpServletRequest request,
 			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
@@ -89,7 +89,7 @@ public class MiniLotoShowDataController extends ScreenBaseController{
 		dataOut.setMiniLotoList(service.getData(dataIn));
 		
 		mav.addObject("result", dataOut);
-		mav.setViewName("loto/miniLotoDataShow");
+		mav.setViewName("loto/miniLotoAnalysisP0Result");
 		return mav;
 	}
 	

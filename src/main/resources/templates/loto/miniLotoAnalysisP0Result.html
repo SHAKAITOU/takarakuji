@@ -26,13 +26,13 @@
 				<tr>
 					<td class="info label-14b text-center" th:text="#{dataShow.data.td1}"></td>
 					<td class="info label-14b text-center" th:text="#{dataShow.data.td2}"></td>
-					<td class="info label-14b text-center" colspan="6"
-						th:text="${T(sha.work.enums.Loto6NumberType).NOMAL_NUMBER.getName()}"></td>
+					<td class="info label-14b text-center" colspan="5"
+						th:text="${T(sha.work.enums.MiniLotoNumberType).NOMAL_NUMBER.getName()}"></td>
 					<td class="danger label-14b text-center" th:text="#{dataShow.data.td4}"></td>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="member : ${result.loto6List}">
+				<tr th:each="member : ${result.miniLotoList}">
 					<td class="label-14b text-center" 
 						th:text="#{dataShow.data.td1.span} + ${member.turn} + #{table.turnTable.data.td2Span}"></td>
 					<td class="label-14b text-center" th:text="${member.openDt}"></td>
@@ -41,7 +41,6 @@
 					<td class="label-14b text-center" th:text="${member.l3}"></td>
 					<td class="label-14b text-center" th:text="${member.l4}"></td>
 					<td class="label-14b text-center" th:text="${member.l5}"></td>
-					<td class="label-14b text-center" th:text="${member.l6}"></td>
 					<td class="label-14b text-center" th:text="${member.b1}"></td>
 				</tr>
 			</tbody>
@@ -54,8 +53,8 @@
 /*<![CDATA[*/
 	$(document).ready(function(){
 		
-		var titleLeft = /*[[#{index.loto6.title}]]*/;
-		var titleRight = /*[[#{index.btn.showData}]]*/;
+		var titleLeft = /*[[#{index.miniloto.title}]]*/;
+		var titleRight = /*[[#{index.btn.analysisP0}]]*/;
 		$('#okPanelTitle').text(titleLeft + titleRight);
 		
 		
@@ -87,14 +86,11 @@
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
 			var postData = $('#search_form').serializeArray();
-			ShaCommon.ajax.post('/loto/showLoto6Data', postData, 
+			ShaCommon.ajax.post('/loto/miniLotoAnalysisP0', postData, 
 					ShaCommon.ajax.callBackOk, 
 					ShaCommon.ajax.callBackNg); 
 		});
 	});
-	
-	
-
 	
 /*]]>*/
 </script>

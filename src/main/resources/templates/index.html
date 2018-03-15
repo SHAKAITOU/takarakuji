@@ -38,7 +38,7 @@
 							<legend th:text="#{index.loto7.title}"></legend>
 						</div>
 						<div class="col-md-10 col-md-offset-1">
-							<!-- ========ANALYSIS BTN========= -->
+							<!-- ========LOTO7 ANALYSIS BTN========= -->
 							<button id="loto7AnalysisP0" type="button" class="btn btn btn-block btn-outline-primary"
 								th:text="#{index.btn.analysisP0}"></button> 
 							<button id="loto7AnalysisP1" type="button" class="btn btn btn-block btn-outline-primary"
@@ -46,13 +46,16 @@
 							<!-- <button id="loto7AnalysisP1Group" type="button" class="btn btn btn-block btn-outline-primary"
 								th:text="#{index.btn.analysisP1Group}"></button> -->
 							<button id="loto7AnalysisP2" type="button" class="btn btn btn-block btn-outline-primary"
-								th:text="#{index.btn.analysisP2}"></button> 
+								th:text="#{index.btn.analysisP2}"></button>
+							<button id="loto7SevenAnalysis" type="button" class="btn btn btn-block btn-outline-primary"
+								th:text="#{index.btn.loto7.sevenAnalysis}"></button> 
+								
 						</div>
 						<div class="col-md-10 col-md-offset-1">
 							<legend th:text="#{index.loto6.title}"></legend>
 						</div>
 						<div class="col-md-10 col-md-offset-1">
-							<!-- ========ANALYSIS BTN========= -->
+							<!-- ========LOTO6 ANALYSIS BTN========= -->
 							<button id="loto6AnalysisP0" type="button" class="btn btn btn-block btn-outline-primary"
 								th:text="#{index.btn.analysisP0}"></button> 
 							<button id="loto6AnalysisP1" type="button" class="btn btn btn-block btn-outline-primary"
@@ -61,12 +64,14 @@
 								th:text="#{index.btn.analysisP1Group}"></button> -->
 							<button id="loto6AnalysisP2" type="button" class="btn btn btn-block btn-outline-primary"
 								th:text="#{index.btn.analysisP2}"></button> 
+							<button id="loto6SixAnalysis" type="button" class="btn btn btn-block btn-outline-primary"
+								th:text="#{index.btn.loto6.sixAnalysis}"></button> 
 						</div>
 						<div class="col-md-10 col-md-offset-1">
 							<legend th:text="#{index.miniloto.title}"></legend>
 						</div>
 						<div class="col-md-10 col-md-offset-1">
-							<!-- ========ANALYSIS BTN========= -->
+							<!-- ========MINILOTO ANALYSIS BTN========= -->
 							<button id="miniLotoAnalysisP0" type="button" class="btn btn btn-block btn-outline-primary" 
 								th:text="#{index.btn.analysisP0}"></button> 
 							<button id="miniLotoAnalysisP1" type="button" class="btn btn btn-block btn-outline-primary"
@@ -74,7 +79,9 @@
 							<!-- <button id="loto7AnalysisP1Group" type="button" class="btn btn btn-block btn-outline-primary"
 								th:text="#{index.btn.analysisP1Group}"></button> -->
 							<button id="miniLotoAnalysisP2" type="button" class="btn btn btn-block btn-outline-primary"
-								th:text="#{index.btn.analysisP2}"></button> 
+								th:text="#{index.btn.analysisP2}"></button>
+							<button id="miniLotoFiveAnalysis" type="button" class="btn btn btn-block btn-outline-primary"
+								th:text="#{index.btn.miniLoto.fiveAnalysis}"></button> 	 
 						</div>
 					</div>
 				</div>
@@ -113,46 +120,8 @@
 $(document).ready(function(){
 	var commonBtn;
 	
-	$btn_obj = $('#loto6AnalysisP0'); 
-	$btn_obj.unbind(); 
-	$btn_obj.on('click', function(event) {
-		commonBtn = $(this);
-		event.preventDefault();
-		ShaCommon.ajax.get('/loto/loto6AnalysisP0', null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
-	});
-	
-	$btn_obj = $('#loto6AnalysisP1'); 
-	$btn_obj.unbind(); 
-	$btn_obj.on('click', function(event) {
-		commonBtn = $(this);
-		event.preventDefault();
-		ShaCommon.ajax.get('/loto/loto6AnalysisP1', null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
-	});
-	
-	$btn_obj = $('#loto6AnalysisP1Group'); 
-	$btn_obj.unbind(); 
-	$btn_obj.on('click', function(event) {
-		commonBtn = $(this);
-		event.preventDefault();
-		ShaCommon.ajax.get('/loto/loto6AnalysisP1Group', null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
-	});
-	
-	$btn_obj = $('#loto6AnalysisP2'); 
-	$btn_obj.unbind(); 
-	$btn_obj.on('click', function(event) {
-		commonBtn = $(this);
-		event.preventDefault();
-		ShaCommon.ajax.get('/loto/loto6AnalysisP2', null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
-	});
-	
+	//-------------------------------------------------------
+	//LOTO7		
 	$btn_obj = $('#loto7AnalysisP0'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
@@ -193,6 +162,72 @@ $(document).ready(function(){
 				ShaCommon.ajax.callBackNg); 
 	});
 	
+	$btn_obj = $('#loto7SevenAnalysis'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.get('/loto/loto7SevenAnalysis', null, 
+				ShaCommon.ajax.callBackOk, 
+				ShaCommon.ajax.callBackNg); 
+	});
+	
+	//-------------------------------------------------------
+	//LOTO6
+	$btn_obj = $('#loto6AnalysisP0'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.get('/loto/loto6AnalysisP0', null, 
+				ShaCommon.ajax.callBackOk, 
+				ShaCommon.ajax.callBackNg); 
+	});
+	
+	$btn_obj = $('#loto6AnalysisP1'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.get('/loto/loto6AnalysisP1', null, 
+				ShaCommon.ajax.callBackOk, 
+				ShaCommon.ajax.callBackNg); 
+	});
+	
+	$btn_obj = $('#loto6AnalysisP1Group'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.get('/loto/loto6AnalysisP1Group', null, 
+				ShaCommon.ajax.callBackOk, 
+				ShaCommon.ajax.callBackNg); 
+	});
+	
+	$btn_obj = $('#loto6AnalysisP2'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.get('/loto/loto6AnalysisP2', null, 
+				ShaCommon.ajax.callBackOk, 
+				ShaCommon.ajax.callBackNg); 
+	});
+	
+	$btn_obj = $('#loto6SixAnalysis'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.get('/loto/loto6SixAnalysis', null, 
+				ShaCommon.ajax.callBackOk, 
+				ShaCommon.ajax.callBackNg); 
+	});
+	
+	
+
+	//-------------------------------------------------------
+	//MINILOTO
 	$btn_obj = $('#miniLotoAnalysisP0'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
@@ -219,6 +254,16 @@ $(document).ready(function(){
 		commonBtn = $(this);
 		event.preventDefault();
 		ShaCommon.ajax.get('/loto/miniLotoAnalysisP2', null, 
+				ShaCommon.ajax.callBackOk, 
+				ShaCommon.ajax.callBackNg); 
+	});
+	
+	$btn_obj = $('#miniLotoFiveAnalysis'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.get('/loto/miniLotoFiveAnalysis', null, 
 				ShaCommon.ajax.callBackOk, 
 				ShaCommon.ajax.callBackNg); 
 	});

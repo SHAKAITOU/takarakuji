@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+  th:with="lang=${#locale.language}" th:lang="${lang}">
+<head>
+	<title th:text="#{common.title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<!-- CSS -->
+<style type="text/css">
+
+</style>
+<div class="row">
+	<div class="col-md-12 col-sx-12">
+		<div class="col-md-12 col-sx-12 div-center">
+			<canvas id="lineChart" height="200"></canvas>
+		</div>
+	</div>
+	<div class="col-md-12 col-xs-12 table-responsive">
+		<table id="resultTable" class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<td class="td-t2s label-14b text-center" th:text="${T(sha.work.enums.MiniLotoNumberType).NOMAL_NUMBER.getName()}"></td>
+					<td class="td-t2s label-14b text-center" 
+						th:text="#{dataShow.data.td1.span} + '1' + #{miniLotoFiveAnalysisResult.data.td2}"></td>
+					<td class="td-t2s label-14b text-center" 
+						th:text="#{dataShow.data.td1.span} + '2' + #{miniLotoFiveAnalysisResult.data.td2}"></td>
+					<td class="td-t2s label-14b text-center" 
+						th:text="#{dataShow.data.td1.span} + '3' + #{miniLotoFiveAnalysisResult.data.td2}"></td>
+					<td class="td-t2s label-14b text-center" 
+						th:text="#{dataShow.data.td1.span} + '4' + #{miniLotoFiveAnalysisResult.data.td2}"></td>
+					<td class="td-t2s label-14b text-center" 
+						th:text="#{dataShow.data.td1.span} + '5' + #{miniLotoFiveAnalysisResult.data.td2}"></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="member : ${resultList.fiveList}">
+					<td class="label-14b text-center" th:text="${member.numberName}"></td>
+					<td class="label-14b text-center" th:text="${member.l1Cnt}"></td>
+					<td class="label-14b text-center" th:text="${member.l2Cnt}"></td>
+					<td class="label-14b text-center" th:text="${member.l3Cnt}"></td>
+					<td class="label-14b text-center" th:text="${member.l4Cnt}"></td>
+					<td class="label-14b text-center" th:text="${member.l5Cnt}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<script type="text/javascript" th:inline="javascript">
+
+/*<![CDATA[*/
+	$(document).ready(function(){
+		
+		//--------------------------------------------------------[
+		//title init
+		var titleLeft = /*[[#{index.miniloto.title}]]*/;
+		var titleRight = /*[[#{index.btn.miniLoto.fiveAnalysis}]]*/;
+		
+		//--------------------------------------------------------]
+
+		//--------------------------------------------------------[
+		//data init
+		var baseData = /*[[${resultBaseList.p1List}]]*/ null;
+		var sevenData = /*[[${resultList.fiveList}]]*/ null;
+		
+		//--------------------------------------------------------]
+		
+		//--------------------------------------------------------[
+	    //page component init	
+		var ctx = $("#lineChart").get(0).getContext('2d');
+	    var lineChart = drawLineChart(ctx, baseData, sevenData, titleLeft + titleRight);
+		
+		$('#okPanelTitle').text(titleLeft + titleRight);
+		
+		//--------------------------------------------------------]
+		
+	});
+	
+	function drawLineChart(ctx, baseData, sevenData, title) {
+		
+		var lbs = [];
+		
+		var dataSetL1 = [];
+		var dataSetL2 = [];
+		var dataSetL3 = [];
+		var dataSetL4 = [];
+		var dataSetL5 = [];
+		var radius = 3;
+
+		for(n=0; n<sevenData.length; n++) {
+			lbs.push(sevenData[n].numberName);
+			dataSetL1[n] = sevenData[n].l1Cnt;
+			dataSetL2[n] = sevenData[n].l2Cnt;
+			dataSetL3[n] = sevenData[n].l3Cnt;
+			dataSetL4[n] = sevenData[n].l4Cnt;
+			dataSetL5[n] = sevenData[n].l5Cnt;
+		}
+		
+		var dataSetBaseN1 = [];
+		
+		for(n=0; n<baseData.length; n++) {
+			dataSetBaseN1[n] = baseData[n].numberValue;
+		}
+		var avg = ShaCommon.util.getAverageInt(dataSetBaseN1);
+		var annotationTitle = /*[[#{analysisP1Result.barChart.annotation.title}]]*/;
+		var unit = /*[[#{miniLotoFiveAnalysisResult.data.td2}]]*/;
+		var unit2 = /*[[#{table.turnTable.data.td2Span}]]*/;
+		var all = /*[[#{miniLotoFiveAnalysisResult.data.td3}]]*/;
+		var normalNm = /*[[${T(sha.work.enums.MiniLotoNumberType).NOMAL_NUMBER.getName()}]]*/;
+		
+		var myChart = new Chart(ctx, {
+		    type: 'line',
+		    data: {
+		        labels: lbs,
+		        datasets: [
+		        	{
+			            label: '1'+unit,
+			            data: dataSetL1,
+			            fill: false,
+			            backgroundColor: ShaColor.htmlColor.categorys[0].rgbA,
+			            borderColor: ShaColor.htmlColor.categorys[0].rgbB,
+			            borderWidth: 1
+			        },
+			        {
+			            label: '2'+unit,
+			            data: dataSetL2,
+			            fill: false,
+			            backgroundColor: ShaColor.htmlColor.categorys[1].rgbA,
+			            borderColor: ShaColor.htmlColor.categorys[1].rgbB,
+			            borderWidth: 1
+			        },
+			        {
+			            label: '3'+unit,
+			            data: dataSetL3,
+			            fill: false,
+			            backgroundColor: ShaColor.htmlColor.categorys[2].rgbA,
+			            borderColor: ShaColor.htmlColor.categorys[2].rgbB,
+			            borderWidth: 1
+			        },
+			        {
+			            label: '4'+unit,
+			            data: dataSetL4,
+			            fill: false,
+			            backgroundColor: ShaColor.htmlColor.categorys[3].rgbA,
+			            borderColor: ShaColor.htmlColor.categorys[3].rgbB,
+			            borderWidth: 1
+			        },
+			        {
+			            label: '5'+unit,
+			            data: dataSetL5,
+			            fill: false,
+			            backgroundColor: ShaColor.htmlColor.categorys[4].rgbA,
+			            borderColor: ShaColor.htmlColor.categorys[4].rgbB,
+			            borderWidth: 1
+			        },
+			        {
+			            label: all+normalNm,
+			            data: dataSetBaseN1,
+			            fill: false,
+			            backgroundColor: ShaColor.htmlColor.categorys[35].rgbA,
+			            borderColor: ShaColor.htmlColor.categorys[35].rgbB,
+			            borderWidth: 1
+			        }
+		        ]
+		    },
+		    options: {
+		    	legend: {
+		    		display: true
+		    	},
+		    	title: {
+					display: true,
+					text: [title]
+				},
+				tooltips: {
+		            callbacks: {
+		                label: function(tooltipItem, data) {
+		                	
+		                	var yValue = /*[[${T(sha.work.enums.MiniLotoNumberType).NOMAL_NUMBER.getName()}]]*/;
+		                	
+		                	if(tooltipItem.datasetIndex < 5) {
+			                	var no = /*[[#{dataShow.data.td1.span}]]*/;
+			                	var ln = no + (tooltipItem.datasetIndex+1) + unit;
+		                		return ln + "、" + yValue + tooltipItem.xLabel + " : " + tooltipItem.yLabel + unit2;
+		                	}else{
+		                		
+		                		return all + yValue + tooltipItem.xLabel + " : " + tooltipItem.yLabel + unit2;
+		                	}
+		                    
+		                }
+		            }
+		        },
+				scales: {
+		        	xAxes: [{
+		        		gridLines: {
+		        			display: true,
+		        			color: ShaColor.htmlColor.grids[0].rgbB,
+		                    borderDash: [1, 5],
+		        		},
+		        		ticks: {
+		                    beginAtZero:false,
+		                    //min: 0,
+		                    //max: 31,
+		                    //stepSize: xStepSize,
+		                },
+		        		scaleLabel: {
+		        			display: true,
+		        			labelString: /*[[${T(sha.work.enums.MiniLotoNumberType).NOMAL_NUMBER.getName()}]]*/,
+		        			//fontColor: "red"
+		        		}
+		        	}],
+		            yAxes: [{
+		            	gridLines: {
+		            		display: true,
+		                    color: ShaColor.htmlColor.grids[0].rgbB,
+		                    borderDash: [1, 5],
+		            	},
+		                ticks: {
+		                    beginAtZero:true,
+		                    //min: 0,
+		                    //max: 31,
+		                    //stepSize: 5
+		                },
+		            	scaleLabel: {
+		                	display: true,
+		                	labelString: /*[[#{analysisP1Result.yTitle}]]*/,
+		                	//fontColor: "red"
+		              	}
+		            }]
+		        },
+				annotation: {
+		            annotations: [{
+		                type: 'line',
+		                mode: 'horizontal',
+		                scaleID: 'y-axis-0',
+		                value: avg,
+		                borderColor: ShaColor.htmlColor.annotations[0].rgbB,
+		                borderWidth: 1,
+		                label: {
+                            backgroundColor: ShaColor.htmlColor.annotations[0].rgbA,
+                            borderColor: ShaColor.htmlColor.annotations[0].rgbB,
+                            borderWidth: 1,
+                            content: all + annotationTitle + avg + unit2,
+                            enabled: true,
+                            position: "left"
+                        }
+		            }]
+		    	}
+		    }
+		});
+		
+		return myChart;
+	}
+
+	
+/*]]>*/
+</script>
+
+	
+	
+</body>
+
+</html>

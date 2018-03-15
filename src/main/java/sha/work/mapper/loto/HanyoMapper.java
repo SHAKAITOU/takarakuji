@@ -1,4 +1,4 @@
-package sha.work.mapper.domain;
+package sha.work.mapper.loto;
 
 import java.util.List;
 

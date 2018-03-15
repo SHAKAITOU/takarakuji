@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import sha.work.dto.loto.Loto7;
 import sha.work.entity.in.Loto7AnalysisP1In;
 import sha.work.entity.in.Loto7ShowDataIn;
+import sha.work.entity.query.Loto7SevenQuery;
 import sha.work.entity.query.NumberAndTurnsQuery;
 
 @Mapper
@@ -26,6 +27,8 @@ public interface Loto7Mapper {
 	List<NumberAndTurnsQuery> getBonusNumber1Sum(Loto7AnalysisP1In loto7AnalysisP1);
 	
 	List<NumberAndTurnsQuery> getBonusNumber2Sum(Loto7AnalysisP1In loto7AnalysisP1);	
+	
+	List<Loto7SevenQuery> getSevenSum(@Param("hanyoId") int hanyoId);
 	
 	void save(Loto7 loto7);
 

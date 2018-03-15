@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import sha.work.dto.loto.Loto6;
 import sha.work.entity.in.Loto6AnalysisP1In;
 import sha.work.entity.in.Loto6ShowDataIn;
+import sha.work.entity.query.Loto6SixQuery;
 import sha.work.entity.query.NumberAndTurnsQuery;
 
 @Mapper
@@ -24,6 +25,8 @@ public interface Loto6Mapper {
 	
 	List<NumberAndTurnsQuery> getBonusNumber1Sum(Loto6AnalysisP1In loto6AnalysisP1);
 
+	List<Loto6SixQuery> getSixSum(@Param("hanyoId") int hanyoId);
+	
 	void save(Loto6 loto6);
 
 }

@@ -14,7 +14,7 @@ import sha.work.entity.query.MiniLotoAnalysisP1Query;
 import sha.work.entity.query.NumberAndTurnsQuery;
 import sha.work.enums.HanyoType;
 import sha.work.exception.TKRKScreenException;
-import sha.work.mapper.domain.HanyoMapper;
+import sha.work.mapper.loto.HanyoMapper;
 import sha.work.mapper.loto.MiniLotoMapper;
 
 @Service

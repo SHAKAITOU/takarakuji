@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import sha.work.dto.loto.MiniLoto;
 import sha.work.entity.in.MiniLotoAnalysisP1In;
 import sha.work.entity.in.MiniLotoShowDataIn;
+import sha.work.entity.query.MiniLotoFiveQuery;
 import sha.work.entity.query.NumberAndTurnsQuery;
 
 @Mapper
@@ -24,6 +25,9 @@ public interface MiniLotoMapper {
 	
 	List<NumberAndTurnsQuery> getBonusNumber1Sum(MiniLotoAnalysisP1In miniLotoAnalysisP1);
 
+	List<MiniLotoFiveQuery> getFiveSum(@Param("hanyoId") int hanyoId);
+	
+	
 	void save(MiniLoto miniLoto);
 
 }

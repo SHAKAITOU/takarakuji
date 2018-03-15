@@ -8,7 +8,7 @@ import sha.framework.service.BaseService;
 import sha.framework.util.MultipleDBAccessUtil;
 import sha.work.dto.domain.Hanyo;
 import sha.work.exception.TKRKScreenException;
-import sha.work.mapper.domain.HanyoMapper;
+import sha.work.mapper.loto.HanyoMapper;
 
 @Service
 public class HanyoDataImportService extends BaseService {

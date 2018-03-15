@@ -20,6 +20,19 @@
 		<result property="b1" column="b1"/>
 		<result property="b2" column="b2"/>
     </resultMap>
+    
+     <resultMap id="Loto7SevenQuery" 
+				type="sha.work.entity.query.Loto7SevenQuery">
+		<id property="numberName" column="value" />
+		<result property="l1Cnt" column="l1_cnt"/>
+		<result property="l2Cnt" column="l2_cnt"/>
+		<result property="l3Cnt" column="l3_cnt"/>
+		<result property="l4Cnt" column="l4_cnt"/>
+		<result property="l5Cnt" column="l5_cnt"/>
+		<result property="l6Cnt" column="l6_cnt"/>
+		<result property="l7Cnt" column="l7_cnt"/>
+    </resultMap>
+    
 	
 	<!-- SQL CHIP -->
 	<sql id="selectNumber">
@@ -28,7 +41,13 @@
 			COUNT(*) AS numberValue
 		FROM 
 			M_LOTO7
-		WHERE (l1 = ${prefix} or l2 = ${prefix} or l3 = ${prefix} or l4 = ${prefix} or l5 = ${prefix} or l6 = ${prefix} or l7 = ${prefix})
+		WHERE (l1 = ${prefix} or 
+				l2 = ${prefix} or 
+				l3 = ${prefix} or 
+				l4 = ${prefix} or 
+				l5 = ${prefix} or 
+				l6 = ${prefix} or 
+				l7 = ${prefix})
 	</sql>
 	
 	<sql id="selectBonusNumber1">
@@ -108,6 +127,28 @@
 		ORDER BY numberName	
 	</select>
 	
+	<select id="getSevenSum" resultMap="Loto7SevenQuery">
+		SELECT
+			mh.value,
+			COALESCE(dl1.l1_cnt, 0) l1_cnt,
+			COALESCE(dl2.l2_cnt, 0) l2_cnt,
+			COALESCE(dl3.l3_cnt, 0) l3_cnt,
+			COALESCE(dl4.l4_cnt, 0) l4_cnt,
+			COALESCE(dl5.l5_cnt, 0) l5_cnt,
+			COALESCE(dl6.l6_cnt, 0) l6_cnt,
+			COALESCE(dl7.l7_cnt, 0) l7_cnt
+		FROM
+			M_HANYO mh
+		LEFT JOIN (SELECT l1, COUNT(l1) l1_cnt FROM M_LOTO7 GROUP BY l1) dl1 on CAST(mh.value AS integer) = dl1.l1
+		LEFT JOIN (SELECT l2, COUNT(l2) l2_cnt FROM M_LOTO7 GROUP BY l2) dl2 on CAST(mh.value AS integer) = dl2.l2
+		LEFT JOIN (SELECT l3, COUNT(l3) l3_cnt FROM M_LOTO7 GROUP BY l3) dl3 on CAST(mh.value AS integer) = dl3.l3
+		LEFT JOIN (SELECT l4, COUNT(l4) l4_cnt FROM M_LOTO7 GROUP BY l4) dl4 on CAST(mh.value AS integer) = dl4.l4
+		LEFT JOIN (SELECT l5, COUNT(l5) l5_cnt FROM M_LOTO7 GROUP BY l5) dl5 on CAST(mh.value AS integer) = dl5.l5
+		LEFT JOIN (SELECT l6, COUNT(l6) l6_cnt FROM M_LOTO7 GROUP BY l6) dl6 on CAST(mh.value AS integer) = dl6.l6
+		LEFT JOIN (SELECT l7, COUNT(l7) l7_cnt FROM M_LOTO7 GROUP BY l7) dl7 on CAST(mh.value AS integer) = dl7.l7
+		WHERE
+			mh.id = #{hanyoId}
+	</select>
 	
 	<!-- INSERT -->
 	<insert id="save">

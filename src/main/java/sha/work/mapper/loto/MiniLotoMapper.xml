@@ -17,6 +17,16 @@
 		<result property="l5" column="l5"/>
 		<result property="b1" column="b1"/>
     </resultMap>
+    
+    <resultMap id="MiniLotoFiveQuery" 
+				type="sha.work.entity.query.MiniLotoFiveQuery">
+		<id property="numberName" column="value" />
+		<result property="l1Cnt" column="l1_cnt"/>
+		<result property="l2Cnt" column="l2_cnt"/>
+		<result property="l3Cnt" column="l3_cnt"/>
+		<result property="l4Cnt" column="l4_cnt"/>
+		<result property="l5Cnt" column="l5_cnt"/>
+    </resultMap>
 	
 	<!-- SQL CHIP -->
 	<sql id="selectNumber">
@@ -86,6 +96,25 @@
 			<include refid="selectBonusNumber1"><property name="prefix" value="${index}"/></include>
 		</foreach>
 		ORDER BY numberName	
+	</select>
+	
+	<select id="getFiveSum" resultMap="MiniLotoFiveQuery">
+		SELECT
+			mh.value,
+			COALESCE(dl1.l1_cnt, 0) l1_cnt,
+			COALESCE(dl2.l2_cnt, 0) l2_cnt,
+			COALESCE(dl3.l3_cnt, 0) l3_cnt,
+			COALESCE(dl4.l4_cnt, 0) l4_cnt,
+			COALESCE(dl5.l5_cnt, 0) l5_cnt
+		FROM
+			M_HANYO mh
+		LEFT JOIN (SELECT l1, COUNT(l1) l1_cnt FROM M_MINI_LOTO GROUP BY l1) dl1 on CAST(mh.value AS integer) = dl1.l1
+		LEFT JOIN (SELECT l2, COUNT(l2) l2_cnt FROM M_MINI_LOTO GROUP BY l2) dl2 on CAST(mh.value AS integer) = dl2.l2
+		LEFT JOIN (SELECT l3, COUNT(l3) l3_cnt FROM M_MINI_LOTO GROUP BY l3) dl3 on CAST(mh.value AS integer) = dl3.l3
+		LEFT JOIN (SELECT l4, COUNT(l4) l4_cnt FROM M_MINI_LOTO GROUP BY l4) dl4 on CAST(mh.value AS integer) = dl4.l4
+		LEFT JOIN (SELECT l5, COUNT(l5) l5_cnt FROM M_MINI_LOTO GROUP BY l5) dl5 on CAST(mh.value AS integer) = dl5.l5
+		WHERE
+			mh.id = #{hanyoId}
 	</select>
 	
 	<insert id="save">

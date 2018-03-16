@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+  th:with="lang=${#locale.language}" th:lang="${lang}">
+<body>
+
+<div class="modal border-danger" id="alert" th:fragment="alert">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog modal-sm vertical-align-center">
+			<div class="modal-content alert">
+				<div class="card-header">
+					<h5 class="alert-title" th:text="#{dialogs.alert.title}"></h5>
+				</div>
+				<div class="modal-body alert-text" id="alertBody">
+					<p>This is a small modal.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal border-danger" id="dialogWith2Btn" th:fragment="dialogWith2Btn">
+	<div class="modal-dialog" role="document">
+    	<div class="card border-danger mb-3">
+			<div class="card-header" id="dialogWith2BtnTitle">Header</div>
+			<div class="card-body" id="dialogWith2BtnBody">
+			</div>
+			<div class="modal-footer">
+				<button id="dlgBtnOk" type="button" class="btn btn-sm btn-primary" th:text="#{dialogs.btn.ok}"></button>
+				<button id="dlgBtnNg" type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" th:text="#{dialogs.btn.ng}"></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

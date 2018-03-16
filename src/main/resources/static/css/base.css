@@ -106,18 +106,22 @@ html {
     display:table;
     height: 100%;
     width: 100%;
+    pointer-events:none; /* This makes sure that we can still click outside of the modal to close it */
 }
 .vertical-align-center {
     /* To center vertically */
     display: table-cell;
     vertical-align: middle;
+    pointer-events:none;
 }
 .modal-content {
     /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
     width:inherit;
+    max-width:inherit; /* For Bootstrap 4 - to avoid the modal window stretching full width */
     height:inherit;
     /* To center horizontally */
     margin: 0 auto;
+    pointer-events: all;
 }
 
 .w800-dialog .modal-dialog {
@@ -241,11 +245,13 @@ html {
 }
 
 .td-t2d{
+	padding-left: 2px;
 	color: white;
 	background-color: #4C345F;
 }
 
 .td-t2a{
+	padding-left: 2px;
 	color: #F9F944;
 	background-color: #B17DBF;
 	font-weight: bold;
@@ -514,6 +520,30 @@ a:hover {
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   border-bottom: 8px solid #343D66;
+}
+
+/*!--------------------------
+ * DIALOGS CSS
+ * --------------------------
+ */
+ 
+ .alert{
+	border-width: 1;
+	border-color: #c9171e;
+}
+
+ .alert-title{
+	margin: 1px;
+	padding: 2px;
+	color: #c9171e;
+	font-weight: bold;
+}
+
+ .alert-text{
+	margin: 1px;
+	padding: 2px;
+	color: #c9171e;
+	font-size: 14px;
 }
 
 /*!--------------------------

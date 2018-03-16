@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+  th:with="lang=${#locale.language}" th:lang="${lang}">
+<head>
+	<title th:text="#{common.title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<!-- CSS -->
+<style type="text/css">
+
+</style>
+<form id="search_form" name="search_form" role="form" method="POST">
+<div class="row">
+	<div class="col-md-6 col-xs-12">
+		<legend id="estimateTitle" th:text="#{loto7Estimate.estimateL1Title}"></legend>
+		<div class="row">
+			<div class="col-md-12" style="height: 30px;">
+				<div id="estimateL1Div" class="form-group">
+					<div class="input-group">
+						<div class="td-th2 input-group-append">
+							<span class="input-group-text" th:text="${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}"></span>
+						</div>
+						<input type="text" name="l1" class="form-control-sm text-center label-14b" 
+							style="max-width: 30px;" th:value="${result.l1}"/>
+						<input type="text" name="l2" class="form-control-sm text-center label-14b" 
+							style="max-width: 30px;" th:value="${result.l2}"/>
+						<input type="text" name="l3" class="form-control-sm text-center label-14b" 
+							style="max-width: 30px;" th:value="${result.l3}"/>
+						<input type="text" name="l4" class="form-control-sm text-center label-14b" 
+							style="max-width: 30px;" th:value="${result.l4}"/>
+						<input type="text" name="l5" class="form-control-sm text-center label-14b" 
+							style="max-width: 30px;" th:value="${result.l5}"/>
+						<input type="text" name="l6" class="form-control-sm text-center label-14b" 
+							style="max-width: 30px;" th:value="${result.l6}"/>
+						<input type="text" name="l7" class="form-control-sm text-center label-14b" 
+							style="max-width: 30px;" th:value="${result.l7}"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 col-xs-12">
+		<legend id="estimateTitle" th:text="#{loto7Estimate.estimateB1Title}"></legend>
+		<div class="row">
+			<div class="col-md-12" style="height: 30px;">
+				<div id="estimateL1Div" class="form-group">
+					<div class="input-group">
+						<div class="td-t2a input-group-append">
+							<span class="input-group-text" th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getName()}"></span>
+						</div>
+						<input type="text" name="b1" class="form-control-sm text-center label-14b" 
+							style="max-width: 30px;" th:value="${result.b1}"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 col-xs-12">
+		<legend id="estimateTitle" th:text="#{loto7Estimate.estimateB2Title}"></legend>
+		<div class="row">
+			<div class="col-md-12" style="height: 30px;">
+				<div id="estimateL1Div" class="form-group">
+					<div class="input-group">
+						<div class="td-t2d input-group-append">
+							<span class="input-group-text" th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getName()}"></span>
+						</div>
+						<input type="text" name="b2" class="form-control-sm text-center label-14b" 
+							style="max-width: 30px;" th:value="${result.b2}"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- BR -->
+<div class="row"><div class="col-md-12 col-xs-12 text-right" style="height: 10px;"></div></div>	
+<div class="row">
+	<div class="col-md-12 col-xs-12 text-right" style="height: 40px;">
+		<button id="searchBtn" type="button" class="btn-lg btn-outline-primary btn_com" style="width: 120px;"
+			th:text="#{loto7Estimate.btn.estimate}"></button>
+	</div>
+	<div class="col-md-12 col-sx-12">
+		<div class="col-md-12 col-sx-12 div-center">
+			<!-- <canvas id="scatterChart" height="200"></canvas> -->
+		</div>
+	</div>
+	<div class="col-md-12 col-xs-12 table-responsive">
+		<table id="resultTable" class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<td class="info label-14b text-center" th:text="#{dataShow.data.td1}"></td>
+					<td class="info label-14b text-center" th:text="#{dataShow.data.td2}"></td>
+					<td class="info label-14b text-center" colspan="7"
+						th:text="${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}"></td>
+					<td class="danger label-14b text-center" th:text="#{dataShow.data.td4}"></td>
+					<td class="danger label-14b text-center" th:text="#{dataShow.data.td5}"></td>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</div>
+</form>
+<div th:replace="fragment/dialogs :: alert"></div>
+<script type="text/javascript" th:inline="javascript">
+
+/*<![CDATA[*/
+	$(document).ready(function(){
+		
+		//--------------------------------------------------------[
+		//title init
+		var titleLeft = /*[[#{index.loto7.title}]]*/;
+		var titleRight = /*[[#{index.btn.loto7.estimate}]]*/;
+		//--------------------------------------------------------]
+		
+		//--------------------------------------------------------[
+		//data init
+		var data = /*[[${result.loto7List}]]*/ null;
+		//--------------------------------------------------------]
+		
+		//--------------------------------------------------------[
+	    //page component init	
+		//var ctx = $("#scatterChart").get(0).getContext('2d');
+	    //var scatterChart = drawScatterChart(ctx, data, titleLeft + titleRight);
+		
+	    $('#okPanelTitle').text(titleLeft + titleRight);
+
+		//--------------------------------------------------------]
+		
+		
+	  	//--------------------------------------------------------[
+		//init bond event to btn
+		//date picker init
+		//===========================================================↓
+		$('#searchDt').datepicker({
+	        format: "yyyy/mm/dd",
+	        language: "ja",
+	    });
+
+		$btn_obj = $('#searchBtn'); 
+		$btn_obj.unbind(); 
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			var postData = $('#search_form').serializeArray();
+			if(checkValue(postData)) {
+				return;
+			}
+			ShaCommon.ajax.post('/loto/loto7Estimate', postData, 
+					ShaCommon.ajax.callBackOk, 
+					ShaCommon.ajax.callBackNg); 
+		});
+	});
+	
+	function checkValue() {
+		//alert(JSON.stringify(postData));
+		alert(postData.l1);
+		if(!ShaCommon.util.isLoto7Number(postData.l1)){
+			var ttlHead = /*[[${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}]]*/;
+			var ttlfoot = /*[[#{loto7Estimate.check.nonNumber}]]*/;
+			ShaCommon.dialogs.alert(ttlHead+"1"+ttlfoot);
+			return true;
+		}
+	}
+
+	
+/*]]>*/
+</script>
+
+	
+	
+</body>
+
+</html>

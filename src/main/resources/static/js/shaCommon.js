@@ -33,12 +33,38 @@ try{
 			return avg;
 		},
 		
+		isLoto7Number : function(number) {
+			var numbers = [];
+			for( var i = 1; i <= 37; i++ ){
+				if(number == i){
+					return true;
+				}
+			}
+			
+			return false;
+		},
+		
 		triggerWinResize : function(callFun) {
 			$(window).resize(function() {
 				callFun();
 			}).trigger("resize");
-		}
+		},
 	
+	}
+	
+	//*****************************************************************************
+	// common ajax define
+	//*****************************************************************************
+	
+	if($common.dialogs) { 
+		return $common.dialogs; 
+	}	
+	
+	$common.dialogs = {
+		alert : function (context) {
+			$('#alert').find('#alertBody').html(context);
+			return $('#alert').modal('show');
+		}
 	}
 	
 	

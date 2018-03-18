@@ -546,6 +546,12 @@ a:hover {
 	font-size: 14px;
 }
 
+ .alert-input{
+	color: #c9171e;
+	background-color: #f6bfbc;
+	border:solid 1px #800000;
+}
+
 /*!--------------------------
  * D3 CSS
  * --------------------------

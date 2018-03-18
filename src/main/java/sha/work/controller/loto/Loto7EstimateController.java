@@ -1,5 +1,6 @@
 package sha.work.controller.loto;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 import java.util.Map;
@@ -17,13 +18,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import sha.framework.controller.ScreenBaseController;
 import sha.framework.exception.TKRKScreenException;
+import sha.framework.util.FileReaderUtil;
 import sha.framework.util.LogCommonUtil;
+import sha.work.dto.loto.Loto7;
 import sha.work.entity.in.Loto7EstimateDataIn;
+import sha.work.entity.out.Loto7AnalysisP1Out;
+import sha.work.entity.out.Loto7AnalysisP2Out;
 import sha.work.entity.out.Loto7EstimateDataOut;
+import sha.work.entity.out.Loto7SevenAnalysisOut;
+import sha.work.service.batch.Loto7AnalysisBaseDataCreateService;
 import sha.work.service.loto.Loto7ShowService;
+import sha.work.util.FileUtil;
 
 /**
  * S002 Thymeleaf 
@@ -40,7 +49,10 @@ public class Loto7EstimateController extends ScreenBaseController{
 	private LogCommonUtil log;
 
 	@Autowired
-	private Loto7ShowService service;
+	private Loto7AnalysisBaseDataCreateService service;
+	
+	@Autowired
+	private ObjectMapper objMapper;
 
 
 	@RequestMapping(path="/loto/loto7Estimate", method=RequestMethod.GET)
@@ -72,13 +84,19 @@ public class Loto7EstimateController extends ScreenBaseController{
 		Loto7EstimateDataIn dataIn = searchLoto7EstimateDataIn(allRequestParams);
 
 		Loto7EstimateDataOut dataOut = new Loto7EstimateDataOut();
-		
+		Loto7 loto7 = new Loto7();
+
 		try {
 			BeanUtils.copyProperties(dataOut, dataIn);
+			BeanUtils.copyProperties(loto7, dataIn);
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			throw new TKRKScreenException(e);
 		}
-
+		
+		dataOut.setEstimateAnalysisBase(service.analysisOnly(loto7));
+		dataOut.setLoto7AnalysisP2Out(getLoto7AnalysisP2OutData());
+		dataOut.setLoto7SevenAnalysisOut(getSevenAnaLysisData()); 
+		dataOut.estimateRank();
 		mav.addObject("result", dataOut);
 		mav.setViewName("loto/loto7Estimate");
 		return mav;
@@ -103,6 +121,26 @@ public class Loto7EstimateController extends ScreenBaseController{
 		dataIn.setB2(Integer.valueOf(allRequestParams.get("b2")));
 		
 		return dataIn;
+	}
+	
+	private Loto7AnalysisP2Out getLoto7AnalysisP2OutData() {
+		try {
+			String data = FileReaderUtil.read(FileUtil.getLoto7P2DataFileJson());
+			return objMapper.readValue(data, Loto7AnalysisP2Out.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new TKRKScreenException(e);
+		}
+	}
+	
+	private Loto7SevenAnalysisOut getSevenAnaLysisData() {
+		try {
+			String data = FileReaderUtil.read(FileUtil.getLoto7SevenDataFileJson());
+			return objMapper.readValue(data, Loto7SevenAnalysisOut.class);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new TKRKScreenException(e);
+		}
 	}
 
 }

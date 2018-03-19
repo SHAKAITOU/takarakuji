@@ -50,7 +50,9 @@
 							<button id="loto7SevenAnalysis" type="button" class="btn btn btn-block btn-outline-primary btn_com"
 								th:text="#{index.btn.loto7.sevenAnalysis}"></button>
 							<button id="loto7Estimate" type="button" class="btn btn btn-block btn-outline-primary btn_com"
-								th:text="#{index.btn.loto7.estimate}"></button> 	
+								th:text="#{index.btn.loto7.estimate}"></button> 
+							<button id="loto7Add" type="button" class="btn btn btn-block btn-outline-primary btn_com"
+								th:text="#{index.btn.loto7.add}"></button>
 								
 						</div>
 						<div class="col-md-10 col-md-offset-1">
@@ -184,6 +186,16 @@ $(document).ready(function(){
 		commonBtn = $(this);
 		event.preventDefault();
 		ShaCommon.ajax.get('/loto/loto7Estimate', null, 
+				ShaCommon.ajax.callBackOk, 
+				ShaCommon.ajax.callBackNg); 
+	});
+	
+	$btn_obj = $('#loto7Add'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.get('/loto/loto7Add', null, 
 				ShaCommon.ajax.callBackOk, 
 				ShaCommon.ajax.callBackNg); 
 	});

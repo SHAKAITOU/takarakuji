@@ -552,6 +552,11 @@ a:hover {
 	border:solid 1px #800000;
 }
 
+ .progressBar{
+	border-width: 1;
+	border-color: #2780E3;
+}
+
 /*!--------------------------
  * D3 CSS
  * --------------------------

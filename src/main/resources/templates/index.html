@@ -118,14 +118,14 @@
 	
 </div>	
 <!-- /container -->
-
+<div th:replace="fragment/dialogs :: progress"></div>
+<div th:replace="fragment/dialogs :: alert"></div>
 <!-- include bootstrapLib  -->
 <div th:replace="fragment/footer :: bootstrapLib"></div>
 <script type="text/javascript">
 /*<![CDATA[*/
 $(document).ready(function(){
 	var commonBtn;
-	
 	//-------------------------------------------------------
 	//LOTO7		
 	$btn_obj = $('#loto7AnalysisP0'); 

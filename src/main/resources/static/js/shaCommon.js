@@ -83,10 +83,18 @@ try{
 	}	
 	
 	$common.dialogs = {
+		progress : function (showFlg) {
+			if(showFlg){
+				return $('#progress').modal('show');
+			}else{
+				return $('#progress').modal('hide');
+			}
+		},
 		alert : function (context) {
 			$('#alert').find('#alertBody').html(context);
 			return $('#alert').modal('show');
-		}
+		},
+	
 	}
 	
 	
@@ -103,7 +111,10 @@ try{
 		//------------------------------------------------------------------------------
 		// execute get ajax
 		//------------------------------------------------------------------------------
-		get : function (url, formData, callBackOk, callBackNg) { 
+		get : function (url, formData, callBackOk, callBackNg) {
+			
+			ShaCommon.dialogs.progress(true);
+			
 			$.ajax({
 				   type: "GET",
 				   url: url,
@@ -111,12 +122,15 @@ try{
 				   statusCode: {
 					    200: function(data){
 					    	callBackOk(data);
+					    	ShaCommon.dialogs.progress(false);
 					    },
 					    404: function() {
-					      alert( "page not found" );
+					    	alert( "page not found" );
+					    	ShaCommon.dialogs.progress(false);
 					    },
 					    500: function(data){
 					    	callBackNg(data);
+					    	ShaCommon.dialogs.progress(false);
 					    }
 				   },
 				   timeout: 10000
@@ -127,6 +141,9 @@ try{
 		// execute post ajax
 		//------------------------------------------------------------------------------
 		post : function (url, formData, callBackOk, callBackNg) { 
+			
+			ShaCommon.dialogs.progress(true);
+			
 			$.ajax({
 				   type: "POST",
 				   url: url,
@@ -134,12 +151,15 @@ try{
 				   statusCode: {
 					    200: function(data){
 					    	callBackOk(data);
+					    	ShaCommon.dialogs.progress(false);
 					    },
 					    404: function() {
-					      alert( "page not found" );
+					    	alert( "page not found" );
+					    	ShaCommon.dialogs.progress(false);
 					    },
 					    500: function(data){
 					    	callBackNg(data);
+					    	ShaCommon.dialogs.progress(false);
 					    }
 				   },
 				   timeout: 10000

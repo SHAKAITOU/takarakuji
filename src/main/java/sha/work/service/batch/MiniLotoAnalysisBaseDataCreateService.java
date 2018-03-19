@@ -8,13 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sha.framework.service.BaseService;
-import sha.work.dto.loto.Loto6;
-import sha.work.dto.loto.Loto6AnalysisBase;
 import sha.work.dto.loto.MiniLoto;
 import sha.work.dto.loto.MiniLotoAnalysisBase;
 import sha.work.exception.TKRKScreenException;
-import sha.work.mapper.loto.Loto6AnalysisBaseMapper;
-import sha.work.mapper.loto.Loto6Mapper;
 import sha.work.mapper.loto.MiniLotoAnalysisBaseMapper;
 import sha.work.mapper.loto.MiniLotoMapper;
 
@@ -32,19 +28,18 @@ public class MiniLotoAnalysisBaseDataCreateService extends BaseService {
 	public void analysis(int turn) throws TKRKScreenException {
 
 		MiniLoto miniLoto = miniLotoMapper.findByTurn(turn);
-		analysis(miniLoto);
+		saveData(analysisOnly(miniLoto));
 	}
 	
 	@Transactional
 	public void analysisAll() {
 		List<MiniLoto> all = miniLotoMapper.getAll();
 		for(MiniLoto miniLoto : all) {
-			analysis(miniLoto);
+			saveData(analysisOnly(miniLoto));
 		}
 	}
 	
-	private void analysis(MiniLoto miniLoto) throws TKRKScreenException {
-		
+	public MiniLotoAnalysisBase analysisOnly(MiniLoto miniLoto) throws TKRKScreenException {
 		MiniLotoAnalysisBase analysisBase = new MiniLotoAnalysisBase();
 		
 		int[] numbers = toArray(miniLoto);
@@ -78,7 +73,11 @@ public class MiniLotoAnalysisBaseDataCreateService extends BaseService {
 		
 		analysisBase.setRightAreaNumCnt(getRightAreaNumCnt(numbers));
 		
-		int cnt = analysisBaseMapper.isExist(miniLoto.getTurn());
+		return analysisBase;
+	}
+	
+	public void saveData(MiniLotoAnalysisBase analysisBase) {
+		int cnt = analysisBaseMapper.isExist(analysisBase.getTurn());
 		if(cnt > 0) {
 			analysisBaseMapper.update(analysisBase);
 		} else {

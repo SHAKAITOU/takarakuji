@@ -55,6 +55,17 @@ try{
 			return false;
 		},
 		
+		isMiniLotoNumber : function(number) {
+			var numbers = [];
+			for( var i = 1; i <= 31; i++ ){
+				if(number == i){
+					return true;
+				}
+			}
+			
+			return false;
+		},
+		
 		triggerWinResize : function(callFun) {
 			$(window).resize(function() {
 				callFun();

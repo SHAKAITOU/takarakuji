@@ -85,7 +85,9 @@
 							<button id="miniLotoAnalysisP2" type="button" class="btn btn btn-block btn-outline-primary btn_com"
 								th:text="#{index.btn.analysisP2}"></button>
 							<button id="miniLotoFiveAnalysis" type="button" class="btn btn btn-block btn-outline-primary btn_com"
-								th:text="#{index.btn.miniLoto.fiveAnalysis}"></button> 	 
+								th:text="#{index.btn.miniLoto.fiveAnalysis}"></button> 	
+							<button id="miniLotoEstimate" type="button" class="btn btn btn-block btn-outline-primary btn_com"
+								th:text="#{index.btn.miniLoto.estimate}"></button>		 
 						</div>
 					</div>
 				</div>
@@ -287,6 +289,16 @@ $(document).ready(function(){
 		commonBtn = $(this);
 		event.preventDefault();
 		ShaCommon.ajax.get('/loto/miniLotoFiveAnalysis', null, 
+				ShaCommon.ajax.callBackOk, 
+				ShaCommon.ajax.callBackNg); 
+	});
+	
+	$btn_obj = $('#miniLotoEstimate'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.get('/loto/miniLotoEstimate', null, 
 				ShaCommon.ajax.callBackOk, 
 				ShaCommon.ajax.callBackNg); 
 	});

@@ -20,7 +20,7 @@
 				<div id="estimateL1Div" class="form-group">
 					<div class="input-group">
 						<div class="td-th2 input-group-append">
-							<span class="input-group-text" th:text="${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}"></span>
+							<span class="input-group-text" th:text="${T(sha.work.enums.Loto6NumberType).NOMAL_NUMBER.getName()}"></span>
 						</div>
 						<input type="text" id="l1" name="l1" class="form-control-sm text-center label-14b" 
 							style="max-width: 30px;" th:value="${result.l1}"/>
@@ -34,40 +34,22 @@
 							style="max-width: 30px;" th:value="${result.l5}"/>
 						<input type="text" id="l6" name="l6" class="form-control-sm text-center label-14b" 
 							style="max-width: 30px;" th:value="${result.l6}"/>
-						<input type="text" id="l7" name="l7" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="${result.l7}"/>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="col-md-3 col-xs-12">
-		<legend id="estimateTitle" th:text="#{loto7Estimate.estimateB1Title}"></legend>
+		<legend id="estimateTitle" th:text="#{loto6Estimate.estimateB1Title}"></legend>
 		<div class="row">
 			<div class="col-md-12" style="height: 30px;">
 				<div id="estimateL1Div" class="form-group">
 					<div class="input-group">
 						<div class="td-t2a input-group-append">
-							<span class="input-group-text" th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getName()}"></span>
+							<span class="input-group-text" th:text="${T(sha.work.enums.Loto6NumberType).BONUS_NUMBER1.getName()}"></span>
 						</div>
 						<input type="text" id="b1" name="b1" class="form-control-sm text-center label-14b" 
 							style="max-width: 30px;" th:value="${result.b1}"/>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-3 col-xs-12">
-		<legend id="estimateTitle" th:text="#{loto7Estimate.estimateB2Title}"></legend>
-		<div class="row">
-			<div class="col-md-12" style="height: 30px;">
-				<div id="estimateL1Div" class="form-group">
-					<div class="input-group">
-						<div class="td-t2d input-group-append">
-							<span class="input-group-text" th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getName()}"></span>
-						</div>
-						<input type="text" id="b2" name="b2" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="${result.b2}"/>
 					</div>
 				</div>
 			</div>
@@ -79,7 +61,7 @@
 <div class="row">
 	<div class="col-md-12 col-xs-12 text-right" style="height: 40px;">
 		<button id="searchBtn" type="button" class="btn-lg btn-outline-primary btn_com" style="width: 120px;"
-			th:text="#{loto7Estimate.btn.estimate}"></button>
+			th:text="#{loto6Estimate.btn.estimate}"></button>
 	</div>
 	<div class="col-md-12 col-sx-12">
 		<div class="col-md-12 col-sx-12 div-center">
@@ -87,122 +69,122 @@
 		</div>
 	</div>
 	<div class="col-md-12 col-xs-12 table-responsive">
-		<legend id="estimateTitle" th:text="#{loto7Estimate.data.title}"></legend>
+		<legend id="estimateTitle" th:text="#{loto6Estimate.data.title}"></legend>
 		<table id="resultTable" class="table table-striped table-bordered table-hover">
 			<thead>
 				<tr>
 					<td class="td-t2s label-14b text-center" style="min-width: 170px"
-						th:text="#{loto7Estimate.data.td1}"></td>
+						th:text="#{loto6Estimate.data.td1}"></td>
 					<td class="td-t2s label-14b text-center" style="min-width: 50px"
-						th:text="#{loto7Estimate.data.td2}"></td>
+						th:text="#{loto6Estimate.data.td2}"></td>
 					<td class="td-t2s label-14b text-center" style="min-width: 320px"
-						th:text="#{loto7Estimate.data.td3}"></td>
+						th:text="#{loto6Estimate.data.td3}"></td>
 					<td class="td-t2s label-14b text-center" style="min-width: 50px" 
-						th:text="#{loto7Estimate.data.td4}"></td>
+						th:text="#{loto6Estimate.data.td4}"></td>
 				</tr>
-				<div th:if="${result.loto7AnalysisP2Out}">
+				<div th:if="${result.loto6AnalysisP2Out}">
 					<!-- TOTAL_AVG -->
 					<div th:replace="fragment/table :: estimateTr(
-						${T(sha.work.enums.Loto7AnalysisType).TOTAL_AVG.getName()},
+						${T(sha.work.enums.Loto6AnalysisType).TOTAL_AVG.getName()},
 						${result.estimateAnalysisBase.totalAvg},
-						${result.loto7AnalysisP2Out.summaryTotalAvgList},
+						${result.loto6AnalysisP2Out.summaryTotalAvgList},
 						${result.totalAvgRank},
 						${result.totalAvgPt}
 					)">
 					</div>
 					<!-- MAX_MIN_DIFF -->
 					<div th:replace="fragment/table :: estimateTr(
-						${T(sha.work.enums.Loto7AnalysisType).MAX_MIN_DIFF.getName()},
+						${T(sha.work.enums.Loto6AnalysisType).MAX_MIN_DIFF.getName()},
 						${result.estimateAnalysisBase.maxMinDiff},
-						${result.loto7AnalysisP2Out.summaryMaxMinDiffList},
+						${result.loto6AnalysisP2Out.summaryMaxMinDiffList},
 						${result.maxMinDiffRank},
 						${result.maxMinDiffPt}
 					)">
 					</div>
 					<!-- MAX_NUM_DIFF -->
 					<div th:replace="fragment/table :: estimateTr(
-						${T(sha.work.enums.Loto7AnalysisType).MAX_NUM_DIFF.getName()},
+						${T(sha.work.enums.Loto6AnalysisType).MAX_NUM_DIFF.getName()},
 						${result.estimateAnalysisBase.maxNumDiff},
-						${result.loto7AnalysisP2Out.summaryMaxNumDiffList},
+						${result.loto6AnalysisP2Out.summaryMaxNumDiffList},
 						${result.maxNumDiffRank},
 						${result.maxNumDiffPt}
 					)">
 					</div>
 					<!-- MIN_NUM_DIFF -->
 					<div th:replace="fragment/table :: estimateTr(
-						${T(sha.work.enums.Loto7AnalysisType).MIN_NUM_DIFF.getName()},
+						${T(sha.work.enums.Loto6AnalysisType).MIN_NUM_DIFF.getName()},
 						${result.estimateAnalysisBase.minNumDiff},
-						${result.loto7AnalysisP2Out.summaryMinNumDiffList},
+						${result.loto6AnalysisP2Out.summaryMinNumDiffList},
 						${result.minNumDiffRank},
 						${result.minNumDiffPt}
 					)">
 					</div>
 					<!-- NUM_DIFF_AVG -->
 					<div th:replace="fragment/table :: estimateTr(
-						${T(sha.work.enums.Loto7AnalysisType).NUM_DIFF_AVG.getName()},
+						${T(sha.work.enums.Loto6AnalysisType).NUM_DIFF_AVG.getName()},
 						${result.estimateAnalysisBase.numDiffAvg},
-						${result.loto7AnalysisP2Out.summaryNumDiffAvgList},
+						${result.loto6AnalysisP2Out.summaryNumDiffAvgList},
 						${result.numDiffAvgRank},
 						${result.numDiffAvgPt}
 					)">
 					</div>
 					<!-- EVEN_NUM_CNT -->
 					<div th:replace="fragment/table :: estimateTr(
-						${T(sha.work.enums.Loto7AnalysisType).EVEN_NUM_CNT.getName()},
+						${T(sha.work.enums.Loto6AnalysisType).EVEN_NUM_CNT.getName()},
 						${result.estimateAnalysisBase.evenNumCnt},
-						${result.loto7AnalysisP2Out.summaryEvenNumCntList},
+						${result.loto6AnalysisP2Out.summaryEvenNumCntList},
 						${result.evenNumCntRank},
 						${result.evenNumCntPt}
 					)">
 					</div>
 					<!-- ODD_NUM_CNT -->
 					<div th:replace="fragment/table :: estimateTr(
-						${T(sha.work.enums.Loto7AnalysisType).ODD_NUM_CNT.getName()},
+						${T(sha.work.enums.Loto6AnalysisType).ODD_NUM_CNT.getName()},
 						${result.estimateAnalysisBase.oddNumCnt},
-						${result.loto7AnalysisP2Out.summaryOddNumCntList},
+						${result.loto6AnalysisP2Out.summaryOddNumCntList},
 						${result.oddNumCntRank},
 						${result.oddNumCntPt}
 					)">
 					</div>
 					<!-- SERIAL_NUM_CNT -->
 					<div th:replace="fragment/table :: estimateTr(
-						${T(sha.work.enums.Loto7AnalysisType).SERIAL_NUM_CNT.getName()},
+						${T(sha.work.enums.Loto6AnalysisType).SERIAL_NUM_CNT.getName()},
 						${result.estimateAnalysisBase.serialNumCnt},
-						${result.loto7AnalysisP2Out.summarySerialNumCntList},
+						${result.loto6AnalysisP2Out.summarySerialNumCntList},
 						${result.serialNumCntRank},
 						${result.serialNumCntPt}
 					)">
 					</div>
 					<!-- LEFT_AREA_NUM_CNT -->
 					<div th:replace="fragment/table :: estimateTr(
-						${T(sha.work.enums.Loto7AnalysisType).LEFT_AREA_NUM_CNT.getName()},
+						${T(sha.work.enums.Loto6AnalysisType).LEFT_AREA_NUM_CNT.getName()},
 						${result.estimateAnalysisBase.leftAreaNumCnt},
-						${result.loto7AnalysisP2Out.summaryLeftAreaNumCntList},
+						${result.loto6AnalysisP2Out.summaryLeftAreaNumCntList},
 						${result.leftAreaNumCntRank},
 						${result.leftAreaNumCntPt}
 					)">
 					</div>
 					<!-- CENTER_AREA_NUM_CNT -->
 					<div th:replace="fragment/table :: estimateTr(
-						${T(sha.work.enums.Loto7AnalysisType).CENTER_AREA_NUM_CNT.getName()},
+						${T(sha.work.enums.Loto6AnalysisType).CENTER_AREA_NUM_CNT.getName()},
 						${result.estimateAnalysisBase.centerAreaNumCnt},
-						${result.loto7AnalysisP2Out.summaryCenterAreaNumCntList},
+						${result.loto6AnalysisP2Out.summaryCenterAreaNumCntList},
 						${result.centerAreaNumCntRank},
 						${result.centerAreaNumCntPt}
 					)">
 					</div>
 					<!-- RIGHT_AREA_NUM_CNT -->
 					<div th:replace="fragment/table :: estimateTr(
-						${T(sha.work.enums.Loto7AnalysisType).RIGHT_AREA_NUM_CNT.getName()},
+						${T(sha.work.enums.Loto6AnalysisType).RIGHT_AREA_NUM_CNT.getName()},
 						${result.estimateAnalysisBase.rightAreaNumCnt},
-						${result.loto7AnalysisP2Out.summaryRightAreaNumCntList},
+						${result.loto6AnalysisP2Out.summaryRightAreaNumCntList},
 						${result.rightAreaNumCntRank},
 						${result.rightAreaNumCntPt}
 					)">
 					</div>
 					<!-- PLACE1 -->
 					<div th:replace="fragment/table :: estimateTr(
-						${T(sha.work.enums.Loto7SevenAnalysisType).PLACE1.getName()},
+						${T(sha.work.enums.Loto6SixAnalysisType).PLACE1.getName()},
 						${result.l1},
 						${result.l1List},
 						${result.l1Rank},
@@ -211,7 +193,7 @@
 					</div>
 					<!-- PLACE2 -->
 					<div th:replace="fragment/table :: estimateTr(
-						${T(sha.work.enums.Loto7SevenAnalysisType).PLACE2.getName()},
+						${T(sha.work.enums.Loto6SixAnalysisType).PLACE2.getName()},
 						${result.l2},
 						${result.l2List},
 						${result.l2Rank},
@@ -220,7 +202,7 @@
 					</div>
 					<!-- PLACE3 -->
 					<div th:replace="fragment/table :: estimateTr(
-						${T(sha.work.enums.Loto7SevenAnalysisType).PLACE3.getName()},
+						${T(sha.work.enums.Loto6SixAnalysisType).PLACE3.getName()},
 						${result.l3},
 						${result.l3List},
 						${result.l3Rank},
@@ -229,7 +211,7 @@
 					</div>
 					<!-- PLACE4 -->
 					<div th:replace="fragment/table :: estimateTr(
-						${T(sha.work.enums.Loto7SevenAnalysisType).PLACE4.getName()},
+						${T(sha.work.enums.Loto6SixAnalysisType).PLACE4.getName()},
 						${result.l4},
 						${result.l4List},
 						${result.l4Rank},
@@ -238,7 +220,7 @@
 					</div>
 					<!-- PLACE5 -->
 					<div th:replace="fragment/table :: estimateTr(
-						${T(sha.work.enums.Loto7SevenAnalysisType).PLACE5.getName()},
+						${T(sha.work.enums.Loto6SixAnalysisType).PLACE5.getName()},
 						${result.l5},
 						${result.l5List},
 						${result.l5Rank},
@@ -247,25 +229,16 @@
 					</div>
 					<!-- PLACE6 -->
 					<div th:replace="fragment/table :: estimateTr(
-						${T(sha.work.enums.Loto7SevenAnalysisType).PLACE6.getName()},
+						${T(sha.work.enums.Loto6SixAnalysisType).PLACE6.getName()},
 						${result.l6},
 						${result.l6List},
 						${result.l6Rank},
 						${result.l6Pt}
 					)">
 					</div>
-					<!-- PLACE7 -->
-					<div th:replace="fragment/table :: estimateTr(
-						${T(sha.work.enums.Loto7SevenAnalysisType).PLACE7.getName()},
-						${result.l7},
-						${result.l7List},
-						${result.l7Rank},
-						${result.l7Pt}
-					)">
-					</div>
 					<tr>
 						<td class="td-th2 text-center" colspan="4">
-							<span th:text="#{loto7Estimate.data.td5}"></span>
+							<span th:text="#{loto6Estimate.data.td5}"></span>
 							<span class="badge badge-warning label-14b">
 								<span th:text="${result.totalPt} + 'P'"></span>
 							</span>
@@ -287,8 +260,8 @@
 		
 		//--------------------------------------------------------[
 		//title init
-		var titleLeft = /*[[#{index.loto7.title}]]*/;
-		var titleRight = /*[[#{index.btn.loto7.estimate}]]*/;
+		var titleLeft = /*[[#{index.loto6.title}]]*/;
+		var titleRight = /*[[#{index.btn.loto6.estimate}]]*/;
 		//--------------------------------------------------------]
 		
 		//--------------------------------------------------------[
@@ -317,7 +290,7 @@
 			if(checkValue(postData)) {
 				return;
 			}
-			ShaCommon.ajax.post('/loto/loto7Estimate', postData, 
+			ShaCommon.ajax.post('/loto/loto6Estimate', postData, 
 					ShaCommon.ajax.callBackOk, 
 					ShaCommon.ajax.callBackNg); 
 		});
@@ -336,26 +309,22 @@
 			$('#l4'),
 			$('#l5'),
 			$('#l6'),
-			$('#l7'),
 			$('#b1'),
-			$('#b2')
 		];
 		var ttlHeads = [
-			/*[[#{loto7Estimate.check.l1}]]*/,
-			/*[[#{loto7Estimate.check.l2}]]*/,
-			/*[[#{loto7Estimate.check.l3}]]*/,
-			/*[[#{loto7Estimate.check.l4}]]*/,
-			/*[[#{loto7Estimate.check.l5}]]*/,
-			/*[[#{loto7Estimate.check.l6}]]*/,
-			/*[[#{loto7Estimate.check.l7}]]*/,
-			/*[[#{loto7Estimate.check.b1}]]*/,
-			/*[[#{loto7Estimate.check.b2}]]*/
+			/*[[#{loto6Estimate.check.l1}]]*/,
+			/*[[#{loto6Estimate.check.l2}]]*/,
+			/*[[#{loto6Estimate.check.l3}]]*/,
+			/*[[#{loto6Estimate.check.l4}]]*/,
+			/*[[#{loto6Estimate.check.l5}]]*/,
+			/*[[#{loto6Estimate.check.l6}]]*/,
+			/*[[#{loto6Estimate.check.b1}]]*/,
 		];
-		var msgNonNumber = /*[[#{loto7Estimate.check.nonNumber}]]*/;
-		var msgdupliNumber = /*[[#{loto7Estimate.check.duplicateNumber}]]*/;
+		var msgNonNumber = /*[[#{loto6Estimate.check.nonNumber}]]*/;
+		var msgdupliNumber = /*[[#{loto6Estimate.check.duplicateNumber}]]*/;
 		var numMap = [];
 		for( var i = 0; i < objs.length; i++ ){
-			if(!ShaCommon.util.isLoto7Number(objs[i].val())){
+			if(!ShaCommon.util.isLoto6Number(objs[i].val())){
 				ShaCommon.dialogs.alert(ttlHeads[i]+msgNonNumber);
 				objs[i].addClass('alert-input');
 				return true;

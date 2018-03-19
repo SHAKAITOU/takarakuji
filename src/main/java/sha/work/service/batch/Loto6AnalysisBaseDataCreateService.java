@@ -28,18 +28,18 @@ public class Loto6AnalysisBaseDataCreateService extends BaseService {
 	public void analysis(int turn) throws TKRKScreenException {
 
 		Loto6 loto6 = loto6Mapper.findByTurn(turn);
-		analysis(loto6);
+		saveData(analysisOnly(loto6));
 	}
 	
 	@Transactional
 	public void analysisAll() {
 		List<Loto6> all = loto6Mapper.getAll();
 		for(Loto6 loto6 : all) {
-			analysis(loto6);
+			saveData(analysisOnly(loto6));
 		}
 	}
 	
-	private void analysis(Loto6 loto6) throws TKRKScreenException {
+	public Loto6AnalysisBase analysisOnly(Loto6 loto6) throws TKRKScreenException {
 		
 		Loto6AnalysisBase analysisBase = new Loto6AnalysisBase();
 		
@@ -74,7 +74,11 @@ public class Loto6AnalysisBaseDataCreateService extends BaseService {
 		
 		analysisBase.setRightAreaNumCnt(getRightAreaNumCnt(numbers));
 		
-		int cnt = analysisBaseMapper.isExist(loto6.getTurn());
+		return analysisBase;
+	}
+	
+	public void saveData(Loto6AnalysisBase analysisBase) {
+		int cnt = analysisBaseMapper.isExist(analysisBase.getTurn());
 		if(cnt > 0) {
 			analysisBaseMapper.update(analysisBase);
 		} else {

@@ -67,7 +67,9 @@
 							<button id="loto6AnalysisP2" type="button" class="btn btn btn-block btn-outline-primary btn_com"
 								th:text="#{index.btn.analysisP2}"></button> 
 							<button id="loto6SixAnalysis" type="button" class="btn btn btn-block btn-outline-primary btn_com"
-								th:text="#{index.btn.loto6.sixAnalysis}"></button> 
+								th:text="#{index.btn.loto6.sixAnalysis}"></button>
+							<button id="loto6Estimate" type="button" class="btn btn btn-block btn-outline-primary btn_com"
+								th:text="#{index.btn.loto6.estimate}"></button>	 
 						</div>
 						<div class="col-md-10 col-md-offset-1">
 							<legend th:text="#{index.miniloto.title}"></legend>
@@ -237,6 +239,15 @@ $(document).ready(function(){
 	});
 	
 	
+	$btn_obj = $('#loto6Estimate'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.get('/loto/loto6Estimate', null, 
+				ShaCommon.ajax.callBackOk, 
+				ShaCommon.ajax.callBackNg); 
+	});
 
 	//-------------------------------------------------------
 	//MINILOTO

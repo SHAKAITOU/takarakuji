@@ -119,5 +119,32 @@
 	</div>
 </div>
 
+<div th:fragment="estimateTr(itemNm, keyValue, sumList, rankValue, ptValue)">
+	<tr>
+		<td class="label-14b text-left" 
+			th:text="${itemNm}"></td>
+		<td class="label-14b text-center">
+			<span th:text="${keyValue}"></span>
+		</td>
+		<td class="label-14b text-left">
+			<span th:each="member,iter : ${sumList}" 
+				th:class="'rankSpan badge ' + 
+				(${iter.index == rankValue} ? 
+				'badge-danger' : 'badge-success')"
+				data-toggle="tooltip" data-placement="top" data-html="true"
+				th:with="valueNm=#{table.turnTable.data.td2}"
+				th:title="${T(sha.work.util.HtmlHelper).getTooltipHtmlForEstimateItem(
+				itemNm, member.numberName, valueNm, member.numberValue)}" 
+				th:text="${T(sha.work.util.HtmlHelper).getRankKey(iter.index+1)}"></span>
+		</td>
+		<td class="label-14b text-center">
+			<span class="badge badge-warning label-14b">
+				<span style="color: #E7CF59" 
+					th:text="${ptValue} + 'P'"></span>
+			</span>
+		</td>
+	</tr>
+</div>
+
 </body>
 </html>

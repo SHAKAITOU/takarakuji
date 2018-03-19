@@ -4,7 +4,6 @@ import java.util.List;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import sha.work.dto.loto.Loto7;
 import sha.work.dto.loto.Loto7AnalysisBase;
 import sha.work.entity.in.Loto7EstimateDataIn;
 import sha.work.entity.query.NumberAndTurnsQuery;
@@ -46,6 +45,40 @@ public class Loto7EstimateDataOut extends Loto7EstimateDataIn {
 	/** 右エリア数出る回数 */
 	private int rightAreaNumCntRank;
 	private int rightAreaNumCntPt;
+	
+	private int l1Rank;
+	private int l1Pt;
+	private List<NumberAndTurnsQuery> l1List;
+	
+	private int l2Rank;
+	private int l2Pt;
+	private List<NumberAndTurnsQuery> l2List;
+	
+	private int l3Rank;
+	private int l3Pt;
+	private List<NumberAndTurnsQuery> l3List;
+	
+	
+	private int l4Rank;
+	private int l4Pt;
+	private List<NumberAndTurnsQuery> l4List;
+	
+	
+	private int l5Rank;
+	private int l5Pt;
+	private List<NumberAndTurnsQuery> l5List;
+	
+	
+	private int l6Rank;
+	private int l6Pt;
+	private List<NumberAndTurnsQuery> l6List;
+	
+	
+	private int l7Rank;
+	private int l7Pt;
+	private List<NumberAndTurnsQuery> l7List;
+	
+	private int totalPt = 0;
 
 	private Loto7AnalysisBase estimateAnalysisBase;
 	
@@ -53,16 +86,4 @@ public class Loto7EstimateDataOut extends Loto7EstimateDataIn {
 	
 	private Loto7SevenAnalysisOut loto7SevenAnalysisOut;
 	
-	public void estimateRank() {
-		int rank = 1;
-		int point = 10;
-		for(NumberAndTurnsQuery turn : loto7AnalysisP2Out.getSummaryTotalAvgList()) {
-			
-			totalAvgRank = ++rank;
-			totalAvgPt = --point;
-			if(estimateAnalysisBase.getTotalAvg() == Integer.valueOf(turn.getNumberName())) {
-				break;
-			}
-		}
-	}
 }

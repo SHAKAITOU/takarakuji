@@ -49,7 +49,7 @@ public class Loto6AnalysisBaseDataCreateController extends ScreenBaseController{
 
 
 		ModelAndView mav = new ModelAndView();
-		service.analysisAll();
+		service.analysisAndSaveAll();
 		mav.setViewName("/common/success");
 		
 		return mav;

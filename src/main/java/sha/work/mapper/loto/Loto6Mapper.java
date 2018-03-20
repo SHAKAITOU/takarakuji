@@ -15,7 +15,12 @@ import sha.work.entity.query.NumberAndTurnsQuery;
 public interface Loto6Mapper {
 
     Loto6 findByTurn(@Param("turn") int turn);
+    
+    Loto6 findLastTurn();
+    
     List<Loto6> getAll();
+    
+    int isExist(@Param("turn") int turn);
     
     int getTotalCnt();
     
@@ -29,4 +34,5 @@ public interface Loto6Mapper {
 	
 	void save(Loto6 loto6);
 
+	void update(Loto6 lot6);
 }

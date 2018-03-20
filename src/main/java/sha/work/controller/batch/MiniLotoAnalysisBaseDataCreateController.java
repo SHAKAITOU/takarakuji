@@ -49,7 +49,7 @@ public class MiniLotoAnalysisBaseDataCreateController extends ScreenBaseControll
 
 
 		ModelAndView mav = new ModelAndView();
-		service.analysisAll();
+		service.analysisAndSaveAll();
 		mav.setViewName("/common/success");
 		
 		return mav;

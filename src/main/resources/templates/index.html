@@ -71,10 +71,12 @@
 							<button id="loto6SixAnalysis" type="button" class="btn btn btn-block btn-outline-primary btn_com"
 								th:text="#{index.btn.loto6.sixAnalysis}"></button>
 							<button id="loto6Estimate" type="button" class="btn btn btn-block btn-outline-primary btn_com"
-								th:text="#{index.btn.loto6.estimate}"></button>	 
+								th:text="#{index.btn.loto6.estimate}"></button>
+							<button id="loto6Add" type="button" class="btn btn btn-block btn-outline-primary btn_com"
+								th:text="#{index.btn.loto6.add}"></button>	 
 						</div>
 						<div class="col-md-10 col-md-offset-1">
-							<legend th:text="#{index.miniloto.title}"></legend>
+							<legend th:text="#{index.miniLoto.title}"></legend>
 						</div>
 						<div class="col-md-10 col-md-offset-1">
 							<!-- ========MINILOTO ANALYSIS BTN========= -->
@@ -89,7 +91,9 @@
 							<button id="miniLotoFiveAnalysis" type="button" class="btn btn btn-block btn-outline-primary btn_com"
 								th:text="#{index.btn.miniLoto.fiveAnalysis}"></button> 	
 							<button id="miniLotoEstimate" type="button" class="btn btn btn-block btn-outline-primary btn_com"
-								th:text="#{index.btn.miniLoto.estimate}"></button>		 
+								th:text="#{index.btn.miniLoto.estimate}"></button>
+							<button id="miniLotoAdd" type="button" class="btn btn btn-block btn-outline-primary btn_com"
+								th:text="#{index.btn.miniLoto.add}"></button>
 						</div>
 					</div>
 				</div>
@@ -264,6 +268,16 @@ $(document).ready(function(){
 				ShaCommon.ajax.callBackOk, 
 				ShaCommon.ajax.callBackNg); 
 	});
+	
+	$btn_obj = $('#loto6Add'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.get('/loto/loto6Add', null, 
+				ShaCommon.ajax.callBackOk, 
+				ShaCommon.ajax.callBackNg); 
+	});
 
 	//-------------------------------------------------------
 	//MINILOTO
@@ -313,6 +327,16 @@ $(document).ready(function(){
 		commonBtn = $(this);
 		event.preventDefault();
 		ShaCommon.ajax.get('/loto/miniLotoEstimate', null, 
+				ShaCommon.ajax.callBackOk, 
+				ShaCommon.ajax.callBackNg); 
+	});
+	
+	$btn_obj = $('#miniLotoAdd'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.get('/loto/miniLotoAdd', null, 
 				ShaCommon.ajax.callBackOk, 
 				ShaCommon.ajax.callBackNg); 
 	});

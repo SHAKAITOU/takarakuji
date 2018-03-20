@@ -25,14 +25,14 @@ public class MiniLotoAnalysisBaseDataCreateService extends BaseService {
 	private MiniLotoAnalysisBaseMapper analysisBaseMapper;
 
 	@Transactional
-	public void analysis(int turn) throws TKRKScreenException {
+	public void analysisAndSave(int turn) throws TKRKScreenException {
 
 		MiniLoto miniLoto = miniLotoMapper.findByTurn(turn);
 		saveData(analysisOnly(miniLoto));
 	}
 	
 	@Transactional
-	public void analysisAll() {
+	public void analysisAndSaveAll() {
 		List<MiniLoto> all = miniLotoMapper.getAll();
 		for(MiniLoto miniLoto : all) {
 			saveData(analysisOnly(miniLoto));

@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+  th:with="lang=${#locale.language}" th:lang="${lang}">
+<head>
+	<title th:text="#{common.title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<!-- CSS -->
+<style type="text/css">
+
+</style>
+<form id="add_form" name="add_form" role="form" method="POST">
+<div class="row">
+	<div class="col-md-6 col-xs-12">
+		<legend th:text="#{miniLotoAdd.addOpenDtTitle}"></legend>
+		<div class="row">
+			<div class="col-md-12" style="height: 30px;">
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group">
+						<input id="openDt" name="openDt" type="text" 
+							class="form-control-sm form_datetime text-center label-14b" style="width: 120px;"
+								placeholder="yyyy/mm/dd" th:value="${result.newTurn.openDt}" readonly="true"/>
+						<div class="input-group-append">
+							<span class="input-group-text" th:text="#{miniLotoAdd.addOpenDtTitle}"></span>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6 col-xs-12">
+		<legend th:text="#{miniLotoAdd.addTurnTitle}"></legend>
+		<div class="row">
+			<div class="col-md-12" style="height: 30px;">
+				<div class="form-group">
+					<div class="input-group">
+						<input type="text" id="turn" name="turn" class="form-control-sm text-center label-14b" style="width: 60px;"
+							th:value="${result.newTurn.turn}" readonly="true"/>
+						<div class="input-group-append">
+							<span class="input-group-text" th:text="#{miniLotoAdd.addTurnTitle}"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6 col-xs-12">
+		<legend th:text="#{miniLotoEstimate.estimateL1Title}"></legend>
+		<div class="row">
+			<div class="col-md-12" style="height: 30px;">
+				<div class="form-group">
+					<div class="input-group">
+						<div class="td-th2 input-group-append">
+							<span class="input-group-text" th:text="${T(sha.work.enums.MiniLotoNumberType).NOMAL_NUMBER.getName()}"></span>
+						</div>
+						<input type="text" id="l1" name="l1" class="form-control-sm text-center label-14b" 
+							style="max-width: 30px;" th:value="(${result.newTurn.l1 > 0} ? ${result.newTurn.l1} : '')"/>
+						<input type="text" id="l2" name="l2" class="form-control-sm text-center label-14b" 
+							style="max-width: 30px;" th:value="(${result.newTurn.l2 > 0} ? ${result.newTurn.l2} : '')"/>
+						<input type="text" id="l3" name="l3" class="form-control-sm text-center label-14b" 
+							style="max-width: 30px;" th:value="(${result.newTurn.l3 > 0} ? ${result.newTurn.l3} : '')"/>
+						<input type="text" id="l4" name="l4" class="form-control-sm text-center label-14b" 
+							style="max-width: 30px;" th:value="(${result.newTurn.l4 > 0} ? ${result.newTurn.l4} : '')"/>
+						<input type="text" id="l5" name="l5" class="form-control-sm text-center label-14b" 
+							style="max-width: 30px;" th:value="(${result.newTurn.l5 > 0} ? ${result.newTurn.l5} : '')"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6 col-xs-12">
+		<legend th:text="#{miniLotoEstimate.estimateB1Title}"></legend>
+		<div class="row">
+			<div class="col-md-12" style="height: 30px;">
+				<div id="estimateL1Div" class="form-group">
+					<div class="input-group">
+						<div class="td-t2a input-group-append">
+							<span class="input-group-text" th:text="${T(sha.work.enums.MiniLotoNumberType).BONUS_NUMBER1.getName()}"></span>
+						</div>
+						<input type="text" id="b1" name="b1" class="form-control-sm text-center label-14b" 
+							style="max-width: 30px;" th:value="(${result.newTurn.b1 > 0} ? ${result.newTurn.b1} : '')"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- BR -->
+<div class="row"><div class="col-md-12 col-xs-12 text-right" style="height: 10px;"></div></div>	
+<div class="row">
+	<div class="col-md-12 col-xs-12 text-right" style="height: 40px;">
+		<button id="addBtn" type="button" class="btn-lg btn-outline-danger btn_com" style="width: 120px;"
+			th:text="#{index.btn.miniLoto.add}"></button>
+	</div>
+</div>
+</form>
+<script type="text/javascript" th:inline="javascript">
+
+/*<![CDATA[*/
+	$(document).ready(function(){
+		
+		//--------------------------------------------------------[
+		//title init
+		var titleLeft = /*[[#{index.miniLoto.title}]]*/;
+		var titleRight = /*[[#{index.btn.miniLoto.add}]]*/;
+		//--------------------------------------------------------]
+		
+		//--------------------------------------------------------[
+		//data init
+		
+		//--------------------------------------------------------]
+		
+		//--------------------------------------------------------[
+	    //page component init	
+		//var ctx = $("#scatterChart").get(0).getContext('2d');
+	    //var scatterChart = drawScatterChart(ctx, data, titleLeft + titleRight);
+		
+	    $('#okPanelTitle').text(titleLeft + titleRight);
+
+		//--------------------------------------------------------]
+		
+		
+	  	//--------------------------------------------------------[
+		//init bond event to btn
+
+		$btn_obj = $('#addBtn'); 
+		$btn_obj.unbind(); 
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			var postData = $('#add_form').serializeArray();
+			if(checkValue(postData)) {
+				return;
+			}
+			
+			var title = /*[[#{dialogs.confirm.add.title}]]*/;
+			var confirmMsg = /*[[#{dialogs.confirm.add.msg}]]*/;
+			var successMsg = /*[[#{miniLotoAdd.add.success.msg}]]*/;
+			var addTurn = /*[[#{dataShow.data.td1.span}]]*/;
+			addTurn += $('#turn').val();
+			var unit = /*[[#{table.turnTable.data.td2Span}]]*/;
+			ShaCommon.dialogs.confirm(
+					title,
+					confirmMsg,
+					function(){						
+						ShaCommon.ajax.postWithSucc(
+									'/loto/miniLotoAdd', 
+									postData, 
+									ShaCommon.ajax.callBackOk,
+									ShaCommon.ajax.callBackNg,
+									addTurn + unit + successMsg
+								);  
+					});
+		});
+	});
+	
+	function checkValue() {
+		//alert(JSON.stringify(postData));
+		var objs = [
+			$('#l1'), 
+			$('#l2'),
+			$('#l3'),
+			$('#l4'),
+			$('#l5'),
+			$('#b1'),
+		];
+		var ttlHeads = [
+			/*[[#{loto7Estimate.check.l1}]]*/,
+			/*[[#{loto7Estimate.check.l2}]]*/,
+			/*[[#{loto7Estimate.check.l3}]]*/,
+			/*[[#{loto7Estimate.check.l4}]]*/,
+			/*[[#{loto7Estimate.check.l5}]]*/,
+			/*[[#{loto7Estimate.check.b1}]]*/,
+		];
+		var msgNonNumber = /*[[#{miniLotoEstimate.check.nonNumber}]]*/;
+		var msgdupliNumber = /*[[#{miniLotoEstimate.check.duplicateNumber}]]*/;
+		var numMap = [];
+		for( var i = 0; i < objs.length; i++ ){
+			if(!ShaCommon.util.isMiniLotoNumber(objs[i].val())){
+				ShaCommon.dialogs.alert(ttlHeads[i]+msgNonNumber);
+				objs[i].addClass('alert-input');
+				return true;
+			} else {
+				objs[i].removeClass('alert-input');
+			}
+		}
+		
+		for( var i = 0; i < objs.length; i++ ){
+			if(i>0 && numMap[objs[i].val()] != null) {
+				ShaCommon.dialogs.alert(ttlHeads[i]+msgdupliNumber);
+				objs[i].addClass('alert-input');
+				return true;
+			} else{
+				numMap[objs[i].val()] = objs[i].val();
+				objs[i].removeClass('alert-input');
+			}
+		}
+		
+		return false;
+	}
+
+	
+/*]]>*/
+</script>
+
+	
+	
+</body>
+
+</html>

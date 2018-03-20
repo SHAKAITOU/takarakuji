@@ -25,14 +25,14 @@ public class Loto6AnalysisBaseDataCreateService extends BaseService {
 	private Loto6AnalysisBaseMapper analysisBaseMapper;
 
 	@Transactional
-	public void analysis(int turn) throws TKRKScreenException {
+	public void analysisAndSave(int turn) throws TKRKScreenException {
 
 		Loto6 loto6 = loto6Mapper.findByTurn(turn);
 		saveData(analysisOnly(loto6));
 	}
 	
 	@Transactional
-	public void analysisAll() {
+	public void analysisAndSaveAll() {
 		List<Loto6> all = loto6Mapper.getAll();
 		for(Loto6 loto6 : all) {
 			saveData(analysisOnly(loto6));

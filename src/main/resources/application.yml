@@ -56,12 +56,12 @@ mybatis:
 #### CRON ####
 # 秒/分/時/日/月/曜日
 cron:
-  #LOTO7 毎週土曜日のAM 00:00に実行
+  #LOTO7 毎週土曜日のAM 00:00に実行（金抽）
   loto7Cron: 0 0 0 * * 6
-  #LOTO6 毎週日、水曜日のAM 00:00に実行
-  loto6Cron: 0 0 0 * * 0,3
-  #LOTO6 毎週火曜日のAM 00:00に実行
-  miniLotoCron: 0 0 0 * * 2
+  #LOTO6 毎週火、金曜日のAM 00:00に実行（月、木抽）
+  loto6Cron: 0 0 0 * * 2,5
+  #LOTO6 毎週水曜日のAM 00:00に実行（火抽）
+  miniLotoCron: 0 0 0 * * 3
 ################
 
 #### no env##### 

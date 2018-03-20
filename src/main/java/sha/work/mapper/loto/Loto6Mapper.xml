@@ -55,12 +55,20 @@
 		SELECT * FROM M_LOTO6
 	</select>
 	
+	<select id="isExist" resultType="int">
+		SELECT COUNT(*) FROM M_LOTO6 WHERE TURN = #{turn}
+	</select>
+	
 	<select id="findByTurn" resultMap="Loto6">
 		SELECT * FROM M_LOTO6 WHERE TURN = #{turn}
 	</select>
 	
 	<select id="getTotalCnt" resultType="int">
 		SELECT COUNT(*) FROM M_LOTO6
+	</select>
+	
+	<select id="findLastTurn" resultMap="Loto6">
+		SELECT * FROM M_LOTO6 ORDER BY TURN DESC LIMIT 1
 	</select>
 	
 	<select id="getPageList" resultMap="Loto6">
@@ -149,4 +157,18 @@
 		)
 	</insert>
 	
+	<update id="update">
+		UPDATE M_LOTO6
+		SET
+			OPEN_DT = #{openDt}
+			,L1 = #{l1}
+			,L2 = #{l2}
+			,L3 = #{l3}
+			,L4 = #{l4}
+			,L5 = #{l5}
+			,L6 = #{l6}
+			,B1 = #{b1}
+		WHERE
+			TURN = #{turn}
+	</update>
 </mapper>

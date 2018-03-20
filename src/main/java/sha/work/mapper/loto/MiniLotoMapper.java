@@ -17,7 +17,11 @@ public interface MiniLotoMapper {
     MiniLoto findByTurn(@Param("turn") int turn);
     List<MiniLoto> getAll();
     
+    MiniLoto findLastTurn();
+    
     int getTotalCnt();
+    
+    int isExist(@Param("turn") int turn);
     
     List<MiniLoto> getPageList(MiniLotoShowDataIn dataIn);
 
@@ -29,5 +33,7 @@ public interface MiniLotoMapper {
 	
 	
 	void save(MiniLoto miniLoto);
+	
+	void update(MiniLoto miniLoto);
 
 }

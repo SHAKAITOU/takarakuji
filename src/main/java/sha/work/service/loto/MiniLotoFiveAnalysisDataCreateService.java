@@ -1,4 +1,4 @@
-package sha.work.service.batch;
+package sha.work.service.loto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

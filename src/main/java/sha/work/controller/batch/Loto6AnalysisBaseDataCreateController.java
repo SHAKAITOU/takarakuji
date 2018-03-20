@@ -19,7 +19,7 @@ import sha.framework.controller.ScreenBaseController;
 import sha.framework.util.JsonLogCommonUtil;
 import sha.framework.util.MessageSourceUtil;
 import sha.work.exception.TKRKScreenException;
-import sha.work.service.batch.Loto6AnalysisBaseDataCreateService;
+import sha.work.service.loto.Loto6AnalysisBaseDataCreateService;
 
 /**
  * S002 Thymeleaf 

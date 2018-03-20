@@ -557,6 +557,42 @@ a:hover {
 	border-color: #2780E3;
 }
 
+ .confirm{
+	border-width: 1;
+	border-color: #2780E3;
+}
+
+ .confirm-title{
+	margin: 1px;
+	padding: 2px;
+	font-weight: bold;
+}
+
+ .confirm-text{
+	margin: 1px;
+	padding: 5px;
+	font-size: 14px;
+}
+
+ .successBar-title{
+	margin: 1px;
+	padding: 2px;
+	color: #008b8b;
+	font-weight: bold;
+}
+
+ .successBar-text{
+	margin: 1px;
+	padding: 5px;
+	color: #008b8b;
+	font-size: 14px;
+}
+
+ .successBar{
+	border-width: 1;
+	border-color: #008b8b;
+}
+
 /*!--------------------------
  * D3 CSS
  * --------------------------

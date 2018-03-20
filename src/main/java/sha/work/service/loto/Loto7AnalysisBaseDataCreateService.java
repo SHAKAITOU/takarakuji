@@ -1,4 +1,4 @@
-package sha.work.service.batch;
+package sha.work.service.loto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,7 +24,6 @@ public class Loto7AnalysisBaseDataCreateService extends BaseService {
 	@Autowired
 	private Loto7AnalysisBaseMapper analysisBaseMapper;
 
-	@Transactional
 	public void analysisAndSave(int turn) throws TKRKScreenException {
 
 		Loto7 loto7 = loto7Mapper.findByTurn(turn);

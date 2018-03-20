@@ -19,7 +19,7 @@ import sha.framework.controller.ScreenBaseController;
 import sha.framework.util.JsonLogCommonUtil;
 import sha.framework.util.MessageSourceUtil;
 import sha.work.exception.TKRKScreenException;
-import sha.work.service.loto.Loto7AnalysisBaseDataCreateService;
+import sha.work.service.batch.MiniLotoBatchService;
 
 /**
  * S002 Thymeleaf 
@@ -27,8 +27,8 @@ import sha.work.service.loto.Loto7AnalysisBaseDataCreateService;
  *
  */
 @Controller
-@RequestMapping("/batch/createLoto7AnalysisBaseData")
-public class Loto7AnalysisBaseDataCreateController extends ScreenBaseController{
+@RequestMapping("/batch/miniLotoBatch")
+public class MiniLotoBatchController extends ScreenBaseController{
 	
 	
 	@Autowired
@@ -39,7 +39,7 @@ public class Loto7AnalysisBaseDataCreateController extends ScreenBaseController{
 	private JsonLogCommonUtil jsonLog;
 	
 	@Autowired
-	private Loto7AnalysisBaseDataCreateService service;
+	private MiniLotoBatchService service;
 
 
 	@RequestMapping(method=RequestMethod.GET)
@@ -49,7 +49,7 @@ public class Loto7AnalysisBaseDataCreateController extends ScreenBaseController{
 
 
 		ModelAndView mav = new ModelAndView();
-		service.analysisAndSaveAll();
+		service.batch();
 		mav.setViewName("/common/success");
 		
 		return mav;

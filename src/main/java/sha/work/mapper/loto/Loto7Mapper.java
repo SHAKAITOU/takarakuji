@@ -15,8 +15,12 @@ import sha.work.entity.query.NumberAndTurnsQuery;
 public interface Loto7Mapper {
 
     Loto7 findByTurn(@Param("turn") int turn);
+    
+    Loto7 findLastTurn();
 
     List<Loto7> getAll();
+    
+    int isExist(@Param("turn") int turn);
     
     int getTotalCnt();
     
@@ -31,5 +35,7 @@ public interface Loto7Mapper {
 	List<Loto7SevenQuery> getSevenSum(@Param("hanyoId") int hanyoId);
 	
 	void save(Loto7 loto7);
+	
+	void update(Loto7 loto7);
 
 }

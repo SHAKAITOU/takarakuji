@@ -94,6 +94,27 @@ try{
 			$('#alert').find('#alertBody').html(context);
 			return $('#alert').modal('show');
 		},
+		
+		confirm : function (title, context, callBackOk) {
+			$('#confirm').find('#confirmTitle').html(title);
+			$('#confirm').find('#confirmBody').html(context);
+			
+			$btn_obj = $('#confirmBtnOk'); 
+			$btn_obj.unbind(); 
+			$btn_obj.on('click', function(event) {
+				event.preventDefault();
+				callBackOk();
+			});
+			
+			$('#confirm').modal('show');
+		},
+		confirmClose : function () {
+			$('#confirm').modal('hide');
+		},
+		success : function (context) {
+			$('#success').find('#successBody').html(context);
+			$('#success').modal('show');
+		},
 	
 	}
 	
@@ -152,6 +173,37 @@ try{
 					    200: function(data){
 					    	callBackOk(data);
 					    	ShaCommon.dialogs.progress(false);
+					    },
+					    404: function() {
+					    	alert( "page not found" );
+					    	ShaCommon.dialogs.progress(false);
+					    },
+					    500: function(data){
+					    	callBackNg(data);
+					    	ShaCommon.dialogs.progress(false);
+					    }
+				   },
+				   timeout: 10000
+			});
+		},
+		
+		//------------------------------------------------------------------------------
+		// execute post with succ ajax
+		//------------------------------------------------------------------------------
+		postWithSucc : function (url, formData, callBackOk, callBackNg, sucMsg) { 
+			
+			ShaCommon.dialogs.progress(true);
+			
+			$.ajax({
+				   type: "POST",
+				   url: url,
+				   data: formData,
+				   statusCode: {
+					    200: function(data){
+					    	callBackOk(data);
+					    	ShaCommon.dialogs.progress(false);
+					    	ShaCommon.dialogs.confirmClose();
+					    	ShaCommon.dialogs.success(sucMsg);
 					    },
 					    404: function() {
 					    	alert( "page not found" );

@@ -1,13 +1,11 @@
 package sha.work.service.loto;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import sha.framework.service.BaseService;
 import sha.work.dto.loto.Loto7;
-import sha.work.entity.in.Loto7ShowDataIn;
 import sha.work.exception.TKRKScreenException;
 import sha.work.mapper.loto.Loto7Mapper;
 
@@ -17,13 +15,25 @@ public class Loto7AddService extends BaseService {
 	/** DB access class. */
 	@Autowired
 	private Loto7Mapper loto7Mapper;
+	
+	@Autowired
+	private Loto7AnalysisBaseDataCreateService analysisBaseService;
 
-	public int getMaxTurn() throws TKRKScreenException {
+	public Loto7 getLastTurn() throws TKRKScreenException {
 		
-		return loto7Mapper.getTotalCnt();
+		return loto7Mapper.findLastTurn();
+	}
+	
+	@Transactional
+	public void add(Loto7 loto7) {
+		int cnt = loto7Mapper.isExist(loto7.getTurn());
+		if(cnt > 0) {
+			loto7Mapper.update(loto7);
+		} else {
+			loto7Mapper.save(loto7);
+		}
+		analysisBaseService.analysisAndSave(loto7.getTurn());
+		
 	}
 
-	public  List<Loto7> getData(Loto7ShowDataIn dataIn) throws TKRKScreenException {
-		return loto7Mapper.getPageList(dataIn);
-	}
 }

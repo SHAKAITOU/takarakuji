@@ -24,7 +24,7 @@ import sha.framework.util.LogCommonUtil;
 import sha.work.dto.loto.MiniLoto;
 import sha.work.entity.in.MiniLotoEstimateDataIn;
 import sha.work.entity.out.MiniLotoEstimateDataOut;
-import sha.work.service.batch.MiniLotoAnalysisBaseDataCreateService;
+import sha.work.service.loto.MiniLotoAnalysisBaseDataCreateService;
 import sha.work.service.loto.MiniLotoEstimateService;
 
 /**

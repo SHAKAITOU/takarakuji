@@ -73,8 +73,16 @@
 		SELECT * FROM M_LOTO7
 	</select>
 	
+	<select id="isExist" resultType="int">
+		SELECT COUNT(*) FROM M_LOTO7 WHERE TURN = #{turn}
+	</select>
+	
 	<select id="findByTurn" resultMap="Loto7">
 		SELECT * FROM M_LOTO7 WHERE TURN = #{turn}
+	</select>
+	
+	<select id="findLastTurn" resultMap="Loto7">
+		SELECT * FROM M_LOTO7 ORDER BY TURN DESC LIMIT 1
 	</select>
 	
 	<select id="getTotalCnt" resultType="int">
@@ -150,6 +158,8 @@
 			mh.id = #{hanyoId}
 	</select>
 	
+	
+	
 	<!-- INSERT -->
 	<insert id="save">
 		INSERT INTO M_LOTO7
@@ -180,4 +190,20 @@
 		)
 	</insert>
 	
+	<update id="update">
+		UPDATE M_LOTO7
+		SET
+			OPEN_DT = #{openDt}
+			,L1 = #{l1}
+			,L2 = #{l2}
+			,L3 = #{l3}
+			,L4 = #{l4}
+			,L5 = #{l5}
+			,L6 = #{l6}
+			,L7 = #{l7}
+			,B1 = #{b1}
+			,B2 = #{b2}
+		WHERE
+			TURN = #{turn}
+	</update>
 </mapper>

@@ -26,6 +26,26 @@
 	</div>	
 </div>
 
+<div class="modal" id="success" th:fragment="success">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog modal-sm vertical-align-center" role="document">
+			<div class="modal-content successBar">
+				<div class="modal-header">
+					<h5 id="successTitle" class="modal-title successBar-title" th:text="#{dialogs.success.title}"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body successBar-text">
+					<div class="col-md-10 col-md-offset-1" id="successBody">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>
+
 <div class="modal" id="alert" th:fragment="alert">
 	<div class="vertical-alignment-helper">
 		<div class="modal-dialog modal-sm vertical-align-center" role="document">
@@ -44,15 +64,25 @@
 	</div>	
 </div>
 
-<div class="modal border-danger" id="dialogWith2Btn" th:fragment="dialogWith2Btn">
-	<div class="modal-dialog" role="document">
-    	<div class="card border-danger mb-3">
-			<div class="card-header" id="dialogWith2BtnTitle">Header</div>
-			<div class="card-body" id="dialogWith2BtnBody">
-			</div>
-			<div class="modal-footer">
-				<button id="dlgBtnOk" type="button" class="btn btn-sm btn-primary" th:text="#{dialogs.btn.ok}"></button>
-				<button id="dlgBtnNg" type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" th:text="#{dialogs.btn.ng}"></button>
+<div class="modal" id="confirm" th:fragment="confirm">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog modal-sm vertical-align-center" role="document">
+	    	<div class="modal-content confirm">
+				<div class="modal-header">
+					<h5 id="confirmTitle" class="modal-title confirm-title"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body confirm-text">
+					<div class="col-md-10 col-md-offset-1" id="confirmBody">
+						
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button id="confirmBtnOk" type="button" class="btn btn-sm btn-outline-primary btn_com" th:text="#{dialogs.btn.ok}"></button>
+					<button id="confirmBtnNg" type="button" class="btn btn-sm btn-outline-danger btn_com" data-dismiss="modal" th:text="#{dialogs.btn.ng}"></button>
+				</div>
 			</div>
 		</div>
 	</div>

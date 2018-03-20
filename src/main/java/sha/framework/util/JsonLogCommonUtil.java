@@ -71,6 +71,10 @@ public class JsonLogCommonUtil {
 		writeLog(Level.DEBUG, getLogMap(requestId, traceId, message, request, response, t));
 	}
 	
+	public void info(String message) {
+
+		writeLog(Level.INFO, getLogMap("", "", message, null, null, null));
+	}
 	
 	public void info(String requestId, 
 						String traceId,

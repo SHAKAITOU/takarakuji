@@ -11,8 +11,43 @@
 <style type="text/css">
 
 </style>
-<form id="search_form" name="search_form" role="form" method="POST">
+<form id="add_form" name="add_form" role="form" method="POST">
 <div class="row">
+	<div class="col-md-6 col-xs-12">
+		<legend id="estimateTitle" th:text="#{loto7Add.addOpenDtTitle}"></legend>
+		<div class="row">
+			<div class="col-md-12" style="height: 30px;">
+				<div id="estimateL1Div" class="form-group">
+					<div class="input-group">
+						<div class="input-group">
+						<input id="openDt" name="openDt" type="text" 
+							class="form-control-sm form_datetime text-center label-14b" style="width: 120px;"
+								placeholder="yyyy/mm/dd" th:value="${result.newTurn.openDt}" readonly="true"/>
+						<div class="input-group-append">
+							<span class="input-group-text" th:text="#{loto7Add.addOpenDtTitle}"></span>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6 col-xs-12">
+		<legend id="estimateTitle" th:text="#{loto7Add.addTurnTitle}"></legend>
+		<div class="row">
+			<div class="col-md-12" style="height: 30px;">
+				<div id="estimateL1Div" class="form-group">
+					<div class="input-group">
+						<input type="text" id="turn" name="turn" class="form-control-sm text-center label-14b" style="width: 60px;"
+							th:value="${result.newTurn.turn}" readonly="true"/>
+						<div class="input-group-append">
+							<span class="input-group-text" th:text="#{loto7Add.addTurnTitle}"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="col-md-6 col-xs-12">
 		<legend id="estimateTitle" th:text="#{loto7Estimate.estimateL1Title}"></legend>
 		<div class="row">
@@ -23,19 +58,19 @@
 							<span class="input-group-text" th:text="${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}"></span>
 						</div>
 						<input type="text" id="l1" name="l1" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="${result.l1}"/>
+							style="max-width: 30px;" th:value="(${result.newTurn.l1 > 0} ? ${result.newTurn.l1} : '')"/>
 						<input type="text" id="l2" name="l2" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="${result.l2}"/>
+							style="max-width: 30px;" th:value="(${result.newTurn.l2 > 0} ? ${result.newTurn.l2} : '')"/>
 						<input type="text" id="l3" name="l3" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="${result.l3}"/>
+							style="max-width: 30px;" th:value="(${result.newTurn.l3 > 0} ? ${result.newTurn.l3} : '')"/>
 						<input type="text" id="l4" name="l4" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="${result.l4}"/>
+							style="max-width: 30px;" th:value="(${result.newTurn.l4 > 0} ? ${result.newTurn.l4} : '')"/>
 						<input type="text" id="l5" name="l5" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="${result.l5}"/>
+							style="max-width: 30px;" th:value="(${result.newTurn.l5 > 0} ? ${result.newTurn.l5} : '')"/>
 						<input type="text" id="l6" name="l6" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="${result.l6}"/>
+							style="max-width: 30px;" th:value="(${result.newTurn.l6 > 0} ? ${result.newTurn.l6} : '')"/>
 						<input type="text" id="l7" name="l7" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="${result.l7}"/>
+							style="max-width: 30px;" th:value="(${result.newTurn.l7 > 0} ? ${result.newTurn.l7} : '')"/>
 					</div>
 				</div>
 			</div>
@@ -51,7 +86,7 @@
 							<span class="input-group-text" th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getName()}"></span>
 						</div>
 						<input type="text" id="b1" name="b1" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="${result.b1}"/>
+							style="max-width: 30px;" th:value="(${result.newTurn.b1 > 0} ? ${result.newTurn.b1} : '')"/>
 					</div>
 				</div>
 			</div>
@@ -67,7 +102,7 @@
 							<span class="input-group-text" th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getName()}"></span>
 						</div>
 						<input type="text" id="b2" name="b2" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="${result.b2}"/>
+							style="max-width: 30px;" th:value="(${result.newTurn.b2 > 0} ? ${result.newTurn.b2} : '')"/>
 					</div>
 				</div>
 			</div>
@@ -78,7 +113,7 @@
 <div class="row"><div class="col-md-12 col-xs-12 text-right" style="height: 10px;"></div></div>	
 <div class="row">
 	<div class="col-md-12 col-xs-12 text-right" style="height: 40px;">
-		<button id="searchBtn" type="button" class="btn-lg btn-outline-primary btn_com" style="width: 120px;"
+		<button id="addBtn" type="button" class="btn-lg btn-outline-danger btn_com" style="width: 120px;"
 			th:text="#{index.btn.loto7.add}"></button>
 	</div>
 </div>
@@ -112,17 +147,33 @@
 	  	//--------------------------------------------------------[
 		//init bond event to btn
 
-		$btn_obj = $('#searchBtn'); 
+		$btn_obj = $('#addBtn'); 
 		$btn_obj.unbind(); 
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
-			var postData = $('#search_form').serializeArray();
+			var postData = $('#add_form').serializeArray();
 			if(checkValue(postData)) {
 				return;
 			}
-			ShaCommon.ajax.post('/loto/loto7Add', postData, 
-					ShaCommon.ajax.callBackOk, 
-					ShaCommon.ajax.callBackNg); 
+			
+			var title = /*[[#{dialogs.confirm.add.title}]]*/;
+			var confirmMsg = /*[[#{dialogs.confirm.add.msg}]]*/;
+			var successMsg = /*[[#{loto7Add.add.success.msg}]]*/;
+			var addTurn = /*[[#{dataShow.data.td1.span}]]*/;
+			addTurn += $('#turn').val();
+			var unit = /*[[#{table.turnTable.data.td2Span}]]*/;
+			ShaCommon.dialogs.confirm(
+					title,
+					confirmMsg,
+					function(){						
+						ShaCommon.ajax.postWithSucc(
+									'/loto/loto7Add', 
+									postData, 
+									ShaCommon.ajax.callBackOk,
+									ShaCommon.ajax.callBackNg,
+									addTurn + unit + successMsg
+								);  
+					});
 		});
 	});
 	

@@ -24,7 +24,7 @@ import sha.framework.util.LogCommonUtil;
 import sha.work.dto.loto.Loto6;
 import sha.work.entity.in.Loto6EstimateDataIn;
 import sha.work.entity.out.Loto6EstimateDataOut;
-import sha.work.service.batch.Loto6AnalysisBaseDataCreateService;
+import sha.work.service.loto.Loto6AnalysisBaseDataCreateService;
 import sha.work.service.loto.Loto6EstimateService;
 
 /**

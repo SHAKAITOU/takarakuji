@@ -1,13 +1,11 @@
 package sha.work.controller.loto;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,11 +20,9 @@ import sha.framework.controller.ScreenBaseController;
 import sha.framework.exception.TKRKScreenException;
 import sha.framework.util.LogCommonUtil;
 import sha.work.dto.loto.Loto7;
-import sha.work.entity.in.Loto7EstimateDataIn;
-import sha.work.entity.out.Loto7EstimateDataOut;
-import sha.work.service.batch.Loto7AnalysisBaseDataCreateService;
+import sha.work.entity.in.Loto7AddDataIn;
 import sha.work.service.loto.Loto7AddService;
-import sha.work.service.loto.Loto7EstimateService;
+import sha.work.util.LotoUtil;
 
 /**
  * S002 Thymeleaf 
@@ -52,7 +48,8 @@ public class Loto7AddController extends ScreenBaseController{
 		ModelAndView mav = new ModelAndView();
 		
 		
-		Loto7EstimateDataIn dataIn = initLoto7EstimateDataIn();
+		Loto7AddDataIn dataIn = initLoto7AddDataIn();
+
 		
 		mav.addObject("result", dataIn);
 		mav.setViewName("loto/loto7Add");
@@ -65,50 +62,43 @@ public class Loto7AddController extends ScreenBaseController{
 			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
 		
 		ModelAndView mav = new ModelAndView();
-		Loto7EstimateDataIn dataIn = searchLoto7EstimateDataIn(allRequestParams);
-
-		Loto7 loto7 = new Loto7();
-
-		try {
-			BeanUtils.copyProperties(loto7, dataIn);
-		} catch (IllegalAccessException | InvocationTargetException e) {
-			throw new TKRKScreenException(e);
-		}
+		Loto7 loto7 = setLoto7AddDataIn(allRequestParams);
+		service.add(loto7);
 		
+		Loto7AddDataIn dataIn = initLoto7AddDataIn();
+
 		mav.addObject("result", dataIn);
 		mav.setViewName("loto/loto7Add");
 		return mav;
 	}
 	
-	private Loto7EstimateDataIn initLoto7EstimateDataIn() {
-		Loto7EstimateDataIn dataIn = new Loto7EstimateDataIn();
-		dataIn.setL1(1);
-		dataIn.setL2(9);
-		dataIn.setL3(14);
-		dataIn.setL4(21);
-		dataIn.setL5(28);
-		dataIn.setL6(31);
-		dataIn.setL7(34);
-		dataIn.setB1(7);
-		dataIn.setB2(8);
-		
+	private Loto7AddDataIn initLoto7AddDataIn() {
+		Loto7AddDataIn dataIn = new Loto7AddDataIn();
+		dataIn.setLastTurn(service.getLastTurn());
+		Loto7 newTurn = new Loto7();
+		newTurn.setOpenDt(LotoUtil.getNextLoto7OpenDt(dataIn.getLastTurn().getOpenDt()));
+		newTurn.setTurn(dataIn.getLastTurn().getTurn()+1);
+		dataIn.setNewTurn(newTurn);
 		return dataIn;
 	}
 	
-	private Loto7EstimateDataIn searchLoto7EstimateDataIn(Map<String,String> allRequestParams) {
-		Loto7EstimateDataIn dataIn = new Loto7EstimateDataIn();
-		dataIn.setL1(Integer.valueOf(allRequestParams.get("l1")));
-		dataIn.setL2(Integer.valueOf(allRequestParams.get("l2")));
-		dataIn.setL3(Integer.valueOf(allRequestParams.get("l3")));
-		dataIn.setL4(Integer.valueOf(allRequestParams.get("l4")));
-		dataIn.setL5(Integer.valueOf(allRequestParams.get("l5")));
-		dataIn.setL6(Integer.valueOf(allRequestParams.get("l6")));
-		dataIn.setL7(Integer.valueOf(allRequestParams.get("l7")));
-		dataIn.setB1(Integer.valueOf(allRequestParams.get("b1")));
-		dataIn.setB2(Integer.valueOf(allRequestParams.get("b2")));
+	private Loto7 setLoto7AddDataIn(Map<String,String> allRequestParams) {
+		Loto7 newTurn = new Loto7();
+		newTurn.setOpenDt(allRequestParams.get("openDt"));
+		newTurn.setTurn(Integer.valueOf(allRequestParams.get("turn")));
+		newTurn.setL1(Integer.valueOf(allRequestParams.get("l1")));
+		newTurn.setL2(Integer.valueOf(allRequestParams.get("l2")));
+		newTurn.setL3(Integer.valueOf(allRequestParams.get("l3")));
+		newTurn.setL4(Integer.valueOf(allRequestParams.get("l4")));
+		newTurn.setL5(Integer.valueOf(allRequestParams.get("l5")));
+		newTurn.setL6(Integer.valueOf(allRequestParams.get("l6")));
+		newTurn.setL7(Integer.valueOf(allRequestParams.get("l7")));
+		newTurn.setB1(Integer.valueOf(allRequestParams.get("b1")));
+		newTurn.setB2(Integer.valueOf(allRequestParams.get("b2")));
 		
-		return dataIn;
+		return newTurn;
 	}
+	
 	
 
 }

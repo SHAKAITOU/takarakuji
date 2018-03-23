@@ -25,6 +25,8 @@ import sha.framework.exception.TKRKScreenException;
 import sha.framework.util.DateUtility;
 import sha.framework.util.DateUtility.DateFormat;
 import sha.framework.util.LogCommonUtil;
+import sha.work.common.UrlConstants;
+import sha.work.common.ViewConstants;
 import sha.work.entity.in.Loto6ShowDataIn;
 import sha.work.entity.out.Loto6ShowDataOut;
 import sha.work.enums.PageCntType;
@@ -49,7 +51,7 @@ public class Loto6AnalysisP0Controller extends ScreenBaseController{
 	private Loto6ShowService service;
 
 
-	@RequestMapping(path="/loto/loto6AnalysisP0", method=RequestMethod.GET)
+	@RequestMapping(path=UrlConstants.LOTO_LOTO6ANALYSISP0, method=RequestMethod.GET)
 	public ModelAndView showLoto6DataGet(@ModelAttribute Object greeting)  {
 		
 		ModelAndView mav = new ModelAndView();
@@ -66,11 +68,11 @@ public class Loto6AnalysisP0Controller extends ScreenBaseController{
 		dataOut.setLoto6List(service.getData(dataIn));
 		
 		mav.addObject("result", dataOut);
-		mav.setViewName("loto/loto6AnalysisP0Result");
+		mav.setViewName(ViewConstants.LOTO_LOTO6ANALYSISP0RESULT);
 		return mav;
 	}
 	
-	@RequestMapping(path="/loto/loto6AnalysisP0", method=RequestMethod.POST)
+	@RequestMapping(path=UrlConstants.LOTO_LOTO6ANALYSISP0, method=RequestMethod.POST)
 	public ModelAndView showLoto6DataPost(@RequestParam Map<String,String> allRequestParams, Locale loc, 
 			HttpServletRequest request,
 			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
@@ -89,7 +91,7 @@ public class Loto6AnalysisP0Controller extends ScreenBaseController{
 		dataOut.setLoto6List(service.getData(dataIn));
 		
 		mav.addObject("result", dataOut);
-		mav.setViewName("loto/loto6AnalysisP0Result");
+		mav.setViewName(ViewConstants.LOTO_LOTO6ANALYSISP0RESULT);
 		return mav;
 	}
 	

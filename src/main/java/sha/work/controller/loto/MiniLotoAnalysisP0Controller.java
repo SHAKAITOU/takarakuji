@@ -25,6 +25,8 @@ import sha.framework.exception.TKRKScreenException;
 import sha.framework.util.DateUtility;
 import sha.framework.util.DateUtility.DateFormat;
 import sha.framework.util.LogCommonUtil;
+import sha.work.common.UrlConstants;
+import sha.work.common.ViewConstants;
 import sha.work.entity.in.MiniLotoShowDataIn;
 import sha.work.entity.out.MiniLotoShowDataOut;
 import sha.work.enums.PageCntType;
@@ -49,7 +51,7 @@ public class MiniLotoAnalysisP0Controller extends ScreenBaseController{
 	private MiniLotoShowService service;
 
 
-	@RequestMapping(path="/loto/miniLotoAnalysisP0", method=RequestMethod.GET)
+	@RequestMapping(path=UrlConstants.LOTO_MINILOTOANALYSISP0, method=RequestMethod.GET)
 	public ModelAndView showMiniLotoDataGet(@ModelAttribute Object greeting)  {
 		
 		ModelAndView mav = new ModelAndView();
@@ -66,11 +68,11 @@ public class MiniLotoAnalysisP0Controller extends ScreenBaseController{
 		dataOut.setMiniLotoList(service.getData(dataIn));
 		
 		mav.addObject("result", dataOut);
-		mav.setViewName("loto/miniLotoAnalysisP0Result");
+		mav.setViewName(ViewConstants.LOTO_MINILOTOANALYSISP0RESULT);
 		return mav;
 	}
 	
-	@RequestMapping(path="/loto/miniLotoAnalysisP0", method=RequestMethod.POST)
+	@RequestMapping(path=UrlConstants.LOTO_MINILOTOANALYSISP0, method=RequestMethod.POST)
 	public ModelAndView showMiniLotoDataPost(@RequestParam Map<String,String> allRequestParams, Locale loc, 
 			HttpServletRequest request,
 			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
@@ -89,7 +91,7 @@ public class MiniLotoAnalysisP0Controller extends ScreenBaseController{
 		dataOut.setMiniLotoList(service.getData(dataIn));
 		
 		mav.addObject("result", dataOut);
-		mav.setViewName("loto/miniLotoAnalysisP0Result");
+		mav.setViewName(ViewConstants.LOTO_MINILOTOANALYSISP0RESULT);
 		return mav;
 	}
 	

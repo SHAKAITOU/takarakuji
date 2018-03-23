@@ -21,6 +21,8 @@ import sha.framework.controller.ScreenBaseController;
 import sha.framework.util.FileReaderUtil;
 import sha.framework.util.JsonLogCommonUtil;
 import sha.framework.util.MessageSourceUtil;
+import sha.work.common.UrlConstants;
+import sha.work.common.ViewConstants;
 import sha.work.entity.out.MiniLotoAnalysisP2Out;
 import sha.work.exception.TKRKScreenException;
 import sha.work.util.FileUtil;
@@ -45,7 +47,7 @@ public class MiniLotoAnalysisP2Controller extends ScreenBaseController{
 	private ObjectMapper objMapper;  
 
 
-	@RequestMapping(path="/loto/miniLotoAnalysisP2", method=RequestMethod.GET)
+	@RequestMapping(path=UrlConstants.LOTO_MINILOTOANALYSISP2, method=RequestMethod.GET)
 	public ModelAndView getMiniLotoAnalysisP2(@RequestParam Map<String,String> allRequestParams, Locale loc, 
 			HttpServletRequest request,
 			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
@@ -54,7 +56,7 @@ public class MiniLotoAnalysisP2Controller extends ScreenBaseController{
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("resultList", getAnaLysisData());
-		mav.setViewName("loto/miniLotoAnalysisP2Result");
+		mav.setViewName(ViewConstants.LOTO_MINILOTOANALYSISP2RESULT);
 		
 		return mav;
 	}

@@ -21,6 +21,8 @@ import sha.framework.controller.ScreenBaseController;
 import sha.framework.util.FileReaderUtil;
 import sha.framework.util.JsonLogCommonUtil;
 import sha.framework.util.MessageSourceUtil;
+import sha.work.common.UrlConstants;
+import sha.work.common.ViewConstants;
 import sha.work.entity.out.Loto6AnalysisP1Out;
 import sha.work.entity.out.Loto6SixAnalysisOut;
 import sha.work.exception.TKRKScreenException;
@@ -46,7 +48,7 @@ public class Loto6SixAnalysisController extends ScreenBaseController{
 	private ObjectMapper objMapper;  
 
 
-	@RequestMapping(path="/loto/loto6SixAnalysis", method=RequestMethod.GET)
+	@RequestMapping(path=UrlConstants.LOTO_LOTO6SIXANALYSIS, method=RequestMethod.GET)
 	public ModelAndView getLoto7SevenAnalysis(@RequestParam Map<String,String> allRequestParams, Locale loc, 
 			HttpServletRequest request,
 			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
@@ -56,7 +58,7 @@ public class Loto6SixAnalysisController extends ScreenBaseController{
 		
 		mav.addObject("resultList", getSixAnaLysisData());
 		mav.addObject("resultBaseList", getBaseAnaLysisData());
-		mav.setViewName("loto/loto6SixAnalysisResult");
+		mav.setViewName(ViewConstants.LOTO_LOTO6SIXANALYSISRESULT);
 		
 		return mav;
 	}

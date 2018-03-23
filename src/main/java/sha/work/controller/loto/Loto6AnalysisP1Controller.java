@@ -21,6 +21,8 @@ import sha.framework.controller.ScreenBaseController;
 import sha.framework.util.FileReaderUtil;
 import sha.framework.util.JsonLogCommonUtil;
 import sha.framework.util.MessageSourceUtil;
+import sha.work.common.UrlConstants;
+import sha.work.common.ViewConstants;
 import sha.work.entity.out.Loto6AnalysisP1Out;
 import sha.work.exception.TKRKScreenException;
 import sha.work.util.FileUtil;
@@ -45,7 +47,7 @@ public class Loto6AnalysisP1Controller extends ScreenBaseController{
 	private ObjectMapper objMapper; 
 
 
-	@RequestMapping(path="/loto/loto6AnalysisP1", method=RequestMethod.GET)
+	@RequestMapping(path=UrlConstants.LOTO_LOTO6ANALYSISP1, method=RequestMethod.GET)
 	public ModelAndView getLoto6AnalysisP1(@RequestParam Map<String,String> allRequestParams, Locale loc, 
 			HttpServletRequest request,
 			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
@@ -53,12 +55,12 @@ public class Loto6AnalysisP1Controller extends ScreenBaseController{
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("resultList", getAnaLysisData());
-		mav.setViewName("loto/loto6AnalysisP1Result");
+		mav.setViewName(ViewConstants.LOTO_LOTO6ANALYSISP1RESULT);
 		
 		return mav;
 	}
 	
-	@RequestMapping(path="/loto/loto6AnalysisP1Group", method=RequestMethod.GET)
+	@RequestMapping(path=UrlConstants.LOTO_LOTO6ANALYSISP1GROUP, method=RequestMethod.GET)
 	public ModelAndView getLoto6AnalysisP1Group(@RequestParam Map<String,String> allRequestParams, Locale loc, 
 			HttpServletRequest request,
 			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
@@ -66,7 +68,7 @@ public class Loto6AnalysisP1Controller extends ScreenBaseController{
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("resultList", getAnaLysisData());
-		mav.setViewName("loto/loto6AnalysisP1ResultGroup");
+		mav.setViewName(ViewConstants.LOTO_LOTO6ANALYSISP1RESULTGROUP);
 		
 		return mav;
 	}

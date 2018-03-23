@@ -16,14 +16,14 @@ import sha.work.common.ViewConstants;
  *
  */
 @Controller
-@RequestMapping(UrlConstants.INDEX)
-public class IndexController extends ScreenBaseController{
+@RequestMapping(UrlConstants.USER_LOGIN)
+public class UserLoginController extends ScreenBaseController{
 
 	@RequestMapping(method=RequestMethod.GET)
 	public ModelAndView exapmle(@ModelAttribute Object greeting)  {
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName(ViewConstants.INDEX);
+		mav.setViewName(ViewConstants.LOGIN);
 		return mav;
 	}
 

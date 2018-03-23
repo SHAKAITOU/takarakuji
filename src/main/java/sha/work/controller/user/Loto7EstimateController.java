@@ -1,4 +1,4 @@
-package sha.work.controller.loto;
+package sha.work.controller.user;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
@@ -21,11 +21,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import sha.framework.controller.ScreenBaseController;
 import sha.framework.exception.TKRKScreenException;
 import sha.framework.util.LogCommonUtil;
-import sha.work.dto.loto.MiniLoto;
-import sha.work.entity.in.MiniLotoEstimateDataIn;
-import sha.work.entity.out.MiniLotoEstimateDataOut;
-import sha.work.service.loto.MiniLotoAnalysisBaseDataCreateService;
-import sha.work.service.loto.MiniLotoEstimateService;
+import sha.work.common.UrlConstants;
+import sha.work.common.ViewConstants;
+import sha.work.dto.loto.Loto7;
+import sha.work.entity.in.Loto7EstimateDataIn;
+import sha.work.entity.out.Loto7EstimateDataOut;
+import sha.work.service.loto.Loto7AnalysisBaseDataCreateService;
+import sha.work.service.loto.Loto7EstimateService;
 
 /**
  * S002 Thymeleaf 
@@ -33,7 +35,7 @@ import sha.work.service.loto.MiniLotoEstimateService;
  *
  */
 @Controller
-public class MiniLotoEstimateController extends ScreenBaseController{
+public class Loto7EstimateController extends ScreenBaseController{
 
 	
 
@@ -42,20 +44,22 @@ public class MiniLotoEstimateController extends ScreenBaseController{
 	private LogCommonUtil log;
 
 	@Autowired
-	private MiniLotoAnalysisBaseDataCreateService service;
+	private Loto7AnalysisBaseDataCreateService service;
+	
+	
 	
 	@Autowired
-	private MiniLotoEstimateService estimateService;
+	private Loto7EstimateService estimateService;
 
 
-	@RequestMapping(path="/loto/miniLotoEstimate", method=RequestMethod.GET)
+	@RequestMapping(path=UrlConstants.USER_LOTO7ESTIMATE, method=RequestMethod.GET)
 	public ModelAndView get(@ModelAttribute Object greeting)  {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		
-		MiniLotoEstimateDataIn dataIn = initMiniLotoEstimateDataIn();
-		MiniLotoEstimateDataOut dataOut = new MiniLotoEstimateDataOut();
+		Loto7EstimateDataIn dataIn = initLoto7EstimateDataIn();
+		Loto7EstimateDataOut dataOut = new Loto7EstimateDataOut();
 		
 		try {
 			BeanUtils.copyProperties(dataOut, dataIn);
@@ -64,59 +68,64 @@ public class MiniLotoEstimateController extends ScreenBaseController{
 		}
 		
 		mav.addObject("result", dataOut);
-		mav.setViewName("loto/miniLotoEstimate");
+		mav.setViewName(ViewConstants.USER_LOTO7ESTIMATE);
 		return mav;
 	}
 	
-	@RequestMapping(path="/loto/miniLotoEstimate", method=RequestMethod.POST)
+	@RequestMapping(path=UrlConstants.USER_LOTO7ESTIMATE, method=RequestMethod.POST)
 	public ModelAndView post(@RequestParam Map<String,String> allRequestParams, Locale loc, 
 			HttpServletRequest request,
 			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
 		
 		ModelAndView mav = new ModelAndView();
-		MiniLotoEstimateDataIn dataIn = searchMiniLotoEstimateDataIn(allRequestParams);
+		Loto7EstimateDataIn dataIn = searchLoto7EstimateDataIn(allRequestParams);
 
-		MiniLotoEstimateDataOut dataOut = new MiniLotoEstimateDataOut();
-		MiniLoto miniLoto = new MiniLoto();
+		Loto7EstimateDataOut dataOut = new Loto7EstimateDataOut();
+		Loto7 loto7 = new Loto7();
 
 		try {
 			BeanUtils.copyProperties(dataOut, dataIn);
-			BeanUtils.copyProperties(miniLoto, dataIn);
+			BeanUtils.copyProperties(loto7, dataIn);
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			throw new TKRKScreenException(e);
 		}
 		
-		dataOut.setEstimateAnalysisBase(service.analysisOnly(miniLoto));
+		dataOut.setEstimateAnalysisBase(service.analysisOnly(loto7));
 		dataOut = estimateService.getEstimateData(dataOut);
 		mav.addObject("result", dataOut);
-		mav.setViewName("loto/miniLotoEstimate");
+		mav.setViewName(ViewConstants.USER_LOTO7ESTIMATE);
 		return mav;
 	}
 	
-	private MiniLotoEstimateDataIn initMiniLotoEstimateDataIn() {
-		MiniLotoEstimateDataIn dataIn = new MiniLotoEstimateDataIn();
+	private Loto7EstimateDataIn initLoto7EstimateDataIn() {
+		Loto7EstimateDataIn dataIn = new Loto7EstimateDataIn();
 		dataIn.setL1(1);
 		dataIn.setL2(9);
 		dataIn.setL3(14);
 		dataIn.setL4(21);
 		dataIn.setL5(28);
+		dataIn.setL6(31);
+		dataIn.setL7(34);
 		dataIn.setB1(7);
+		dataIn.setB2(8);
 		
 		return dataIn;
 	}
 	
-	private MiniLotoEstimateDataIn searchMiniLotoEstimateDataIn(Map<String,String> allRequestParams) {
-		MiniLotoEstimateDataIn dataIn = new MiniLotoEstimateDataIn();
+	private Loto7EstimateDataIn searchLoto7EstimateDataIn(Map<String,String> allRequestParams) {
+		Loto7EstimateDataIn dataIn = new Loto7EstimateDataIn();
 		dataIn.setL1(Integer.valueOf(allRequestParams.get("l1")));
 		dataIn.setL2(Integer.valueOf(allRequestParams.get("l2")));
 		dataIn.setL3(Integer.valueOf(allRequestParams.get("l3")));
 		dataIn.setL4(Integer.valueOf(allRequestParams.get("l4")));
 		dataIn.setL5(Integer.valueOf(allRequestParams.get("l5")));
+		dataIn.setL6(Integer.valueOf(allRequestParams.get("l6")));
+		dataIn.setL7(Integer.valueOf(allRequestParams.get("l7")));
 		dataIn.setB1(Integer.valueOf(allRequestParams.get("b1")));
+		dataIn.setB2(Integer.valueOf(allRequestParams.get("b2")));
 		
 		return dataIn;
 	}
-	
 	
 
 }

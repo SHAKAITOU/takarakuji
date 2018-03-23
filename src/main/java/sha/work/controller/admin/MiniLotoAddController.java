@@ -1,4 +1,4 @@
-package sha.work.controller.loto;
+package sha.work.controller.admin;
 
 import java.util.Locale;
 import java.util.Map;
@@ -19,6 +19,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import sha.framework.controller.ScreenBaseController;
 import sha.framework.exception.TKRKScreenException;
 import sha.framework.util.LogCommonUtil;
+import sha.work.common.UrlConstants;
+import sha.work.common.ViewConstants;
 import sha.work.dto.loto.MiniLoto;
 import sha.work.entity.in.MiniLotoAddDataIn;
 import sha.work.service.loto.MiniLotoAddService;
@@ -42,7 +44,7 @@ public class MiniLotoAddController extends ScreenBaseController{
 	private MiniLotoAddService service;
 
 
-	@RequestMapping(path="/loto/miniLotoAdd", method=RequestMethod.GET)
+	@RequestMapping(path=UrlConstants.ADMIN_MINILOTOADD, method=RequestMethod.GET)
 	public ModelAndView get(@ModelAttribute Object greeting)  {
 		
 		ModelAndView mav = new ModelAndView();
@@ -52,11 +54,11 @@ public class MiniLotoAddController extends ScreenBaseController{
 
 		
 		mav.addObject("result", dataIn);
-		mav.setViewName("loto/miniLotoAdd");
+		mav.setViewName(ViewConstants.ADMIN_MINILOTOADD);
 		return mav;
 	}
 	
-	@RequestMapping(path="/loto/miniLotoAdd", method=RequestMethod.POST)
+	@RequestMapping(path=UrlConstants.ADMIN_MINILOTOADD, method=RequestMethod.POST)
 	public ModelAndView post(@RequestParam Map<String,String> allRequestParams, Locale loc, 
 			HttpServletRequest request,
 			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
@@ -68,7 +70,7 @@ public class MiniLotoAddController extends ScreenBaseController{
 		MiniLotoAddDataIn dataIn = initMiniLotoAddDataIn();
 
 		mav.addObject("result", dataIn);
-		mav.setViewName("loto/miniLotoAdd");
+		mav.setViewName(ViewConstants.ADMIN_MINILOTOADD);
 		return mav;
 	}
 	

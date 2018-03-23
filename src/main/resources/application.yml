@@ -1,3 +1,4 @@
+#### SPRING ####
 spring:
   application:
     name: shaLotoPro
@@ -38,6 +39,7 @@ spring:
 api-service:
   name: shaLoto
 
+#### LOGGING ####
 logging:
   level:
     root: INFO
@@ -46,12 +48,19 @@ logging:
   file: logs/logback-demo.log
   path: logs
   
+#### SERVER ####
 server:
   port: 8092
-  
+
+#### MYBATIS ####
 mybatis:
   configuration:
     map-underscore-to-camel-case: true 
+
+#### SECURITY ####   
+security:
+  enable-csrf: true
+    
 
 #### CRON ####
 # 秒/分/時/日/月/曜日

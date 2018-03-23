@@ -1,4 +1,4 @@
-package sha.work.controller.loto;
+package sha.work.controller.user;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
@@ -21,11 +21,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import sha.framework.controller.ScreenBaseController;
 import sha.framework.exception.TKRKScreenException;
 import sha.framework.util.LogCommonUtil;
-import sha.work.dto.loto.Loto7;
-import sha.work.entity.in.Loto7EstimateDataIn;
-import sha.work.entity.out.Loto7EstimateDataOut;
-import sha.work.service.loto.Loto7AnalysisBaseDataCreateService;
-import sha.work.service.loto.Loto7EstimateService;
+import sha.work.dto.loto.Loto6;
+import sha.work.entity.in.Loto6EstimateDataIn;
+import sha.work.entity.out.Loto6EstimateDataOut;
+import sha.work.service.loto.Loto6AnalysisBaseDataCreateService;
+import sha.work.service.loto.Loto6EstimateService;
 
 /**
  * S002 Thymeleaf 
@@ -33,7 +33,7 @@ import sha.work.service.loto.Loto7EstimateService;
  *
  */
 @Controller
-public class Loto7EstimateController extends ScreenBaseController{
+public class Loto6EstimateController extends ScreenBaseController{
 
 	
 
@@ -42,22 +42,20 @@ public class Loto7EstimateController extends ScreenBaseController{
 	private LogCommonUtil log;
 
 	@Autowired
-	private Loto7AnalysisBaseDataCreateService service;
-	
-	
+	private Loto6AnalysisBaseDataCreateService service;
 	
 	@Autowired
-	private Loto7EstimateService estimateService;
+	private Loto6EstimateService estimateService;
 
 
-	@RequestMapping(path="/loto/loto7Estimate", method=RequestMethod.GET)
+	@RequestMapping(path="/user/loto6Estimate", method=RequestMethod.GET)
 	public ModelAndView get(@ModelAttribute Object greeting)  {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		
-		Loto7EstimateDataIn dataIn = initLoto7EstimateDataIn();
-		Loto7EstimateDataOut dataOut = new Loto7EstimateDataOut();
+		Loto6EstimateDataIn dataIn = initLoto6EstimateDataIn();
+		Loto6EstimateDataOut dataOut = new Loto6EstimateDataOut();
 		
 		try {
 			BeanUtils.copyProperties(dataOut, dataIn);
@@ -66,64 +64,61 @@ public class Loto7EstimateController extends ScreenBaseController{
 		}
 		
 		mav.addObject("result", dataOut);
-		mav.setViewName("loto/loto7Estimate");
+		mav.setViewName("user/loto6Estimate");
 		return mav;
 	}
 	
-	@RequestMapping(path="/loto/loto7Estimate", method=RequestMethod.POST)
+	@RequestMapping(path="/user/loto/loto6Estimate", method=RequestMethod.POST)
 	public ModelAndView post(@RequestParam Map<String,String> allRequestParams, Locale loc, 
 			HttpServletRequest request,
 			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
 		
 		ModelAndView mav = new ModelAndView();
-		Loto7EstimateDataIn dataIn = searchLoto7EstimateDataIn(allRequestParams);
+		Loto6EstimateDataIn dataIn = searchLoto6EstimateDataIn(allRequestParams);
 
-		Loto7EstimateDataOut dataOut = new Loto7EstimateDataOut();
-		Loto7 loto7 = new Loto7();
+		Loto6EstimateDataOut dataOut = new Loto6EstimateDataOut();
+		Loto6 loto6 = new Loto6();
 
 		try {
 			BeanUtils.copyProperties(dataOut, dataIn);
-			BeanUtils.copyProperties(loto7, dataIn);
+			BeanUtils.copyProperties(loto6, dataIn);
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			throw new TKRKScreenException(e);
 		}
 		
-		dataOut.setEstimateAnalysisBase(service.analysisOnly(loto7));
+		dataOut.setEstimateAnalysisBase(service.analysisOnly(loto6));
 		dataOut = estimateService.getEstimateData(dataOut);
 		mav.addObject("result", dataOut);
-		mav.setViewName("loto/loto7Estimate");
+		mav.setViewName("user/loto6Estimate");
 		return mav;
 	}
 	
-	private Loto7EstimateDataIn initLoto7EstimateDataIn() {
-		Loto7EstimateDataIn dataIn = new Loto7EstimateDataIn();
+	private Loto6EstimateDataIn initLoto6EstimateDataIn() {
+		Loto6EstimateDataIn dataIn = new Loto6EstimateDataIn();
 		dataIn.setL1(1);
 		dataIn.setL2(9);
 		dataIn.setL3(14);
 		dataIn.setL4(21);
 		dataIn.setL5(28);
 		dataIn.setL6(31);
-		dataIn.setL7(34);
 		dataIn.setB1(7);
-		dataIn.setB2(8);
 		
 		return dataIn;
 	}
 	
-	private Loto7EstimateDataIn searchLoto7EstimateDataIn(Map<String,String> allRequestParams) {
-		Loto7EstimateDataIn dataIn = new Loto7EstimateDataIn();
+	private Loto6EstimateDataIn searchLoto6EstimateDataIn(Map<String,String> allRequestParams) {
+		Loto6EstimateDataIn dataIn = new Loto6EstimateDataIn();
 		dataIn.setL1(Integer.valueOf(allRequestParams.get("l1")));
 		dataIn.setL2(Integer.valueOf(allRequestParams.get("l2")));
 		dataIn.setL3(Integer.valueOf(allRequestParams.get("l3")));
 		dataIn.setL4(Integer.valueOf(allRequestParams.get("l4")));
 		dataIn.setL5(Integer.valueOf(allRequestParams.get("l5")));
 		dataIn.setL6(Integer.valueOf(allRequestParams.get("l6")));
-		dataIn.setL7(Integer.valueOf(allRequestParams.get("l7")));
 		dataIn.setB1(Integer.valueOf(allRequestParams.get("b1")));
-		dataIn.setB2(Integer.valueOf(allRequestParams.get("b2")));
 		
 		return dataIn;
 	}
+	
 	
 
 }

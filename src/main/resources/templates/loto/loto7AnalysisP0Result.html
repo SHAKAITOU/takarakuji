@@ -111,7 +111,9 @@
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
 			var postData = $('#search_form').serializeArray();
-			ShaCommon.ajax.post('/loto/loto7AnalysisP0', postData, 
+			ShaCommon.ajax.post(
+					/*[[${T(sha.work.common.UrlConstants).LOTO_LOTO7ANALYSISP0}]]*/, 
+					postData, 
 					ShaCommon.ajax.callBackOk, 
 					ShaCommon.ajax.callBackNg); 
 		});

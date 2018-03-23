@@ -289,7 +289,9 @@
 			if(checkValue(postData)) {
 				return;
 			}
-			ShaCommon.ajax.post('/loto/loto6Estimate', postData, 
+			ShaCommon.ajax.post(
+					/*[[${T(sha.work.common.UrlConstants).USER_LOTO6ESTIMATE}]]*/,    
+					postData, 
 					ShaCommon.ajax.callBackOk, 
 					ShaCommon.ajax.callBackNg); 
 		});

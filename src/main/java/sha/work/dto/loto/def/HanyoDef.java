@@ -1,4 +1,4 @@
-package sha.work.dto.domain.def;
+package sha.work.dto.loto.def;
 
 public interface HanyoDef {
 

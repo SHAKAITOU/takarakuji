@@ -9,6 +9,7 @@ CREATE TABLE public.d_users
     name character varying(40) COLLATE pg_catalog."default",
     pw character varying(40) COLLATE pg_catalog."default" NOT NULL,
     valid integer NOT NULL,
+    role integer NOT NULL,
     CONSTRAINT d_users_pkey PRIMARY KEY (id)
 )
 WITH (

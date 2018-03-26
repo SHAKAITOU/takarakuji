@@ -15,9 +15,12 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
 		integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
 	
+	<!-- date picker -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" 
+		integrity="sha256-I/m6FhcACNYmRoqn1xUnizh6S7jOJsTq+aiJ6BtE2LE=" crossorigin="anonymous" />
+	
 	<link rel="stylesheet" th:href="@{/css/bootstrap-cosmo.css}"/>
 	<link rel="stylesheet" th:href="@{/css/base.css}"/>
-	<link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.css}"/>
 	
 </head>
 <body>
@@ -35,6 +38,26 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-10 col-md-offset-1">
+							<legend th:text="#{login.title}"></legend>
+						</div>
+						<div class="col-md-10 col-md-offset-1">
+							<!-- ========LOGIN BTN========= -->
+							<div sec:authorize="isAuthenticated()">
+								<span sec:authentication="name"></span>
+							</div>
+						</div>
+						<div class="col-md-10 col-md-offset-1">
+							<!-- ========LOGIN BTN========= -->
+							<button id="login" 
+								sec:authorize="!isAuthenticated()"
+								type="button" class="btn btn btn-block btn-outline-info btn_com"
+								th:text="#{login.panel.btn.login}"></button>
+							<button id="logout" 
+								sec:authorize="isAuthenticated()"
+								type="button" class="btn btn btn-block btn-outline-info btn_com"
+								th:text="#{login.panel.btn.logout}"></button>
+						</div>
+						<div class="col-md-10 col-md-offset-1">
 							<legend th:text="#{index.loto7.title}"></legend>
 						</div>
 						<div class="col-md-10 col-md-offset-1">
@@ -49,11 +72,15 @@
 								th:text="#{index.btn.analysisP2}"></button>
 							<button id="loto7SevenAnalysis" type="button" class="btn btn btn-block btn-outline-primary btn_com"
 								th:text="#{index.btn.loto7.sevenAnalysis}"></button>
-							<button id="loto7Estimate" type="button" class="btn btn btn-block btn-outline-primary btn_com"
-								th:text="#{index.btn.loto7.estimate}"></button> 
-							<button id="loto7Add" type="button" class="btn btn btn-block btn-outline-primary btn_com"
-								th:text="#{index.btn.loto7.add}"></button>
-								
+							<button id="loto7Estimate"
+								sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_USER.getRole()) || 
+												hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
+								 type="button" class="btn btn btn-block btn-outline-warning btn_com"
+									th:text="#{index.btn.loto7.estimate}"></button> 
+							<button id="loto7Add" 
+								sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
+								type="button" class="btn btn btn-block btn-outline-warning btn_com"
+									th:text="#{index.btn.loto7.add}"></button>
 						</div>
 						<div class="col-md-10 col-md-offset-1">
 							<legend th:text="#{index.loto6.title}"></legend>
@@ -70,9 +97,14 @@
 								th:text="#{index.btn.analysisP2}"></button> 
 							<button id="loto6SixAnalysis" type="button" class="btn btn btn-block btn-outline-primary btn_com"
 								th:text="#{index.btn.loto6.sixAnalysis}"></button>
-							<button id="loto6Estimate" type="button" class="btn btn btn-block btn-outline-primary btn_com"
+							<button id="loto6Estimate" 
+								sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_USER.getRole()) || 
+												hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
+								type="button" class="btn btn btn-block btn-outline-warning btn_com"
 								th:text="#{index.btn.loto6.estimate}"></button>
-							<button id="loto6Add" type="button" class="btn btn btn-block btn-outline-primary btn_com"
+							<button id="loto6Add" 
+								sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
+								type="button" class="btn btn btn-block btn-outline-warning btn_com"
 								th:text="#{index.btn.loto6.add}"></button>	 
 						</div>
 						<div class="col-md-10 col-md-offset-1">
@@ -90,9 +122,14 @@
 								th:text="#{index.btn.analysisP2}"></button>
 							<button id="miniLotoFiveAnalysis" type="button" class="btn btn btn-block btn-outline-primary btn_com"
 								th:text="#{index.btn.miniLoto.fiveAnalysis}"></button> 	
-							<button id="miniLotoEstimate" type="button" class="btn btn btn-block btn-outline-primary btn_com"
+							<button id="miniLotoEstimate" 
+								sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_USER.getRole()) || 
+												hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
+								type="button" class="btn btn btn-block btn-outline-warning btn_com"
 								th:text="#{index.btn.miniLoto.estimate}"></button>
-							<button id="miniLotoAdd" type="button" class="btn btn btn-block btn-outline-primary btn_com"
+							<button id="miniLotoAdd" 
+								sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
+								type="button" class="btn btn btn-block btn-outline-warning btn_com"
 								th:text="#{index.btn.miniLoto.add}"></button>
 						</div>
 					</div>
@@ -134,6 +171,42 @@
 /*<![CDATA[*/
 $(document).ready(function(){
 	var commonBtn;
+	
+	//-------------------------------------------------------
+	//LOGIN
+	$btn_obj = $('#login'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.get(
+				/*[[${T(sha.work.common.UrlConstants).USER_LOGIN}]]*/, 
+				null, 
+				ShaCommon.ajax.callBackOk, 
+				ShaCommon.ajax.callBackNg); 
+	});
+	
+	$btn_obj = $('#logout'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		var title = /*[[#{login.panel.btn.logout}]]*/;
+		var confirmMsg = /*[[#{login.logout.confirm.msg}]]*/;
+		ShaCommon.dialogs.confirm(
+			title,
+			confirmMsg,
+			function(){
+				ShaCommon.ajax.get(
+						/*[[${T(sha.work.common.UrlConstants).LOGOUT}]]*/, 
+						null, 
+						ShaCommon.ajax.callBackOk, 
+						ShaCommon.ajax.callBackNg);
+			}
+		);
+		
+	});
+	
 	//-------------------------------------------------------
 	//LOTO7		
 	$btn_obj = $('#loto7AnalysisP0'); 
@@ -380,6 +453,8 @@ $(document).ready(function(){
 				ShaCommon.ajax.callBackOk, 
 				ShaCommon.ajax.callBackNg); 
 	});
+	
+	$("#ngPanel").hide();
 });
 
 /*]]>*/

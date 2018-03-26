@@ -8,6 +8,12 @@ public class ViewConstants {
 	//LOGIN
 	public static final String LOGIN 					= "/login";
 	
+	//LOGIN
+	public static final String LOGIN_SUCC 				= "/loginSucc";
+	
+	//403
+	public static final String ACCESS_DENIED 			= "/403";
+	
 	//LOTO
 	public static final String LOTO_LOTO7ANALYSISP0RESULT 				=  "loto/loto7AnalysisP0Result";
 	

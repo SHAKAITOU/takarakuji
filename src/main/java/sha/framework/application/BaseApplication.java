@@ -21,7 +21,6 @@ import sha.framework.util.JsonLogCommonUtil;
 import sha.framework.util.LogCommonUtil;
 import sha.framework.util.MessageSourceUtil;
 import sha.framework.util.StringCommonUtil;
-import sha.framework.util.UserInfoUtil;
 /**
  * コマースアプリケーションクラス
  *
@@ -68,12 +67,7 @@ public class BaseApplication extends WebMvcConfigurerAdapter {
 	public MessageSourceUtil getResourceUtil() {
 		return new MessageSourceUtil();
 	}
-	
-	@Bean
-	public UserInfoUtil getUserInfoUtil() {
-		return new UserInfoUtil();
-	}
-	
+
 	@Bean
 	public DateCommonUtil getDateCommonUtil() {
 		return new DateCommonUtil();

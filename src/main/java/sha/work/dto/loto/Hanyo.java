@@ -1,4 +1,4 @@
-package sha.work.dto.domain;
+package sha.work.dto.loto;
 
 import lombok.Data;
 

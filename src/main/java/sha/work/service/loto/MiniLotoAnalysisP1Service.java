@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sha.framework.service.BaseService;
-import sha.work.dto.domain.Hanyo;
+import sha.work.dto.loto.Hanyo;
 import sha.work.entity.in.MiniLotoAnalysisP1In;
 import sha.work.entity.out.MiniLotoAnalysisP1Out;
 import sha.work.entity.query.MiniLotoAnalysisP1Query;

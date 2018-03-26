@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import sha.framework.service.BaseService;
 import sha.framework.util.MultipleDBAccessUtil;
-import sha.work.dto.domain.Hanyo;
+import sha.work.dto.loto.Hanyo;
 import sha.work.exception.TKRKScreenException;
 import sha.work.mapper.loto.HanyoMapper;
 

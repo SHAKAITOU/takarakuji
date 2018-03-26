@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import sha.work.dto.domain.Hanyo;
-import sha.work.dto.domain.def.HanyoDef;
+import sha.work.dto.loto.Hanyo;
+import sha.work.dto.loto.def.HanyoDef;
 
 @Mapper
 public interface HanyoMapper extends HanyoDef {

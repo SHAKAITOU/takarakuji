@@ -10,6 +10,7 @@ import org.springframework.util.CollectionUtils;
 
 public class FileReaderUtil {
 
+	@SuppressWarnings("unchecked")
 	public static List<List<String>> readCsv(File src) {
 		List<List<String>> csvData = new ArrayList<>(new ArrayList<>());
 

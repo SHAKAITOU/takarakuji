@@ -103,6 +103,7 @@ try{
 			$btn_obj.unbind(); 
 			$btn_obj.on('click', function(event) {
 				event.preventDefault();
+		    	ShaCommon.dialogs.confirmClose();
 				callBackOk();
 			});
 			
@@ -116,6 +117,41 @@ try{
 			$('#success').modal('show');
 		},
 	
+	}
+	
+	//*****************************************************************************
+	// common ajax define
+	//*****************************************************************************
+	
+	if($common.restful) { 
+		return $common.restful; 
+	}	
+	
+	$common.restful = {
+		get : function(url, parameters) {
+			var paras = "";
+			if(parameters != null) {
+				for( var i = 0; i <= parameters.length; i++ ){
+					if(i == 0) {
+						paras += "?" + parameters[i].name + "=" + parameters[i].value;
+					} else {
+						paras += "&" + parameters[i].name + "=" + parameters[i].value;
+					}
+				}
+			}
+			window.location.href = url+paras;
+			ShaCommon.dialogs.progress(true);
+		},
+		
+		post : function(url, formObj) {
+			formObj.attr('action', url);
+			formObj.submit();
+			ShaCommon.dialogs.progress(true);
+		},
+		
+		refeshIndex : function(url) {
+			ShaCommon.restful.get("/",null);
+		}
 	}
 	
 	
@@ -202,7 +238,6 @@ try{
 					    200: function(data){
 					    	callBackOk(data);
 					    	ShaCommon.dialogs.progress(false);
-					    	ShaCommon.dialogs.confirmClose();
 					    	ShaCommon.dialogs.success(sucMsg);
 					    },
 					    404: function() {

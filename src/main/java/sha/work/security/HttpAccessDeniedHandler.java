@@ -1,4 +1,4 @@
-package sha.framework.handler;
+package sha.work.security;
 
 import java.io.IOException;
 
@@ -14,6 +14,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
 import sha.framework.util.LogCommonUtil;
+import sha.work.common.UrlConstants;
 
 @Component
 public class HttpAccessDeniedHandler implements AccessDeniedHandler {
@@ -33,9 +34,10 @@ public class HttpAccessDeniedHandler implements AccessDeniedHandler {
         	log.info("AccessDenied", "User '" + auth.getName()
                     + "' attempted to access the protected URL: "
                     + httpServletRequest.getRequestURI());
+        	
         }
-
-        httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/403");
+        
+    	httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + UrlConstants.ACCESS_DENIED);
 
     }
 }

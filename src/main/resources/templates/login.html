@@ -14,10 +14,16 @@
 				<h3 class="panel-title" th:text="#{login.title}"></h3>
 			</div>
 			<div class="panel-body">
-				<form class="form-horizontal">
+				<form id="login_form" name="login_form" role="form" method="POST" class="form-horizontal">
 				<fieldset>
+					<div th:if="${param.error}">
+                        <div class="alert alert-danger" th:text="#{login.fail.msg}"></div>
+                    </div>
+                    <div th:if="${param.logout}">
+                        <div class="alert alert-info" th:text="#{login.logout.msg}"></div>
+                    </div>
 					<div style="margin: 0 0 10px 0;">
-						<input id="userId" name="userId" type="text" 
+						<input id="username" name="username" type="text" 
 							th:placeholder="#{login.panel.placeholder.user}" class="form-control input-md"/>
 					</div>
 					<div style="margin: 0 0 10px 0;">
@@ -25,7 +31,7 @@
 							th:placeholder="#{login.panel.placeholder.pw}" class="form-control input-md"/>
 					</div>
 					<a href="#"><small> Forgot Password?</small></a><br/>
-					<button id="singlebutton" name="singlebutton" 
+					<button id="loginBtn" name="loginBtn" 
 						class="btn btn btn-outline-primary btn_com pull-right"
 						th:text="#{login.panel.btn.login}"></button>
 				</fieldset>
@@ -35,11 +41,60 @@
 	</div>
 </div>	
 <!-- /container -->
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
 /*<![CDATA[*/
-$(document).ready(function(){
+	$(document).ready(function(){
+		//--------------------------------------------------------[
+		//init bond event to btn
 	
-});
+		$btn_obj = $('#loginBtn'); 
+		$btn_obj.unbind(); 
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			var postData = $('#login_form').serializeArray();
+			if(checkValue(postData)) {
+				return;
+			}
+			
+			ShaCommon.ajax.post(
+				/*[[${T(sha.work.common.UrlConstants).USER_LOGIN}]]*/,
+				postData, 
+				ShaCommon.ajax.callBackOk,
+				ShaCommon.ajax.callBackNg
+			);  
+		});
+		
+		//when logout auto refresh index page.
+		var logoutFlg = /*[[${param.logout}]]*/ null;
+		if(logoutFlg != null) {
+			ShaCommon.restful.refeshIndex();
+		}
+	});
+	
+	
+	function checkValue() {
+		//alert(JSON.stringify(postData));
+		var objs = [
+			$('#username'), 
+			$('#password'),
+		];
+		var ttlHeads = [
+			/*[[#{login.panel.placeholder.user}]]*/,
+			/*[[#{login.panel.placeholder.pw}]]*/,
+		];
+		var msgNon = /*[[#{login.check.msg.blank}]]*/;
+		for( var i = 0; i < objs.length; i++ ){
+			if(objs[i].val() == ""){
+				ShaCommon.dialogs.alert(ttlHeads[i]+msgNon);
+				objs[i].addClass('alert-input');
+				return true;
+			} else {
+				objs[i].removeClass('alert-input');
+			}
+		}
+		
+		return false;
+	}
 
 /*]]>*/
 </script>

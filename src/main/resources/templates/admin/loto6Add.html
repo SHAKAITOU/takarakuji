@@ -147,15 +147,15 @@
 			ShaCommon.dialogs.confirm(
 					title,
 					confirmMsg,
-					function(){						
+					function(){
 						ShaCommon.ajax.postWithSucc(
 									/*[[${T(sha.work.common.UrlConstants).ADMIN_LOTO6ADD}]]*/,
 									postData, 
 									ShaCommon.ajax.callBackOk,
 									ShaCommon.ajax.callBackNg,
-									addTurn + unit + successMsg
-								);  
-					});
+							addTurn + unit + successMsg
+						);  
+			});
 		});
 	});
 	

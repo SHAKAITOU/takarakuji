@@ -9,29 +9,39 @@ import sha.work.dto.domain.User;
 
 @Mapper
 public interface UserMapper {
-	
-	static final String SQL1    = "<script>"
-									+ " SELECT * FROM USERS WHERE 1 = 1  "
-									+ " <if test=\"name != null\">and NAME = #{name} </if>"
-									+ "</script>";
 
 	
-	@Select("SELECT * FROM USERS WHERE NAME = #{name}")
-    User findByName(@Param("name") String name);
+	@Select("SELECT * FROM D_USERS WHERE NAME = #{name}")
+    User getByName(@Param("name") String name);
 	
-	@Select("SELECT * FROM USERS WHERE ID = #{id}")
-    User findById(@Param("id") int id);
+	@Select("SELECT * FROM D_USERS WHERE ID = #{id}")
+    User getById(@Param("id") int id);
 	
-	@Insert("INSERT INTO USERS VALUES (#{id}, #{name})")
-	void save(@Param("id") int id, @Param("name") String name);
+	@Select("SELECT * FROM D_USERS WHERE CODE = #{code}")
+	User getByCode(@Param("code") String code);
 	
-	@Insert("INSERT INTO USER VALUES (#{id}, #{name})")
-	void saveError(@Param("id") int id, @Param("name") String name);
+	@Insert("INSERT INTO D_USERS "
+			+ "("
+			+ "ID"
+			+ ",CODE"
+			+ ",NAME"
+			+ ",PW"
+			+ ",VALID"
+			+ ",ROLE"
+			+ ")"
+			+ "VALUES ("
+			+ "#{id} "
+			+ ",#{name}"
+			+ ",#{code}"
+			+ ",#{pw}"
+			+ ",#{valid}"
+			+ ",#{role}"
+			+ ")")
+	void save(User user);
+
 	
 	//@SelectProvider(type = CommonSqlBuilder.class, method = "buildGetUsersByName")
 	//User getByNameLoad(String name);
 	
-	@Select(SQL1)
-	User getByName(@Param("name") String name);
 	
 }

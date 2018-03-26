@@ -21,6 +21,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import sha.framework.controller.ScreenBaseController;
 import sha.framework.exception.TKRKScreenException;
 import sha.framework.util.LogCommonUtil;
+import sha.work.common.UrlConstants;
+import sha.work.common.ViewConstants;
 import sha.work.dto.loto.Loto6;
 import sha.work.entity.in.Loto6EstimateDataIn;
 import sha.work.entity.out.Loto6EstimateDataOut;
@@ -48,7 +50,7 @@ public class Loto6EstimateController extends ScreenBaseController{
 	private Loto6EstimateService estimateService;
 
 
-	@RequestMapping(path="/user/loto6Estimate", method=RequestMethod.GET)
+	@RequestMapping(path=UrlConstants.USER_LOTO6ESTIMATE, method=RequestMethod.GET)
 	public ModelAndView get(@ModelAttribute Object greeting)  {
 		
 		ModelAndView mav = new ModelAndView();
@@ -64,11 +66,11 @@ public class Loto6EstimateController extends ScreenBaseController{
 		}
 		
 		mav.addObject("result", dataOut);
-		mav.setViewName("user/loto6Estimate");
+		mav.setViewName(ViewConstants.USER_LOTO6ESTIMATE);
 		return mav;
 	}
 	
-	@RequestMapping(path="/user/loto/loto6Estimate", method=RequestMethod.POST)
+	@RequestMapping(path=UrlConstants.USER_LOTO6ESTIMATE, method=RequestMethod.POST)
 	public ModelAndView post(@RequestParam Map<String,String> allRequestParams, Locale loc, 
 			HttpServletRequest request,
 			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
@@ -89,7 +91,7 @@ public class Loto6EstimateController extends ScreenBaseController{
 		dataOut.setEstimateAnalysisBase(service.analysisOnly(loto6));
 		dataOut = estimateService.getEstimateData(dataOut);
 		mav.addObject("result", dataOut);
-		mav.setViewName("user/loto6Estimate");
+		mav.setViewName(ViewConstants.USER_LOTO6ESTIMATE);
 		return mav;
 	}
 	
@@ -101,7 +103,6 @@ public class Loto6EstimateController extends ScreenBaseController{
 		dataIn.setL4(21);
 		dataIn.setL5(28);
 		dataIn.setL6(31);
-		dataIn.setB1(7);
 		
 		return dataIn;
 	}
@@ -114,7 +115,6 @@ public class Loto6EstimateController extends ScreenBaseController{
 		dataIn.setL4(Integer.valueOf(allRequestParams.get("l4")));
 		dataIn.setL5(Integer.valueOf(allRequestParams.get("l5")));
 		dataIn.setL6(Integer.valueOf(allRequestParams.get("l6")));
-		dataIn.setB1(Integer.valueOf(allRequestParams.get("b1")));
 		
 		return dataIn;
 	}

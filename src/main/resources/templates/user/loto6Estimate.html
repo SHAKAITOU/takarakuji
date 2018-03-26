@@ -39,22 +39,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-3 col-xs-12">
-		<legend id="estimateTitle" th:text="#{loto6Estimate.estimateB1Title}"></legend>
-		<div class="row">
-			<div class="col-md-12" style="height: 30px;">
-				<div id="estimateL1Div" class="form-group">
-					<div class="input-group">
-						<div class="td-t2a input-group-append">
-							<span class="input-group-text" th:text="${T(sha.work.enums.Loto6NumberType).BONUS_NUMBER1.getName()}"></span>
-						</div>
-						<input type="text" id="b1" name="b1" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="${result.b1}"/>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 </div>
 <!-- BR -->
 <div class="row"><div class="col-md-12 col-xs-12 text-right" style="height: 10px;"></div></div>	
@@ -310,7 +294,6 @@
 			$('#l4'),
 			$('#l5'),
 			$('#l6'),
-			$('#b1'),
 		];
 		var ttlHeads = [
 			/*[[#{loto6Estimate.check.l1}]]*/,
@@ -319,7 +302,6 @@
 			/*[[#{loto6Estimate.check.l4}]]*/,
 			/*[[#{loto6Estimate.check.l5}]]*/,
 			/*[[#{loto6Estimate.check.l6}]]*/,
-			/*[[#{loto6Estimate.check.b1}]]*/,
 		];
 		var msgNonNumber = /*[[#{loto6Estimate.check.nonNumber}]]*/;
 		var msgdupliNumber = /*[[#{loto6Estimate.check.duplicateNumber}]]*/;

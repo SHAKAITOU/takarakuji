@@ -23,9 +23,7 @@ public class ShaLotoSecurityConfig extends WebSecurityConfigurerAdapter {
 					UrlConstants.LOTO_ALL};
 	
 	private static String[] ADMIN_PERMIT_URL_PATTERN = 
-			new String[] {
-					UrlConstants.ADMIN_ALL, 
-					UrlConstants.USER_ALL};
+			new String[] {UrlConstants.ADMIN_ALL};
 	
 	private static String[] USER_PERMIT_URL_PATTERN = 
 			new String[] {UrlConstants.USER_ALL};
@@ -45,8 +43,10 @@ public class ShaLotoSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
 					.antMatchers(DEFAULT_PERMIT_URL_PATTERN).permitAll()
-					.antMatchers(ADMIN_PERMIT_URL_PATTERN).hasAnyRole(AuthorityType.ROLE_ADMIN.getName())
-					.antMatchers(USER_PERMIT_URL_PATTERN).hasAnyRole(AuthorityType.ROLE_USER.getName())
+					.antMatchers(ADMIN_PERMIT_URL_PATTERN)
+						.hasAnyRole(AuthorityType.ROLE_ADMIN.getName())
+					.antMatchers(USER_PERMIT_URL_PATTERN)
+						.hasAnyRole(AuthorityType.ROLE_ADMIN.getName(), AuthorityType.ROLE_USER.getName())
 					.anyRequest().authenticated()
                 .and()
                 .formLogin()

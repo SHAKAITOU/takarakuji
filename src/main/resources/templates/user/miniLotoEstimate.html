@@ -37,22 +37,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-3 col-xs-12">
-		<legend id="estimateTitle" th:text="#{miniLotoEstimate.estimateB1Title}"></legend>
-		<div class="row">
-			<div class="col-md-12" style="height: 30px;">
-				<div id="estimateL1Div" class="form-group">
-					<div class="input-group">
-						<div class="td-t2a input-group-append">
-							<span class="input-group-text" th:text="${T(sha.work.enums.MiniLotoNumberType).BONUS_NUMBER1.getName()}"></span>
-						</div>
-						<input type="text" id="b1" name="b1" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="${result.b1}"/>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 </div>
 <!-- BR -->
 <div class="row"><div class="col-md-12 col-xs-12 text-right" style="height: 10px;"></div></div>	
@@ -298,7 +282,6 @@
 			$('#l3'),
 			$('#l4'),
 			$('#l5'),
-			$('#b1'),
 		];
 		var ttlHeads = [
 			/*[[#{miniLotoEstimate.check.l1}]]*/,
@@ -306,7 +289,6 @@
 			/*[[#{miniLotoEstimate.check.l3}]]*/,
 			/*[[#{miniLotoEstimate.check.l4}]]*/,
 			/*[[#{miniLotoEstimate.check.l5}]]*/,
-			/*[[#{miniLotoEstimate.check.b1}]]*/,
 		];
 		var msgNonNumber = /*[[#{miniLotoEstimate.check.nonNumber}]]*/;
 		var msgdupliNumber = /*[[#{miniLotoEstimate.check.duplicateNumber}]]*/;

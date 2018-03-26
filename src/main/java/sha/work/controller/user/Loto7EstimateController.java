@@ -106,8 +106,6 @@ public class Loto7EstimateController extends ScreenBaseController{
 		dataIn.setL5(28);
 		dataIn.setL6(31);
 		dataIn.setL7(34);
-		dataIn.setB1(7);
-		dataIn.setB2(8);
 		
 		return dataIn;
 	}
@@ -121,8 +119,6 @@ public class Loto7EstimateController extends ScreenBaseController{
 		dataIn.setL5(Integer.valueOf(allRequestParams.get("l5")));
 		dataIn.setL6(Integer.valueOf(allRequestParams.get("l6")));
 		dataIn.setL7(Integer.valueOf(allRequestParams.get("l7")));
-		dataIn.setB1(Integer.valueOf(allRequestParams.get("b1")));
-		dataIn.setB2(Integer.valueOf(allRequestParams.get("b2")));
 		
 		return dataIn;
 	}

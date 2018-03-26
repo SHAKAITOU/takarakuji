@@ -46,46 +46,114 @@
 								<span sec:authentication="name"></span>
 							</div>
 						</div>
-						<div class="col-md-10 col-md-offset-1">
+						<div class="col-md-10 col-md-offset-1 visible-xs hidden-lg hidden-md">
+							<div class="btn-group" role="group">
+								<button id="btnGroupDrop0" type="button" class="btn btn-outline-primary dropdown-toggle" 
+									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+								<div class="dropdown-menu" aria-labelledby="btnGroupDrop0" x-placement="bottom-start" 
+									style="position: absolute; transform: translate3d(0px, 36px, 0px); top: 0px; left: 0px; will-change: transform;">
+									<a class="loginClk dropdown-item" 
+										sec:authorize="!isAuthenticated()"
+										href="#" th:text="#{login.panel.btn.login}"></a>
+									<a class="logoutClk dropdown-item" 
+										sec:authorize="isAuthenticated()"
+										href="#" th:text="#{login.panel.btn.logout}"></a>
+								</div>
+							</div>
+							<div class="btn-group" role="group">
+								<button id="btnGroupDrop1" type="button" class="btn btn-outline-primary dropdown-toggle" 
+									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+									th:text="#{index.loto7.title}"></button>
+								<div class="dropdown-menu" aria-labelledby="btnGroupDrop1" x-placement="bottom-start" 
+									style="position: absolute; transform: translate3d(0px, 36px, 0px); top: 0px; left: 0px; will-change: transform;">
+									<a class="loto7AnalysisP0Clk dropdown-item" 
+										href="#" th:text="#{index.btn.analysisP0}"></a>
+									<a class="loto7AnalysisP1Clk dropdown-item" 
+										href="#" th:text="#{index.btn.analysisP1}"></a>
+									<a class="loto7AnalysisP2Clk dropdown-item" 
+										href="#" th:text="#{index.btn.analysisP2}"></a>
+									<a class="loto7SevenAnalysisClk dropdown-item" 
+										href="#" th:text="#{index.btn.loto7.sevenAnalysis}"></a>
+									<a class="loto7EstimateClk dropdown-item" 
+										sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_USER.getRole()) || 
+												hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
+										href="#" th:text="#{index.btn.loto7.estimate}"></a>
+									<a class="loto7AddClk dropdown-item" 
+										sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
+										href="#" th:text="#{index.btn.loto7.add}"></a>
+								</div>
+							</div>
+							<div class="btn-group" role="group">
+								<button id="btnGroupDrop2" type="button" class="btn btn-outline-primary dropdown-toggle" 
+									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+									th:text="#{index.loto6.title}"></button>
+								<div class="dropdown-menu" aria-labelledby="btnGroupDrop2" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 36px, 0px); top: 0px; left: 0px; will-change: transform;">
+									<a class="loto6AnalysisP0Clk dropdown-item" 
+										href="#" th:text="#{index.btn.analysisP0}"></a>
+									<a class="loto6AnalysisP1Clk dropdown-item" 
+										href="#" th:text="#{index.btn.analysisP1}"></a>
+									<a class="loto6AnalysisP2Clk dropdown-item" 
+										href="#" th:text="#{index.btn.analysisP2}"></a>
+								</div>
+							</div>
+							<div class="btn-group" role="group">
+								<button id="btnGroupDrop3" type="button" class="btn btn-outline-primary dropdown-toggle" 
+									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+									th:text="#{index.miniLoto.title}"></button>
+								<div class="dropdown-menu" aria-labelledby="btnGroupDrop3" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 36px, 0px); top: 0px; left: 0px; will-change: transform;">
+									<a class="miniLotoAnalysisP0Clk dropdown-item" 
+										href="#" th:text="#{index.btn.analysisP0}"></a>
+									<a class="miniLotoAnalysisP1Clk dropdown-item" 
+										href="#" th:text="#{index.btn.analysisP1}"></a>
+									<a class="miniLotoAnalysisP2Clk dropdown-item" 
+										href="#" th:text="#{index.btn.analysisP2}"></a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-10 col-md-offset-1 visible-lg visible-md hidden-xs">
 							<!-- ========LOGIN BTN========= -->
 							<button id="login" 
 								sec:authorize="!isAuthenticated()"
-								type="button" class="btn btn btn-block btn-outline-info btn_com"
+								type="button" class="loginClk btn btn btn-block btn-outline-info btn_com"
 								th:text="#{login.panel.btn.login}"></button>
 							<button id="logout" 
 								sec:authorize="isAuthenticated()"
-								type="button" class="btn btn btn-block btn-outline-info btn_com"
+								type="button" class="logoutClk btn btn btn-block btn-outline-info btn_com"
 								th:text="#{login.panel.btn.logout}"></button>
 						</div>
-						<div class="col-md-10 col-md-offset-1">
+						<div class="col-md-10 col-md-offset-1 visible-lg visible-md hidden-xs">
 							<legend th:text="#{index.loto7.title}"></legend>
 						</div>
-						<div class="col-md-10 col-md-offset-1">
+						<div class="col-md-10 col-md-offset-1 visible-lg visible-md hidden-xs">
 							<!-- ========LOTO7 ANALYSIS BTN========= -->
-							<button id="loto7AnalysisP0" type="button" class="btn btn btn-block btn-outline-primary btn_com"
+							<button type="button" 
+								class="loto7AnalysisP0Clk btn btn btn-block btn-outline-primary btn_com"
 								th:text="#{index.btn.analysisP0}"></button> 
-							<button id="loto7AnalysisP1" type="button" class="btn btn btn-block btn-outline-primary btn_com"
+							<button type="button" 
+								class="loto7AnalysisP1Clk btn btn btn-block btn-outline-primary btn_com"
 								th:text="#{index.btn.analysisP1}"></button>
 							<!-- <button id="loto7AnalysisP1Group" type="button" class="btn btn btn-block btn-outline-primary"
 								th:text="#{index.btn.analysisP1Group}"></button> -->
-							<button id="loto7AnalysisP2" type="button" class="btn btn btn-block btn-outline-primary btn_com"
+							<button type="button" 
+								class="loto7AnalysisP2Clk btn btn btn-block btn-outline-primary btn_com"
 								th:text="#{index.btn.analysisP2}"></button>
-							<button id="loto7SevenAnalysis" type="button" class="btn btn btn-block btn-outline-primary btn_com"
+							<button type="button" 
+								class="loto7SevenAnalysisClk btn btn btn-block btn-outline-primary btn_com"
 								th:text="#{index.btn.loto7.sevenAnalysis}"></button>
-							<button id="loto7Estimate"
+							<button 
 								sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_USER.getRole()) || 
 												hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
-								 type="button" class="btn btn btn-block btn-outline-warning btn_com"
+								 type="button" class="loto7EstimateClk btn btn btn-block btn-outline-warning btn_com"
 									th:text="#{index.btn.loto7.estimate}"></button> 
-							<button id="loto7Add" 
+							<button 
 								sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
-								type="button" class="btn btn btn-block btn-outline-warning btn_com"
+								type="button" class="loto7AddClk btn btn btn-block btn-outline-warning btn_com"
 									th:text="#{index.btn.loto7.add}"></button>
 						</div>
-						<div class="col-md-10 col-md-offset-1">
+						<div class="col-md-10 col-md-offset-1 visible-lg visible-md hidden-xs">
 							<legend th:text="#{index.loto6.title}"></legend>
 						</div>
-						<div class="col-md-10 col-md-offset-1">
+						<div class="col-md-10 col-md-offset-1 visible-lg visible-md hidden-xs">
 							<!-- ========LOTO6 ANALYSIS BTN========= -->
 							<button id="loto6AnalysisP0" type="button" class="btn btn btn-block btn-outline-primary btn_com"
 								th:text="#{index.btn.analysisP0}"></button> 
@@ -107,10 +175,10 @@
 								type="button" class="btn btn btn-block btn-outline-warning btn_com"
 								th:text="#{index.btn.loto6.add}"></button>	 
 						</div>
-						<div class="col-md-10 col-md-offset-1">
+						<div class="col-md-10 col-md-offset-1 visible-lg visible-md hidden-xs">
 							<legend th:text="#{index.miniLoto.title}"></legend>
 						</div>
-						<div class="col-md-10 col-md-offset-1">
+						<div class="col-md-10 col-md-offset-1 visible-lg visible-md hidden-xs">
 							<!-- ========MINILOTO ANALYSIS BTN========= -->
 							<button id="miniLotoAnalysisP0" type="button" class="btn btn btn-block btn-outline-primary btn_com" 
 								th:text="#{index.btn.analysisP0}"></button> 
@@ -174,7 +242,7 @@ $(document).ready(function(){
 	
 	//-------------------------------------------------------
 	//LOGIN
-	$btn_obj = $('#login'); 
+	$btn_obj = $('.loginClk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
@@ -186,7 +254,7 @@ $(document).ready(function(){
 				ShaCommon.ajax.callBackNg); 
 	});
 	
-	$btn_obj = $('#logout'); 
+	$btn_obj = $('.logoutClk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
@@ -209,7 +277,7 @@ $(document).ready(function(){
 	
 	//-------------------------------------------------------
 	//LOTO7		
-	$btn_obj = $('#loto7AnalysisP0'); 
+	$btn_obj = $('.loto7AnalysisP0Clk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
@@ -221,7 +289,7 @@ $(document).ready(function(){
 				ShaCommon.ajax.callBackNg); 
 	});
 	
-	$btn_obj = $('#loto7AnalysisP1'); 
+	$btn_obj = $('.loto7AnalysisP1Clk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
@@ -245,7 +313,7 @@ $(document).ready(function(){
 				ShaCommon.ajax.callBackNg); 
 	});
 	
-	$btn_obj = $('#loto7AnalysisP2'); 
+	$btn_obj = $('.loto7AnalysisP2Clk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
@@ -257,7 +325,7 @@ $(document).ready(function(){
 				ShaCommon.ajax.callBackNg); 
 	});
 	
-	$btn_obj = $('#loto7SevenAnalysis'); 
+	$btn_obj = $('.loto7SevenAnalysisClk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
@@ -269,7 +337,7 @@ $(document).ready(function(){
 				ShaCommon.ajax.callBackNg); 
 	});
 	
-	$btn_obj = $('#loto7Estimate'); 
+	$btn_obj = $('.loto7EstimateClk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
@@ -281,7 +349,7 @@ $(document).ready(function(){
 				ShaCommon.ajax.callBackNg); 
 	});
 	
-	$btn_obj = $('#loto7Add'); 
+	$btn_obj = $('.loto7AddClk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);

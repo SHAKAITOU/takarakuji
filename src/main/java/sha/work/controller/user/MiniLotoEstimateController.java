@@ -21,6 +21,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import sha.framework.controller.ScreenBaseController;
 import sha.framework.exception.TKRKScreenException;
 import sha.framework.util.LogCommonUtil;
+import sha.work.common.UrlConstants;
+import sha.work.common.ViewConstants;
 import sha.work.dto.loto.MiniLoto;
 import sha.work.entity.in.MiniLotoEstimateDataIn;
 import sha.work.entity.out.MiniLotoEstimateDataOut;
@@ -48,7 +50,7 @@ public class MiniLotoEstimateController extends ScreenBaseController{
 	private MiniLotoEstimateService estimateService;
 
 
-	@RequestMapping(path="/user/miniLotoEstimate", method=RequestMethod.GET)
+	@RequestMapping(path=UrlConstants.USER_MINILOTOESTIMATE, method=RequestMethod.GET)
 	public ModelAndView get(@ModelAttribute Object greeting)  {
 		
 		ModelAndView mav = new ModelAndView();
@@ -64,11 +66,11 @@ public class MiniLotoEstimateController extends ScreenBaseController{
 		}
 		
 		mav.addObject("result", dataOut);
-		mav.setViewName("user/miniLotoEstimate");
+		mav.setViewName(ViewConstants.USER_MINILOTOESTIMATE);
 		return mav;
 	}
 	
-	@RequestMapping(path="/user/miniLotoEstimate", method=RequestMethod.POST)
+	@RequestMapping(path=UrlConstants.USER_MINILOTOESTIMATE, method=RequestMethod.POST)
 	public ModelAndView post(@RequestParam Map<String,String> allRequestParams, Locale loc, 
 			HttpServletRequest request,
 			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
@@ -89,7 +91,7 @@ public class MiniLotoEstimateController extends ScreenBaseController{
 		dataOut.setEstimateAnalysisBase(service.analysisOnly(miniLoto));
 		dataOut = estimateService.getEstimateData(dataOut);
 		mav.addObject("result", dataOut);
-		mav.setViewName("user/miniLotoEstimate");
+		mav.setViewName(ViewConstants.USER_MINILOTOESTIMATE);
 		return mav;
 	}
 	
@@ -100,7 +102,6 @@ public class MiniLotoEstimateController extends ScreenBaseController{
 		dataIn.setL3(14);
 		dataIn.setL4(21);
 		dataIn.setL5(28);
-		dataIn.setB1(7);
 		
 		return dataIn;
 	}
@@ -112,7 +113,6 @@ public class MiniLotoEstimateController extends ScreenBaseController{
 		dataIn.setL3(Integer.valueOf(allRequestParams.get("l3")));
 		dataIn.setL4(Integer.valueOf(allRequestParams.get("l4")));
 		dataIn.setL5(Integer.valueOf(allRequestParams.get("l5")));
-		dataIn.setB1(Integer.valueOf(allRequestParams.get("b1")));
 		
 		return dataIn;
 	}

@@ -13,4 +13,5 @@ import lombok.Setter;
 public class CronSetting {
 	private String loto7Cron;
 	private String loto6Cron;
+	private String miniLotoCron;
 }

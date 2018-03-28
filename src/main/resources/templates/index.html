@@ -95,6 +95,15 @@
 										href="#" th:text="#{index.btn.analysisP1}"></a>
 									<a class="loto6AnalysisP2Clk dropdown-item" 
 										href="#" th:text="#{index.btn.analysisP2}"></a>
+									<a class="loto6SixAnalysisClk dropdown-item" 
+										href="#" th:text="#{index.btn.loto6.sixAnalysis}"></a>
+									<a class="loto6EstimateClk dropdown-item" 
+										sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_USER.getRole()) || 
+												hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
+										href="#" th:text="#{index.btn.loto6.estimate}"></a>
+									<a class="loto6AddClk dropdown-item" 
+										sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
+										href="#" th:text="#{index.btn.loto6.add}"></a>
 								</div>
 							</div>
 							<div class="btn-group" role="group">
@@ -108,16 +117,25 @@
 										href="#" th:text="#{index.btn.analysisP1}"></a>
 									<a class="miniLotoAnalysisP2Clk dropdown-item" 
 										href="#" th:text="#{index.btn.analysisP2}"></a>
+									<a class="miniLotoFiveAnalysisClk dropdown-item" 
+										href="#" th:text="#{index.btn.miniLoto.fiveAnalysis}"></a>
+									<a class="miniLotoEstimateClk dropdown-item" 
+										sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_USER.getRole()) || 
+												hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
+										href="#" th:text="#{index.btn.miniLoto.estimate}"></a>
+									<a class="miniLotoAddClk dropdown-item" 
+										sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
+										href="#" th:text="#{index.btn.miniLoto.add}"></a>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-10 col-md-offset-1 visible-lg visible-md hidden-xs">
 							<!-- ========LOGIN BTN========= -->
-							<button id="login" 
+							<button 
 								sec:authorize="!isAuthenticated()"
 								type="button" class="loginClk btn btn btn-block btn-outline-info btn_com"
 								th:text="#{login.panel.btn.login}"></button>
-							<button id="logout" 
+							<button 
 								sec:authorize="isAuthenticated()"
 								type="button" class="logoutClk btn btn btn-block btn-outline-info btn_com"
 								th:text="#{login.panel.btn.logout}"></button>
@@ -156,24 +174,30 @@
 						</div>
 						<div class="col-md-10 col-md-offset-1 visible-lg visible-md hidden-xs">
 							<!-- ========LOTO6 ANALYSIS BTN========= -->
-							<button id="loto6AnalysisP0" type="button" class="btn btn btn-block btn-outline-primary btn_com"
+							<button type="button" 
+								class="loto6AnalysisP0Clk btn btn btn-block btn-outline-primary btn_com"
 								th:text="#{index.btn.analysisP0}"></button> 
-							<button id="loto6AnalysisP1" type="button" class="btn btn btn-block btn-outline-primary btn_com"
+							<button type="button" 
+								class="loto6AnalysisP1Clk btn btn btn-block btn-outline-primary btn_com"
 								th:text="#{index.btn.analysisP1}"></button>
 							<!-- <button id="loto6AnalysisP1Group" type="button" class="btn btn btn-block btn-outline-primary"
 								th:text="#{index.btn.analysisP1Group}"></button> -->
-							<button id="loto6AnalysisP2" type="button" class="btn btn btn-block btn-outline-primary btn_com"
+							<button type="button" 
+								class="loto6AnalysisP2Clk btn btn btn-block btn-outline-primary btn_com"
 								th:text="#{index.btn.analysisP2}"></button> 
-							<button id="loto6SixAnalysis" type="button" class="btn btn btn-block btn-outline-primary btn_com"
+							<button type="button" 
+								class="loto6SixAnalysisClk btn btn btn-block btn-outline-primary btn_com"
 								th:text="#{index.btn.loto6.sixAnalysis}"></button>
-							<button id="loto6Estimate" 
+							<button 
 								sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_USER.getRole()) || 
 												hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
-								type="button" class="btn btn btn-block btn-outline-warning btn_com"
+								type="button" 
+								class="loto6EstimateClk btn btn btn-block btn-outline-warning btn_com"
 								th:text="#{index.btn.loto6.estimate}"></button>
-							<button id="loto6Add" 
+							<button 
 								sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
-								type="button" class="btn btn btn-block btn-outline-warning btn_com"
+								type="button" 
+								class="loto6AddClk btn btn btn-block btn-outline-warning btn_com"
 								th:text="#{index.btn.loto6.add}"></button>	 
 						</div>
 						<div class="col-md-10 col-md-offset-1 visible-lg visible-md hidden-xs">
@@ -181,24 +205,30 @@
 						</div>
 						<div class="col-md-10 col-md-offset-1 visible-lg visible-md hidden-xs">
 							<!-- ========MINILOTO ANALYSIS BTN========= -->
-							<button id="miniLotoAnalysisP0" type="button" class="btn btn btn-block btn-outline-primary btn_com" 
+							<button type="button" 
+								class="miniLotoAnalysisP0Clk btn btn btn-block btn-outline-primary btn_com" 
 								th:text="#{index.btn.analysisP0}"></button> 
-							<button id="miniLotoAnalysisP1" type="button" class="btn btn btn-block btn-outline-primary btn_com"
+							<button type="button" 
+								class="miniLotoAnalysisP1Clk btn btn btn-block btn-outline-primary btn_com"
 								th:text="#{index.btn.analysisP1}"></button>
 							<!-- <button id="loto7AnalysisP1Group" type="button" class="btn btn btn-block btn-outline-primary"
 								th:text="#{index.btn.analysisP1Group}"></button> -->
-							<button id="miniLotoAnalysisP2" type="button" class="btn btn btn-block btn-outline-primary btn_com"
+							<button type="button" 
+								class="miniLotoAnalysisP2Clk btn btn btn-block btn-outline-primary btn_com"
 								th:text="#{index.btn.analysisP2}"></button>
-							<button id="miniLotoFiveAnalysis" type="button" class="btn btn btn-block btn-outline-primary btn_com"
+							<button type="button" 
+								class="miniLotoFiveAnalysisClk btn btn btn-block btn-outline-primary btn_com"
 								th:text="#{index.btn.miniLoto.fiveAnalysis}"></button> 	
-							<button id="miniLotoEstimate" 
+							<button 
 								sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_USER.getRole()) || 
 												hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
-								type="button" class="btn btn btn-block btn-outline-warning btn_com"
+								type="button" 
+								class="miniLotoEstimateClk btn btn btn-block btn-outline-warning btn_com"
 								th:text="#{index.btn.miniLoto.estimate}"></button>
-							<button id="miniLotoAdd" 
+							<button 
 								sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
-								type="button" class="btn btn btn-block btn-outline-warning btn_com"
+								type="button" 
+								class="miniLotoAddClk btn btn btn-block btn-outline-warning btn_com"
 								th:text="#{index.btn.miniLoto.add}"></button>
 						</div>
 					</div>
@@ -364,7 +394,7 @@ $(document).ready(function(){
 	
 	//-------------------------------------------------------
 	//LOTO6
-	$btn_obj = $('#loto6AnalysisP0'); 
+	$btn_obj = $('.loto6AnalysisP0Clk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
@@ -376,7 +406,7 @@ $(document).ready(function(){
 				ShaCommon.ajax.callBackNg); 
 	});
 	
-	$btn_obj = $('#loto6AnalysisP1'); 
+	$btn_obj = $('.loto6AnalysisP1Clk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
@@ -388,7 +418,7 @@ $(document).ready(function(){
 				ShaCommon.ajax.callBackNg); 
 	});
 	
-	$btn_obj = $('#loto6AnalysisP1Group'); 
+	$btn_obj = $('.loto6AnalysisP1GroupClk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
@@ -400,7 +430,7 @@ $(document).ready(function(){
 				ShaCommon.ajax.callBackNg); 
 	});
 	
-	$btn_obj = $('#loto6AnalysisP2'); 
+	$btn_obj = $('.loto6AnalysisP2Clk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
@@ -412,7 +442,7 @@ $(document).ready(function(){
 				ShaCommon.ajax.callBackNg); 
 	});
 	
-	$btn_obj = $('#loto6SixAnalysis'); 
+	$btn_obj = $('.loto6SixAnalysisClk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
@@ -425,7 +455,7 @@ $(document).ready(function(){
 	});
 	
 	
-	$btn_obj = $('#loto6Estimate'); 
+	$btn_obj = $('.loto6EstimateClk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
@@ -437,7 +467,7 @@ $(document).ready(function(){
 				ShaCommon.ajax.callBackNg); 
 	});
 	
-	$btn_obj = $('#loto6Add'); 
+	$btn_obj = $('.loto6AddClk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
@@ -451,7 +481,7 @@ $(document).ready(function(){
 
 	//-------------------------------------------------------
 	//MINILOTO
-	$btn_obj = $('#miniLotoAnalysisP0'); 
+	$btn_obj = $('.miniLotoAnalysisP0Clk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
@@ -463,7 +493,7 @@ $(document).ready(function(){
 				ShaCommon.ajax.callBackNg); 
 	});
 	
-	$btn_obj = $('#miniLotoAnalysisP1'); 
+	$btn_obj = $('.miniLotoAnalysisP1Clk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
@@ -475,7 +505,7 @@ $(document).ready(function(){
 				ShaCommon.ajax.callBackNg); 
 	});
 
-	$btn_obj = $('#miniLotoAnalysisP2'); 
+	$btn_obj = $('.miniLotoAnalysisP2Clk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
@@ -487,7 +517,7 @@ $(document).ready(function(){
 				ShaCommon.ajax.callBackNg); 
 	});
 	
-	$btn_obj = $('#miniLotoFiveAnalysis'); 
+	$btn_obj = $('.miniLotoFiveAnalysisClk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
@@ -499,7 +529,7 @@ $(document).ready(function(){
 				ShaCommon.ajax.callBackNg); 
 	});
 	
-	$btn_obj = $('#miniLotoEstimate'); 
+	$btn_obj = $('.miniLotoEstimateClk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);
@@ -511,7 +541,7 @@ $(document).ready(function(){
 				ShaCommon.ajax.callBackNg); 
 	});
 	
-	$btn_obj = $('#miniLotoAdd'); 
+	$btn_obj = $('.miniLotoAddClk'); 
 	$btn_obj.unbind(); 
 	$btn_obj.on('click', function(event) {
 		commonBtn = $(this);

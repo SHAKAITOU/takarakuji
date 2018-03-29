@@ -161,7 +161,7 @@
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
 			var postData = $('#add_form').serializeArray();
-			if(checkTurn(postData)) {
+			if(checkValue(postData)) {
 				return;
 			}
 			

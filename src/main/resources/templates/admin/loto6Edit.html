@@ -143,7 +143,7 @@
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
 			var postData = $('#add_form').serializeArray();
-			if(checkTurn(postData)) {
+			if(checkValue(postData)) {
 				return;
 			}
 			
@@ -159,7 +159,7 @@
 					confirmMsg,
 					function(){						
 						ShaCommon.ajaxNonRefresh.post(
-									/*[[${T(sha.work.common.UrlConstants).ADMIN_LOTO7EDIT}]]*/,
+									/*[[${T(sha.work.common.UrlConstants).ADMIN_LOTO6EDIT}]]*/,
 									postData, 
 									function(data){
 										var rsFlg = /*[[${T(sha.work.enums.ExecuteReturnType).OK.getId()}]]*/;
@@ -183,26 +183,22 @@
 			$('#l4'),
 			$('#l5'),
 			$('#l6'),
-			$('#l7'),
 			$('#b1'),
-			$('#b2')
 		];
 		var ttlHeads = [
-			/*[[#{loto7Estimate.check.l1}]]*/,
-			/*[[#{loto7Estimate.check.l2}]]*/,
-			/*[[#{loto7Estimate.check.l3}]]*/,
-			/*[[#{loto7Estimate.check.l4}]]*/,
-			/*[[#{loto7Estimate.check.l5}]]*/,
-			/*[[#{loto7Estimate.check.l6}]]*/,
-			/*[[#{loto7Estimate.check.l7}]]*/,
-			/*[[#{loto7Estimate.check.b1}]]*/,
-			/*[[#{loto7Estimate.check.b2}]]*/
+			/*[[#{loto6Estimate.check.l1}]]*/,
+			/*[[#{loto6Estimate.check.l2}]]*/,
+			/*[[#{loto6Estimate.check.l3}]]*/,
+			/*[[#{loto6Estimate.check.l4}]]*/,
+			/*[[#{loto6Estimate.check.l5}]]*/,
+			/*[[#{loto6Estimate.check.l6}]]*/,
+			/*[[#{loto6Estimate.check.b1}]]*/,
 		];
-		var msgNonNumber = /*[[#{loto7Estimate.check.nonNumber}]]*/;
-		var msgdupliNumber = /*[[#{loto7Estimate.check.duplicateNumber}]]*/;
+		var msgNonNumber = /*[[#{loto6Estimate.check.nonNumber}]]*/;
+		var msgdupliNumber = /*[[#{loto6Estimate.check.duplicateNumber}]]*/;
 		var numMap = [];
 		for( var i = 0; i < objs.length; i++ ){
-			if(!ShaCommon.util.isLoto7Number(objs[i].val())){
+			if(!ShaCommon.util.isLoto6Number(objs[i].val())){
 				ShaCommon.dialogs.alert(ttlHeads[i]+msgNonNumber);
 				objs[i].addClass('alert-input');
 				return true;
@@ -228,7 +224,7 @@
 	function checkTurn() {
 		turnInput = $('#turn');
 		if(turnInput.val() == ''){
-			var hdMsg = /*[[#{loto7Add.edit.turn.blankMsg}]]*/;
+			var hdMsg = /*[[#{loto6Add.edit.turn.blankMsg}]]*/;
 			ShaCommon.dialogs.alert(hdMsg);
 			turnInput.addClass('alert-input');
 			return true;
@@ -242,7 +238,7 @@
 		turnInput = $('#turn');
 		
 		if($('#turnKeep').val() == ''){
-			var hdMsg = /*[[#{loto7Add.edit.turn.blankMsg}]]*/;
+			var hdMsg = /*[[#{loto6Add.edit.turn.blankMsg}]]*/;
 			ShaCommon.dialogs.alert(hdMsg);
 			turnInput.addClass('alert-input');
 			return true;
@@ -251,7 +247,7 @@
 		}
 		
 		if(turnInput.val() != $('#turnKeep').val()) {
-			var hdMsg = /*[[#{loto7Add.edit.turn.failMsg}]]*/;
+			var hdMsg = /*[[#{loto6Add.edit.turn.failMsg}]]*/;
 			ShaCommon.dialogs.alert(hdMsg);
 			turnInput.addClass('alert-input');
 			return true;
@@ -270,9 +266,7 @@
 		$('#l4').val(data.returnObj.l4);
 		$('#l5').val(data.returnObj.l5);
 		$('#l6').val(data.returnObj.l6);
-		$('#l7').val(data.returnObj.l7);
 		$('#b1').val(data.returnObj.b1);
-		$('#b2').val(data.returnObj.b2);
 	}
 
 	
@@ -285,9 +279,7 @@
 		$('#l4').val("");
 		$('#l5').val("");
 		$('#l6').val("");
-		$('#l7').val("");
 		$('#b1').val("");
-		$('#b2').val("");
 	}
 
 	

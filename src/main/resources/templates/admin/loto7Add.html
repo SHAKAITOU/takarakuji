@@ -36,8 +36,9 @@
 			<div class="col-md-12" style="height: 30px;">
 				<div id="estimateL1Div" class="form-group">
 					<div class="input-group">
-						<input type="text" id="turn" name="turn" class="form-control-sm text-center label-14b" style="width: 60px;"
-							th:value="${result.newTurn.turn}" readonly="true"/>
+						<input id="turn" name="turn" type="number" min="1" max="99999" step="1" 
+							class="form-control-sm text-center label-14b" style="width: 60px;"
+							th:value="${result.newTurn.turn}"/>
 						<div class="input-group-append">
 							<span class="input-group-text" th:text="#{loto7Add.addTurnTitle}"></span>
 						</div>
@@ -166,9 +167,7 @@
 					function(){						
 						ShaCommon.ajax.postWithSucc(
 									/*[[${T(sha.work.common.UrlConstants).ADMIN_LOTO7ADD}]]*/,
-									postData, 
-									ShaCommon.ajax.callBackOk,
-									ShaCommon.ajax.callBackNg,
+									postData,
 									addTurn + unit + successMsg
 								);  
 					});

@@ -23,6 +23,7 @@ import sha.work.common.UrlConstants;
 import sha.work.common.ViewConstants;
 import sha.work.dto.loto.Loto6;
 import sha.work.entity.in.Loto6AddDataIn;
+import sha.work.service.batch.Loto6BatchService;
 import sha.work.service.loto.Loto6AddService;
 import sha.work.util.LotoUtil;
 
@@ -42,6 +43,9 @@ public class Loto6AddController extends ScreenBaseController{
 
 	@Autowired
 	private Loto6AddService service;
+	
+	@Autowired
+	private Loto6BatchService batchService;
 
 
 	@RequestMapping(path=UrlConstants.ADMIN_LOTO6ADD, method=RequestMethod.GET)
@@ -66,6 +70,7 @@ public class Loto6AddController extends ScreenBaseController{
 		ModelAndView mav = new ModelAndView();
 		Loto6 loto6 = setLoto6AddDataIn(allRequestParams);
 		service.add(loto6);
+		batchService.batch();
 		
 		Loto6AddDataIn dataIn = initLoto6AddDataIn();
 

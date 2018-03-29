@@ -13,35 +13,17 @@
 </style>
 <form id="add_form" name="add_form" role="form" method="POST">
 <div class="row">
-	<div class="col-md-6 col-xs-12">
-		<legend th:text="#{loto6Add.addOpenDtTitle}"></legend>
+	<div class="col-md-12 col-xs-12">
+		<legend id="estimateTitle" th:text="#{loto7Add.addTurnTitle}"></legend>
 		<div class="row">
 			<div class="col-md-12" style="height: 30px;">
-				<div class="form-group">
+				<div id="estimateL1Div" class="form-group">
 					<div class="input-group">
-						<div class="input-group">
-						<input id="openDt" name="openDt" type="text" 
-							class="form-control-sm form_datetime text-center label-14b" style="width: 120px;"
-								placeholder="yyyy/mm/dd" th:value="${result.newTurn.openDt}" readonly="true"/>
+						<input id="turn" name="turn" type="number" min="1" max="99999" step="1" 
+							class="form-control-sm text-center label-14b" style="width: 60px;"
+							th:value="(${result.newTurn.turn > 0} ? ${result.newTurn.turn} : '')"/>
 						<div class="input-group-append">
-							<span class="input-group-text" th:text="#{loto6Add.addOpenDtTitle}"></span>
-						</div>
-					</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-6 col-xs-12">
-		<legend th:text="#{loto6Add.addTurnTitle}"></legend>
-		<div class="row">
-			<div class="col-md-12" style="height: 30px;">
-				<div class="form-group">
-					<div class="input-group">
-						<input type="text" id="turn" name="turn" class="form-control-sm text-center label-14b" style="width: 60px;"
-							th:value="${result.newTurn.turn}" readonly="true"/>
-						<div class="input-group-append">
-							<span class="input-group-text" th:text="#{loto6Add.addTurnTitle}"></span>
+							<span class="input-group-text" th:text="#{loto7Add.addTurnTitle}"></span>
 						</div>
 					</div>
 				</div>
@@ -49,13 +31,13 @@
 		</div>
 	</div>
 	<div class="col-md-6 col-xs-12">
-		<legend th:text="#{loto6Estimate.estimateL1Title}"></legend>
+		<legend id="estimateTitle" th:text="#{loto7Estimate.estimateL1Title}"></legend>
 		<div class="row">
 			<div class="col-md-12" style="height: 30px;">
-				<div class="form-group">
+				<div id="estimateL1Div" class="form-group">
 					<div class="input-group">
 						<div class="td-th2 input-group-append">
-							<span class="input-group-text" th:text="${T(sha.work.enums.Loto6NumberType).NOMAL_NUMBER.getName()}"></span>
+							<span class="input-group-text" th:text="${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}"></span>
 						</div>
 						<input type="text" id="l1" name="l1" class="form-control-sm text-center label-14b" 
 							style="max-width: 30px;" th:value="(${result.newTurn.l1 > 0} ? ${result.newTurn.l1} : '')"/>
@@ -69,22 +51,40 @@
 							style="max-width: 30px;" th:value="(${result.newTurn.l5 > 0} ? ${result.newTurn.l5} : '')"/>
 						<input type="text" id="l6" name="l6" class="form-control-sm text-center label-14b" 
 							style="max-width: 30px;" th:value="(${result.newTurn.l6 > 0} ? ${result.newTurn.l6} : '')"/>
+						<input type="text" id="l7" name="l7" class="form-control-sm text-center label-14b" 
+							style="max-width: 30px;" th:value="(${result.newTurn.l7 > 0} ? ${result.newTurn.l7} : '')"/>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-md-6 col-xs-12">
-		<legend th:text="#{loto6Estimate.estimateB1Title}"></legend>
+	<div class="col-md-3 col-xs-12">
+		<legend id="estimateTitle" th:text="#{loto7Estimate.estimateB1Title}"></legend>
 		<div class="row">
 			<div class="col-md-12" style="height: 30px;">
 				<div id="estimateL1Div" class="form-group">
 					<div class="input-group">
 						<div class="td-t2a input-group-append">
-							<span class="input-group-text" th:text="${T(sha.work.enums.Loto6NumberType).BONUS_NUMBER1.getName()}"></span>
+							<span class="input-group-text" th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getName()}"></span>
 						</div>
 						<input type="text" id="b1" name="b1" class="form-control-sm text-center label-14b" 
 							style="max-width: 30px;" th:value="(${result.newTurn.b1 > 0} ? ${result.newTurn.b1} : '')"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 col-xs-12">
+		<legend id="estimateTitle" th:text="#{loto7Estimate.estimateB2Title}"></legend>
+		<div class="row">
+			<div class="col-md-12" style="height: 30px;">
+				<div id="estimateL1Div" class="form-group">
+					<div class="input-group">
+						<div class="td-t2d input-group-append">
+							<span class="input-group-text" th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getName()}"></span>
+						</div>
+						<input type="text" id="b2" name="b2" class="form-control-sm text-center label-14b" 
+							style="max-width: 30px;" th:value="(${result.newTurn.b2 > 0} ? ${result.newTurn.b2} : '')"/>
 					</div>
 				</div>
 			</div>
@@ -95,8 +95,8 @@
 <div class="row"><div class="col-md-12 col-xs-12 text-right" style="height: 10px;"></div></div>	
 <div class="row">
 	<div class="col-md-12 col-xs-12 text-right" style="height: 40px;">
-		<button id="addBtn" type="button" class="btn-lg btn-outline-danger btn_com" style="width: 120px;"
-			th:text="#{index.btn.loto6.add}"></button>
+		<button id="editBtn" type="button" class="btn-lg btn-outline-danger btn_com" style="width: 120px;"
+			th:text="#{index.btn.loto7.edit}"></button>
 	</div>
 </div>
 </form>
@@ -107,8 +107,8 @@
 		
 		//--------------------------------------------------------[
 		//title init
-		var titleLeft = /*[[#{index.loto6.title}]]*/;
-		var titleRight = /*[[#{index.btn.loto6.add}]]*/;
+		var titleLeft = /*[[#{index.loto7.title}]]*/;
+		var titleRight = /*[[#{index.btn.loto7.edit}]]*/;
 		//--------------------------------------------------------]
 		
 		//--------------------------------------------------------[
@@ -129,7 +129,7 @@
 	  	//--------------------------------------------------------[
 		//init bond event to btn
 
-		$btn_obj = $('#addBtn'); 
+		$btn_obj = $('#editBtn'); 
 		$btn_obj.unbind(); 
 		$btn_obj.on('click', function(event) {
 			event.preventDefault();
@@ -138,22 +138,27 @@
 				return;
 			}
 			
-			var title = /*[[#{dialogs.confirm.add.title}]]*/;
-			var confirmMsg = /*[[#{dialogs.confirm.add.msg}]]*/;
-			var successMsg = /*[[#{loto6Add.add.success.msg}]]*/;
+			var title = /*[[#{dialogs.confirm.edit.title}]]*/;
+			var confirmMsg = /*[[#{dialogs.confirm.edit.msg}]]*/;
+			var successMsg = /*[[#{loto7Add.edit.success.msg}]]*/;
+			var failMsg = /*[[#{loto7Add.edit.fail.msg}]]*/;
 			var addTurn = /*[[#{dataShow.data.td1.span}]]*/;
 			addTurn += $('#turn').val();
 			var unit = /*[[#{table.turnTable.data.td2Span}]]*/;
+			
 			ShaCommon.dialogs.confirm(
 					title,
 					confirmMsg,
-					function(){
-						ShaCommon.ajax.postWithSucc(
-									/*[[${T(sha.work.common.UrlConstants).ADMIN_LOTO6ADD}]]*/,
-									postData,
-							addTurn + unit + successMsg
-						);  
-			});
+					function(){						
+						ShaCommon.ajaxNonRefresh.postWithSuccOrFail(
+									/*[[${T(sha.work.common.UrlConstants).ADMIN_LOTO7EDIT}]]*/,
+									postData, 
+									clearData(),
+									function(){},
+									addTurn + unit + successMsg,
+									addTurn + unit + failMsg
+								);  
+					});
 		});
 	});
 	
@@ -166,7 +171,9 @@
 			$('#l4'),
 			$('#l5'),
 			$('#l6'),
+			$('#l7'),
 			$('#b1'),
+			$('#b2')
 		];
 		var ttlHeads = [
 			/*[[#{loto7Estimate.check.l1}]]*/,
@@ -175,13 +182,15 @@
 			/*[[#{loto7Estimate.check.l4}]]*/,
 			/*[[#{loto7Estimate.check.l5}]]*/,
 			/*[[#{loto7Estimate.check.l6}]]*/,
+			/*[[#{loto7Estimate.check.l7}]]*/,
 			/*[[#{loto7Estimate.check.b1}]]*/,
+			/*[[#{loto7Estimate.check.b2}]]*/
 		];
-		var msgNonNumber = /*[[#{loto6Estimate.check.nonNumber}]]*/;
-		var msgdupliNumber = /*[[#{loto6Estimate.check.duplicateNumber}]]*/;
+		var msgNonNumber = /*[[#{loto7Estimate.check.nonNumber}]]*/;
+		var msgdupliNumber = /*[[#{loto7Estimate.check.duplicateNumber}]]*/;
 		var numMap = [];
 		for( var i = 0; i < objs.length; i++ ){
-			if(!ShaCommon.util.isLoto6Number(objs[i].val())){
+			if(!ShaCommon.util.isLoto7Number(objs[i].val())){
 				ShaCommon.dialogs.alert(ttlHeads[i]+msgNonNumber);
 				objs[i].addClass('alert-input');
 				return true;
@@ -201,7 +210,21 @@
 			}
 		}
 		
+		turnInput = $('#turn');
+		if(turnInput.val() == ''){
+			var hdMsg = /*[[#{loto7Add.addTurnTitle}]]*/;
+			ShaCommon.dialogs.alert(hdMsg+msgNonNumber);
+			turnInput.addClass('alert-input');
+			return true;
+		} else {
+			turnInput.removeClass('alert-input');
+		}
+		
 		return false;
+	}
+	
+	function clearData() {
+		
 	}
 
 	

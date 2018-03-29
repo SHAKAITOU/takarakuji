@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,9 +26,9 @@ import sha.work.common.UrlConstants;
 import sha.work.common.ViewConstants;
 import sha.work.dto.loto.Loto7;
 import sha.work.entity.in.Loto7AddDataIn;
+import sha.work.enums.ExecuteReturnType;
 import sha.work.service.batch.Loto7BatchService;
 import sha.work.service.loto.Loto7AddOrEditService;
-import sha.work.util.LotoUtil;
 
 /**
  * S002 Thymeleaf 
@@ -33,7 +36,7 @@ import sha.work.util.LotoUtil;
  *
  */
 @Controller
-public class Loto7AddController extends ScreenBaseController{
+public class Loto7EditController extends ScreenBaseController{
 
 	
 
@@ -48,7 +51,7 @@ public class Loto7AddController extends ScreenBaseController{
 	private Loto7BatchService batchService;
 
 
-	@RequestMapping(path=UrlConstants.ADMIN_LOTO7ADD, method=RequestMethod.GET)
+	@RequestMapping(path=UrlConstants.ADMIN_LOTO7EDIT, method=RequestMethod.GET)
 	public ModelAndView get(@ModelAttribute Object greeting)  {
 		
 		ModelAndView mav = new ModelAndView();
@@ -58,41 +61,37 @@ public class Loto7AddController extends ScreenBaseController{
 
 		
 		mav.addObject("result", dataIn);
-		mav.setViewName(ViewConstants.ADMIN_LOTO7ADD);
+		mav.addObject("returnType", ExecuteReturnType.DEFAULT.getId());
+		mav.setViewName(ViewConstants.ADMIN_LOTO7EDIT);
 		return mav;
 	}
 	
-	@RequestMapping(path=UrlConstants.ADMIN_LOTO7ADD, method=RequestMethod.POST)
-	public ModelAndView post(@RequestParam Map<String,String> allRequestParams, Locale loc, 
+	@RequestMapping(path=UrlConstants.ADMIN_LOTO7EDIT, method=RequestMethod.POST, 
+						produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> post(@RequestParam Map<String,String> allRequestParams, Locale loc, 
 			HttpServletRequest request,
 			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
 		
-		ModelAndView mav = new ModelAndView();
 		Loto7 loto7 = setLoto7AddDataIn(allRequestParams);
 		
-		service.addOrEdit(loto7);
-		batchService.batch();
-		
-		Loto7AddDataIn dataIn = initLoto7AddDataIn();
-
-		mav.addObject("result", dataIn);
-		mav.setViewName(ViewConstants.ADMIN_LOTO7ADD);
-		return mav;
+		boolean rsFlg = service.edit(loto7);
+		if (rsFlg) {
+			batchService.batch();
+			return new ResponseEntity<Object>(ExecuteReturnType.OK, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Object>(ExecuteReturnType.NG, HttpStatus.OK);
+		}
 	}
 	
 	private Loto7AddDataIn initLoto7AddDataIn() {
 		Loto7AddDataIn dataIn = new Loto7AddDataIn();
-		dataIn.setLastTurn(service.getLastTurn());
 		Loto7 newTurn = new Loto7();
-		newTurn.setOpenDt(LotoUtil.getNextLoto7OpenDt(dataIn.getLastTurn().getOpenDt()));
-		newTurn.setTurn(dataIn.getLastTurn().getTurn()+1);
 		dataIn.setNewTurn(newTurn);
 		return dataIn;
 	}
 	
 	private Loto7 setLoto7AddDataIn(Map<String,String> allRequestParams) {
 		Loto7 newTurn = new Loto7();
-		newTurn.setOpenDt(allRequestParams.get("openDt"));
 		newTurn.setTurn(Integer.valueOf(allRequestParams.get("turn")));
 		newTurn.setL1(Integer.valueOf(allRequestParams.get("l1")));
 		newTurn.setL2(Integer.valueOf(allRequestParams.get("l2")));

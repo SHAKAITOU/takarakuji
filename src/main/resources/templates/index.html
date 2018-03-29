@@ -82,6 +82,9 @@
 									<a class="loto7AddClk dropdown-item" 
 										sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
 										href="#" th:text="#{index.btn.loto7.add}"></a>
+									<a class="loto7EditClk dropdown-item" 
+										sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
+										href="#" th:text="#{index.btn.loto7.edit}"></a>
 								</div>
 							</div>
 							<div class="btn-group" role="group">
@@ -103,7 +106,7 @@
 										href="#" th:text="#{index.btn.loto6.estimate}"></a>
 									<a class="loto6AddClk dropdown-item" 
 										sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
-										href="#" th:text="#{index.btn.loto6.add}"></a>
+										href="#" th:text="#{index.btn.loto6.maintain}"></a>
 								</div>
 							</div>
 							<div class="btn-group" role="group">
@@ -125,7 +128,7 @@
 										href="#" th:text="#{index.btn.miniLoto.estimate}"></a>
 									<a class="miniLotoAddClk dropdown-item" 
 										sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
-										href="#" th:text="#{index.btn.miniLoto.add}"></a>
+										href="#" th:text="#{index.btn.miniLoto.maintain}"></a>
 								</div>
 							</div>
 						</div>
@@ -168,6 +171,10 @@
 								sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
 								type="button" class="loto7AddClk btn btn btn-block btn-outline-warning btn_com"
 									th:text="#{index.btn.loto7.add}"></button>
+							<button 
+								sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
+								type="button" class="loto7EditClk btn btn btn-block btn-outline-warning btn_com"
+									th:text="#{index.btn.loto7.edit}"></button>
 						</div>
 						<div class="col-md-10 col-md-offset-1 visible-lg visible-md hidden-xs">
 							<legend th:text="#{index.loto6.title}"></legend>
@@ -198,7 +205,7 @@
 								sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
 								type="button" 
 								class="loto6AddClk btn btn btn-block btn-outline-warning btn_com"
-								th:text="#{index.btn.loto6.add}"></button>	 
+								th:text="#{index.btn.loto6.maintain}"></button>	 
 						</div>
 						<div class="col-md-10 col-md-offset-1 visible-lg visible-md hidden-xs">
 							<legend th:text="#{index.miniLoto.title}"></legend>
@@ -229,7 +236,7 @@
 								sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
 								type="button" 
 								class="miniLotoAddClk btn btn btn-block btn-outline-warning btn_com"
-								th:text="#{index.btn.miniLoto.add}"></button>
+								th:text="#{index.btn.miniLoto.maintain}"></button>
 						</div>
 					</div>
 				</div>
@@ -280,9 +287,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).USER_LOGIN}]]*/, 
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
 	});
 	
 	$btn_obj = $('.logoutClk'); 
@@ -298,9 +303,7 @@ $(document).ready(function(){
 			function(){
 				ShaCommon.ajax.get(
 						/*[[${T(sha.work.common.UrlConstants).LOGOUT}]]*/, 
-						null, 
-						ShaCommon.ajax.callBackOk, 
-						ShaCommon.ajax.callBackNg);
+						null);
 			}
 		);
 		
@@ -315,9 +318,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).LOTO_LOTO7ANALYSISP0}]]*/, 
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
 	});
 	
 	$btn_obj = $('.loto7AnalysisP1Clk'); 
@@ -327,9 +328,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).LOTO_LOTO7ANALYSISP1}]]*/, 
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
 	});
 	
 	$btn_obj = $('#loto7AnalysisP1Group'); 
@@ -339,9 +338,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).LOTO_LOTO7ANALYSISP1GROUP}]]*/, 
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
 	});
 	
 	$btn_obj = $('.loto7AnalysisP2Clk'); 
@@ -351,9 +348,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).LOTO_LOTO7ANALYSISP2}]]*/, 
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
 	});
 	
 	$btn_obj = $('.loto7SevenAnalysisClk'); 
@@ -363,9 +358,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).LOTO_LOTO7SEVENANALYSIS}]]*/, 
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
 	});
 	
 	$btn_obj = $('.loto7EstimateClk'); 
@@ -375,9 +368,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).USER_LOTO7ESTIMATE}]]*/,
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
 	});
 	
 	$btn_obj = $('.loto7AddClk'); 
@@ -387,9 +378,17 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).ADMIN_LOTO7ADD}]]*/,
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
+	});
+	
+	$btn_obj = $('.loto7EditClk'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.get(
+				/*[[${T(sha.work.common.UrlConstants).ADMIN_LOTO7EDIT}]]*/,
+				null); 
 	});
 	
 	//-------------------------------------------------------
@@ -401,9 +400,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).LOTO_LOTO6ANALYSISP0}]]*/,
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
 	});
 	
 	$btn_obj = $('.loto6AnalysisP1Clk'); 
@@ -413,9 +410,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).LOTO_LOTO6ANALYSISP1}]]*/,
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
 	});
 	
 	$btn_obj = $('.loto6AnalysisP1GroupClk'); 
@@ -425,9 +420,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).LOTO_LOTO6ANALYSISP1GROUP}]]*/,
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
 	});
 	
 	$btn_obj = $('.loto6AnalysisP2Clk'); 
@@ -437,9 +430,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).LOTO_LOTO6ANALYSISP2}]]*/,
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
 	});
 	
 	$btn_obj = $('.loto6SixAnalysisClk'); 
@@ -449,9 +440,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).LOTO_LOTO6SIXANALYSIS}]]*/,
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
 	});
 	
 	
@@ -462,9 +451,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).USER_LOTO6ESTIMATE}]]*/,
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
 	});
 	
 	$btn_obj = $('.loto6AddClk'); 
@@ -474,9 +461,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).ADMIN_LOTO6ADD}]]*/,
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
 	});
 
 	//-------------------------------------------------------
@@ -488,9 +473,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).LOTO_MINILOTOANALYSISP0}]]*/,
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
 	});
 	
 	$btn_obj = $('.miniLotoAnalysisP1Clk'); 
@@ -500,9 +483,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).LOTO_MINILOTOANALYSISP1}]]*/,
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
 	});
 
 	$btn_obj = $('.miniLotoAnalysisP2Clk'); 
@@ -512,9 +493,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).LOTO_MINILOTOANALYSISP2}]]*/, 
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
 	});
 	
 	$btn_obj = $('.miniLotoFiveAnalysisClk'); 
@@ -524,9 +503,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).LOTO_MINILOTOFIVEANALYSIS}]]*/,  
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
 	});
 	
 	$btn_obj = $('.miniLotoEstimateClk'); 
@@ -536,9 +513,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).USER_MINILOTOESTIMATE}]]*/,   
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
 	});
 	
 	$btn_obj = $('.miniLotoAddClk'); 
@@ -548,9 +523,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).ADMIN_MINILOTOADD}]]*/,
-				null, 
-				ShaCommon.ajax.callBackOk, 
-				ShaCommon.ajax.callBackNg); 
+				null); 
 	});
 	
 	$("#ngPanel").hide();

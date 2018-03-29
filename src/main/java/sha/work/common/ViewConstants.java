@@ -59,4 +59,10 @@ public class ViewConstants {
 	
 	public static final String ADMIN_MINILOTOADD 					= "admin/miniLotoAdd";
 	
+	public static final String ADMIN_LOTO7EDIT 					= "admin/loto7Edit";
+	
+	public static final String ADMIN_LOTO6EDIT 					= "admin/loto6Edit";
+	
+	public static final String ADMIN_MINILOTOEDIT 				= "admin/miniLotoEdit";
+	
 }

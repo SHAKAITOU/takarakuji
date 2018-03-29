@@ -85,8 +85,14 @@ public class UrlConstants {
 	
 	public static final String ADMIN_LOTO7ADD 			= ADMIN+"/loto7Add";
 	
+	public static final String ADMIN_LOTO7EDIT 			= ADMIN+"/loto7Edit";
+	
 	public static final String ADMIN_LOTO6ADD 			= ADMIN+"/loto6Add";
 	
+	public static final String ADMIN_LOTO6EDIT 			= ADMIN+"/loto6Edit";
+	
 	public static final String ADMIN_MINILOTOADD 			= ADMIN+"/miniLotoAdd";
+	
+	public static final String ADMIN_MINILOTOEDIT 		= ADMIN+"/miniLotoEdit";
 	
 }

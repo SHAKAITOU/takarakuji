@@ -120,7 +120,7 @@ try{
 	}
 	
 	//*****************************************************************************
-	// common ajax define
+	// common restful define
 	//*****************************************************************************
 	
 	if($common.restful) { 
@@ -156,7 +156,7 @@ try{
 	
 	
 	//*****************************************************************************
-	// common ajax define
+	// common ajax with page refresh define
 	//*****************************************************************************
 	
 	if($common.ajax) { 
@@ -168,7 +168,7 @@ try{
 		//------------------------------------------------------------------------------
 		// execute get ajax
 		//------------------------------------------------------------------------------
-		get : function (url, formData, callBackOk, callBackNg) {
+		get : function (url, formData) {
 			
 			ShaCommon.dialogs.progress(true);
 			
@@ -178,7 +178,7 @@ try{
 				   data: formData,
 				   statusCode: {
 					    200: function(data){
-					    	callBackOk(data);
+					    	ShaCommon.ajax.callBackOk(data);
 					    	ShaCommon.dialogs.progress(false);
 					    },
 					    404: function() {
@@ -186,7 +186,7 @@ try{
 					    	ShaCommon.dialogs.progress(false);
 					    },
 					    500: function(data){
-					    	callBackNg(data);
+					    	ShaCommon.ajax.callBackNg(data);
 					    	ShaCommon.dialogs.progress(false);
 					    }
 				   },
@@ -197,7 +197,7 @@ try{
 		//------------------------------------------------------------------------------
 		// execute post ajax
 		//------------------------------------------------------------------------------
-		post : function (url, formData, callBackOk, callBackNg) { 
+		post : function (url, formData) { 
 			
 			ShaCommon.dialogs.progress(true);
 			
@@ -207,7 +207,7 @@ try{
 				   data: formData,
 				   statusCode: {
 					    200: function(data){
-					    	callBackOk(data);
+					    	ShaCommon.ajax.callBackOk(data);
 					    	ShaCommon.dialogs.progress(false);
 					    },
 					    404: function() {
@@ -215,7 +215,7 @@ try{
 					    	ShaCommon.dialogs.progress(false);
 					    },
 					    500: function(data){
-					    	callBackNg(data);
+					    	ShaCommon.ajax.callBackNg(data);
 					    	ShaCommon.dialogs.progress(false);
 					    }
 				   },
@@ -226,7 +226,7 @@ try{
 		//------------------------------------------------------------------------------
 		// execute post with succ ajax
 		//------------------------------------------------------------------------------
-		postWithSucc : function (url, formData, callBackOk, callBackNg, sucMsg) { 
+		postWithSucc : function (url, formData, sucMsg) { 
 			
 			ShaCommon.dialogs.progress(true);
 			
@@ -236,7 +236,7 @@ try{
 				   data: formData,
 				   statusCode: {
 					    200: function(data){
-					    	callBackOk(data);
+					    	ShaCommon.ajax.callBackOk(data);
 					    	ShaCommon.dialogs.progress(false);
 					    	ShaCommon.dialogs.success(sucMsg);
 					    },
@@ -245,14 +245,14 @@ try{
 					    	ShaCommon.dialogs.progress(false);
 					    },
 					    500: function(data){
-					    	callBackNg(data);
+					    	ShaCommon.ajax.callBackNg(data);
 					    	ShaCommon.dialogs.progress(false);
 					    }
 				   },
 				   timeout: 10000
 			});
 		},
-	
+		
 		//------------------------------------------------------------------------------
 		// execute ajax callBackOk
 		//------------------------------------------------------------------------------
@@ -272,6 +272,53 @@ try{
 			$("#okResultBody").html("");
 			$("#ngResultBody").html(data.responseText);
 		}
+	}
+	
+	//*****************************************************************************
+	// common ajax with no refresh define
+	//*****************************************************************************
+	
+	if($common.ajaxNonRefresh) { 
+		return $common.ajaxNonRefresh; 
+	}	
+	
+	$common.ajaxNonRefresh = {
+
+		//------------------------------------------------------------------------------
+		// execute post with succ ajax
+		//------------------------------------------------------------------------------
+		postWithSuccOrFail : function (url, formData, callBackOk, callBackNg, sucMsg, failMsg) { 
+			
+			ShaCommon.dialogs.progress(true);
+			
+			$.ajax({
+				   type: "POST",
+				   url: url,
+				   data: formData,
+				   statusCode: {
+					    200: function(data){
+					    	ShaCommon.dialogs.progress(false);
+					    	if(data == "1") {
+					    		callBackOk();
+					    		ShaCommon.dialogs.success(sucMsg);
+					    	} else {
+					    		callBackNg();
+					    		ShaCommon.dialogs.alert(failMsg);
+					    	}
+					    },
+					    404: function() {
+					    	alert( "page not found" );
+					    	ShaCommon.dialogs.progress(false);
+					    },
+					    500: function(data){
+					    	callBackNg(data);
+					    	ShaCommon.dialogs.progress(false);
+					    }
+				   },
+				   timeout: 10000
+			});
+		},
+	
 	}
 	
 })(ShaCommon);

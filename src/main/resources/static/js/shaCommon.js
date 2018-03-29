@@ -285,9 +285,38 @@ try{
 	$common.ajaxNonRefresh = {
 
 		//------------------------------------------------------------------------------
+		// execute get ajax
+		//------------------------------------------------------------------------------
+		get : function (url, formData, callBackOk) {
+			
+			ShaCommon.dialogs.progress(true);
+			
+			$.ajax({
+				   type: "GET",
+				   url: url,
+				   data: formData,
+				   statusCode: {
+					    200: function(data){
+					    	callBackOk(data);
+					    	ShaCommon.dialogs.progress(false);
+					    },
+					    404: function() {
+					    	alert( "page not found" );
+					    	ShaCommon.dialogs.progress(false);
+					    },
+					    500: function(data){
+					    	ShaCommon.ajax.callBackNg(data);
+					    	ShaCommon.dialogs.progress(false);
+					    }
+				   },
+				   timeout: 10000
+			});
+		},	
+			
+		//------------------------------------------------------------------------------
 		// execute post with succ ajax
 		//------------------------------------------------------------------------------
-		postWithSuccOrFail : function (url, formData, callBackOk, callBackNg, sucMsg, failMsg) { 
+		post : function (url, formData, callBackOk) { 
 			
 			ShaCommon.dialogs.progress(true);
 			
@@ -298,20 +327,14 @@ try{
 				   statusCode: {
 					    200: function(data){
 					    	ShaCommon.dialogs.progress(false);
-					    	if(data == "1") {
-					    		callBackOk();
-					    		ShaCommon.dialogs.success(sucMsg);
-					    	} else {
-					    		callBackNg();
-					    		ShaCommon.dialogs.alert(failMsg);
-					    	}
+					    	callBackOk(data);
 					    },
 					    404: function() {
 					    	alert( "page not found" );
 					    	ShaCommon.dialogs.progress(false);
 					    },
 					    500: function(data){
-					    	callBackNg(data);
+					    	ShaCommon.ajax.callBackNg(data);
 					    	ShaCommon.dialogs.progress(false);
 					    }
 				   },

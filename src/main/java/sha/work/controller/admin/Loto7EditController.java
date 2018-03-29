@@ -2,6 +2,7 @@ package sha.work.controller.admin;
 
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,9 +23,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import sha.framework.controller.ScreenBaseController;
 import sha.framework.exception.TKRKScreenException;
 import sha.framework.util.LogCommonUtil;
+import sha.framework.util.MessageSourceUtil;
 import sha.work.common.UrlConstants;
 import sha.work.common.ViewConstants;
 import sha.work.dto.loto.Loto7;
+import sha.work.entity.common.ReturnObject;
 import sha.work.entity.in.Loto7AddDataIn;
 import sha.work.enums.ExecuteReturnType;
 import sha.work.service.batch.Loto7BatchService;
@@ -49,6 +52,9 @@ public class Loto7EditController extends ScreenBaseController{
 	
 	@Autowired
 	private Loto7BatchService batchService;
+	
+	@Autowired
+	private MessageSourceUtil messageSourceUtil;
 
 
 	@RequestMapping(path=UrlConstants.ADMIN_LOTO7EDIT, method=RequestMethod.GET)
@@ -57,7 +63,7 @@ public class Loto7EditController extends ScreenBaseController{
 		ModelAndView mav = new ModelAndView();
 		
 		
-		Loto7AddDataIn dataIn = initLoto7AddDataIn();
+		Loto7AddDataIn dataIn = initLoto7EditDataIn();
 
 		
 		mav.addObject("result", dataIn);
@@ -66,31 +72,65 @@ public class Loto7EditController extends ScreenBaseController{
 		return mav;
 	}
 	
+	@RequestMapping(path=UrlConstants.ADMIN_LOTO7EDIT_SEARCH, method=RequestMethod.GET, 
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> search(@RequestParam Map<String,String> allRequestParams, Locale loc, 
+			HttpServletRequest request,
+			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
+
+		int turn = Integer.valueOf(allRequestParams.get("turn"));
+		Loto7 loto7 = search(turn);
+		
+		ReturnObject returnObject = new ReturnObject();
+		if (Objects.isNull(loto7)) {
+			returnObject.setReturnType(ExecuteReturnType.NG.getId());
+			returnObject.setReturnMsg(messageSourceUtil.getContext(
+					"loto7Add.edit.fail.msg", Integer.toString(turn)));
+		} else {
+			returnObject.setReturnType(ExecuteReturnType.OK.getId());
+			returnObject.setReturnObj(loto7);
+		}
+
+		return new ResponseEntity<Object>(returnObject, HttpStatus.OK);
+	}
+
 	@RequestMapping(path=UrlConstants.ADMIN_LOTO7EDIT, method=RequestMethod.POST, 
 						produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> post(@RequestParam Map<String,String> allRequestParams, Locale loc, 
 			HttpServletRequest request,
 			HttpServletResponse response) throws TKRKScreenException, JsonProcessingException   {
 		
-		Loto7 loto7 = setLoto7AddDataIn(allRequestParams);
+		Loto7 loto7 = setLoto7EditDataIn(allRequestParams);
 		
 		boolean rsFlg = service.edit(loto7);
+		ReturnObject returnObject = new ReturnObject();
 		if (rsFlg) {
 			batchService.batch();
-			return new ResponseEntity<Object>(ExecuteReturnType.OK, HttpStatus.OK);
+			returnObject.setReturnType(ExecuteReturnType.OK.getId());
+			returnObject.setReturnMsg(messageSourceUtil.getContext(
+					"loto7Add.edit.success.msg", Integer.toString(loto7.getTurn())));
+			returnObject.setReturnObj(service.getByTurn(loto7.getTurn()));
 		} else {
-			return new ResponseEntity<Object>(ExecuteReturnType.NG, HttpStatus.OK);
+			returnObject.setReturnType(ExecuteReturnType.NG.getId());
+			returnObject.setReturnMsg(messageSourceUtil.getContext(
+					"loto7Add.edit.fail.msg", Integer.toString(loto7.getTurn())));
 		}
+		return new ResponseEntity<Object>(returnObject, HttpStatus.OK);
 	}
 	
-	private Loto7AddDataIn initLoto7AddDataIn() {
+	private Loto7AddDataIn initLoto7EditDataIn() {
 		Loto7AddDataIn dataIn = new Loto7AddDataIn();
 		Loto7 newTurn = new Loto7();
 		dataIn.setNewTurn(newTurn);
 		return dataIn;
 	}
 	
-	private Loto7 setLoto7AddDataIn(Map<String,String> allRequestParams) {
+	private Loto7 search(int turn) {
+		return service.getByTurn(turn);
+	}
+	
+	
+	private Loto7 setLoto7EditDataIn(Map<String,String> allRequestParams) {
 		Loto7 newTurn = new Loto7();
 		newTurn.setTurn(Integer.valueOf(allRequestParams.get("turn")));
 		newTurn.setL1(Integer.valueOf(allRequestParams.get("l1")));

@@ -14,7 +14,7 @@
 <form id="add_form" name="add_form" role="form" method="POST">
 <div class="row">
 	<div class="col-md-12 col-xs-12">
-		<legend id="estimateTitle" th:text="#{loto7Add.addTurnTitle}"></legend>
+		<legend id="estimateTitle" th:text="#{loto6Add.addTurnTitle}"></legend>
 		<div class="row">
 			<div class="col-md-12" style="height: 30px;">
 				<div id="estimateL1Div" class="form-group">
@@ -26,7 +26,7 @@
 							th:value="(${result.newTurn.turn > 0} ? ${result.newTurn.turn} : '')"/>
 							
 						<div class="input-group-append">
-							<span class="input-group-text" th:text="#{loto7Add.addTurnTitle}"></span>
+							<span class="input-group-text" th:text="#{loto6Add.addTurnTitle}"></span>
 						</div>
 					</div>
 				</div>
@@ -34,13 +34,13 @@
 		</div>
 	</div>
 	<div class="col-md-6 col-xs-12">
-		<legend id="estimateTitle" th:text="#{loto7Estimate.estimateL1Title}"></legend>
+		<legend id="estimateTitle" th:text="#{loto6Estimate.estimateL1Title}"></legend>
 		<div class="row">
 			<div class="col-md-12" style="height: 30px;">
 				<div id="estimateL1Div" class="form-group">
 					<div class="input-group">
 						<div class="td-th2 input-group-append">
-							<span class="input-group-text" th:text="${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}"></span>
+							<span class="input-group-text" th:text="${T(sha.work.enums.Loto6NumberType).NOMAL_NUMBER.getName()}"></span>
 						</div>
 						<input type="text" id="l1" name="l1" class="form-control-sm text-center label-14b" 
 							style="max-width: 30px;" th:value="(${result.newTurn.l1 > 0} ? ${result.newTurn.l1} : '')"/>
@@ -54,40 +54,22 @@
 							style="max-width: 30px;" th:value="(${result.newTurn.l5 > 0} ? ${result.newTurn.l5} : '')"/>
 						<input type="text" id="l6" name="l6" class="form-control-sm text-center label-14b" 
 							style="max-width: 30px;" th:value="(${result.newTurn.l6 > 0} ? ${result.newTurn.l6} : '')"/>
-						<input type="text" id="l7" name="l7" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="(${result.newTurn.l7 > 0} ? ${result.newTurn.l7} : '')"/>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-md-3 col-xs-12">
-		<legend id="estimateTitle" th:text="#{loto7Estimate.estimateB1Title}"></legend>
+	<div class="col-md-6 col-xs-12">
+		<legend id="estimateTitle" th:text="#{loto6Estimate.estimateB1Title}"></legend>
 		<div class="row">
 			<div class="col-md-12" style="height: 30px;">
 				<div id="estimateL1Div" class="form-group">
 					<div class="input-group">
 						<div class="td-t2a input-group-append">
-							<span class="input-group-text" th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER1.getName()}"></span>
+							<span class="input-group-text" th:text="${T(sha.work.enums.Loto6NumberType).BONUS_NUMBER1.getName()}"></span>
 						</div>
 						<input type="text" id="b1" name="b1" class="form-control-sm text-center label-14b" 
 							style="max-width: 30px;" th:value="(${result.newTurn.b1 > 0} ? ${result.newTurn.b1} : '')"/>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-3 col-xs-12">
-		<legend id="estimateTitle" th:text="#{loto7Estimate.estimateB2Title}"></legend>
-		<div class="row">
-			<div class="col-md-12" style="height: 30px;">
-				<div id="estimateL1Div" class="form-group">
-					<div class="input-group">
-						<div class="td-t2d input-group-append">
-							<span class="input-group-text" th:text="${T(sha.work.enums.Loto7NumberType).BONUS_NUMBER2.getName()}"></span>
-						</div>
-						<input type="text" id="b2" name="b2" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="(${result.newTurn.b2 > 0} ? ${result.newTurn.b2} : '')"/>
 					</div>
 				</div>
 			</div>
@@ -99,9 +81,9 @@
 <div class="row">
 	<div class="col-md-12 col-xs-12 text-right" style="height: 40px;">
 		<button id="editSearchBtn" type="button" class="btn-lg btn-outline-primary btn_com" style="width: 120px;"
-			th:text="#{index.btn.loto7.editSearch}"></button>
+			th:text="#{index.btn.loto6.editSearch}"></button>
 		<button id="editBtn" type="button" class="btn-lg btn-outline-danger btn_com" style="width: 120px;"
-			th:text="#{index.btn.loto7.edit}"></button>
+			th:text="#{index.btn.loto6.edit}"></button>
 	</div>
 </div>
 </form>
@@ -112,8 +94,8 @@
 		
 		//--------------------------------------------------------[
 		//title init
-		var titleLeft = /*[[#{index.loto7.title}]]*/;
-		var titleRight = /*[[#{index.btn.loto7.edit}]]*/;
+		var titleLeft = /*[[#{index.loto6.title}]]*/;
+		var titleRight = /*[[#{index.btn.loto6.edit}]]*/;
 		//--------------------------------------------------------]
 		
 		//--------------------------------------------------------[
@@ -143,7 +125,7 @@
 			}
 			
 			ShaCommon.ajaxNonRefresh.get(
-					/*[[${T(sha.work.common.UrlConstants).ADMIN_LOTO7EDIT_SEARCH}]]*/,
+					/*[[${T(sha.work.common.UrlConstants).ADMIN_LOTO6EDIT_SEARCH}]]*/,
 					postData, 
 					function(data){
 						var rsFlg = /*[[${T(sha.work.enums.ExecuteReturnType).OK.getId()}]]*/;

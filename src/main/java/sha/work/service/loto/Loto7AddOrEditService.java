@@ -18,6 +18,11 @@ public class Loto7AddOrEditService extends BaseService {
 	
 	@Autowired
 	private Loto7AnalysisBaseDataCreateService analysisBaseService;
+	
+	public Loto7 getByTurn(int turn) throws TKRKScreenException {
+		
+		return loto7Mapper.findByTurn(turn);
+	}
 
 	public Loto7 getLastTurn() throws TKRKScreenException {
 		

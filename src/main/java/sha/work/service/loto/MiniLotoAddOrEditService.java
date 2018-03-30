@@ -10,7 +10,7 @@ import sha.work.exception.TKRKScreenException;
 import sha.work.mapper.loto.MiniLotoMapper;
 
 @Service
-public class MiniLotoAddService extends BaseService {
+public class MiniLotoAddOrEditService extends BaseService {
 
 	/** DB access class. */
 	@Autowired
@@ -19,13 +19,18 @@ public class MiniLotoAddService extends BaseService {
 	@Autowired
 	private MiniLotoAnalysisBaseDataCreateService analysisBaseService;
 
+	public MiniLoto getByTurn(int turn) throws TKRKScreenException {
+		
+		return miniLotoMapper.findByTurn(turn);
+	}
+	
 	public MiniLoto getLastTurn() throws TKRKScreenException {
 		
 		return miniLotoMapper.findLastTurn();
 	}
 	
 	@Transactional
-	public void add(MiniLoto miniLoto) {
+	public void addOrEdit(MiniLoto miniLoto) {
 		int cnt = miniLotoMapper.isExist(miniLoto.getTurn());
 		if(cnt > 0) {
 			miniLotoMapper.update(miniLoto);
@@ -34,6 +39,20 @@ public class MiniLotoAddService extends BaseService {
 		}
 		analysisBaseService.analysisAndSave(miniLoto.getTurn());
 		
+	}
+	
+
+	@Transactional
+	public boolean edit(MiniLoto miniLoto) {
+		MiniLoto miniLotoDb = miniLotoMapper.findByTurn(miniLoto.getTurn());
+		if(miniLotoDb != null) {
+			miniLoto.setOpenDt(miniLotoDb.getOpenDt());
+			miniLotoMapper.update(miniLoto);
+			analysisBaseService.analysisAndSave(miniLoto.getTurn());
+			return true;
+		}
+		
+		return false;
 	}
 
 }

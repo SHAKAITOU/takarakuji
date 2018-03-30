@@ -24,7 +24,7 @@ import sha.work.common.ViewConstants;
 import sha.work.dto.loto.MiniLoto;
 import sha.work.entity.in.MiniLotoAddDataIn;
 import sha.work.service.batch.MiniLotoBatchService;
-import sha.work.service.loto.MiniLotoAddService;
+import sha.work.service.loto.MiniLotoAddOrEditService;
 import sha.work.util.LotoUtil;
 
 /**
@@ -42,7 +42,7 @@ public class MiniLotoAddController extends ScreenBaseController{
 	private LogCommonUtil log;
 
 	@Autowired
-	private MiniLotoAddService service;
+	private MiniLotoAddOrEditService service;
 	
 	
 	@Autowired
@@ -71,7 +71,7 @@ public class MiniLotoAddController extends ScreenBaseController{
 		ModelAndView mav = new ModelAndView();
 		MiniLoto miniLoto = setMiniLotoAddDataIn(allRequestParams);
 		
-		service.add(miniLoto);
+		service.addOrEdit(miniLoto);
 		batchService.batch();
 		
 		MiniLotoAddDataIn dataIn = initMiniLotoAddDataIn();

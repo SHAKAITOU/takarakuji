@@ -24,7 +24,7 @@ import sha.work.common.ViewConstants;
 import sha.work.dto.loto.Loto6;
 import sha.work.entity.in.Loto6AddDataIn;
 import sha.work.service.batch.Loto6BatchService;
-import sha.work.service.loto.Loto6AddService;
+import sha.work.service.loto.Loto6AddOrEditService;
 import sha.work.util.LotoUtil;
 
 /**
@@ -42,7 +42,7 @@ public class Loto6AddController extends ScreenBaseController{
 	private LogCommonUtil log;
 
 	@Autowired
-	private Loto6AddService service;
+	private Loto6AddOrEditService service;
 	
 	@Autowired
 	private Loto6BatchService batchService;
@@ -69,7 +69,7 @@ public class Loto6AddController extends ScreenBaseController{
 		
 		ModelAndView mav = new ModelAndView();
 		Loto6 loto6 = setLoto6AddDataIn(allRequestParams);
-		service.add(loto6);
+		service.addOrEdit(loto6);
 		batchService.batch();
 		
 		Loto6AddDataIn dataIn = initLoto6AddDataIn();

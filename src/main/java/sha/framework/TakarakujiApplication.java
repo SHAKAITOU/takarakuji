@@ -12,4 +12,5 @@ public class TakarakujiApplication extends BaseApplication{
 	public static void main(String[] args) {
 		SpringApplication.run(TakarakujiApplication.class, args);
 	}
+	
 }

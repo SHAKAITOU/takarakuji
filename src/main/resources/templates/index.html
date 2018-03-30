@@ -106,7 +106,10 @@
 										href="#" th:text="#{index.btn.loto6.estimate}"></a>
 									<a class="loto6AddClk dropdown-item" 
 										sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
-										href="#" th:text="#{index.btn.loto6.maintain}"></a>
+										href="#" th:text="#{index.btn.loto6.add}"></a>
+									<a class="loto6EditClk dropdown-item" 
+										sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
+										href="#" th:text="#{index.btn.loto6.edit}"></a>	
 								</div>
 							</div>
 							<div class="btn-group" role="group">
@@ -128,7 +131,10 @@
 										href="#" th:text="#{index.btn.miniLoto.estimate}"></a>
 									<a class="miniLotoAddClk dropdown-item" 
 										sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
-										href="#" th:text="#{index.btn.miniLoto.maintain}"></a>
+										href="#" th:text="#{index.btn.miniLoto.add}"></a>
+									<a class="miniLotoEditClk dropdown-item" 
+										sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
+										href="#" th:text="#{index.btn.miniLoto.edit}"></a>
 								</div>
 							</div>
 						</div>
@@ -205,7 +211,12 @@
 								sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
 								type="button" 
 								class="loto6AddClk btn btn btn-block btn-outline-warning btn_com"
-								th:text="#{index.btn.loto6.maintain}"></button>	 
+								th:text="#{index.btn.loto6.add}"></button>	 
+							<button 
+								sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
+								type="button" 
+								class="loto6EditClk btn btn btn-block btn-outline-warning btn_com"
+								th:text="#{index.btn.loto6.edit}"></button>	 	
 						</div>
 						<div class="col-md-10 col-md-offset-1 visible-lg visible-md hidden-xs">
 							<legend th:text="#{index.miniLoto.title}"></legend>
@@ -236,7 +247,12 @@
 								sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
 								type="button" 
 								class="miniLotoAddClk btn btn btn-block btn-outline-warning btn_com"
-								th:text="#{index.btn.miniLoto.maintain}"></button>
+								th:text="#{index.btn.miniLoto.add}"></button>
+							<button 
+								sec:authorize="hasAuthority(T(sha.work.enums.AuthorityType).ROLE_ADMIN.getRole())"
+								type="button" 
+								class="miniLotoEditClk btn btn btn-block btn-outline-warning btn_com"
+								th:text="#{index.btn.miniLoto.edit}"></button>	
 						</div>
 					</div>
 				</div>
@@ -463,6 +479,16 @@ $(document).ready(function(){
 				/*[[${T(sha.work.common.UrlConstants).ADMIN_LOTO6ADD}]]*/,
 				null); 
 	});
+	
+	$btn_obj = $('.loto6EditClk'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.get(
+				/*[[${T(sha.work.common.UrlConstants).ADMIN_LOTO6EDIT}]]*/,
+				null); 
+	});
 
 	//-------------------------------------------------------
 	//MINILOTO
@@ -523,6 +549,16 @@ $(document).ready(function(){
 		event.preventDefault();
 		ShaCommon.ajax.get(
 				/*[[${T(sha.work.common.UrlConstants).ADMIN_MINILOTOADD}]]*/,
+				null); 
+	});
+	
+	$btn_obj = $('.miniLotoEditClk'); 
+	$btn_obj.unbind(); 
+	$btn_obj.on('click', function(event) {
+		commonBtn = $(this);
+		event.preventDefault();
+		ShaCommon.ajax.get(
+				/*[[${T(sha.work.common.UrlConstants).ADMIN_MINILOTOEDIT}]]*/,
 				null); 
 	});
 	

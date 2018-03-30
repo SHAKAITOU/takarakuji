@@ -5,12 +5,12 @@ import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import sha.work.dto.loto.Loto6AnalysisBase;
-import sha.work.entity.in.Loto7EstimateDataIn;
+import sha.work.entity.in.Loto6EstimateDataIn;
 import sha.work.entity.query.NumberAndTurnsQuery;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class Loto6EstimateDataOut extends Loto7EstimateDataIn {
+public class Loto6EstimateDataOut extends Loto6EstimateDataIn {
 
 	/** 最大数と最小数の差 */
 	private int maxMinDiffRank;

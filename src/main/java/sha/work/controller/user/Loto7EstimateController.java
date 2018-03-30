@@ -26,8 +26,11 @@ import sha.work.common.ViewConstants;
 import sha.work.dto.loto.Loto7;
 import sha.work.entity.in.Loto7EstimateDataIn;
 import sha.work.entity.out.Loto7EstimateDataOut;
+import sha.work.enums.ExecuteReturnType;
+import sha.work.service.loto.Loto7AddOrEditService;
 import sha.work.service.loto.Loto7AnalysisBaseDataCreateService;
 import sha.work.service.loto.Loto7EstimateService;
+import sha.work.util.LotoUtil;
 
 /**
  * S002 Thymeleaf 
@@ -44,9 +47,10 @@ public class Loto7EstimateController extends ScreenBaseController{
 	private LogCommonUtil log;
 
 	@Autowired
+	private Loto7AddOrEditService loto7Service;
+	
+	@Autowired
 	private Loto7AnalysisBaseDataCreateService service;
-	
-	
 	
 	@Autowired
 	private Loto7EstimateService estimateService;
@@ -67,6 +71,8 @@ public class Loto7EstimateController extends ScreenBaseController{
 			throw new TKRKScreenException(e);
 		}
 		
+		dataOut.setAnalysisComplete(ExecuteReturnType.NG.getId());
+		
 		mav.addObject("result", dataOut);
 		mav.setViewName(ViewConstants.USER_LOTO7ESTIMATE);
 		return mav;
@@ -81,17 +87,17 @@ public class Loto7EstimateController extends ScreenBaseController{
 		Loto7EstimateDataIn dataIn = searchLoto7EstimateDataIn(allRequestParams);
 
 		Loto7EstimateDataOut dataOut = new Loto7EstimateDataOut();
-		Loto7 loto7 = new Loto7();
 
 		try {
 			BeanUtils.copyProperties(dataOut, dataIn);
-			BeanUtils.copyProperties(loto7, dataIn);
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			throw new TKRKScreenException(e);
 		}
 		
-		dataOut.setEstimateAnalysisBase(service.analysisOnly(loto7));
+		dataOut.setEstimateAnalysisBase(service.analysisOnly(dataOut.getEstTurn()));
 		dataOut = estimateService.getEstimateData(dataOut);
+		dataOut.setAnalysisComplete(ExecuteReturnType.OK.getId());
+		
 		mav.addObject("result", dataOut);
 		mav.setViewName(ViewConstants.USER_LOTO7ESTIMATE);
 		return mav;
@@ -99,26 +105,37 @@ public class Loto7EstimateController extends ScreenBaseController{
 	
 	private Loto7EstimateDataIn initLoto7EstimateDataIn() {
 		Loto7EstimateDataIn dataIn = new Loto7EstimateDataIn();
-		dataIn.setL1(1);
-		dataIn.setL2(9);
-		dataIn.setL3(14);
-		dataIn.setL4(21);
-		dataIn.setL5(28);
-		dataIn.setL6(31);
-		dataIn.setL7(34);
+		Loto7 lastTurn = loto7Service.getLastTurn();
+		Loto7 estTurn = new Loto7();
+		estTurn.setTurn(lastTurn.getTurn()+1);
+		estTurn.setOpenDt(LotoUtil.getNextLoto7OpenDt(lastTurn.getOpenDt()));
+		dataIn.setEstTurn(estTurn);;
+		
+		
+//		dataIn.setL1(1);
+//		dataIn.setL2(9);
+//		dataIn.setL3(14);
+//		dataIn.setL4(21);
+//		dataIn.setL5(28);
+//		dataIn.setL6(31);
+//		dataIn.setL7(34);
 		
 		return dataIn;
 	}
 	
 	private Loto7EstimateDataIn searchLoto7EstimateDataIn(Map<String,String> allRequestParams) {
 		Loto7EstimateDataIn dataIn = new Loto7EstimateDataIn();
-		dataIn.setL1(Integer.valueOf(allRequestParams.get("l1")));
-		dataIn.setL2(Integer.valueOf(allRequestParams.get("l2")));
-		dataIn.setL3(Integer.valueOf(allRequestParams.get("l3")));
-		dataIn.setL4(Integer.valueOf(allRequestParams.get("l4")));
-		dataIn.setL5(Integer.valueOf(allRequestParams.get("l5")));
-		dataIn.setL6(Integer.valueOf(allRequestParams.get("l6")));
-		dataIn.setL7(Integer.valueOf(allRequestParams.get("l7")));
+		Loto7 estTurn = new Loto7();
+		estTurn.setTurn(Integer.valueOf(allRequestParams.get("turn")));
+		estTurn.setOpenDt(allRequestParams.get("openDt"));
+		estTurn.setL1(Integer.valueOf(allRequestParams.get("l1")));
+		estTurn.setL2(Integer.valueOf(allRequestParams.get("l2")));
+		estTurn.setL3(Integer.valueOf(allRequestParams.get("l3")));
+		estTurn.setL4(Integer.valueOf(allRequestParams.get("l4")));
+		estTurn.setL5(Integer.valueOf(allRequestParams.get("l5")));
+		estTurn.setL6(Integer.valueOf(allRequestParams.get("l6")));
+		estTurn.setL7(Integer.valueOf(allRequestParams.get("l7")));
+		dataIn.setEstTurn(estTurn);
 		
 		return dataIn;
 	}

@@ -151,49 +151,49 @@ public class Loto7EstimateService extends BaseService {
 		
 		dataOut.setL1List(convertSevenData(dataOut.getLoto7SevenAnalysisOut().getSevenList(),
 												Loto7SevenQuery::getL1Cnt));
-		values = getBaseRankAndPt(dataOut.getL1(), dataOut.getL1List());
+		values = getBaseRankAndPt(dataOut.getEstTurn().getL1(), dataOut.getL1List());
 		dataOut.setL1Rank(values[0]);
 		dataOut.setL1Pt(values[1]);
 		dataOut.setTotalPt(dataOut.getTotalPt()+values[1]);
 
 		dataOut.setL2List(convertSevenData(dataOut.getLoto7SevenAnalysisOut().getSevenList(),
 				Loto7SevenQuery::getL2Cnt));
-		values = getBaseRankAndPt(dataOut.getL2(), dataOut.getL2List());
+		values = getBaseRankAndPt(dataOut.getEstTurn().getL2(), dataOut.getL2List());
 		dataOut.setL2Rank(values[0]);
 		dataOut.setL2Pt(values[1]);
 		dataOut.setTotalPt(dataOut.getTotalPt()+values[1]);
 
 		dataOut.setL3List(convertSevenData(dataOut.getLoto7SevenAnalysisOut().getSevenList(),
 				Loto7SevenQuery::getL3Cnt));
-		values = getBaseRankAndPt(dataOut.getL3(), dataOut.getL3List());
+		values = getBaseRankAndPt(dataOut.getEstTurn().getL3(), dataOut.getL3List());
 		dataOut.setL3Rank(values[0]);
 		dataOut.setL3Pt(values[1]);
 		dataOut.setTotalPt(dataOut.getTotalPt()+values[1]);
 
 		dataOut.setL4List(convertSevenData(dataOut.getLoto7SevenAnalysisOut().getSevenList(),
 				Loto7SevenQuery::getL4Cnt));
-		values = getBaseRankAndPt(dataOut.getL4(), dataOut.getL4List());
+		values = getBaseRankAndPt(dataOut.getEstTurn().getL4(), dataOut.getL4List());
 		dataOut.setL4Rank(values[0]);
 		dataOut.setL4Pt(values[1]);
 		dataOut.setTotalPt(dataOut.getTotalPt()+values[1]);
 
 		dataOut.setL5List(convertSevenData(dataOut.getLoto7SevenAnalysisOut().getSevenList(),
 				Loto7SevenQuery::getL5Cnt));
-		values = getBaseRankAndPt(dataOut.getL5(), dataOut.getL5List());
+		values = getBaseRankAndPt(dataOut.getEstTurn().getL5(), dataOut.getL5List());
 		dataOut.setL5Rank(values[0]);
 		dataOut.setL5Pt(values[1]);
 		dataOut.setTotalPt(dataOut.getTotalPt()+values[1]);
 
 		dataOut.setL6List(convertSevenData(dataOut.getLoto7SevenAnalysisOut().getSevenList(),
 				Loto7SevenQuery::getL6Cnt));
-		values = getBaseRankAndPt(dataOut.getL6(), dataOut.getL6List());
+		values = getBaseRankAndPt(dataOut.getEstTurn().getL6(), dataOut.getL6List());
 		dataOut.setL6Rank(values[0]);
 		dataOut.setL6Pt(values[1]);
 		dataOut.setTotalPt(dataOut.getTotalPt()+values[1]);
 
 		dataOut.setL7List(convertSevenData(dataOut.getLoto7SevenAnalysisOut().getSevenList(),
 				Loto7SevenQuery::getL7Cnt));
-		values = getBaseRankAndPt(dataOut.getL7(), dataOut.getL7List());
+		values = getBaseRankAndPt(dataOut.getEstTurn().getL7(), dataOut.getL7List());
 		dataOut.setL7Rank(values[0]);
 		dataOut.setL7Pt(values[1]);
 		dataOut.setTotalPt(dataOut.getTotalPt()+values[1]);

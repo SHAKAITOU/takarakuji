@@ -13,29 +13,57 @@
 </style>
 <form id="search_form" name="search_form" role="form" method="POST">
 <div class="row">
+	<div class="col-md-3 col-xs-12">
+		<legend id="estimateTitle" th:text="#{loto7Estimate.estimateTurnTitle}"></legend>
+		<div class="row">
+			<div class="col-md-12" style="height: 30px;">
+				<div id="estimateL1Div" class="form-group">
+					<div class="input-group">
+						<input id="turn" name="turn" type="number" min="1" max="99999" step="1" 
+							class="form-control-sm text-center label-14b" style="width: 60px;"
+							th:value="${result.estTurn.turn}" readonly="true"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3 col-xs-12">
+		<legend id="estimateTitle" th:text="#{loto7Estimate.estimateOpenDtTitle}"></legend>
+		<div class="row">
+			<div class="col-md-12" style="height: 30px;">
+				<div id="estimateL1Div" class="form-group">
+					<div class="input-group">
+						<input id="openDt" name="openDt" type="text" 
+							class="form-control-sm form_datetime text-center label-14b" style="width: 120px;"
+								placeholder="yyyy/mm/dd" th:value="${result.estTurn.openDt}" readonly="true"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="col-md-6 col-xs-12">
 		<legend id="estimateTitle" th:text="#{loto7Estimate.estimateL1Title}"></legend>
 		<div class="row">
-			<div class="col-md-12" style="height: 30px;">
+			<div class="col-md-12 col-xs-12" style="height: 30px;">
 				<div id="estimateL1Div" class="form-group">
 					<div class="input-group">
 						<div class="td-th2 input-group-append">
 							<span class="input-group-text" th:text="${T(sha.work.enums.Loto7NumberType).NOMAL_NUMBER.getName()}"></span>
 						</div>
 						<input type="text" id="l1" name="l1" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="${result.l1}"/>
+							style="max-width: 30px;" th:value="${result.estTurn.l1}"/>
 						<input type="text" id="l2" name="l2" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="${result.l2}"/>
+							style="max-width: 30px;" th:value="${result.estTurn.l2}"/>
 						<input type="text" id="l3" name="l3" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="${result.l3}"/>
+							style="max-width: 30px;" th:value="${result.estTurn.l3}"/>
 						<input type="text" id="l4" name="l4" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="${result.l4}"/>
+							style="max-width: 30px;" th:value="${result.estTurn.l4}"/>
 						<input type="text" id="l5" name="l5" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="${result.l5}"/>
+							style="max-width: 30px;" th:value="${result.estTurn.l5}"/>
 						<input type="text" id="l6" name="l6" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="${result.l6}"/>
+							style="max-width: 30px;" th:value="${result.estTurn.l6}"/>
 						<input type="text" id="l7" name="l7" class="form-control-sm text-center label-14b" 
-							style="max-width: 30px;" th:value="${result.l7}"/>
+							style="max-width: 30px;" th:value="${result.estTurn.l7}"/>
 					</div>
 				</div>
 			</div>
@@ -48,6 +76,8 @@
 	<div class="col-md-12 col-xs-12 text-right" style="height: 40px;">
 		<button id="searchBtn" type="button" class="btn-lg btn-outline-primary btn_com" style="width: 120px;"
 			th:text="#{loto7Estimate.btn.estimate}"></button>
+		<button id="saveBtn" type="button" class="btn-lg btn-outline-danger" style="width: 120px;"
+			th:text="#{loto7Estimate.btn.save}"></button>
 	</div>
 	<div class="col-md-12 col-sx-12">
 		<div class="col-md-12 col-sx-12 div-center">
@@ -171,7 +201,7 @@
 					<!-- PLACE1 -->
 					<div th:replace="fragment/table :: estimateTr(
 						${T(sha.work.enums.Loto7SevenAnalysisType).PLACE1.getName()},
-						${result.l1},
+						${result.estTurn.l1},
 						${result.l1List},
 						${result.l1Rank},
 						${result.l1Pt}
@@ -180,7 +210,7 @@
 					<!-- PLACE2 -->
 					<div th:replace="fragment/table :: estimateTr(
 						${T(sha.work.enums.Loto7SevenAnalysisType).PLACE2.getName()},
-						${result.l2},
+						${result.estTurn.l2},
 						${result.l2List},
 						${result.l2Rank},
 						${result.l2Pt}
@@ -189,7 +219,7 @@
 					<!-- PLACE3 -->
 					<div th:replace="fragment/table :: estimateTr(
 						${T(sha.work.enums.Loto7SevenAnalysisType).PLACE3.getName()},
-						${result.l3},
+						${result.estTurn.l3},
 						${result.l3List},
 						${result.l3Rank},
 						${result.l3Pt}
@@ -198,7 +228,7 @@
 					<!-- PLACE4 -->
 					<div th:replace="fragment/table :: estimateTr(
 						${T(sha.work.enums.Loto7SevenAnalysisType).PLACE4.getName()},
-						${result.l4},
+						${result.estTurn.l4},
 						${result.l4List},
 						${result.l4Rank},
 						${result.l4Pt}
@@ -207,7 +237,7 @@
 					<!-- PLACE5 -->
 					<div th:replace="fragment/table :: estimateTr(
 						${T(sha.work.enums.Loto7SevenAnalysisType).PLACE5.getName()},
-						${result.l5},
+						${result.estTurn.l5},
 						${result.l5List},
 						${result.l5Rank},
 						${result.l5Pt}
@@ -216,7 +246,7 @@
 					<!-- PLACE6 -->
 					<div th:replace="fragment/table :: estimateTr(
 						${T(sha.work.enums.Loto7SevenAnalysisType).PLACE6.getName()},
-						${result.l6},
+						${result.estTurn.l6},
 						${result.l6List},
 						${result.l6Rank},
 						${result.l6Pt}
@@ -225,7 +255,7 @@
 					<!-- PLACE7 -->
 					<div th:replace="fragment/table :: estimateTr(
 						${T(sha.work.enums.Loto7SevenAnalysisType).PLACE7.getName()},
-						${result.l7},
+						${result.estTurn.l7},
 						${result.l7List},
 						${result.l7Rank},
 						${result.l7Pt}
@@ -269,6 +299,18 @@
 	    //var scatterChart = drawScatterChart(ctx, data, titleLeft + titleRight);
 		
 	    $('#okPanelTitle').text(titleLeft + titleRight);
+	    
+	    //judge save btn active
+	    $btn_obj = $('#saveBtn'); 
+	    var analysisComplete = /*[[${T(sha.work.enums.ExecuteReturnType).OK.getId()}]]*/;
+	    var rsFlg = /*[[${result.analysisComplete}]]*/;
+	    if(rsFlg == analysisComplete){
+	    	$btn_obj.prop('disabled', false);
+	    	$btn_obj.addClass('btn_com');
+	    }else{
+	    	$btn_obj.prop('disabled', true);
+	    	$btn_obj.removeClass('btn_com');
+	    }
 
 		//--------------------------------------------------------]
 		
@@ -289,9 +331,25 @@
 					postData); 
 		});
 		
-		$('.rankSpan').each(function(i, el) {
+		$btn_obj = $('#saveBtn'); 
+		$btn_obj.unbind(); 
+		$btn_obj.on('click', function(event) {
+			event.preventDefault();
+			var postData = $('#search_form').serializeArray();
+			if(checkValue(postData)) {
+				return;
+			}
+			ShaCommon.ajax.post(
+					/*[[${T(sha.work.common.UrlConstants).USER_LOTO7ESTIMATE}]]*/,    
+					postData); 
+		});
+		
+		
+		//$('.rankSpan').each(function(i, el) {
 			
-		});		
+		//});
+		
+		
 	});
 	
 	function checkValue() {

@@ -86,4 +86,6 @@ public class Loto7EstimateDataOut extends Loto7EstimateDataIn {
 	
 	private Loto7SevenAnalysisOut loto7SevenAnalysisOut;
 	
+	private int analysisComplete;
+	
 }

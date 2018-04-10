@@ -1,3 +1,11 @@
+####################################################################################################
+# Current platform's information.
+####################################################################################################
+platform:
+  name:
+    short: TK
+    full: takarakuji
+  version: v1
 #### SPRING ####
 spring:
   application:
@@ -45,6 +53,7 @@ logging:
     root: INFO
     org.springframework.web: INFO
     sha.work.mapper.loto: DEBUG
+    sha.work.security: DEBUG
   file: logs/logback-demo.log
   path: logs
   
@@ -73,7 +82,9 @@ cron:
   miniLotoCron: 0 0 0 * * 3
 ################
 
-#### no env##### 
+#### no env#####
+version:
+  aws: 1.11.228 
 #cloud.aws:
 #  credentials:
 #    accessKey: aws_access_key

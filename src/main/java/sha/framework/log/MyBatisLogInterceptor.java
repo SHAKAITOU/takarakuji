@@ -1,16 +1,17 @@
-/**
- * @(#)MyBatisLogInterceptor.java
- *
- * Copyright (c) 2017 Fast Retailing Corporation.
- */
 
-package sha.framework.util.log;
+package sha.framework.log;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Locale;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Properties;
+
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.plugin.Intercepts;
@@ -18,9 +19,8 @@ import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.plugin.Plugin;
 import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.session.ResultHandler;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
+
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -30,40 +30,35 @@ import lombok.extern.slf4j.Slf4j;
  * @version $Revision$
  */
 @Intercepts({@Signature(type = StatementHandler.class,
-        method = "query",
-        args = {Statement.class, ResultHandler.class}),
+                        method = "query",
+                        args = {Statement.class, ResultHandler.class}),
         @Signature(type = StatementHandler.class,
-        method = "update",
-        args = {Statement.class})})
+                   method = "update",
+                   args = {Statement.class})})
 @Component
 @Slf4j
 public class MyBatisLogInterceptor implements Interceptor {
 
     /**
-     * message.
+     * the attribute name of sql in log.
      */
-    @Autowired
-    private MessageSource messageSource;
+    private static final String LOG_ATTRIBUTE_SQL = "sql";
 
     /**
-     * message id (sql).
+     * the attribute name of sql parameter in log.
      */
-    private static final String MSG_SQL = "e.common.log.sql";
+    private static final String LOG_ATTRIBUTE_PARAMETER = "parameter";
 
     /**
-     * message id (parameter).
+     * the attribute name of sql state in log.
      */
-    private static final String MSG_SQL_PARAM = "e.common.log.sql.param";
+    private static final String LOG_ATTRIBUTE_STATE = "state";
 
     /**
-     * message id (state).
+     * the attribute name of executing times in log.
      */
-    private static final String MSG_SQL_STATE = "e.common.log.sql.state";
+    private static final String LOG_ATTRIBUTE_TIMES = "times";
 
-    /**
-     * message id (times).
-     */
-    private static final String MSG_SQL_TIMES = "e.common.log.sql.times";
 
     /**
      * mybatis StatementHandler Interceptor.<br>
@@ -79,13 +74,13 @@ public class MyBatisLogInterceptor implements Interceptor {
             return invocation.proceed();
         } else {
             StatementHandler handler = (StatementHandler) invocation.getTarget();
-            // start timestamp
-            long timestamp = System.currentTimeMillis();
+            // start instant
+            Instant startInstant = LocalDateTime.now().toInstant(ZoneOffset.UTC);
             try {
                 return invocation.proceed();
             } catch (InvocationTargetException e) {
                 // write the error log
-                writeErrorLog(handler, timestamp, e);
+                writeErrorLog(handler, startInstant, e);
                 throw e;
             }
         }
@@ -94,38 +89,30 @@ public class MyBatisLogInterceptor implements Interceptor {
     /**
      * write the sql log.
      * @param handler handler
-     * @param timestamp start timestamp
+     * @param startInstant start instant
      * @param e sql exception
      */
     private void writeErrorLog(StatementHandler handler,
-            long timestamp,
-            InvocationTargetException ex) {
-        if (ex.getTargetException() instanceof SQLException) {
+                               Instant startInstant,
+                               InvocationTargetException e) {
+        if (e.getTargetException() instanceof SQLException) {
+            Map<String, Object> logMap = new LinkedHashMap<>();
             // sql
-            log.error(messageSource.getMessage(
-                    MSG_SQL,
-                    new Object[]{handler.getBoundSql().getSql()},
-                    Locale.getDefault()));
+            logMap.put(LOG_ATTRIBUTE_SQL, handler.getBoundSql().getSql());
             // parameter
-            log.error(messageSource.getMessage(
-                    MSG_SQL_PARAM,
-                    new Object[]{handler.getBoundSql().getParameterObject()},
-                    Locale.getDefault()));
+            if (handler.getBoundSql().getParameterObject() != null) {
+                logMap.put(LOG_ATTRIBUTE_PARAMETER,
+                        handler.getBoundSql().getParameterObject().toString());
+            }
             // state
-            log.error(messageSource.getMessage(
-                    MSG_SQL_STATE,
-                    new Object[]{((SQLException) ex.getTargetException())
-                            .getSQLState()},
-                    Locale.getDefault()));
+            logMap.put(LOG_ATTRIBUTE_STATE, ((SQLException) e.getTargetException()).getSQLState());
+
             // calculate the execute times
-            long times = (System.currentTimeMillis() - timestamp);
             // times
-            log.error(messageSource.getMessage(
-                    MSG_SQL_TIMES,
-                    new Object[]{times},
-                    Locale.getDefault()));
-        } else {
-            // do nothing
+            Instant endInstant = LocalDateTime.now().toInstant(ZoneOffset.UTC);
+            logMap.put(LOG_ATTRIBUTE_TIMES,
+                    ChronoUnit.MILLIS.between(startInstant, endInstant) + "ms");
+            log.info("", logMap);
         }
     }
 
@@ -147,6 +134,5 @@ public class MyBatisLogInterceptor implements Interceptor {
      */
     @Override
     public void setProperties(Properties properties) {
-        // ignore
     }
 }

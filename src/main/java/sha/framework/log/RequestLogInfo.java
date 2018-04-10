@@ -1,12 +1,8 @@
-/**
- * @(#)RequestLogInfo.java
- *
- * Copyright (c) 2017 Fast Retailing Corporation.
- */
 
-package sha.framework.util.log;
+package sha.framework.log;
 
 import java.io.Serializable;
+
 import lombok.Data;
 
 /**
@@ -31,9 +27,4 @@ public class RequestLogInfo implements Serializable {
      * request id.
      */
     private String requestId;
-
-    /**
-     * service.
-     */
-    private String service;
 }

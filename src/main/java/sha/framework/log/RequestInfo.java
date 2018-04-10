@@ -1,16 +1,11 @@
-/**
- * @(#)RequestInfo.java
- *
- * Copyright (c) 2017 Fast Retailing Corporation.
- */
 
-package sha.framework.util.log;
+package sha.framework.log;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.Nullable;
+
 import org.springframework.http.HttpHeaders;
+
 import lombok.Data;
 
 /**
@@ -44,11 +39,12 @@ public class RequestInfo implements Serializable {
     /**
      * query.
      */
-    @Nullable
-    private Map<String, Object> query = new HashMap<>();
+    private String query;
 
     /**
      * trace id.
      */
     private String traceId;
+    
+    private Map<String, String> parameterMap;
 }

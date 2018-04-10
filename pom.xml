@@ -177,6 +177,22 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-security</artifactId>
 			</dependency>
+			<!-- logback lib -->
+			<dependency>
+	            <groupId>ch.qos.logback.contrib</groupId>
+	            <artifactId>logback-json-core</artifactId>
+	            <version>0.1.2</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>ch.qos.logback.contrib</groupId>
+	            <artifactId>logback-json-classic</artifactId>
+	            <version>0.1.2</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>ch.qos.logback.contrib</groupId>
+	            <artifactId>logback-jackson</artifactId>
+	            <version>0.1.2</version>
+	        </dependency>
 	</dependencies>
 
 	<build>

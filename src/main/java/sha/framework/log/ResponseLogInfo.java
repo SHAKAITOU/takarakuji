@@ -1,23 +1,20 @@
-/**
- * @(#)ResponseInfo.java
- *
- * Copyright (c) 2017 Fast Retailing Corporation.
- */
 
-package sha.framework.util.log;
+package sha.framework.log;
 
 import java.io.Serializable;
-import javax.annotation.Nullable;
+
 import lombok.Data;
 
+
 /**
- * information of response.
+ * ResponseLogInfo.
+ * log information of response
  *
  * @author Fast Retailing
  * @version $Revision$
  */
 @Data
-public class ResponseInfo implements Serializable {
+public class ResponseLogInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -34,7 +31,6 @@ public class ResponseInfo implements Serializable {
     /**
      * response.
      */
-    @Nullable
     private Object response;
 
     /**
